@@ -3937,3 +3937,16 @@ h6 {
   font-weight: 700;
   color: var(--color-white);
   letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.footer-link-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link-list a {
+  color: var(--color-white-50);
