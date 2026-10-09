@@ -4417,3 +4417,16 @@ h6 {
   font-size: clamp(0.82rem, 1vw, 0.92rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.88);
+  line-height: 1.46;
+  margin: 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(12px);
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    margin 0.35s ease;
+}

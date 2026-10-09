@@ -1,214 +1,339 @@
-import React from 'react';
-import { Layers, Globe, PhoneCall, Send, MessageSquare, Database, Users2, Check, Sparkles, Shield, Cpu, RefreshCw, Zap } from 'lucide-react';
-import { PLATFORM_PILLARS, JOURNEY_STEPS } from '../data/landingData';
+import React, { useEffect, useRef } from 'react';
+import {
+  Sparkles,
+  Cpu,
+  ShieldCheck,
+  Calendar,
+  MessageSquare,
+  PhoneForwarded,
+  Activity,
+} from 'lucide-react';
+
+export const CHECKPOINTS = [
+  {
+    id: 1,
+    title: 'Real-Time Neural Speech with Zero Awkward Pauses',
+    summary:
+      'Streams bidirectional speech tokens in under 550ms with 24kHz uncompressed Opus audio. Supports fluid human interruptions, clarifying pauses, and empathetic inflection with verified sub-second latency across every live caller interaction.',
+    icon: Cpu,
+    side: 'left',
+    image: '/assets/checkpoints/cp-1.jpg',
+  },
+  {
+    id: 2,
+    title: 'Strict Brand Voice Guardrails',
+    summary:
+      'Trained strictly on approved enterprise policy documentation, knowledge bases, and verified service menus. Deterministic fallback rules enforce 100% factual fidelity, eliminating hallucinations and ensuring your brand voice is flawlessly protected on every call.',
+    icon: ShieldCheck,
+    side: 'right',
+    image: '/assets/checkpoints/cp-2.jpg',
+  },
+  {
+    id: 3,
+    title: 'Live Diary & CRM Writeback',
+    summary:
+      'Directly verifies live availability across Google Calendar, Microsoft Outlook, and custom CRM systems. Books appointments in real time, applies custom buffer rules, and writes back comprehensive caller dossiers without requiring any manual human staff entry.',
+    icon: Calendar,
+    side: 'left',
+    image: '/assets/checkpoints/cp-3.jpg',
+  },
+  {
+    id: 4,
+    title: 'Immediate WhatsApp & SMS Automation',
+    summary:
+      'Instantly dispatches calendar confirmations, digital brochures, intake questionnaires, and location links via WhatsApp or SMS within seconds of call completion. Keeps prospective customers engaged immediately while conversation context is at its peak.',
+    icon: MessageSquare,
+    side: 'right',
+    image: '/assets/checkpoints/cp-4.jpg',
+  },
+  {
+    id: 5,
+    title: 'Smart Human Warm Transfer',
+    summary:
+      'Intelligently identifies complex caller requests, high-value opportunities, or escalation criteria in real time. Dials your available human team, quietly whispers full caller context and dossier details, and bridges the live conversation seamlessly.',
+    icon: PhoneForwarded,
+    side: 'left',
+    image: '/assets/checkpoints/cp-5.jpg',
+  },
+  {
+    id: 6,
+    title: 'Deep Call Telemetry & Transcript Logs',
+    summary:
+      'Produces verbatim word-for-word audio transcripts, caller sentiment tags, and structured CRM records within seconds of hanging up. Grants full operational transparency with searchable audit logs and automated conversation intelligence.',
+    icon: Activity,
+    side: 'right',
+    image: '/assets/checkpoints/cp-6.jpg',
+  },
+];
+
+// Wide-sweeping continuous organic curve across 1200 x 2760 viewBox
+// Loops around the circular images and stays completely clear of all text blocks
+const SCRIBBLE_WIDE_PATH_D = `
+  M 600,40
+  C 640,80 920,110 970,240
+  C 1020,370 870,440 600,480
+  C 330,520 180,590 230,720
+  C 280,850 560,880 600,980
+  C 640,1080 920,1110 970,1240
+  C 1020,1370 870,1440 600,1480
+  C 330,1520 180,1590 230,1720
+  C 280,1850 560,1880 600,1980
+  C 640,2080 920,2110 970,2240
+  C 1020,2370 870,2440 600,2480
+  C 330,2520 180,2570 230,2650
+  C 270,2720 460,2750 600,2750
+`.trim();
 
 export default function PlatformJourney() {
+  const sectionRef = useRef(null);
+  const pathRef = useRef(null);
+  const logoGroupRef = useRef(null);
+  const logoImageRef = useRef(null);
+  const rowsRef = useRef([]);
+  const terminusTextRef = useRef(null);
+
+  // Direct Hardware-Accelerated Scroll Synchronizer (Zero React Re-Renders)
+  useEffect(() => {
+    const path = pathRef.current;
+    const logoGroup = logoGroupRef.current;
+    const logoImage = logoImageRef.current;
+    const section = sectionRef.current;
+    if (!path || !logoGroup || !logoImage || !section) return;
+
+    const pathLength = path.getTotalLength();
+    path.style.strokeDasharray = `${pathLength}px`;
+    path.style.strokeDashoffset = `${pathLength}px`;
+
+    // Set initial position
+    const startPt = path.getPointAtLength(0);
+    logoGroup.setAttribute('transform', `translate(${startPt.x}, ${startPt.y})`);
+    logoImage.setAttribute('transform', `rotate(0)`);
+
+    let targetP = 0;
+    let currentP = 0;
+    let animId = null;
+
+    const updateScrollTarget = () => {
+      const rect = section.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // Start as section upper reaches enters view, end near the last checkpoint
+      const scrollStart = windowH * 0.45;
+      const scrollTotal = rect.height - windowH * 0.35;
+      const p = Math.max(0, Math.min(1, (scrollStart - rect.top) / Math.max(scrollTotal, 1)));
+      targetP = p;
+    };
+
+    // Smooth physics loop updating SVG elements directly
+    const CHECKPOINT_Y_THRESHOLDS = [200, 680, 1200, 1680, 2200, 2580];
+
+    const renderLoop = () => {
+      const diff = targetP - currentP;
+      if (Math.abs(diff) > 0.0002) {
+        currentP += diff * 0.12; // buttery responsive momentum
+        const dist = currentP * pathLength;
+
+        // 1. Instant zero-lag stroke update
+        path.style.strokeDashoffset = `${pathLength - dist}px`;
+
+        // 2. Exact mathematical position on the curve
+        const pt = path.getPointAtLength(dist);
+        logoGroup.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+
+        // 3. Smooth rotation around its center as it travels
+        logoImage.setAttribute('transform', `rotate(${currentP * 1440})`);
+
+        // 4. Reveal checkpoint into full black only when the traveling logo reaches that checkpoint
+        CHECKPOINT_Y_THRESHOLDS.forEach((threshY, i) => {
+          const row = rowsRef.current[i];
+          if (!row) return;
+          if (pt.y >= threshY && currentP > 0.02) {
+            row.classList.add('is-reached');
+            row.classList.remove('is-pending');
+          } else {
+            row.classList.remove('is-reached');
+            row.classList.add('is-pending');
+          }
+        });
+
+        // 5. Reveal 'JOBGEN.AI' next to the right of the logo when it reaches the end of the line
+        if (terminusTextRef.current) {
+          if (currentP >= 0.93) {
+            terminusTextRef.current.classList.add('is-visible');
+            terminusTextRef.current.classList.remove('is-hidden');
+          } else {
+            terminusTextRef.current.classList.remove('is-visible');
+            terminusTextRef.current.classList.add('is-hidden');
+          }
+        }
+      }
+      animId = requestAnimationFrame(renderLoop);
+    };
+
+    animId = requestAnimationFrame(renderLoop);
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+    updateScrollTarget();
+
+    return () => {
+      window.removeEventListener('scroll', updateScrollTarget);
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, []);
+
   return (
-    <section id="platform" className="section-spacing">
-      <div className="container">
+    <section id="platform" ref={sectionRef} className="section-spacing platform-scribble-section">
+      <div className="container relative z-10">
         {/* Section Header */}
-        <div style={{ maxWidth: '820px', marginBottom: '4rem' }}>
-          <div className="section-badge">
-            <Layers size={14} />
-            <span>CORE ARCHITECTURE CAPABILITIES</span>
-          </div>
-          <h2 className="section-title">
-            Every conversation. <br />
-            <span className="gradient-text">A deterministic, owned outcome.</span>
+        <div className="scribble-section-header">
+          <h2 className="section-title text-center">
+            <span className="scribble-headline-main">Every conversation.</span> <br />
+            <span className="text-full-blue scribble-headline-sub">A deterministic, owned outcome</span>
           </h2>
-          <p className="section-lead">
-            Connect your website, telephony lines, WhatsApp channels, and CRM database.
-            JobGen unifies voice intelligence, instant messaging, and staff calendars into one unbreakable loop.
-          </p>
         </div>
 
-        {/* Huly-Grade Asymmetric Bento Grid */}
-        <div className="bento-grid" style={{ marginBottom: '5.5rem' }}>
-          {/* Card 1 (Span 8): Real-Time Voice Engine & Sub-600ms Latency */}
-          <div className="hardware-bezel-outer bento-col-8">
-            <div className="hardware-bezel-inner bento-card-inner">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                <div className="bento-icon-wrapper">
-                  <Cpu size={20} />
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--color-blue-400)', background: 'rgba(37,99,235,0.1)', padding: '0.25rem 0.65rem', borderRadius: 'var(--radius-pill)', border: '1px solid rgba(59,130,246,0.25)' }}>
-                  SUB-600MS LATENCY ENGINE
-                </div>
-              </div>
+        {/* The Scribble Track Canvas */}
+        <div className="scribble-track-stage">
+          {/* Wide-Travel SVG Scribble Line */}
+          <div className="scribble-svg-container" aria-hidden="true">
+            <svg
+              viewBox="0 0 1200 2760"
+              className="scribble-svg"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                {/* Linear gradient for active illuminated line */}
+                <linearGradient id="scribbleWideGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#60A5FA" />
+                  <stop offset="30%" stopColor="#2563EB" />
+                  <stop offset="70%" stopColor="#1D4ED8" />
+                  <stop offset="100%" stopColor="#2563EB" />
+                </linearGradient>
 
-              <div>
-                <h3 className="bento-card-title">
-                  Real-Time Neural Speech with Zero Awkward Pauses
-                </h3>
-                <p className="bento-card-desc" style={{ marginBottom: '1.75rem' }}>
-                  Most voice bots make callers wait 2–3 seconds between responses. JobGen streams bidirectional speech tokens in under 550ms, supporting natural interruptions, clarifying pauses, and empathetic inflection.
-                </p>
-              </div>
+                {/* Filter for smooth blue glow */}
+                <filter id="scribbleWideGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="5" result="glow" />
+                  <feMerge>
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
 
-              {/* Graphic element: Live Latency Spectrum */}
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-success)', boxShadow: '0 0 10px var(--color-success)' }} />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--color-white-90)' }}>
-                    Continuous Audio Stream: 24kHz Uncompressed Opus
-                  </span>
-                </div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-blue-400)' }}>
-                  480ms – 620ms Verified
-                </span>
-              </div>
-            </div>
+              {/* 1. Base Subtle Inactive Scribble Path */}
+              <path
+                d={SCRIBBLE_WIDE_PATH_D}
+                className="scribble-path-base"
+                fill="none"
+                stroke="rgba(15, 23, 42, 0.12)"
+                strokeWidth="3.5"
+                strokeDasharray="9 9"
+                strokeLinecap="round"
+              />
+
+              {/* 2. Active Illuminated Scribble Path with Direct strokeDashoffset */}
+              <path
+                ref={pathRef}
+                d={SCRIBBLE_WIDE_PATH_D}
+                className="scribble-path-active"
+                fill="none"
+                stroke="url(#scribbleWideGradient)"
+                strokeWidth="4.5"
+                strokeLinecap="round"
+                filter="url(#scribbleWideGlow)"
+              />
+
+              {/* 3. Pure Spinning JobGen Logo Riding on the Line with Text Appearing to its Right at End */}
+              <g ref={logoGroupRef} className="traveling-jobgen-logo-raw">
+                <image
+                  ref={logoImageRef}
+                  href="/assets/jobgen-logo.webp"
+                  x="-40"
+                  y="-40"
+                  width="80"
+                  height="80"
+                  preserveAspectRatio="xMidYMid meet"
+                  style={{
+                    filter: 'drop-shadow(0 6px 18px rgba(37, 99, 235, 0.65))',
+                  }}
+                />
+                {/* Clean text appearing to the right of the logo with no dots or boxes */}
+                <text
+                  ref={terminusTextRef}
+                  x="56"
+                  y="0"
+                  dominantBaseline="central"
+                  className="traveling-logo-terminus-text is-hidden"
+                >
+                  JOBGEN<tspan fill="#2563EB">.AI</tspan>
+                </text>
+              </g>
+            </svg>
           </div>
 
-          {/* Card 2 (Span 4): Deterministic Guardrails */}
-          <div className="hardware-bezel-outer bento-col-4">
-            <div className="hardware-bezel-inner bento-card-inner">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                <div className="bento-icon-wrapper">
-                  <Shield size={20} />
+          {/* HTML Overlay of the 6 Checkpoint Rows (Text & Circular Photo Frame) */}
+          <div className="scribble-rows-overlay">
+            {CHECKPOINTS.map((cp, idx) => {
+              const IconComp = cp.icon;
+
+              return (
+                <div
+                  key={cp.id}
+                  ref={(el) => (rowsRef.current[idx] = el)}
+                  className="checkpoint-row-item is-pending"
+                >
+                  {/* Left Column: Text or Circular Photo depending on side */}
+                  <div className="checkpoint-col col-left">
+                    {cp.side === 'left' ? (
+                      /* Compact Text-Only Checkpoint (NO BOX) */
+                      <div className="checkpoint-text-block">
+                        <div className="checkpoint-favicon-wrap" aria-hidden="true">
+                          <IconComp size={24} className="checkpoint-favicon-icon" />
+                        </div>
+                        <h3 className="checkpoint-text-title">{cp.title}</h3>
+                        <p className="checkpoint-text-desc">{cp.summary}</p>
+                      </div>
+                    ) : (
+                      /* Opposite Side: Natural Photo in Circular Frame */
+                      <div className="checkpoint-media-block">
+                        <div className="checkpoint-circle-frame">
+                          <img
+                            src={cp.image}
+                            alt={cp.title}
+                            className="checkpoint-circle-img"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column: Circular Photo or Text depending on side */}
+                  <div className="checkpoint-col col-right">
+                    {cp.side === 'right' ? (
+                      /* Compact Text-Only Checkpoint (NO BOX) */
+                      <div className="checkpoint-text-block">
+                        <div className="checkpoint-favicon-wrap" aria-hidden="true">
+                          <IconComp size={24} className="checkpoint-favicon-icon" />
+                        </div>
+                        <h3 className="checkpoint-text-title">{cp.title}</h3>
+                        <p className="checkpoint-text-desc">{cp.summary}</p>
+                      </div>
+                    ) : (
+                      /* Opposite Side: Natural Photo in Circular Frame */
+                      <div className="checkpoint-media-block">
+                        <div className="checkpoint-circle-frame">
+                          <img
+                            src={cp.image}
+                            alt={cp.title}
+                            className="checkpoint-circle-img"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--color-success)' }}>
-                  0% HALLUCINATION
-                </span>
-              </div>
-
-              <div>
-                <h3 className="bento-card-title">
-                  Strict Brand Voice Guardrails
-                </h3>
-                <p className="bento-card-desc" style={{ marginBottom: '1.5rem' }}>
-                  Trained strictly on your verified knowledge base, policy docs, and service menus. If a caller asks something out of bounds, JobGen admits policy limits gracefully.
-                </p>
-              </div>
-
-              <div style={{ padding: '0.75rem 1rem', background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '10px', fontSize: '0.78rem', color: '#6EE7B7' }}>
-                ✓ Deterministic Fallback Rules Active
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 (Span 4): Bi-Directional CRM & Calendar Sync */}
-          <div className="hardware-bezel-outer bento-col-4">
-            <div className="hardware-bezel-inner bento-card-inner">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                <div className="bento-icon-wrapper">
-                  <Database size={20} />
-                </div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--color-blue-400)' }}>
-                  TWO-WAY SYNC
-                </span>
-              </div>
-
-              <div>
-                <h3 className="bento-card-title">
-                  Live Diary & CRM Writeback
-                </h3>
-                <p className="bento-card-desc" style={{ marginBottom: '1.5rem' }}>
-                  Checks live Google/Outlook calendars before offering times. Books slots directly, writes caller notes to HubSpot, Salesforce or Clio in real-time.
-                </p>
-              </div>
-
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {['HubSpot', 'Salesforce', 'Google Cal', 'Calendly'].map((tool) => (
-                  <span key={tool} style={{ fontSize: '0.72rem', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: '0.2rem 0.5rem', borderRadius: 'var(--radius-pill)', color: 'var(--color-white-70)' }}>
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4 (Span 8): Omnichannel WhatsApp & SMS Automation */}
-          <div className="hardware-bezel-outer bento-col-8">
-            <div className="hardware-bezel-inner bento-card-inner">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                <div className="bento-icon-wrapper">
-                  <MessageSquare size={20} />
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--color-blue-400)', background: 'rgba(37,99,235,0.1)', padding: '0.25rem 0.65rem', borderRadius: 'var(--radius-pill)', border: '1px solid rgba(59,130,246,0.25)' }}>
-                  OMNICHANNEL HANDOFF
-                </div>
-              </div>
-
-              <div>
-                <h3 className="bento-card-title">
-                  Immediate WhatsApp & SMS Post-Call Automation
-                </h3>
-                <p className="bento-card-desc" style={{ marginBottom: '1.75rem' }}>
-                  The conversation doesn’t vanish when the call ends. Callers immediately receive calendar invites, intake forms, location maps, or PDF brochures right on WhatsApp before hanging up.
-                </p>
-              </div>
-
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '0.85rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.8125rem', color: 'var(--color-white-70)' }}>
-                  Average SMS/WhatsApp dispatch speed:
-                </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-success)' }}>
-                  &lt; 3.2 Seconds Post-Call
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 5 (Span 6): Warm Human Transfer */}
-          <div className="hardware-bezel-outer bento-col-6">
-            <div className="hardware-bezel-inner bento-card-inner">
-              <div className="bento-icon-wrapper">
-                <Users2 size={20} />
-              </div>
-              <div>
-                <h3 className="bento-card-title">
-                  Smart Human Warm Transfer
-                </h3>
-                <p className="bento-card-desc">
-                  When a caller requests a specific staff member or encounters an emergency, Jenny dials your human team, whispers the caller's dossier, and transfers seamlessly without dropping the call.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 6 (Span 6): Telemetry & Audio Auditing */}
-          <div className="hardware-bezel-outer bento-col-6">
-            <div className="hardware-bezel-inner bento-card-inner">
-              <div className="bento-icon-wrapper">
-                <Zap size={20} />
-              </div>
-              <div>
-                <h3 className="bento-card-title">
-                  Deep Call Telemetry & Transcript Logs
-                </h3>
-                <p className="bento-card-desc">
-                  Every call produces a word-for-word transcript, caller sentiment tag, intent categorization, audio playback link, and structured CRM record within seconds of completion.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* The 4-Step Customer Journey Timeline */}
-        <div className="hardware-bezel-outer">
-          <div className="hardware-bezel-inner" style={{ padding: '3.5rem 3rem' }}>
-            <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.5rem' }}>
-              <div className="section-badge">
-                <span>SEAMLESS CUSTOMER EXPERIENCE</span>
-              </div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '2.25rem', fontWeight: 800, color: '#fff', marginBottom: '0.75rem' }}>
-                A lead is a real person. Give them a proper handover.
-              </h3>
-              <p style={{ color: 'var(--color-white-50)', fontSize: '1rem', lineHeight: 1.6 }}>
-                Agree the channels, details to capture, and handoff rules with our solutions engineering team. Here is the connected journey.
-              </p>
-            </div>
-
-            <div className="journey-timeline-row">
-              {JOURNEY_STEPS.map((step) => (
-                <div key={step.step} className="journey-step-card">
-                  <div className="journey-step-number">STEP 0{step.step}</div>
-                  <h4 className="journey-step-heading">{step.title}</h4>
-                  <p className="journey-step-body">{step.description}</p>
-                </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
