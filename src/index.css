@@ -4274,3 +4274,16 @@ h6 {
 .productivity-card-item.shape-rect-h-stacked .card-full-bleed-content {
   padding: 1rem 1.25rem 1.15rem;
 }
+
+.productivity-card-item.shape-rect-h-stacked .card-body-headline {
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  line-height: 1.24;
+}
+
+.productivity-card-item.shape-rect-h-stacked .card-body-desc {
+  font-size: clamp(0.76rem, 0.9vw, 0.84rem);
+  line-height: 1.42;
+}
+
+/* 3. Standalone Horizontal Rectangle */
+.productivity-card-item.shape-rect-horizontal {
