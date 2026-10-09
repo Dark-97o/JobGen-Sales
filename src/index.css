@@ -3859,3 +3859,15 @@ h6 {
 .faq-question-btn {
   width: 100%;
   padding: 1.35rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
