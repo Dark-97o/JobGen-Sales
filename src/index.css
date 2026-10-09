@@ -3677,3 +3677,16 @@ h6 {
    ========================================================================== */
 
 .pricing-calculator-cockpit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 900px) {
+  .pricing-calculator-cockpit {
