@@ -4482,3 +4482,15 @@ h6 {
 
 .calls-section-header .section-title {
   line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.calls-section-header .calls-headline-main {
+  font-size: clamp(calc(2.1rem + 11px), calc(4.2vw + 11px), calc(3.4rem + 11px));
+  display: inline-block;
+}
+
+.calls-section-header .calls-headline-sub {
+  font-size: clamp(calc(2.1rem + 3px), calc(4.2vw + 3px), calc(3.4rem + 3px));
+  display: inline-block;
+}
