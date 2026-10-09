@@ -3898,3 +3898,16 @@ h6 {
   transform: translateX(-50%);
   width: 600px;
   height: 250px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+/* Global Footer */
+.footer-wrapper {
+  border-top: 1px solid var(--border-subtle);
+  background: #04050A;
+  padding: 5rem 0 3rem;
+  position: relative;
+  z-index: 10;
+}
