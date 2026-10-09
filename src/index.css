@@ -4430,3 +4430,16 @@ h6 {
     max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     margin 0.35s ease;
 }
+
+.productivity-card-item:hover .card-body-desc {
+  opacity: 1;
+  max-height: 120px;
+  margin-top: 0.48rem;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .productivity-header-wrap {
+    margin-top: 100px;
+  }
