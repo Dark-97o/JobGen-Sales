@@ -4378,3 +4378,16 @@ h6 {
       rgba(6, 8, 15, 0.7) 45%,
       rgba(6, 8, 15, 0.92) 80%,
       rgba(6, 8, 15, 0.98) 100%);
+}
+
+/* Card Content: 1 Bold Headline and 1 Line of Description on Hover */
+.card-full-bleed-content {
+  position: relative;
+  z-index: 3;
+  padding: clamp(1.35rem, 2.2vw, 1.95rem);
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-sizing: border-box;
+  width: 100%;
