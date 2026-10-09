@@ -11,7 +11,7 @@ const PRODUCTIVITY_SLOTS = [
         headline: 'Every caller gets a useful answer.',
         description: 'Jenny greets callers in your business name, answers approved questions, and keeps the conversation moving.',
         image: '/assets/cards/call-intake.jpg',
-        shapeClass: 'shape-square-stacked',
+        shapeClass: 'shape-square-stacked shape-square-stacked-lg',
         accentColor: '#38BDF8',
       },
       {
@@ -19,7 +19,7 @@ const PRODUCTIVITY_SLOTS = [
         headline: 'Live calendars, confirmed on the call.',
         description: 'Jenny finds valid times, applies duration and staff rules, books or reschedules, and sends confirmations.',
         image: '/assets/cards/calendar-sync.jpg',
-        shapeClass: 'shape-square-stacked',
+        shapeClass: 'shape-square-stacked shape-square-stacked-lg',
         accentColor: '#60A5FA',
       },
     ],
@@ -123,11 +123,11 @@ export default function UnmatchedProductivity() {
       if (!containerRef.current || !trackRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
-      const totalScrollable = rect.height - windowH;
-      if (totalScrollable <= 0) return;
+      // Reserve the last 100vh for Lead Handover section sliding over:
+      const cardScrollable = Math.max(rect.height - 2 * windowH, 1);
 
-      // Progress: 0.0 at top of pinned section, 1.0 at bottom of pinned section
-      const progress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
+      // Progress: 0.0 at top of pinned section, 1.0 when horizontal cards finish sliding
+      const progress = Math.min(Math.max(-rect.top / cardScrollable, 0), 1);
 
       // Track width and viewport width
       const trackWidth = trackRef.current.scrollWidth;
@@ -185,18 +185,27 @@ export default function UnmatchedProductivity() {
   return (
     <section ref={containerRef} className="productivity-pinned-container" id="productivity">
       <div className="productivity-sticky-frame">
+        {/* Full-Bleed Background Image 'unmatch.jpg' */}
+        <img
+          src="/assets/unmatch.jpg"
+          alt=""
+          className="productivity-bg-img"
+          aria-hidden="true"
+        />
+        <div className="productivity-bg-overlay" />
+
         {/* Subtle Ambient Background Lighting */}
         <div className="productivity-glow-aura aura-left" />
         <div className="productivity-glow-aura aura-right" />
 
-        {/* Section Header: Brought down by 180px, with tall-height min-letter-spaced watermark behind */}
+        {/* Section Header: Brought down by 180px, matching font and title case for main headline, all-caps for faded watermark */}
         <div className="productivity-header-wrap">
           <div className="productivity-headline-container">
             <span className="productivity-bg-faded-text" aria-hidden="true">
               UNMATCHED PRODUCTIVITY
             </span>
             <h2 className="productivity-main-headline">
-              UNMATCHED PRODUCTIVITY
+              Unmatched <span className="productivity-blue-highlight">Productivity</span>
             </h2>
           </div>
         </div>

@@ -4157,3 +4157,15 @@ h6 {
   letter-spacing: -0.035em;
   color: #FFFFFF;
   margin: 0;
+  line-height: 1.1;
+  text-align: left;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
+}
+
+.productivity-blue-highlight {
+  color: #38BDF8;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #38BDF8 !important;
+  display: inline-block;
+}
