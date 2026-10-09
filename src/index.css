@@ -4494,3 +4494,17 @@ h6 {
   font-size: clamp(calc(2.1rem + 3px), calc(4.2vw + 3px), calc(3.4rem + 3px));
   display: inline-block;
 }
+
+.text-full-blue {
+  color: #2563EB !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #2563EB !important;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   OS BLACK MOUSE POINTER & WINDOW POP-OPEN ANIMATION (REAL CALL LIBRARY)
+   ========================================================================== */
+
+.os-mouse-pointer-overlay {
