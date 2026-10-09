@@ -4313,3 +4313,16 @@ h6 {
   clip-path: circle(50% at 50% 50%);
   -webkit-clip-path: circle(50% at 50% 50%);
   -webkit-mask-image: -webkit-radial-gradient(white, black);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.productivity-card-item.shape-circle .card-full-bleed-overlay {
+  border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
+  -webkit-clip-path: circle(50% at 50% 50%);
+}
+
+/* Whole Card Image (Full-Bleed, Crystal Clear) */
+.card-full-bleed-img {
+  position: absolute;
