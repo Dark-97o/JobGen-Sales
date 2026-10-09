@@ -3988,3 +3988,16 @@ h6 {
   padding: 1.5rem;
   animation: fadeInModal 0.25s var(--ease-snappy);
 }
+
+.modal-content {
+  background: linear-gradient(180deg, #0D1222 0%, #070A14 100%);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 28px;
+  max-width: 540px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(37, 99, 235, 0.25);
+  animation: scaleInModal 0.3s var(--ease-snappy);
+}
