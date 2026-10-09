@@ -3793,3 +3793,17 @@ h6 {
     grid-template-columns: 1fr;
   }
 }
+
+.tier-card {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tier-card.is-featured {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 45px rgba(37, 99, 235, 0.25);
+}
+
+.tier-name {
