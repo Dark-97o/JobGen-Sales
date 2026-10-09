@@ -3963,3 +3963,16 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.8125rem;
+  color: var(--color-white-30);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   VOICE DEMO MODAL (Interactive Sandbox)
+   ========================================================================== */
+
+.modal-backdrop {
