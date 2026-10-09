@@ -4221,3 +4221,17 @@ h6 {
   border-color: var(--card-accent, #38BDF8);
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.85), 0 0 40px rgba(56, 189, 248, 0.28);
 }
+
+/* 1. Stacked Squares (Up and Down) */
+.productivity-card-item.shape-square-stacked {
+  width: clamp(280px, 21vw, 320px);
+  height: clamp(210px, 24vh, 235px);
+  border-radius: 26px;
+}
+
+.productivity-card-item.shape-square-stacked .card-full-bleed-content {
+  padding: 1rem 1.25rem 1.15rem;
+}
+
+.productivity-card-item.shape-square-stacked .card-body-headline {
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
