@@ -3820,3 +3820,16 @@ h6 {
 }
 
 .tier-price {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.tier-period {
+  font-size: 0.875rem;
+  color: var(--color-white-50);
+}
+
+/* ==========================================================================
+   FAQ ACCORDION & FINAL STADIUM CTA
