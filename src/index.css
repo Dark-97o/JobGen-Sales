@@ -4261,3 +4261,16 @@ h6 {
 
 .productivity-card-item.shape-square-stacked-lg .card-body-desc {
   font-size: clamp(0.82rem, 0.98vw, 0.9rem);
+  line-height: 1.44;
+}
+
+/* 2. Stacked Horizontal Rectangle (Up with Square Down) */
+.productivity-card-item.shape-rect-h-stacked {
+  width: clamp(330px, 25vw, 380px);
+  height: clamp(190px, 21vh, 210px);
+  border-radius: 26px;
+}
+
+.productivity-card-item.shape-rect-h-stacked .card-full-bleed-content {
+  padding: 1rem 1.25rem 1.15rem;
+}
