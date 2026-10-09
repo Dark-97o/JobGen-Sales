@@ -3625,3 +3625,16 @@ h6 {
 }
 
 /* ==========================================================================
+   TRANSFORMATION MATRIX (GetQuoti / Huly DNA)
+   High-contrast comparison with glowing JobGen column
+   ========================================================================== */
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.comparison-table {
