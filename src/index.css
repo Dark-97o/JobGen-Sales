@@ -3871,3 +3871,17 @@ h6 {
   text-align: left;
   cursor: pointer;
 }
+
+.faq-answer-block {
+  padding: 0 1.75rem 1.5rem;
+  color: var(--color-white-50);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* Final Cosmic Stadium Banner */
+.final-stadium-card {
+  position: relative;
+  background: radial-gradient(ellipse 90% 80% at 50% 10%, rgba(37, 99, 235, 0.25) 0%, rgba(7, 10, 18, 0.95) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 32px;
