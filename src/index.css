@@ -3547,3 +3547,16 @@ h6 {
   border-right: 1px solid rgba(255, 255, 255, 0.06);
   padding: 1.5rem;
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ops-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-white-50);
