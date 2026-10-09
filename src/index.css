@@ -4066,3 +4066,16 @@ h6 {
 .productivity-bg-img {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.productivity-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(6, 8, 15, 0.42) 0%, rgba(6, 8, 15, 0.78) 100%);
+  pointer-events: none;
