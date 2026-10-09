@@ -4391,3 +4391,16 @@ h6 {
   gap: 0;
   box-sizing: border-box;
   width: 100%;
+}
+
+.productivity-card-item.shape-circle .card-full-bleed-content {
+  padding: clamp(2rem, 3.2vw, 3rem) clamp(2.2rem, 3.4vw, 3rem) clamp(2.4rem, 3.6vw, 3.2rem);
+  text-align: center;
+  align-items: center;
+}
+
+.card-body-headline {
+  font-family: var(--font-display, 'Cabinet Grotesk', -apple-system, sans-serif);
+  font-size: clamp(1.14rem, 1.45vw, 1.38rem);
+  font-weight: 800;
+  color: #FFFFFF;
