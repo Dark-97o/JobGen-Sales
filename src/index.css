@@ -4443,3 +4443,16 @@ h6 {
   .productivity-header-wrap {
     margin-top: 100px;
   }
+
+  .productivity-main-headline {
+    font-size: calc(2.2rem + 3px);
+  }
+
+  .productivity-bg-faded-text {
+    font-size: calc(2.8rem + 3px);
+  }
+
+  .productivity-card-item.shape-rect-horizontal {
+    width: 290px;
+    height: 380px;
+    border-radius: 28px;
