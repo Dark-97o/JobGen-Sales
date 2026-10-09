@@ -4469,3 +4469,16 @@ h6 {
 /* ==========================================================================
    AUTHENTIC WHATSAPP ON MAC FRAME (REAL CALL LIBRARY)
    ========================================================================== */
+
+.real-calls-section {
+  position: relative;
+  z-index: 10;
+}
+
+.calls-section-header {
+  max-width: 860px;
+  margin-bottom: 2.25rem;
+}
+
+.calls-section-header .section-title {
+  line-height: 1.1;
