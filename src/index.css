@@ -4079,3 +4079,16 @@ h6 {
   inset: 0;
   background: radial-gradient(circle at 50% 35%, rgba(6, 8, 15, 0.42) 0%, rgba(6, 8, 15, 0.78) 100%);
   pointer-events: none;
+  z-index: 1;
+}
+
+.productivity-glow-aura {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+  opacity: 0.15;
+  z-index: 2;
+}
