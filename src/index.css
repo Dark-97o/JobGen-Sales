@@ -4169,3 +4169,17 @@ h6 {
   -webkit-text-fill-color: #38BDF8 !important;
   display: inline-block;
 }
+
+/* Viewport and Horizontal Track */
+.productivity-track-viewport {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin: 1.25rem 0;
+}
+
+.productivity-cards-track {
