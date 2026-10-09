@@ -3846,3 +3846,16 @@ h6 {
 .faq-item {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all var(--duration-snappy) var(--ease-snappy);
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 1.35rem 1.75rem;
