@@ -4248,3 +4248,16 @@ h6 {
   width: clamp(325px, 25vw, 375px);
   height: clamp(235px, 26.5vh, 265px);
   border-radius: 30px;
+}
+
+.productivity-card-item.shape-square-stacked-lg .card-full-bleed-content {
+  padding: 1.2rem 1.4rem 1.3rem;
+}
+
+.productivity-card-item.shape-square-stacked-lg .card-body-headline {
+  font-size: clamp(1.1rem, 1.35vw, 1.28rem);
+  line-height: 1.25;
+}
+
+.productivity-card-item.shape-square-stacked-lg .card-body-desc {
+  font-size: clamp(0.82rem, 0.98vw, 0.9rem);
