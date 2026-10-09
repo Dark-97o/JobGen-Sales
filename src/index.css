@@ -4053,3 +4053,16 @@ h6 {
   top: 0;
   height: 100vh;
   width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 0 clamp(1.25rem, 2.5vh, 2rem);
+  box-sizing: border-box;
+  background: #06080F url('/assets/unmatch.jpg') center center / cover no-repeat;
+}
+
+/* Full-bleed background image & dark overlay for Unmatched Productivity */
+.productivity-bg-img {
+  position: absolute;
+  inset: 0;
