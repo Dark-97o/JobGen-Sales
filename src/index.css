@@ -3560,3 +3560,15 @@ h6 {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-white-50);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--duration-snappy) var(--ease-snappy);
+}
+
+.ops-nav-item:hover,
+.ops-nav-item.is-active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
