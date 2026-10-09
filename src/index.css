@@ -4104,3 +4104,16 @@ h6 {
   right: -100px;
   background: radial-gradient(circle, #60A5FA 0%, transparent 70%);
 }
+
+/* Section Header: Brought down by 180px, left-aligned */
+.productivity-header-wrap {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 clamp(2.5rem, 6vw, 6.5rem);
+  margin-top: 180px;
+  box-sizing: border-box;
+}
