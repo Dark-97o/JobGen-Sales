@@ -4287,3 +4287,16 @@ h6 {
 
 /* 3. Standalone Horizontal Rectangle */
 .productivity-card-item.shape-rect-horizontal {
+  width: clamp(440px, 34vw, 520px);
+  height: clamp(430px, 50vh, 486px);
+  border-radius: 36px;
+}
+
+/* 4. Standalone Circle */
+.productivity-card-item.shape-circle {
+  width: clamp(380px, 28vw, 440px);
+  height: clamp(380px, 28vw, 440px);
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  clip-path: circle(50% at 50% 50%);
+  -webkit-clip-path: circle(50% at 50% 50%);
