@@ -4508,3 +4508,16 @@ h6 {
    ========================================================================== */
 
 .os-mouse-pointer-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999999;
+}
+
+.os-mouse-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+}
