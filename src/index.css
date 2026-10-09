@@ -3780,3 +3780,16 @@ h6 {
   color: #fff;
   letter-spacing: -0.03em;
 }
+
+/* Pricing Tier Cards Grid */
+.pricing-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+@media (max-width: 960px) {
+  .pricing-tiers-grid {
+    grid-template-columns: 1fr;
+  }
+}
