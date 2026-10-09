@@ -4196,3 +4196,16 @@ h6 {
   display: flex;
   flex-direction: column;
   gap: clamp(0.9rem, 1.4vw, 1.35rem);
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+/* Card Base Styles */
+.productivity-card-item {
+  position: relative;
+  flex-shrink: 0;
+  background-color: #0B0F1A;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
