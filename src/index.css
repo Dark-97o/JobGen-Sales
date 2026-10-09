@@ -4092,3 +4092,15 @@ h6 {
   opacity: 0.15;
   z-index: 2;
 }
+
+.productivity-glow-aura.aura-left {
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, #3B82F6 0%, transparent 70%);
+}
+
+.productivity-glow-aura.aura-right {
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, #60A5FA 0%, transparent 70%);
+}
