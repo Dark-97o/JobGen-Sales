@@ -4456,3 +4456,16 @@ h6 {
     width: 290px;
     height: 380px;
     border-radius: 28px;
+  }
+
+  .productivity-card-item.shape-circle {
+    width: 290px;
+    height: 290px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ==========================================================================
+   AUTHENTIC WHATSAPP ON MAC FRAME (REAL CALL LIBRARY)
+   ========================================================================== */
