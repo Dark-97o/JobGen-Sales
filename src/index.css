@@ -3690,3 +3690,16 @@ h6 {
 
 @media (max-width: 900px) {
   .pricing-calculator-cockpit {
+    grid-template-columns: 1fr;
+    padding: 1.75rem;
+  }
+}
+
+.slider-group {
+  margin-bottom: 2rem;
+}
+
+.slider-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
