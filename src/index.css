@@ -3703,3 +3703,16 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.slider-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-white);
+}
+
+.slider-value-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
