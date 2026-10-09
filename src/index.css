@@ -4040,3 +4040,16 @@ h6 {
 
 /* ==========================================================================
    UNMATCHED PRODUCTIVITY: PINNED HORIZONTAL CARDS TRACK (RIGHT TO LEFT ON SCROLL)
+   ========================================================================== */
+
+.productivity-pinned-container {
+  position: relative;
+  height: 320vh;
+  background-color: #06080F;
+}
+
+.productivity-sticky-frame {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
