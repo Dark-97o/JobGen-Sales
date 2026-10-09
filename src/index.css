@@ -3755,3 +3755,16 @@ h6 {
   border-radius: 20px;
   padding: 2.25rem;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.2);
+}
+
+.roi-metric-item {
+  margin-bottom: 1.5rem;
+}
+
+.roi-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-white-50);
