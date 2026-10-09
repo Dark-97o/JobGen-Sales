@@ -4001,3 +4001,17 @@ h6 {
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(37, 99, 235, 0.25);
   animation: scaleInModal 0.3s var(--ease-snappy);
 }
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleInModal {
+  from {
+    transform: scale(0.95);
