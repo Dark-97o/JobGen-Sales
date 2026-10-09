@@ -4027,3 +4027,16 @@ h6 {
 @keyframes pulse-glow {
 
   0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+}
+
+/* ==========================================================================
+   UNMATCHED PRODUCTIVITY: PINNED HORIZONTAL CARDS TRACK (RIGHT TO LEFT ON SCROLL)
