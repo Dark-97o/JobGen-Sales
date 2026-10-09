@@ -4131,3 +4131,16 @@ h6 {
 .productivity-bg-faded-text {
   position: absolute;
   top: 50%;
+  left: -0.05em;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: calc(clamp(3.4rem, 7vw, 6.8rem) + 3px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.12);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
