@@ -5312,3 +5312,16 @@ h6 {
 .wa-date-divider-pill {
   background: #182229;
   color: #8696a0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 7.5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.04em;
+}
+
+.wa-encryption-badge {
+  background: #182229;
+  color: #aebac1;
+  font-size: 0.72rem;
+  padding: 6px 14px;
