@@ -5533,3 +5533,799 @@ h6 {
     height: 500px;
   }
 }
+
+/* ==========================================================================
+   FRICTION COMPARISON SECTION (MATCHING WIREFRAME REFERENCE)
+   ========================================================================== */
+
+.friction-comparison-section {
+  position: relative;
+  z-index: 2;
+  padding: clamp(5rem, 8vw, 8.5rem) 0;
+}
+
+.friction-full-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.friction-header-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.friction-header-block .section-title {
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 0;
+}
+
+.friction-header-block .friction-headline-main {
+  font-size: clamp(calc(2.1rem + 11px), calc(4.2vw + 11px), calc(3.4rem + 11px));
+  display: inline-block;
+  color: #0b0f17;
+  font-weight: 800;
+}
+
+.friction-header-block .friction-headline-sub {
+  font-size: clamp(calc(2.1rem + 3px), calc(4.2vw + 3px), calc(3.4rem + 3px));
+  display: inline-block;
+  color: #0052FF;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .friction-header-block .friction-headline-sub {
+    white-space: normal;
+  }
+}
+
+/* Stage Layout: Left Fixed-Height Info Card + Right Cards Attached to Right Edge */
+.friction-stage-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 440px) 1fr;
+  gap: clamp(2rem, 3.5vw, 4rem);
+  align-items: center;
+  padding-left: clamp(1.5rem, 4vw, 4rem);
+  padding-right: 0; /* Cards attached flush to the right */
+}
+
+/* Left Column: Fixed-Height Info Card (Dark Theme with Generated Blueprint Asset) */
+.friction-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.friction-fixed-info-card {
+  position: relative;
+  height: 380px;
+  min-height: 380px;
+  max-height: 380px;
+  background: #090D14 url('/assets/friction-info-bg.jpg') center/cover no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  padding: clamp(1.8rem, 2.5vw, 2.5rem);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.friction-card-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 12, 20, 0.72) 0%, rgba(8, 12, 20, 0.88) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.friction-card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.friction-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.friction-card-title {
+  font-family: 'Cabinet Grotesk', 'Inter', -apple-system, sans-serif;
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  font-weight: 850;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.85rem 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.friction-card-desc {
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.friction-metric-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  padding: 1rem 1.4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  flex-shrink: 0;
+}
+
+.friction-metric-value {
+  font-family: 'Cabinet Grotesk', 'Inter', sans-serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 850;
+  color: #38BDF8;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+}
+
+.friction-metric-label {
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.friction-comparison-section.is-pending .friction-fixed-info-card {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.friction-comparison-section.is-pending .friction-pills-header {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.friction-pills-header {
+  display: flex;
+  align-items: center;
+  padding-left: 1.85rem;
+  font-size: calc(0.82rem + 5px);
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.friction-header-col-legacy {
+  width: 48%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #000000;
+  font-size: calc(0.82rem + 5px);
+  font-weight: 850;
+}
+
+.friction-header-col-jobgen {
+  width: 52%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #000000;
+  font-size: calc(0.82rem + 5px);
+  font-weight: 850;
+}
+
+.friction-header-icon-cross {
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.friction-header-icon-tick {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.friction-pills-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.friction-pill-row {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: clamp(56px, 5.2vw, 68px);
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.friction-pill-row:hover,
+.friction-pill-row:focus-visible {
+  transform: translateX(6px);
+}
+
+/* Initial Hidden State for Entrance Animation */
+.friction-pill-row.is-hidden .friction-pill-front-white {
+  opacity: 0;
+  transform: translateX(120px);
+}
+
+.friction-pill-row.is-hidden .friction-pill-next-black {
+  opacity: 0;
+  transform: translateX(180px);
+}
+
+/* Front Pill: White background with black text and semicircle left cap */
+.friction-pill-front-white {
+  position: relative;
+  width: 48%;
+  background: #ffffff;
+  color: #0b0f17;
+  border-radius: 9999px 0 0 9999px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem 0 1.85rem;
+  gap: 0.75rem;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-right: none;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease;
+  will-change: transform, opacity;
+}
+
+.friction-icon-cross {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.friction-text-legacy {
+  font-size: clamp(0.85rem, 1.05vw, 0.98rem);
+  font-weight: 650;
+  color: #0b0f17;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Next Pill: Black background with white text, semicircle left cap overlapping, attached flush right */
+.friction-pill-next-black {
+  position: relative;
+  width: 56%;
+  margin-left: -4%;
+  background: #0b0f17;
+  color: #ffffff;
+  border-radius: 9999px 0 0 9999px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem 0 1.85rem;
+  gap: 0.75rem;
+  z-index: 2;
+  box-shadow: -6px 0 16px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+  will-change: transform, opacity;
+}
+
+.friction-icon-tick {
+  color: #22c55e;
+  flex-shrink: 0;
+}
+
+.friction-text-jobgen {
+  font-size: clamp(0.88rem, 1.1vw, 1.02rem);
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* When hovered over, the black one turns blue */
+.friction-pill-row:hover .friction-pill-next-black,
+.friction-pill-row.is-hovered .friction-pill-next-black {
+  background: #0052FF;
+  box-shadow: -6px 0 25px rgba(0, 82, 255, 0.4);
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .friction-stage-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-right: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  .friction-fixed-info-card {
+    height: auto;
+    min-height: 280px;
+    max-height: none;
+  }
+
+  .friction-pill-front-white {
+    width: 46%;
+    padding-left: 1.25rem;
+  }
+
+  .friction-pill-next-black {
+    width: 58%;
+    margin-left: -4%;
+    padding-left: 1.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .friction-pill-row {
+    height: 52px;
+  }
+
+  .friction-pills-header {
+    display: none;
+  }
+
+  .friction-pill-front-white {
+    width: 44%;
+    padding: 0 0.75rem 0 1rem;
+    gap: 0.4rem;
+  }
+
+  .friction-pill-next-black {
+    width: 60%;
+    margin-left: -4%;
+    padding: 0 1rem 0 1.2rem;
+    gap: 0.4rem;
+  }
+
+  .friction-text-legacy,
+  .friction-text-jobgen {
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   DARK GUARDRAILS & DEPLOYMENT SECTION (FANNED 3D SPADES PLAYING CARDS)
+   ========================================================================== */
+
+.guardrails-dark-section {
+  position: relative;
+  z-index: 10;
+  background: #080B10;
+  border-radius: clamp(48px, 6.5vw, 90px) clamp(48px, 6.5vw, 90px) 0 0;
+  padding: clamp(5.5rem, 8vw, 8.5rem) 0 clamp(6rem, 9vw, 9.5rem) 0;
+  margin-top: clamp(2rem, 4vw, 4rem);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.5);
+  overflow: visible;
+}
+
+.guardrails-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+.guardrails-header-block {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto clamp(3.5rem, 6vw, 5.5rem) auto;
+}
+
+.guardrails-header-block .section-title {
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 0;
+}
+
+.guardrails-headline-main {
+  font-size: clamp(calc(2.1rem + 12px), calc(4.2vw + 12px), calc(3.4rem + 12px));
+  display: inline-block;
+  color: #ffffff;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.guardrails-headline-sub {
+  font-size: clamp(calc(2.1rem - 2px), calc(4.2vw - 2px), calc(3.4rem - 2px));
+  display: inline-block;
+  color: #0052FF;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .guardrails-headline-sub {
+    white-space: normal;
+  }
+}
+
+/* Fanned Playing Cards Stage */
+.spade-hand-stage {
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spade-hand-fan {
+  position: relative;
+  width: 100%;
+  max-width: 1060px;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+}
+
+/* Base hit slots for seamless hover tracking across overlapping cards */
+.spade-hit-slots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spade-hit-area {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(200px, 16vw, 240px);
+  height: clamp(300px, 24vw, 360px);
+  margin-left: calc(-1 * clamp(200px, 16vw, 240px) / 2);
+  margin-top: calc(-1 * clamp(300px, 24vw, 360px) / 2);
+  transform-origin: 50% 120%;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Individual Card Slot: Anchored at Center so translation is symmetrical */
+.spade-card-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(200px, 16vw, 240px);
+  height: clamp(300px, 24vw, 360px);
+  margin-left: calc(-1 * clamp(200px, 16vw, 240px) / 2);
+  margin-top: calc(-1 * clamp(300px, 24vw, 360px) / 2);
+  cursor: pointer;
+  transform-origin: 50% 120%;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
+  outline: none;
+}
+
+/* Dimmed other cards when one is actively hovered */
+.spade-card-slot.is-dimmed {
+  opacity: 0.35;
+  filter: blur(1px) grayscale(20%);
+}
+
+/* Active Hovered Card: Elevates into center and expands without jitter */
+.spade-card-slot.is-active {
+  transform: translateX(0px) translateY(-50px) rotate(0deg) scale(1.36) !important;
+  z-index: 100 !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.spade-card-slot.is-active .spade-card-flipper {
+  transform: rotateY(180deg);
+}
+
+/* 3D Flipper Box */
+.spade-card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 20px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+}
+
+/* Shared Card Faces */
+.spade-card-back,
+.spade-card-front {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   CARD BACK: Luxury Spades Playing Card Face
+   ========================================================================== */
+
+.spade-card-back {
+  transform: rotateY(0deg);
+  background: #0D131F;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(0, 82, 255, 0.16) 0%, transparent 68%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1.5px, transparent 1.5px, transparent 8px),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1.5px, transparent 1.5px, transparent 8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.85), 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.1rem;
+}
+
+/* Corner Ranks (Top-Left & Bottom-Right) - Significantly Larger */
+.card-corner-index {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.95;
+  font-family: 'Cabinet Grotesk', serif;
+  color: #ffffff;
+  user-select: none;
+}
+
+.card-corner-index.top-left {
+  top: 14px;
+  left: 16px;
+}
+
+.card-corner-index.bottom-right {
+  bottom: 14px;
+  right: 16px;
+  transform: rotate(180deg);
+}
+
+.corner-rank {
+  font-size: clamp(1.45rem, 1.7vw, 1.7rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}
+
+.corner-suit {
+  font-size: clamp(1.35rem, 1.55vw, 1.55rem);
+  color: #60a5fa;
+  margin-top: 1px;
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}
+
+/* Center Ornament on Card Back - Significantly Bigger Spade Emblem */
+.card-back-ornament {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.2rem 0.5rem 2.2rem 0.5rem;
+}
+
+.card-back-inner-border {
+  position: absolute;
+  inset: 18px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.card-spade-center-emblem {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 82, 255, 0.45) 0%, rgba(13, 19, 31, 0.95) 70%);
+  border: 1.5px solid rgba(96, 165, 250, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 28px rgba(0, 82, 255, 0.45);
+}
+
+.spade-symbol-icon {
+  font-size: 2.85rem;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(96, 165, 250, 0.9);
+}
+
+.card-back-headline-box {
+  width: 100%;
+  padding: 0 0.85rem;
+  text-align: center;
+  margin: auto 0;
+}
+
+.card-back-headline {
+  font-family: 'Cabinet Grotesk', 'Inter', sans-serif;
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   CARD FRONT: Clean Interface with Background Image (No Deck/Spade mentions)
+   ========================================================================== */
+
+.spade-card-front {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1.5px solid rgba(0, 82, 255, 0.85);
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 82, 255, 0.45);
+}
+
+.spade-front-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 12, 19, 0.65) 0%, rgba(8, 12, 19, 0.94) 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spade-front-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.spade-front-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.spade-front-phase-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0052FF;
+  color: #ffffff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 800;
+  font-size: 0.76rem;
+  box-shadow: 0 0 12px rgba(0, 82, 255, 0.5);
+}
+
+.spade-front-tag {
+  font-size: 0.7rem;
+  font-weight: 650;
+  color: #93c5fd;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spade-front-body {
+  margin: auto 0;
+}
+
+.spade-front-title {
+  font-family: 'Cabinet Grotesk', 'Inter', sans-serif;
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  font-weight: 850;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.65rem 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.spade-front-desc {
+  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+  color: #e2e8f0;
+  line-height: 1.55;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.spade-front-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.spade-seal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #38bdf8;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.spade-seal-icon {
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+/* Micro Hint */
+.spade-hand-hint {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #64748b;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono, monospace);
+}
+
+/* Responsive Handling */
+@media (max-width: 900px) {
+  .spade-hand-fan {
+    height: 380px;
+  }
+
+  .spade-card-slot {
+    width: 175px;
+    height: 270px;
+  }
+
+  .spade-card-slot.is-active {
+    transform: translateX(0) translateY(-40px) rotate(0deg) scale(1.22) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .spade-hand-fan {
+    height: 360px;
+  }
+
+  .spade-card-slot {
+    width: 150px;
+    height: 240px;
+  }
+
+  .card-back-headline {
+    font-size: 0.78rem;
+  }
+
+  .spade-front-title {
+    font-size: 0.95rem;
+  }
+
+  .spade-front-desc {
+    font-size: 0.72rem;
+  }
+}
