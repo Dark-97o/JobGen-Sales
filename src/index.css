@@ -5027,3 +5027,15 @@ h6 {
 .wa-category-text {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wa-sound-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.wa-sound-bars span {
+  width: 2px;
