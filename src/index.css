@@ -5130,3 +5130,16 @@ h6 {
 
 .wa-convo-info {
   min-width: 0;
+}
+
+.wa-convo-title {
+  color: #e9edef;
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
