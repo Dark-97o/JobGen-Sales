@@ -5299,3 +5299,16 @@ h6 {
   position: relative;
   z-index: 1;
   display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wa-date-divider-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 14px;
+}
+
+.wa-date-divider-pill {
+  background: #182229;
+  color: #8696a0;
