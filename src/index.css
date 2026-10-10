@@ -4715,3 +4715,16 @@ h6 {
   align-items: center;
   gap: 16px;
   width: 100%;
+}
+
+.wa-rail-btn {
+  background: transparent;
+  border: none;
+  color: #aebac1;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
