@@ -33,11 +33,6 @@ export default function FinalCta({ onOpenDemo }) {
           </div>
 
           <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 3 }}>
-            <div className="section-badge" style={{ marginBottom: '1.5rem' }}>
-              <Sparkles size={14} />
-              <span>ZERO CALLS MISSED · ZERO LEADS LOST</span>
-            </div>
-
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5.2vw, 4.25rem)', fontWeight: 800, color: '#fff', margin: '0 0 1.5rem', lineHeight: 1.08, letterSpacing: '-0.04em' }}>
               Deploy your 24/7 AI workforce <br />
               <span className="gradient-text">before your next customer calls.</span>
