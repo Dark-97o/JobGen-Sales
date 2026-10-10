@@ -4910,3 +4910,16 @@ h6 {
   background: #103629;
   color: #25D366;
   font-weight: 600;
+}
+
+.wa-filter-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+}
+
+/* Chat Items Scroll List */
+.wa-chats-scroll-list {
+  flex: 1;
+  overflow-y: auto;

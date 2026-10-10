@@ -62,10 +62,6 @@ export default function PricingCalculator({ onOpenDemo }) {
       <div className="container">
         {/* Section Header */}
         <div style={{ maxWidth: '820px', marginBottom: '3.5rem' }}>
-          <div className="section-badge">
-            <Calculator size={14} />
-            <span>INTERACTIVE ROI & INVESTMENT ESTIMATOR</span>
-          </div>
           <h2 className="section-title">
             Transparent pricing modeled <br />
             <span className="gradient-text">on your exact call requirements.</span>
