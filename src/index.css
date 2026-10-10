@@ -5390,3 +5390,16 @@ h6 {
   margin: 0;
   word-break: break-word;
 }
+
+.wa-bubble-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  margin-left: 12px;
+  float: right;
+}
+
+.wa-bubble-time {
+  font-size: 0.68rem;
