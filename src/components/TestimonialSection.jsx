@@ -16,7 +16,7 @@ export default function TestimonialSection() {
                   ))}
                 </div>
 
-                <blockquote style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.25rem, 2vw, 1.65rem)', fontWeight: 600, color: '#fff', lineHeight: 1.45, marginBottom: '2rem' }}>
+                <blockquote className="testimonial-quote">
                   “Jenny answers every single inbound call on the first ring, books straight into our staff diary, and auto-dispatches the tax intake checklists we used to lose. It’s like adding an <span className="gradient-blue-text" style={{ fontWeight: 800 }}>experienced receptionist</span> to our firm — with zero human downtime.”
                 </blockquote>
 
@@ -25,23 +25,23 @@ export default function TestimonialSection() {
                     MG
                   </div>
                   <div>
-                    <strong style={{ fontSize: '1.1rem', color: '#fff', display: 'block', fontWeight: 700 }}>
+                    <strong className="testimonial-author-name">
                       Mandar Gokhale
                     </strong>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--color-white-50)' }}>
+                    <span className="testimonial-author-role">
                       Managing Director · M&S Business Solutions
                     </span>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1.5rem', marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                <div className="testimonial-stats-row">
                   <div>
                     <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-success)' }}>$65,000+</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-white-50)' }}>Annual Overhead Saved</div>
+                    <div className="testimonial-stat-label">Annual Overhead Saved</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#93C5FD' }}>100%</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-white-50)' }}>After-Hours Calls Captured</div>
+                    <div style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-blue-500)' }}>100%</div>
+                    <div className="testimonial-stat-label">After-Hours Calls Captured</div>
                   </div>
                 </div>
               </div>

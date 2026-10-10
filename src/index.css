@@ -4884,3 +4884,16 @@ h6 {
   padding: 4px 14px 10px;
   display: flex;
   gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.wa-filter-chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #202c33;
+  color: #8696a0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
