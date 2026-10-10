@@ -4676,3 +4676,16 @@ h6 {
   font-family: var(--font-mono);
   color: #00A884;
 }
+
+.mac-status-pulsar {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #00A884;
+  box-shadow: 0 0 8px #00A884;
+  animation: pulseBeacon 2s infinite ease-in-out;
+}
+
+/* WhatsApp Main Interface Body */
+.whatsapp-app-body {
+  display: flex;
