@@ -5338,3 +5338,16 @@ h6 {
 
 /* Transcribe Chat Bubbles */
 .wa-bubbles-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wa-bubble-row {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.wa-bubble-row.is-incoming {
