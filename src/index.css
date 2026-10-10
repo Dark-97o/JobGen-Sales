@@ -4741,3 +4741,16 @@ h6 {
   background: rgba(255, 255, 255, 0.1);
   color: #00A884;
 }
+
+.wa-rail-badge-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wa-unread-pill {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: #25D366;
