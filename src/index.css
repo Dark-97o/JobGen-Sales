@@ -4585,3 +4585,16 @@ h6 {
 /* macOS Window Frame */
 .mac-window-container {
   border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28), 0 4px 16px rgba(0, 0, 0, 0.12);
+  background-color: #111b21;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.mac-window-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
