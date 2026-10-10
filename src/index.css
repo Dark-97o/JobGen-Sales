@@ -5208,3 +5208,16 @@ h6 {
 }
 
 .wa-audio-fill {
+  height: 100%;
+  background: #00A884;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.wa-audio-time-label {
+  display: flex;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #8696a0;
+}
