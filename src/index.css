@@ -4728,3 +4728,16 @@ h6 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+.wa-rail-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e9edef;
+}
+
+.wa-rail-btn.is-active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #00A884;
+}
