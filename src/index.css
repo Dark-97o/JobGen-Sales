@@ -4819,3 +4819,16 @@ h6 {
   align-items: center;
   gap: 12px;
 }
+
+.wa-icon-action {
+  background: transparent;
+  border: none;
+  color: #aebac1;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.wa-new-chat-btn {
+  background: #00A884;
+  color: #111b21;
