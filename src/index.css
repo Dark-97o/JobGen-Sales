@@ -4871,3 +4871,16 @@ h6 {
   border: none;
   color: #e9edef;
   font-size: 0.85rem;
+  width: 100%;
+  outline: none;
+}
+
+.wa-search-input::placeholder {
+  color: #8696a0;
+}
+
+/* Filter Chips Bar */
+.wa-filter-chips-row {
+  padding: 4px 14px 10px;
+  display: flex;
+  gap: 6px;
