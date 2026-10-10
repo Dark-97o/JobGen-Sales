@@ -4572,3 +4572,16 @@ h6 {
   }
   100% {
     transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+.nav-logo-clicked {
+  transform: scale(0.92) !important;
+  filter: drop-shadow(0 0 16px rgba(37, 99, 235, 0.9)) !important;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), filter 0.15s ease !important;
+}
+
+/* macOS Window Frame */
+.mac-window-container {
+  border-radius: 14px;
