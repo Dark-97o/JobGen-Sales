@@ -5221,3 +5221,16 @@ h6 {
   font-size: 0.68rem;
   color: #8696a0;
 }
+
+.wa-sound-equalizer {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 14px;
+}
+
+.wa-sound-equalizer span {
+  width: 2.5px;
+  height: 4px;
+  background: #00A884;
+  border-radius: 2px;
