@@ -5364,3 +5364,16 @@ h6 {
   padding: 7px 12px 6px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wa-bubble-dark {
+  background: #202c33;
+  border-radius: 8px 8px 8px 2px;
+}
+
+.wa-bubble-green {
+  background: #005c4b;
+  border-radius: 8px 8px 2px 8px;
+}
+
+.wa-bubble-sender-name {
