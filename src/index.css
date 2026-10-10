@@ -4897,3 +4897,16 @@ h6 {
   font-weight: 500;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.wa-filter-chip:hover {
+  background: #2a3942;
+  color: #e9edef;
+}
+
+.wa-filter-chip.is-active {
+  background: #103629;
+  color: #25D366;
+  font-weight: 600;
