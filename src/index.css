@@ -5442,3 +5442,16 @@ h6 {
 .wa-outcome-icon {
   flex-shrink: 0;
 }
+
+.wa-outcome-label {
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.wa-outcome-text {
+  color: #e9edef;
+  font-size: 0.84rem;
+}
+
+/* WhatsApp Message Input Bar */
+.wa-input-dock {
