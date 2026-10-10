@@ -4962,3 +4962,16 @@ h6 {
 .wa-avatar-audio-pulse {
   position: absolute;
   inset: -3px;
+  border-radius: 50%;
+  border: 2px solid #00A884;
+  animation: waPulse 1.5s infinite ease-out;
+}
+
+@keyframes waPulse {
+  0% { transform: scale(0.95); opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+.wa-chat-details {
+  flex: 1;
+  min-width: 0;
