@@ -4559,3 +4559,16 @@ h6 {
   height: 28px;
   border-radius: 50%;
   border: 2px solid #2563EB;
+  background: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.8);
+  transform: translate(-50%, -50%);
+  animation: clickWave 0.38s ease-out forwards;
+}
+
+@keyframes clickWave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
