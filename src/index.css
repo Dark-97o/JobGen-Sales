@@ -4521,3 +4521,15 @@ h6 {
   will-change: transform, opacity;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
 }
+
+.os-mouse-pointer-overlay.phase-gliding .os-mouse-cursor {
+  animation: cursorGlideToNav 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.os-mouse-pointer-overlay.phase-clicking .os-mouse-cursor {
+  transform: translate3d(var(--target-x), var(--target-y), 0) scale(0.78);
+  transition: transform 0.12s ease;
+}
+
+.os-mouse-pointer-overlay.phase-opening .os-mouse-cursor {
+  transform: translate3d(var(--target-x), var(--target-y), 0) scale(1);
