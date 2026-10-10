@@ -6,10 +6,6 @@ export default function SetupGuardrails() {
     <section className="section-spacing">
       <div className="container">
         <div style={{ maxWidth: '820px', marginBottom: '3.5rem' }}>
-          <div className="section-badge">
-            <Sliders size={14} />
-            <span>3-STEP ACTIVATION & SAFETY PROTOCOL</span>
-          </div>
           <h2 className="section-title">
             Deploy in hours with one call flow. <br />
             <span className="gradient-text">Retain 100% control as you scale.</span>
@@ -23,18 +19,18 @@ export default function SetupGuardrails() {
           {/* Left: 3 Setup Steps */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <div className="hardware-bezel-outer">
-              <div className="hardware-bezel-inner" style={{ padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-                <div style={{ width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-pill)', background: 'var(--color-blue-600)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, flexShrink: 0, boxShadow: '0 0 20px rgba(37,99,235,0.4)' }}>
+              <div className="hardware-bezel-inner setup-step-card" style={{ padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+                <div className="setup-step-badge">
                   01
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.4rem' }}>
+                  <h3 className="setup-step-title">
                     Ingest Verified Business Knowledge
                   </h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-white-50)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+                  <p className="setup-step-desc">
                     Upload your service menu, pricing guidelines, opening hours, or property listings. Define approved answers for questions your staff answers daily.
                   </p>
-                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-blue-400)' }}>
+                  <span className="setup-step-feature">
                     ✓ Multi-PDF Ingestion · Structured Service Catalogs
                   </span>
                 </div>
@@ -42,18 +38,18 @@ export default function SetupGuardrails() {
             </div>
 
             <div className="hardware-bezel-outer">
-              <div className="hardware-bezel-inner" style={{ padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-                <div style={{ width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-pill)', background: 'var(--color-blue-600)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, flexShrink: 0, boxShadow: '0 0 20px rgba(37,99,235,0.4)' }}>
+              <div className="hardware-bezel-inner setup-step-card" style={{ padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+                <div className="setup-step-badge">
                   02
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.4rem' }}>
+                  <h3 className="setup-step-title">
                     Define Required Intake & Escalation Logic
                   </h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-white-50)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+                  <p className="setup-step-desc">
                     Specify required qualification fields: caller address, timeline, urgency level, or insurance type. Set conditional escalation triggers for VIPs.
                   </p>
-                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-blue-400)' }}>
+                  <span className="setup-step-feature">
                     ✓ Custom CRM Fields · Dynamic Calendar Slots
                   </span>
                 </div>
@@ -61,18 +57,18 @@ export default function SetupGuardrails() {
             </div>
 
             <div className="hardware-bezel-outer">
-              <div className="hardware-bezel-inner" style={{ padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
-                <div style={{ width: '2.75rem', height: '2.75rem', borderRadius: 'var(--radius-pill)', background: 'var(--color-blue-600)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, flexShrink: 0, boxShadow: '0 0 20px rgba(37,99,235,0.4)' }}>
+              <div className="hardware-bezel-inner setup-step-card" style={{ padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+                <div className="setup-step-badge">
                   03
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.4rem' }}>
+                  <h3 className="setup-step-title">
                     Sandbox Test & Instant Production Port
                   </h3>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--color-white-50)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+                  <p className="setup-step-desc">
                     Test phone interactions directly in your browser with your team. Review audio recordings and CRM entries, then point your existing phone lines.
                   </p>
-                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-blue-400)' }}>
+                  <span className="setup-step-feature">
                     ✓ Zero Downtime · Instant Number Forwarding
                   </span>
                 </div>
@@ -82,52 +78,52 @@ export default function SetupGuardrails() {
 
           {/* Right: Guardrails & Boundaries Sidebar */}
           <div className="hardware-bezel-outer">
-            <div className="hardware-bezel-inner" style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', background: 'linear-gradient(180deg, rgba(37,99,235,0.12) 0%, rgba(11,16,29,0.95) 100%)' }}>
+            <div className="hardware-bezel-inner guardrail-sidebar-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
                 <Shield size={18} style={{ color: 'var(--color-blue-400)' }} />
-                <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', color: 'var(--color-blue-400)', letterSpacing: '0.15em' }}>
+                <span className="guardrail-strip-tag">
                   Enterprise Boundaries
                 </span>
               </div>
 
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.85rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', lineHeight: 1.2 }}>
+              <h3 className="guardrail-title">
                 You decide where the AI stops.
               </h3>
 
-              <p style={{ fontSize: '0.9rem', color: 'var(--color-white-50)', lineHeight: 1.6, marginBottom: '2rem' }}>
+              <p className="guardrail-desc">
                 An autonomous workforce must be strictly bounded by your company policies and never improvise answers.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', flex: 1 }}>
                 <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                  <FileCheck size={18} style={{ color: 'var(--color-blue-400)', marginTop: '2px', flexShrink: 0 }} />
+                  <FileCheck size={18} className="guardrail-item-icon" />
                   <div>
-                    <strong style={{ color: '#fff', fontSize: '0.9rem', display: 'block' }}>Zero Hallucination Policy</strong>
-                    <span style={{ color: 'var(--color-white-50)', fontSize: '0.8125rem' }}>Only speaks approved business facts. Never fabricates pricing, policies, or availability.</span>
+                    <strong className="guardrail-item-title">Zero Hallucination Policy</strong>
+                    <span className="guardrail-item-desc">Only speaks approved business facts. Never fabricates pricing, policies, or availability.</span>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                  <Lock size={18} style={{ color: 'var(--color-blue-400)', marginTop: '2px', flexShrink: 0 }} />
+                  <Lock size={18} className="guardrail-item-icon" />
                   <div>
-                    <strong style={{ color: '#fff', fontSize: '0.9rem', display: 'block' }}>Identity & Security Checks</strong>
-                    <span style={{ color: 'var(--color-white-50)', fontSize: '0.8125rem' }}>Enforces DOB or account number verification before sharing customer-specific information.</span>
+                    <strong className="guardrail-item-title">Identity & Security Checks</strong>
+                    <span className="guardrail-item-desc">Enforces DOB or account number verification before sharing customer-specific information.</span>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                  <Users size={18} style={{ color: 'var(--color-blue-400)', marginTop: '2px', flexShrink: 0 }} />
+                  <Users size={18} className="guardrail-item-icon" />
                   <div>
-                    <strong style={{ color: '#fff', fontSize: '0.9rem', display: 'block' }}>Instant Warm Failover</strong>
-                    <span style={{ color: 'var(--color-white-50)', fontSize: '0.8125rem' }}>High-urgency callers are transferred to live personnel with a pre-briefed dossier.</span>
+                    <strong className="guardrail-item-title">Instant Warm Failover</strong>
+                    <span className="guardrail-item-desc">High-urgency callers are transferred to live personnel with a pre-briefed dossier.</span>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                  <Eye size={18} style={{ color: 'var(--color-blue-400)', marginTop: '2px', flexShrink: 0 }} />
+                  <Eye size={18} className="guardrail-item-icon" />
                   <div>
-                    <strong style={{ color: '#fff', fontSize: '0.9rem', display: 'block' }}>Complete Audit Trails</strong>
-                    <span style={{ color: 'var(--color-white-50)', fontSize: '0.8125rem' }}>Full audio logs, word-by-word transcripts, and explicit caller recording consent logged.</span>
+                    <strong className="guardrail-item-title">Complete Audit Trails</strong>
+                    <span className="guardrail-item-desc">Full audio logs, word-by-word transcripts, and explicit caller recording consent logged.</span>
                   </div>
                 </div>
               </div>

@@ -4858,3 +4858,16 @@ h6 {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 7px 12px;
+}
+
+.wa-search-icon {
+  color: #8696a0;
+  flex-shrink: 0;
+}
+
+.wa-search-input {
+  background: transparent;
+  border: none;
+  color: #e9edef;
+  font-size: 0.85rem;
