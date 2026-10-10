@@ -5195,3 +5195,16 @@ h6 {
 }
 
 .wa-audio-scrubber-wrap {
+  width: 120px;
+  cursor: pointer;
+}
+
+.wa-audio-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+
+.wa-audio-fill {
