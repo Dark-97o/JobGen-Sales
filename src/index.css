@@ -4767,3 +4767,16 @@ h6 {
   color: #fff;
   border-radius: 50%;
   width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wa-profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3B82F6;
+  color: #fff;
+  display: flex;
