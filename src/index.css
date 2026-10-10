@@ -4662,3 +4662,17 @@ h6 {
 .mac-window-title-sub {
   color: #aebac1;
 }
+
+.mac-titlebar-right {
+  display: flex;
+  align-items: center;
+}
+
+.mac-status-online {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: #00A884;
+}
