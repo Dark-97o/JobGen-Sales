@@ -5052,3 +5052,16 @@ h6 {
 
 .wa-sound-bars span:nth-child(3) {
   animation-delay: 0.4s;
+  height: 8px;
+}
+
+.wa-ready-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8696a0;
+}
+
+.wa-sidebar-bottom-app {
+  padding: 10px 14px;
+  background: #202c33;
