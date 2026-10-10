@@ -5143,3 +5143,16 @@ h6 {
   text-overflow: ellipsis;
   max-width: 320px;
 }
+
+.wa-convo-subtitle {
+  color: #8696a0;
+  font-size: 0.75rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wa-convo-status-text {
+  color: #00A884;
+}
