@@ -5455,3 +5455,16 @@ h6 {
 
 /* WhatsApp Message Input Bar */
 .wa-input-dock {
+  height: 60px;
+  background: #202c33;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.wa-input-icon-btn {
+  background: transparent;
+  border: none;
