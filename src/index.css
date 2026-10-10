@@ -4533,3 +4533,16 @@ h6 {
 
 .os-mouse-pointer-overlay.phase-opening .os-mouse-cursor {
   transform: translate3d(var(--target-x), var(--target-y), 0) scale(1);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes cursorGlideToNav {
+  0% {
+    transform: translate3d(var(--start-x), var(--start-y), 0) scale(1.1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
