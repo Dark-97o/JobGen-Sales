@@ -5014,3 +5014,16 @@ h6 {
   color: #8696a0;
   font-size: 0.8rem;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+.wa-read-receipt-blue {
+  color: #53bdeb;
+  flex-shrink: 0;
+}
+
+.wa-category-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
