@@ -5325,3 +5325,16 @@ h6 {
   color: #aebac1;
   font-size: 0.72rem;
   padding: 6px 14px;
+  border-radius: 8px;
+  margin: 0 auto 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  text-align: center;
+  max-width: 520px;
+  line-height: 1.4;
+}
+
+/* Transcribe Chat Bubbles */
+.wa-bubbles-stream {
