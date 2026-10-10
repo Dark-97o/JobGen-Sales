@@ -5403,3 +5403,16 @@ h6 {
 
 .wa-bubble-time {
   font-size: 0.68rem;
+  color: #8696a0;
+  font-family: var(--font-mono);
+}
+
+.wa-bubble-checks {
+  font-size: 0.72rem;
+}
+
+.wa-bubble-row.is-live-speaking .wa-bubble {
+  outline: 2px solid #25D366;
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.4);
+  transform: scale(1.015);
+}
