@@ -4624,3 +4624,16 @@ h6 {
   display: inline-block;
   transition: opacity 0.15s ease;
 }
+
+.mac-dot-close {
+  background: #FF5F56;
+  border: 1px solid #E0443E;
+}
+
+.mac-dot-minimize {
+  background: #FFBD2E;
+  border: 1px solid #DEA123;
+}
+
+.mac-dot-maximize {
+  background: #27C93F;
