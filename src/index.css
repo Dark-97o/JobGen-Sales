@@ -5156,3 +5156,16 @@ h6 {
 .wa-convo-status-text {
   color: #00A884;
 }
+
+.wa-convo-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Embedded Call Audio Player in WhatsApp Header */
+.wa-embedded-audio-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(17, 27, 33, 0.85);
