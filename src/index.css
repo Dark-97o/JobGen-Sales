@@ -5494,3 +5494,16 @@ h6 {
   border: none;
   color: #e9edef;
   font-size: 0.88rem;
+  width: 100%;
+  outline: none;
+}
+
+.wa-message-input::placeholder {
+  color: #8696a0;
+}
+
+.wa-input-mic-btn {
+  background: #00A884;
+  color: #111b21;
+  border-radius: 50%;
+  width: 38px;
