@@ -5481,3 +5481,16 @@ h6 {
 .wa-input-icon-btn:hover {
   color: #e9edef;
 }
+
+.wa-input-field-wrap {
+  flex: 1;
+  background: #2a3942;
+  border-radius: 8px;
+  padding: 9px 14px;
+}
+
+.wa-message-input {
+  background: transparent;
+  border: none;
+  color: #e9edef;
+  font-size: 0.88rem;
