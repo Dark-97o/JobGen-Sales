@@ -5169,3 +5169,16 @@ h6 {
   align-items: center;
   gap: 10px;
   background: rgba(17, 27, 33, 0.85);
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wa-audio-play-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #00A884;
+  border: none;
+  color: #fff;
+  display: flex;
