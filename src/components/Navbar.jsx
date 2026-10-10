@@ -3,18 +3,56 @@ import { ArrowRight, Sparkles, PhoneCall, X, LogIn } from 'lucide-react';
 
 export default function Navbar({ onOpenDemo }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 40);
+
+          // Check whether the section directly beneath the top navbar is white/light
+          let isWhite = false;
+
+          // 1. The White Contour Stage (after curved-black-shell)
+          const whiteStage = document.querySelector('.white-contour-stage');
+          if (whiteStage) {
+            const rect = whiteStage.getBoundingClientRect();
+            if (rect.top <= 65 && rect.bottom >= 45) {
+              isWhite = true;
+            }
+          }
+
+          // 2. Automate section in Hero with moving text lines (as soon as card shrinks: progress >= 0.05)
+          const blackShell = document.querySelector('.curved-black-shell');
+          if (!isWhite && blackShell) {
+            const blackRect = blackShell.getBoundingClientRect();
+            // If curved black shell is still below the navbar:
+            if (blackRect.top > 65) {
+              const heroTrack = document.querySelector('.hero-scroll-track');
+              if (heroTrack) {
+                const heroRect = heroTrack.getBoundingClientRect();
+                const heroHeight = heroTrack.offsetHeight;
+                const heroProgress = -heroRect.top / Math.max(heroHeight - window.innerHeight, 1);
+                if (heroProgress >= 0.05 && heroRect.bottom > 65) {
+                  isWhite = true;
+                }
+              }
+            }
+          }
+
+          setIsLightMode(isWhite);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -35,13 +73,13 @@ export default function Navbar({ onOpenDemo }) {
   return (
     <>
       {/* Full-Width Top Navbar: Blue Logo on Left, Buttons + Fancy Hamburger on Right */}
-      <header className={`navbar-header-full ${isScrolled ? 'is-scrolled' : ''}`}>
+      <header className={`navbar-header-full ${isScrolled ? 'is-scrolled' : ''} ${isLightMode ? 'is-light-theme' : ''}`}>
         <nav className="navbar-full-container">
           {/* Top Left Side: JobGen Blue Logo + Text */}
           <a href="#home" onClick={handleHomeClick} className="navbar-brand-full">
             <img
-              src="/assets/jobgen-white.webp"
-              alt="JobGen Blue Logo"
+              src={isLightMode ? '/assets/jobgen-logo.webp' : '/assets/jobgen-white.webp'}
+              alt="JobGen Logo"
               className="brand-logo-img-blue"
             />
             <span className="brand-title-full">
