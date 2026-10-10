@@ -5286,3 +5286,16 @@ h6 {
 }
 
 .wa-doodle-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0);
+  background-size: 20px 20px;
+  z-index: 0;
+}
+
+.wa-messages-content-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
