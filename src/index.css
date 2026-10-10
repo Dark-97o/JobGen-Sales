@@ -5351,3 +5351,16 @@ h6 {
 }
 
 .wa-bubble-row.is-incoming {
+  justify-content: flex-start;
+}
+
+.wa-bubble-row.is-outgoing {
+  justify-content: flex-end;
+}
+
+.wa-bubble {
+  position: relative;
+  max-width: 68%;
+  padding: 7px 12px 6px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
