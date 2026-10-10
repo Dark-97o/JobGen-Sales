@@ -4845,3 +4845,16 @@ h6 {
 
 .wa-new-chat-btn:hover {
   transform: scale(1.05);
+}
+
+/* Search Row */
+.wa-search-container {
+  padding: 8px 14px;
+}
+
+.wa-search-input-wrap {
+  background: #202c33;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
