@@ -5507,3 +5507,15 @@ h6 {
   color: #111b21;
   border-radius: 50%;
   width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.wa-input-mic-btn:hover {
+  transform: scale(1.06);
+}
