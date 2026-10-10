@@ -5091,3 +5091,16 @@ h6 {
 /* 3. Right Main Conversation Pane */
 .wa-conversation-pane {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #0b141a;
+  min-width: 0;
+}
+
+.wa-convo-header {
+  height: 60px;
+  background: #202c33;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
