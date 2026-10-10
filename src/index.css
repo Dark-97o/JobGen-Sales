@@ -1,5 +1,5 @@
 /* ==========================================================================
-   JOBGEN.AI UNIFIED PLATFORM â€” FLAGSHIP LUXURY DESIGN SYSTEM
+   JOBGEN.AI UNIFIED PLATFORM — FLAGSHIP LUXURY DESIGN SYSTEM
    Benchmarks: Huly.io, Quoti.ai, Anubi.io, LandoNorris.com
    Palette: Deep Cosmic Obsidian (#06080F, #0A0E1A), Electric Cobalt (#2563EB, #3B82F6),
             Laser Hairline Borders, Frosted Double-Bezel Cockpits, Pure White Kinetic Type.
@@ -52,7 +52,7 @@
   --color-warning: #F59E0B;
   --color-danger: #EF4444;
 
-  /* Typography â€” Modern Luxury High-Tech Scale */
+  /* Typography — Modern Luxury High-Tech Scale */
   --font-display: 'Plus Jakarta Sans', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-headline: 'Plus Jakarta Sans', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-kinetic: 'Plus Jakarta Sans', sans-serif;
@@ -1695,7 +1695,7 @@ h6 {
   transform: scale(1.02);
 }
 
-/* Agent Information Block â€” moved up by 250px per user request */
+/* Agent Information Block — moved up by 250px per user request */
 .agent-info-block {
   display: flex;
   flex-direction: column;
@@ -1715,7 +1715,7 @@ h6 {
   text-align: right;
 }
 
-/* 1. Name written in Automate Text Font â€” Increased size for Jenny & Olivia text only */
+/* 1. Name written in Automate Text Font — Increased size for Jenny & Olivia text only */
 .agent-name-cursive {
   font-family: 'Caveat', 'Covered By Your Grace', 'Alex Brush', cursive;
   font-size: clamp(5rem, 7.8vw, 8.8rem);
@@ -1728,7 +1728,7 @@ h6 {
   margin-bottom: 0.2rem;
 }
 
-/* 2. Role in Long Height Font in One Line â€” Tightened spacing with sales subtitle */
+/* 2. Role in Long Height Font in One Line — Tightened spacing with sales subtitle */
 .agent-role-tall {
   font-family: 'Barlow Condensed', 'Oswald', 'Bebas Neue', sans-serif;
   font-size: clamp(3rem, 4.6vw, 5.4rem);
@@ -1743,7 +1743,7 @@ h6 {
   text-shadow: none;
 }
 
-/* 3. Small Desc: "Inbound Sales" / "Outbound Sales" â€” Thicker, Bold, No Pill, No Dot */
+/* 3. Small Desc: "Inbound Sales" / "Outbound Sales" — Thicker, Bold, No Pill, No Dot */
 .agent-desc-sub {
   display: block;
   font-family: 'Geist Mono', 'Geist', 'Plus Jakarta Sans', monospace;
@@ -2244,7 +2244,7 @@ h6 {
    INFINITE INTEGRATION MARQUEE (Huly / Anubi DNA)
    ========================================================================== */
 
-/* Black Curved Shell Coming Over Hero Section â€” Rounded Bottom Corners */
+/* Black Curved Shell Coming Over Hero Section — Rounded Bottom Corners */
 .curved-black-shell {
   position: relative;
   z-index: 50;
@@ -5518,4 +5518,18 @@ h6 {
 
 .wa-input-mic-btn:hover {
   transform: scale(1.06);
+}
+
+@media (max-width: 900px) {
+  .wa-icon-rail {
+    display: none;
+  }
+
+  .wa-chatlist-panel {
+    width: 280px;
+  }
+
+  .whatsapp-app-body {
+    height: 500px;
+  }
 }

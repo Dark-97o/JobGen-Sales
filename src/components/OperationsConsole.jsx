@@ -10,10 +10,6 @@ export default function OperationsConsole() {
       <div className="container">
         {/* Section Header */}
         <div style={{ maxWidth: '820px', marginBottom: '3.5rem' }}>
-          <div className="section-badge">
-            <Activity size={14} />
-            <span>CENTRAL OPERATIONS TELEMETRY</span>
-          </div>
           <h2 className="section-title">
             Every conversation becomes <br />
             <span className="gradient-text">visible, accountable work.</span>

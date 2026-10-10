@@ -45,10 +45,6 @@ export default function StrategicPillars({ onOpenDemo }) {
     <section id="pillars" className="section-spacing">
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 4rem' }}>
-          <div className="section-badge">
-            <Zap size={14} />
-            <span>DUAL-ENGINE ARCHITECTURE</span>
-          </div>
           <h2 className="section-title">
             Be there when they call. <br />
             <span className="gradient-text">Follow up when it matters most.</span>
