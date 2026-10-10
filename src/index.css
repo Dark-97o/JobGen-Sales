@@ -5429,3 +5429,16 @@ h6 {
   gap: 10px;
   color: #e9edef;
   font-size: 0.85rem;
+}
+
+.wa-outcome-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #25D366;
+  flex-shrink: 0;
+}
+
+.wa-outcome-icon {
+  flex-shrink: 0;
+}
