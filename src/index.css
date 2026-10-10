@@ -4936,3 +4936,16 @@ h6 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   transition: background 0.15s ease;
 }
+
+.wa-chat-item:hover {
+  background: #202c33;
+}
+
+.wa-chat-item.is-active {
+  background: #2a3942;
+}
+
+.wa-chat-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
