@@ -4598,3 +4598,15 @@ h6 {
 .mac-window-container.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.mac-titlebar {
+  background: #1f2c34;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
