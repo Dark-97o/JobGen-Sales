@@ -4988,3 +4988,15 @@ h6 {
   color: #e9edef;
   font-size: 0.92rem;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.wa-chat-timestamp {
+  color: #8696a0;
+  font-size: 0.74rem;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
