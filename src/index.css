@@ -4649,3 +4649,16 @@ h6 {
   color: #8696a0;
   font-weight: 500;
 }
+
+.mac-window-title-app {
+  color: #e9edef;
+  font-weight: 700;
+}
+
+.mac-window-title-sep {
+  opacity: 0.4;
+}
+
+.mac-window-title-sub {
+  color: #aebac1;
+}
