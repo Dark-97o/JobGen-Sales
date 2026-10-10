@@ -5065,3 +5065,16 @@ h6 {
 .wa-sidebar-bottom-app {
   padding: 10px 14px;
   background: #202c33;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.wa-windows-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e9edef;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.wa-green-icon-wrap {
