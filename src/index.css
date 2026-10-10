@@ -4949,3 +4949,16 @@ h6 {
   width: 46px;
   height: 46px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.wa-avatar-audio-pulse {
+  position: absolute;
+  inset: -3px;

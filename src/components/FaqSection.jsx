@@ -13,10 +13,6 @@ export default function FaqSection() {
     <section id="faq" className="section-spacing">
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 3.5rem' }}>
-          <div className="section-badge">
-            <HelpCircle size={14} />
-            <span>CLARITY & ARCHITECTURE FAQS</span>
-          </div>
           <h2 className="section-title">
             Everything you need to know <br />
             <span className="gradient-text">about deploying your AI workforce.</span>
