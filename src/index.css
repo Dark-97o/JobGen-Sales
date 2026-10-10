@@ -4832,3 +4832,16 @@ h6 {
 .wa-new-chat-btn {
   background: #00A884;
   color: #111b21;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.wa-new-chat-btn:hover {
+  transform: scale(1.05);
