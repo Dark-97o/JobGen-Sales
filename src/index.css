@@ -5000,3 +5000,17 @@ h6 {
   flex-shrink: 0;
   font-family: var(--font-mono);
 }
+
+.wa-chat-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wa-chat-category-preview {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8696a0;
+  font-size: 0.8rem;
+  white-space: nowrap;
