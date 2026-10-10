@@ -5468,3 +5468,16 @@ h6 {
 .wa-input-icon-btn {
   background: transparent;
   border: none;
+  color: #8696a0;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.wa-input-icon-btn:hover {
+  color: #e9edef;
+}
