@@ -21,6 +21,13 @@ import {
 } from 'lucide-react';
 import { CALL_RECORDINGS } from '../data/landingData';
 
+// Normalized waveform heights representing realistic voice call audio frequencies
+const WAVE_BARS = [
+  32, 48, 26, 62, 82, 42, 74, 96, 56, 86, 100, 68, 92, 78, 52, 88,
+  100, 82, 64, 94, 74, 54, 70, 90, 50, 84, 98, 64, 46, 74, 92, 54,
+  40, 68, 82, 58, 36, 54, 30, 22
+];
+
 // Custom avatars with recognizable colors & initial badges matching enterprise roles
 const CALL_AVATARS = {
   'inbound-appointment': {
@@ -443,49 +450,8 @@ export default function RealCallLibrary() {
                   </div>
                 </div>
 
-                {/* Header Actions: Embedded Audio Player + Standard WhatsApp Icons */}
+                {/* Header Actions: Standard WhatsApp Icons */}
                 <div className="wa-convo-header-right">
-                  {/* Integrated Call Audio Player */}
-                  <div className="wa-embedded-audio-player">
-                    <button
-                      type="button"
-                      onClick={togglePlay}
-                      className="wa-audio-play-btn"
-                      aria-label={isPlaying ? 'Pause call audio' : 'Play call audio'}
-                      title={isPlaying ? 'Pause' : 'Play call audio'}
-                    >
-                      {isPlaying ? (
-                        <Pause size={15} fill="#fff" />
-                      ) : (
-                        <Play size={15} fill="#fff" style={{ marginLeft: '2px' }} />
-                      )}
-                    </button>
-
-                    <div className="wa-audio-scrubber-wrap" onClick={handleAudioScrub}>
-                      <div className="wa-audio-track">
-                        <div
-                          className="wa-audio-fill"
-                          style={{
-                            width: duration ? `${(currentTime / duration) * 100}%` : '0%',
-                          }}
-                        />
-                      </div>
-                      <div className="wa-audio-time-label">
-                        <span>{formatTime(currentTime)}</span>
-                        <span>/</span>
-                        <span>{activeCall.duration}</span>
-                      </div>
-                    </div>
-
-                    {/* Equalizer Waveform while playing */}
-                    <div className={`wa-sound-equalizer ${isPlaying ? 'is-playing' : ''}`}>
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-
                   {/* Standard WhatsApp Header Icons */}
                   <div className="wa-header-icon-group">
                     <button type="button" className="wa-icon-tool" title="Video call" aria-label="Video call">
@@ -589,31 +555,75 @@ export default function RealCallLibrary() {
                 </div>
               </div>
 
-              {/* WhatsApp Message Input Bar */}
-              <div className="wa-input-dock">
-                <button type="button" className="wa-input-icon-btn" title="Add attachment" aria-label="Attachment">
-                  <Plus size={20} />
-                </button>
-                <button type="button" className="wa-input-icon-btn" title="Emojis" aria-label="Emojis">
-                  <Smile size={20} />
-                </button>
-                <div className="wa-input-field-wrap">
-                  <input
-                    type="text"
-                    readOnly
-                    placeholder="Click any message bubble above to scrub and hear audio..."
-                    className="wa-message-input"
-                  />
-                </div>
+              {/* WhatsApp Big Audio Playing & Pause Dock (Replaced "Click any message bubble above...") */}
+              <div className="wa-big-audio-dock">
+                {/* Big Play / Pause Button */}
                 <button
                   type="button"
                   onClick={togglePlay}
-                  className="wa-input-mic-btn"
-                  title={isPlaying ? 'Pause audio' : 'Play audio'}
-                  aria-label="Microphone"
+                  className="wa-big-play-btn"
+                  title={isPlaying ? 'Pause call audio' : 'Play call audio'}
+                  aria-label={isPlaying ? 'Pause call audio' : 'Play call audio'}
                 >
-                  {isPlaying ? <Volume2 size={20} /> : <Mic size={20} />}
+                  {isPlaying ? (
+                    <Pause size={22} fill="#FFFFFF" color="#FFFFFF" />
+                  ) : (
+                    <Play size={22} fill="#FFFFFF" color="#FFFFFF" style={{ marginLeft: '3px' }} />
+                  )}
                 </button>
+
+                {/* Big Audio Waveform (Playing and Pause Waves with Scrubber) */}
+                <div
+                  className="wa-big-waveform-container"
+                  onClick={handleAudioScrub}
+                  title="Click anywhere along the waveform to scrub audio"
+                  role="slider"
+                  aria-label="Audio scrubber"
+                  aria-valuenow={currentTime}
+                  aria-valuemin={0}
+                  aria-valuemax={duration || 100}
+                >
+                  {/* Waveform Bars Track */}
+                  <div className={`wa-big-waves-track ${isPlaying ? 'is-playing' : 'is-paused'}`}>
+                    {WAVE_BARS.map((heightPct, idx) => {
+                      const barFraction = idx / WAVE_BARS.length;
+                      const isPlayed = barFraction <= (duration ? currentTime / duration : 0);
+                      return (
+                        <div
+                          key={idx}
+                          className={`wa-big-wave-bar ${isPlayed ? 'is-played' : ''}`}
+                          style={{
+                            '--base-height': `${heightPct}%`,
+                            '--bar-delay': `${(idx % 10) * 0.07}s`,
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  {/* Scrub Playhead Line */}
+                  <div
+                    className="wa-waveform-playhead"
+                    style={{
+                      left: duration ? `${(currentTime / duration) * 100}%` : '0%',
+                    }}
+                  />
+                </div>
+
+                {/* Timestamps & Status Indicator */}
+                <div className="wa-big-audio-meta">
+                  <div className="wa-big-time-display">
+                    <span className="wa-time-current">{formatTime(currentTime)}</span>
+                    <span className="wa-time-sep">/</span>
+                    <span className="wa-time-total">{activeCall.duration}</span>
+                  </div>
+                  <div className="wa-audio-status-pill">
+                    <span className={`wa-audio-pulse-dot ${isPlaying ? 'is-active' : ''}`} />
+                    <span className="wa-audio-status-text">
+                      {isPlaying ? 'Playing' : 'Paused'}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

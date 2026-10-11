@@ -4880,10 +4880,10 @@ h6 {
   animation: pulseBeacon 2s infinite ease-in-out;
 }
 
-/* WhatsApp Main Interface Body */
+/* WhatsApp Main Interface Body — Increased by 120px */
 .whatsapp-app-body {
   display: flex;
-  height: 580px;
+  height: 700px;
   width: 100%;
   overflow: hidden;
   background-color: #111b21;
@@ -5388,107 +5388,7 @@ h6 {
   gap: 12px;
 }
 
-/* Embedded Call Audio Player in WhatsApp Header */
-.wa-embedded-audio-player {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(17, 27, 33, 0.85);
-  padding: 5px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.wa-audio-play-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #00D5A5 0%, #00A884 55%, #008f6f 100%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 
-    0 6px 14px -2px rgba(0, 168, 132, 0.5),
-    inset 0 2px 4px rgba(255, 255, 255, 0.55),
-    inset 0 -3px 4px rgba(0, 0, 0, 0.35);
-}
-
-.wa-audio-play-btn:hover {
-  transform: translateY(-2px) scale(1.08);
-  box-shadow: 
-    0 8px 18px -2px rgba(0, 168, 132, 0.65),
-    inset 0 3px 5px rgba(255, 255, 255, 0.7),
-    inset 0 -3px 4px rgba(0, 0, 0, 0.4);
-  background: linear-gradient(145deg, #15e0b2 0%, #00A884 100%);
-}
-
-.wa-audio-play-btn:active {
-  transform: translateY(1px) scale(0.96);
-  box-shadow: 
-    0 2px 6px rgba(0, 168, 132, 0.35),
-    inset 0 1px 2px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.4);
-}
-
-.wa-audio-scrubber-wrap {
-  width: 120px;
-  cursor: pointer;
-}
-
-.wa-audio-track {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 3px;
-}
-
-.wa-audio-fill {
-  height: 100%;
-  background: #00A884;
-  border-radius: 2px;
-  transition: width 0.1s linear;
-}
-
-.wa-audio-time-label {
-  display: flex;
-  gap: 3px;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #8696a0;
-}
-
-.wa-sound-equalizer {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  height: 14px;
-}
-
-.wa-sound-equalizer span {
-  width: 2.5px;
-  height: 4px;
-  background: #00A884;
-  border-radius: 2px;
-  transition: height 0.15s ease;
-}
-
-.wa-sound-equalizer.is-playing span:nth-child(1) {
-  animation: eqBar 0.5s infinite alternate ease-in-out;
-}
-.wa-sound-equalizer.is-playing span:nth-child(2) {
-  animation: eqBar 0.7s infinite alternate ease-in-out 0.15s;
-}
-.wa-sound-equalizer.is-playing span:nth-child(3) {
-  animation: eqBar 0.6s infinite alternate ease-in-out 0.3s;
-}
-.wa-sound-equalizer.is-playing span:nth-child(4) {
-  animation: eqBar 0.8s infinite alternate ease-in-out 0.05s;
-}
 
 .wa-header-icon-group {
   display: flex;
@@ -5693,87 +5593,192 @@ h6 {
   font-size: 0.84rem;
 }
 
-/* WhatsApp Message Input Bar */
-.wa-input-dock {
-  height: 60px;
+/* ==========================================================================
+   WHATSAPP BIG AUDIO PLAYER DOCK (PLAYING & PAUSE WAVES + SCRUBBER)
+   ========================================================================== */
+
+.wa-big-audio-dock {
+  min-height: 74px;
   background: #202c33;
-  padding: 0 16px;
+  padding: 10px 18px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex-shrink: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
 }
 
-.wa-input-icon-btn {
-  background: transparent;
-  border: none;
-  color: #8696a0;
-  cursor: pointer;
-  padding: 6px;
+/* Big Play & Pause Button */
+.wa-big-play-btn {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  display: flex;
+  background: linear-gradient(135deg, #00D5A5 0%, #00A884 60%, #008f6f 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.15s ease;
-}
-
-.wa-input-icon-btn:hover {
-  color: #e9edef;
-}
-
-.wa-input-field-wrap {
-  flex: 1;
-  background: #2a3942;
-  border-radius: 8px;
-  padding: 9px 14px;
-}
-
-.wa-message-input {
-  background: transparent;
-  border: none;
-  color: #e9edef;
-  font-size: 0.88rem;
-  width: 100%;
-  outline: none;
-}
-
-.wa-message-input::placeholder {
-  color: #8696a0;
-}
-
-.wa-input-mic-btn {
-  background: linear-gradient(145deg, #00D5A5 0%, #00A884 55%, #008f6f 100%);
-  color: #111b21;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
+  flex-shrink: 0;
   box-shadow: 
-    0 8px 18px -2px rgba(0, 168, 132, 0.5),
-    inset 0 3px 5px rgba(255, 255, 255, 0.6),
-    inset 0 -3px 5px rgba(0, 0, 0, 0.35);
+    0 8px 20px -2px rgba(0, 168, 132, 0.55),
+    inset 0 2px 4px rgba(255, 255, 255, 0.65),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.35);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.wa-input-mic-btn:hover {
+.wa-big-play-btn:hover {
   transform: translateY(-2px) scale(1.08);
   box-shadow: 
-    0 12px 24px -2px rgba(0, 168, 132, 0.65),
-    inset 0 3px 6px rgba(255, 255, 255, 0.75),
-    inset 0 -3px 5px rgba(0, 0, 0, 0.4);
+    0 12px 26px -2px rgba(0, 168, 132, 0.7),
+    inset 0 3px 5px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.wa-input-mic-btn:active {
-  transform: translateY(2px) scale(0.96);
+.wa-big-play-btn:active {
+  transform: translateY(1px) scale(0.95);
   box-shadow: 
-    0 3px 8px rgba(0, 168, 132, 0.35),
-    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    0 4px 10px rgba(0, 168, 132, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
     inset 0 -2px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Big Audio Waveform Container */
+.wa-big-waveform-container {
+  flex: 1;
+  height: 48px;
+  position: relative;
+  background: rgba(17, 27, 33, 0.85);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.wa-big-waveform-container:hover {
+  background: rgba(17, 27, 33, 0.95);
+  border-color: rgba(0, 213, 165, 0.3);
+}
+
+/* Waveform Bars Track */
+.wa-big-waves-track {
+  width: 100%;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px;
+}
+
+/* Individual Audio Wave Bar (Shows paused shape when audio is paused) */
+.wa-big-wave-bar {
+  flex: 1;
+  max-width: 5px;
+  height: var(--base-height, 40%);
+  min-height: 4px;
+  border-radius: 4px;
+  background: rgba(134, 150, 160, 0.32);
+  transform-origin: 50% 50%;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.wa-big-wave-bar.is-played {
+  background: linear-gradient(180deg, #00D5A5 0%, #00A884 100%);
+  box-shadow: 0 0 6px rgba(0, 168, 132, 0.45);
+}
+
+/* Animated Sound Waveforms while playing */
+.wa-big-waves-track.is-playing .wa-big-wave-bar.is-played {
+  animation: bigWavePulse 0.65s infinite alternate ease-in-out var(--bar-delay, 0s);
+}
+
+@keyframes bigWavePulse {
+  0% {
+    transform: scaleY(0.7);
+    filter: brightness(0.9);
+  }
+  100% {
+    transform: scaleY(1.35);
+    filter: brightness(1.2);
+  }
+}
+
+/* Waveform Playhead Needle */
+.wa-waveform-playhead {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  width: 2.5px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  box-shadow: 0 0 8px #00D5A5, 0 0 3px #FFFFFF;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: left 0.08s linear;
+}
+
+/* Timestamps & Meta */
+.wa-big-audio-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+  min-width: 95px;
+}
+
+.wa-big-time-display {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.wa-time-current {
+  color: #00D5A5;
+}
+
+.wa-time-sep {
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0 4px;
+}
+
+.wa-time-total {
+  color: #8696a0;
+}
+
+.wa-audio-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8696a0;
+}
+
+.wa-audio-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8696a0;
+  transition: all 0.2s ease;
+}
+
+.wa-audio-pulse-dot.is-active {
+  background: #00D5A5;
+  box-shadow: 0 0 8px #00D5A5;
+  animation: pulseBeacon 1.4s infinite ease-in-out;
 }
 
 @media (max-width: 900px) {
@@ -5786,7 +5791,36 @@ h6 {
   }
 
   .whatsapp-app-body {
-    height: 500px;
+    height: 620px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wa-big-audio-dock {
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .wa-big-play-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .wa-big-waveform-container {
+    height: 40px;
+    padding: 0 8px;
+  }
+
+  .wa-big-audio-meta {
+    min-width: 75px;
+  }
+
+  .wa-big-time-display {
+    font-size: 0.78rem;
+  }
+
+  .wa-audio-status-pill {
+    display: none;
   }
 }
 
