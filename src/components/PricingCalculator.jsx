@@ -67,9 +67,6 @@ export default function PricingCalculator({ onOpenDemo }) {
             <span className="pricing-headline-main">Transparent, predictable pricing</span> <br />
             <span className="text-full-blue pricing-headline-sub">built for immediate ROI.</span>
           </h2>
-          <p className="section-lead text-center">
-            No user-seat tax, no hidden telephony fees, and zero lock-in contracts. Upgrade, downgrade, or pause anytime with guaranteed uptime.
-          </p>
         </div>
 
         {/* 3 Clean Tier Cards Grid */}
