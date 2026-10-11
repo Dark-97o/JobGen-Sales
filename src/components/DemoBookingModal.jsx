@@ -19,6 +19,17 @@ export default function DemoBookingModal({ isOpen, onClose }) {
     company: ''
   });
 
+  // Lock background scroll when modal is open
+  React.useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
   // Dynamic next 5 days
   const upcomingDays = React.useMemo(() => {
     const days = [];

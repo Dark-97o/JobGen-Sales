@@ -2,24 +2,39 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="footer-wrapper">
-      <div className="container">
+    <footer className="footer-wrapper footer-video-wrapper">
+      {/* Background Video with Top Fade to Background Above */}
+      <div className="footer-video-bg-container" aria-hidden="true">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="footer-bg-video"
+        >
+          <source src="/assets/footer.mp4" type="video/mp4" />
+        </video>
+        <div className="footer-video-dark-overlay" />
+      </div>
+
+      <div className="container footer-content-container">
         <div className="footer-grid">
-          {/* Brand Info */}
+          {/* Brand Info with jobgen-white logo */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1rem' }}>
-              <div className="brand-dot" />
-              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.25rem', color: '#fff', letterSpacing: '-0.03em' }}>
-                JOBGEN<span style={{ color: 'var(--color-blue-400)' }}>.AI</span>
+            <div className="footer-brand-header">
+              <img
+                src="/assets/jobgen-white.webp"
+                alt="JobGen White Logo"
+                className="footer-brand-logo-img"
+              />
+              <span className="footer-brand-title">
+                JOBGEN<span className="footer-brand-accent">.AI</span>
               </span>
-              <span className="brand-badge">ENTERPRISE</span>
+              <span className="brand-badge footer-brand-badge">ENTERPRISE</span>
             </div>
-            <p style={{ color: 'var(--color-white-50)', fontSize: '0.9rem', lineHeight: 1.65, maxWidth: '340px', marginBottom: '1.5rem' }}>
+            <p className="footer-brand-desc">
               The unified autonomous AI voice workforce for 24/7 inbound reception, instant calendar bookings, and multi-channel sales outreach.
             </p>
-            <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--color-blue-400)', background: 'rgba(37,99,235,0.1)', padding: '0.3rem 0.65rem', borderRadius: 'var(--radius-pill)', border: '1px solid rgba(59,130,246,0.25)' }}>
-              SOC-2 TYPE II · HIPAA BAA · 99.99% SLA
-            </span>
           </div>
 
           {/* Column 1: AI Workforce */}

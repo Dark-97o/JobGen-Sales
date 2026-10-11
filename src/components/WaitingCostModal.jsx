@@ -1,9 +1,20 @@
-import React, { useState, useMemo } from 'react';
-import { X, ArrowRight, Calculator, Sparkles, TrendingDown, DollarSign, Clock, CheckCircle2 } from 'lucide-react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { X, ArrowRight, TrendingDown, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBooking }) {
-  // 7 Slider Inputs from the reference image
+  // Lock background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
+  // 7 Slider Inputs
   const [callsPerDay, setCallsPerDay] = useState(30);
   const [unansweredRate, setUnansweredRate] = useState(20);
   const [coldEnquiries, setColdEnquiries] = useState(20);
@@ -64,96 +75,73 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
     }
   };
 
-  // Helper for slider fill styling
   const getFillPercent = (val, min, max) => ((val - min) / (max - min)) * 100;
 
   return (
-    <div className="cost-modal-backdrop" onClick={onClose}>
+    <div className="cost-clay-modal-backdrop" onClick={onClose}>
       <div 
-        className="cost-modal-card" 
+        className="cost-clay-modal-card" 
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
-        {/* Close Button */}
+        {/* Clay Close Button */}
         <button 
           type="button" 
           onClick={onClose} 
-          className="cost-modal-close-btn"
+          className="cost-clay-close-btn"
           aria-label="Close calculator"
         >
           <X size={18} />
         </button>
 
-        <div className="cost-modal-layout">
-          {/* LEFT SIDE: Narrative & Live Breakdown */}
-          <div className="cost-left-col">
-            <div className="cost-kicker">04 · WHAT WAITING COSTS</div>
-            
-            <h2 className="cost-main-title">
-              What is <br />
-              waiting <br />
-              <span className="cost-title-highlight">costing you?</span>
+        <div className="cost-clay-modal-layout">
+          {/* LEFT SIDE: Clean Narrative & Tactile Impact Summary */}
+          <div className="cost-clay-left-col">
+            <h2 className="cost-clay-main-title">
+              What is waiting <br />
+              <span className="cost-clay-title-highlight">costing you?</span>
             </h2>
 
-            <p className="cost-desc">
-              Every month without help, some calls go unanswered, some enquiries go cold and your team loses hours to admin. Put in your own numbers to see what that adds up to.
-            </p>
-
-            <div className="cost-legend-list">
-              <div className="cost-legend-item">
-                <span className="cost-legend-dot dot-coral" />
-                <span className="cost-legend-text">Missed calls and cold enquiries</span>
-              </div>
-              <div className="cost-legend-item">
-                <span className="cost-legend-dot dot-amber" />
-                <span className="cost-legend-text">Staff time on repetitive admin</span>
-              </div>
-            </div>
-
-            {/* Live Impact Card */}
-            <div className="cost-impact-summary-clay">
-              <div className="cost-impact-header">
-                <TrendingDown size={17} className="text-coral" />
-                <span className="cost-impact-label">ESTIMATED COST OF INACTION</span>
+            {/* Claymorphic Live Impact Summary */}
+            <div className="cost-clay-impact-card">
+              <div className="cost-clay-impact-header">
+                <TrendingDown size={17} className="text-full-blue" />
+                <span className="cost-clay-impact-label">ESTIMATED COST OF INACTION</span>
               </div>
 
-              <div className="cost-impact-big-value">
+              <div className="cost-clay-impact-big-value">
                 A${stats.monthlyTotalCost.toLocaleString()}
-                <span className="cost-impact-per">/month</span>
+                <span className="cost-clay-impact-per">/month</span>
               </div>
 
-              <div className="cost-impact-annual-pill">
-                <span>≈ A${stats.annualTotalCost.toLocaleString()} per year</span>
+              <div className="cost-clay-annual-pill">
+                <span>≈ A${stats.annualTotalCost.toLocaleString()} / year</span>
               </div>
 
-              <div className="cost-impact-breakdown-grid">
-                <div className="cost-breakdown-subitem">
-                  <span className="cost-subitem-label">
-                    <span className="cost-legend-dot dot-coral inline-dot" /> Lost Revenue:
-                  </span>
-                  <span className="cost-subitem-val">A${stats.monthlyLostRevenue.toLocaleString()}/mo</span>
+              <div className="cost-clay-breakdown-grid">
+                <div className="cost-clay-breakdown-item">
+                  <span className="cost-clay-sub-label">Missed Revenue</span>
+                  <span className="cost-clay-sub-val">A${stats.monthlyLostRevenue.toLocaleString()} / mo</span>
                 </div>
-                <div className="cost-breakdown-subitem">
-                  <span className="cost-subitem-label">
-                    <span className="cost-legend-dot dot-amber inline-dot" /> Admin Payroll:
-                  </span>
-                  <span className="cost-subitem-val">A${stats.monthlyAdminCost.toLocaleString()}/mo</span>
+                <div className="cost-clay-breakdown-item">
+                  <span className="cost-clay-sub-label">Admin Payroll</span>
+                  <span className="cost-clay-sub-val">A${stats.monthlyAdminCost.toLocaleString()} / mo</span>
                 </div>
               </div>
 
               {hasCalculated && (
-                <div className="cost-recovered-cta-box">
-                  <div className="cost-recovered-text">
-                    <Sparkles size={15} className="text-amber" />
-                    <span>JobGen autonomous agents recover <strong>95%+</strong> of these missed calls and automate 100% of admin follow-ups.</span>
+                <div className="cost-clay-recovered-box">
+                  <div className="cost-clay-recovered-text">
+                    <Sparkles size={15} className="text-full-blue" />
+                    <span>JobGen recovers <strong>95%+</strong> of these missed leads 24/7.</span>
                   </div>
                   <button 
                     type="button" 
                     onClick={handleBookSolution}
-                    className="cost-recover-btn"
+                    className="cost-clay-recover-btn"
                   >
-                    <span>Recover A${stats.monthlyTotalCost.toLocaleString()}/mo with AI</span>
+                    <span>Recover A${stats.monthlyTotalCost.toLocaleString()}/mo</span>
                     <ArrowRight size={15} />
                   </button>
                 </div>
@@ -161,16 +149,16 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
             </div>
           </div>
 
-          {/* RIGHT SIDE: Interactive Sliders Card */}
-          <div className="cost-right-card">
-            <div className="cost-sliders-stack">
-              {/* Slider 1: Calls you get a day */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">Calls you get a day</span>
-                  <span className="cost-slider-val">{callsPerDay}</span>
+          {/* RIGHT SIDE: Claymorphic Sliders */}
+          <div className="cost-clay-right-card">
+            <div className="cost-clay-sliders-stack">
+              {/* Slider 1: Daily calls */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Daily inbound calls</span>
+                  <span className="cost-clay-slider-val">{callsPerDay}</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="5"
@@ -178,19 +166,19 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="1"
                     value={callsPerDay}
                     onChange={(e) => setCallsPerDay(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(callsPerDay, 5, 150)}%` }}
                   />
                 </div>
               </div>
 
-              {/* Slider 2: Share you can't answer */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">Share you can't answer</span>
-                  <span className="cost-slider-val">{unansweredRate}%</span>
+              {/* Slider 2: Unanswered rate */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Unanswered call rate</span>
+                  <span className="cost-clay-slider-val">{unansweredRate}%</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="5"
@@ -198,19 +186,19 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="1"
                     value={unansweredRate}
                     onChange={(e) => setUnansweredRate(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(unansweredRate, 5, 80)}%` }}
                   />
                 </div>
               </div>
 
-              {/* Slider 3: Enquiries a month nobody follows up */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">Enquiries a month nobody follows up (forms, emails, messages)</span>
-                  <span className="cost-slider-val">{coldEnquiries}</span>
+              {/* Slider 3: Unfollowed inquiries */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Cold inquiries / month</span>
+                  <span className="cost-clay-slider-val">{coldEnquiries}</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="0"
@@ -218,19 +206,19 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="1"
                     value={coldEnquiries}
                     onChange={(e) => setColdEnquiries(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(coldEnquiries, 0, 100)}%` }}
                   />
                 </div>
               </div>
 
-              {/* Slider 4: Share who'd become customers */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">Share who'd become customers</span>
-                  <span className="cost-slider-val">{conversionRate}%</span>
+              {/* Slider 4: Conversion rate */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Lead conversion rate</span>
+                  <span className="cost-clay-slider-val">{conversionRate}%</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="5"
@@ -238,19 +226,19 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="1"
                     value={conversionRate}
                     onChange={(e) => setConversionRate(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(conversionRate, 5, 60)}%` }}
                   />
                 </div>
               </div>
 
-              {/* Slider 5: New customer value (AUD) */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">New customer value (AUD)</span>
-                  <span className="cost-slider-val">A${customerValue}</span>
+              {/* Slider 5: Customer value */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Average customer value</span>
+                  <span className="cost-clay-slider-val">A${customerValue}</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="30"
@@ -258,19 +246,19 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="10"
                     value={customerValue}
                     onChange={(e) => setCustomerValue(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(customerValue, 30, 1000)}%` }}
                   />
                 </div>
               </div>
 
-              {/* Slider 6: Hours a week your team spends on bookings... */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">Hours a week your team spends on bookings, reception, data entry and follow-ups</span>
-                  <span className="cost-slider-val">{adminHoursWeek}h</span>
+              {/* Slider 6: Admin hours */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Weekly admin hours</span>
+                  <span className="cost-clay-slider-val">{adminHoursWeek}h</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="1"
@@ -278,19 +266,19 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="1"
                     value={adminHoursWeek}
                     onChange={(e) => setAdminHoursWeek(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(adminHoursWeek, 1, 40)}%` }}
                   />
                 </div>
               </div>
 
-              {/* Slider 7: What an hour of that time costs you (AUD) */}
-              <div className="cost-slider-group">
-                <div className="cost-slider-header">
-                  <span className="cost-slider-label">What an hour of that time costs you (AUD)</span>
-                  <span className="cost-slider-val">A${hourlyCost}</span>
+              {/* Slider 7: Hourly cost */}
+              <div className="cost-clay-slider-group">
+                <div className="cost-clay-slider-header">
+                  <span className="cost-clay-slider-label">Hourly staff rate</span>
+                  <span className="cost-clay-slider-val">A${hourlyCost}</span>
                 </div>
-                <div className="cost-slider-track-wrap">
+                <div className="cost-clay-slider-track-wrap">
                   <input
                     type="range"
                     min="15"
@@ -298,21 +286,21 @@ export default function WaitingCostModal({ isOpen, onClose, onOpenDemo, onOpenBo
                     step="1"
                     value={hourlyCost}
                     onChange={(e) => setHourlyCost(Number(e.target.value))}
-                    className="cost-range-input"
+                    className="cost-clay-range-input"
                     style={{ '--fill': `${getFillPercent(hourlyCost, 15, 100)}%` }}
                   />
                 </div>
               </div>
             </div>
 
-            {/* Bottom Gradient Button matching image */}
-            <div className="cost-calculate-btn-row">
+            {/* Claymorphic Calculate Button */}
+            <div className="cost-clay-btn-row">
               <button 
                 type="button" 
                 onClick={handleCalculate}
-                className="cost-sunset-calc-btn"
+                className="cost-clay-calc-btn"
               >
-                <span>Calculate what waiting costs</span>
+                <span>Calculate Cost of Waiting</span>
                 <ArrowRight size={16} />
               </button>
             </div>
