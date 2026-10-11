@@ -17,7 +17,7 @@ export default function FaqSection() {
       <div className="container">
         <div className="faq-header-center">
           <h2 className="section-title text-center faq-main-title">
-            Everything you need to know
+            Everything you <span className="faq-title-blue">need to know</span>
           </h2>
         </div>
 
@@ -36,13 +36,12 @@ export default function FaqSection() {
                   aria-expanded={isOpen}
                 >
                   <span className="faq-question-text">{faq.q}</span>
-                  <div className={`faq-plus-badge ${isOpen ? 'is-open' : ''}`} aria-hidden="true">
-                    <Plus
-                      size={20}
-                      strokeWidth={2.2}
-                      className="faq-plus-icon"
+                  <div className={`faq-chevron-badge ${isOpen ? 'is-open' : ''}`} aria-hidden="true">
+                    <ChevronDown
+                      size={17}
+                      className="faq-chevron-icon"
                       style={{
-                        transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                         transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                       }}
                     />

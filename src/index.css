@@ -4298,44 +4298,51 @@ h6 {
   margin: 0;
 }
 
+.faq-title-blue {
+  color: #0052FF;
+}
+
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  max-width: 920px;
+  gap: 0.75rem;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Floating Soft Pillow Claymorphic Card (Matching Image 1) */
+/* Tactile Claymorphic FAQ Cards */
 .faq-item {
   position: relative;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FBFDFF 100%);
+  background: linear-gradient(145deg, #FFFFFF 0%, #F1F5F9 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-radius: 26px;
-  padding: clamp(1.2rem, 2vw, 1.5rem) clamp(1.4rem, 2.5vw, 2.2rem);
+  border-radius: 18px;
+  padding: 0.85rem 1.45rem;
   box-shadow: 
-    0 16px 36px -4px rgba(24, 39, 75, 0.08),
-    0 4px 12px -2px rgba(24, 39, 75, 0.03),
-    inset 0 2px 3px #FFFFFF;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    0 8px 18px -2px rgba(15, 23, 42, 0.05),
+    0 2px 5px -1px rgba(15, 23, 42, 0.02),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 3px rgba(163, 177, 198, 0.22);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .faq-item:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
+  border-color: rgba(37, 99, 235, 0.3);
   box-shadow: 
-    0 22px 46px -6px rgba(37, 99, 235, 0.12),
-    0 6px 16px -2px rgba(24, 39, 75, 0.04),
-    inset 0 2px 3px #FFFFFF;
-  border-color: rgba(37, 99, 235, 0.25);
+    0 12px 24px -3px rgba(37, 99, 235, 0.09),
+    0 4px 10px -1px rgba(15, 23, 42, 0.03),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 3px rgba(163, 177, 198, 0.25);
 }
 
 .faq-item.is-open {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFD 100%);
-  border-color: rgba(37, 99, 235, 0.35);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F4F8FD 100%);
+  border-color: rgba(0, 82, 255, 0.4);
   box-shadow: 
-    0 20px 48px -6px rgba(37, 99, 235, 0.14),
-    0 6px 16px -2px rgba(24, 39, 75, 0.04),
-    inset 0 2px 3px #FFFFFF;
+    0 14px 28px -4px rgba(0, 82, 255, 0.1),
+    0 4px 10px -1px rgba(0, 82, 255, 0.04),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 3px rgba(191, 219, 254, 0.35);
 }
 
 /* Question Button Row */
@@ -4345,7 +4352,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
   background: transparent;
   border: none;
   text-align: left;
@@ -4353,11 +4360,11 @@ h6 {
 }
 
 .faq-question-text {
-  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1.02rem, 1.25vw, 1.14rem);
+  font-family: var(--font-display, 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
   font-weight: 750;
-  color: #0E172A;
-  line-height: 1.4;
+  color: #0E121D;
+  line-height: 1.35;
   letter-spacing: -0.015em;
   transition: color 0.25s ease;
 }
@@ -4366,53 +4373,44 @@ h6 {
   color: #0052FF;
 }
 
-/* Circular Floating Clay Action Badge with Blue Plus */
-.faq-plus-badge {
-  width: 44px;
-  height: 44px;
+/* Claymorphic Chevron Button Badge */
+.faq-chevron-badge {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: linear-gradient(145deg, #FFFFFF 0%, #EEF4FB 100%);
-  border: 1.5px solid rgba(226, 235, 248, 0.95);
+  background: linear-gradient(145deg, #FFFFFF 0%, #EEF2F6 100%);
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
   box-shadow: 
-    0 4px 10px rgba(24, 39, 75, 0.06),
-    inset 0 2px 3px #FFFFFF,
-    inset 0 -2px 3px rgba(163, 177, 198, 0.2);
-  color: #2563EB;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    0 4px 8px rgba(15, 23, 42, 0.04),
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -1.5px 2px rgba(163, 177, 198, 0.22);
+  color: #64748B;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.faq-item:hover .faq-plus-badge {
-  transform: scale(1.04);
-  box-shadow: 
-    0 6px 14px rgba(37, 99, 235, 0.16),
-    inset 0 2px 3px #FFFFFF,
-    inset 0 -2px 3px rgba(163, 177, 198, 0.2);
-  color: #0052FF;
-}
-
-.faq-plus-badge.is-open {
+.faq-chevron-badge.is-open {
   background: linear-gradient(145deg, #0052FF 0%, #1D4ED8 100%);
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.5);
   box-shadow: 
-    0 6px 16px rgba(0, 82, 255, 0.38),
-    inset 0 2px 3px rgba(255, 255, 255, 0.45),
-    inset 0 -2px 3px rgba(0, 35, 130, 0.35);
+    0 5px 12px rgba(0, 82, 255, 0.35),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -1.5px 2px rgba(0, 35, 130, 0.35);
   color: #FFFFFF;
 }
 
-.faq-plus-icon {
+.faq-chevron-icon {
   display: block;
 }
 
-/* Expandable Content */
+/* Smooth Accordion Expand */
 .faq-expand-wrapper {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .faq-expand-wrapper.is-open {
@@ -4424,16 +4422,16 @@ h6 {
 }
 
 .faq-answer-block {
-  padding-top: 1.25rem;
-  margin-top: 1.25rem;
-  border-top: 1px solid rgba(226, 235, 245, 0.85);
+  padding-top: 0.85rem;
+  margin-top: 0.85rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.75);
 }
 
 .faq-answer-text {
   margin: 0;
   color: #475569;
-  font-size: clamp(0.94rem, 1.05vw, 1rem);
-  line-height: 1.7;
+  font-size: clamp(0.9rem, 1vw, 0.96rem);
+  line-height: 1.65;
 }
 
 /* Show More Button */
