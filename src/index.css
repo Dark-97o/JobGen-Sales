@@ -6906,7 +6906,7 @@ h6 {
   position: relative;
   z-index: 20;
   background-color: #060911;
-  margin-top: clamp(-3.5rem, -5.5vw, -6rem);
+  margin-top: calc(clamp(-3.5rem, -5.5vw, -6rem) - 9px);
   border-radius: clamp(40px, 6vw, 80px);
   border: 1.5px solid rgba(255, 255, 255, 0.12);
   box-shadow: 
@@ -6980,115 +6980,6 @@ h6 {
   );
   pointer-events: none;
   z-index: 2;
-}
-
-/* Central Video Play / Pause Button in Foreground */
-.testimonial-video-play-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.85rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  z-index: 25;
-  padding: 1.25rem;
-}
-
-.testimonial-video-play-btn:hover {
-  transform: scale(1.1);
-}
-
-.testimonial-play-btn-circle {
-  position: relative;
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0052FF 0%, #2563EB 100%);
-  border: 2.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 
-    0 14px 40px rgba(0, 82, 255, 0.65),
-    0 0 36px rgba(56, 189, 248, 0.6),
-    inset 0 2px 5px rgba(255, 255, 255, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.testimonial-video-play-btn:hover .testimonial-play-btn-circle {
-  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-  box-shadow: 
-    0 18px 50px rgba(0, 82, 255, 0.85),
-    0 0 50px rgba(56, 189, 248, 0.9),
-    inset 0 2px 6px rgba(255, 255, 255, 1);
-  transform: translateY(-2px);
-}
-
-.testimonial-play-icon {
-  color: #FFFFFF;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
-}
-
-.testimonial-play-icon.play-offset {
-  margin-left: 4px;
-}
-
-.testimonial-play-btn-pulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 104px;
-  height: 104px;
-  margin-left: -52px;
-  margin-top: -52px;
-  border-radius: 50%;
-  border: 2px solid rgba(96, 165, 250, 0.7);
-  animation: playBtnPulse 2.4s ease-out infinite;
-  pointer-events: none;
-}
-
-@keyframes playBtnPulse {
-  0% { transform: scale(0.85); opacity: 0.95; }
-  50% { transform: scale(1.35); opacity: 0.35; }
-  100% { transform: scale(1.65); opacity: 0; }
-}
-
-.testimonial-play-btn-label {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  background: rgba(11, 16, 29, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  padding: 0.4rem 0.95rem;
-  border-radius: 9999px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
-  white-space: nowrap;
-}
-
-/* Glowing Laser Hairline along the Slashed Angle */
-.testimonial-slashed-laser-line {
-  position: absolute;
-  top: -20%;
-  bottom: -20%;
-  left: calc(42% + 58% * 0.14 - 15px);
-  width: 2px;
-  background: linear-gradient(180deg, transparent 0%, rgba(96, 165, 250, 0.9) 30%, rgba(0, 82, 255, 0.95) 70%, transparent 100%);
-  transform: rotate(-12.8deg);
-  transform-origin: center;
-  box-shadow: 0 0 24px rgba(59, 130, 246, 0.85), 0 0 8px rgba(255, 255, 255, 0.6);
-  pointer-events: none;
-  z-index: 3;
 }
 
 /* Foreground Container */
@@ -7248,11 +7139,7 @@ h6 {
   width: 100%;
   height: 100%;
   min-height: 440px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 20;
+  pointer-events: none;
 }
 
 /* Responsive Handling */
@@ -7265,10 +7152,6 @@ h6 {
   .testimonial-right-video-window {
     min-height: 280px;
     margin-top: 1rem;
-  }
-
-  .testimonial-slashed-laser-line {
-    display: none;
   }
 
   .testimonial-video-slashed-pane {
@@ -7290,7 +7173,7 @@ h6 {
   }
 
   .testimonial-dark-slide-section {
-    margin-top: clamp(-2.5rem, -4vw, -3.5rem);
+    margin-top: calc(clamp(-2.5rem, -4vw, -3.5rem) - 9px);
     border-radius: clamp(32px, 5vw, 48px);
     padding: 3.5rem 0;
   }

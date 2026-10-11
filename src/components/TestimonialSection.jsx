@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Star, Play, Pause } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Star } from 'lucide-react';
 
 export default function TestimonialSection() {
-  const [isPlaying, setIsPlaying] = useState(false);
   const sectionRef = useRef(null);
   const iframeRef = useRef(null);
 
@@ -19,37 +18,45 @@ export default function TestimonialSection() {
     }
   };
 
-  // Toggle play/pause via the dedicated play button
-  const togglePlay = () => {
-    const nextPlaying = !isPlaying;
-    if (nextPlaying) {
-      sendIframeCommand('unMute');
-      sendIframeCommand('playVideo');
-    } else {
-      sendIframeCommand('pauseVideo');
-    }
-    setIsPlaying(nextPlaying);
-  };
-
-  // When section enters view, ensure video is ready; mute if scrolled away
+  // Video & Audio play ONLY when this section is on screen; pause & mute when off screen
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
+    const handleVisibility = (inView) => {
+      if (inView) {
+        sendIframeCommand('unMute');
+        sendIframeCommand('playVideo');
+      } else {
+        sendIframeCommand('pauseVideo');
+        sendIframeCommand('mute');
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
-          sendIframeCommand('pauseVideo');
-          setIsPlaying(false);
-        }
+        handleVisibility(entry.isIntersecting);
       },
-      { threshold: 0.15 }
+      { threshold: 0.2 }
     );
 
     observer.observe(section);
 
+    // Active scroll listener for instant audio/video synchrony
+    const onScroll = () => {
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
+      handleVisibility(inView);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
     return () => {
       observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      sendIframeCommand('pauseVideo');
+      sendIframeCommand('mute');
     };
   }, []);
 
@@ -65,7 +72,7 @@ export default function TestimonialSection() {
           <div className="testimonial-video-scaler">
             <iframe
               ref={iframeRef}
-              src="https://www.youtube.com/embed/CA_NEg3xJz0?autoplay=1&mute=1&loop=1&playlist=CA_NEg3xJz0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&enablejsapi=1"
+              src="https://www.youtube.com/embed/CA_NEg3xJz0?autoplay=1&mute=0&loop=1&playlist=CA_NEg3xJz0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&enablejsapi=1"
               title="Accounting Firm Case Study Video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -75,9 +82,6 @@ export default function TestimonialSection() {
           {/* Directional vignette along the diagonal angle */}
           <div className="testimonial-video-angled-vignette" />
         </div>
-
-        {/* Glowing Laser Hairline Along the Slashed Angle */}
-        <div className="testimonial-slashed-laser-line" />
       </div>
 
       {/* Foreground Content: Review, Name & Metrics on the LEFT side (Ultra-High Contrast) */}
@@ -124,27 +128,8 @@ export default function TestimonialSection() {
             </div>
           </div>
 
-          {/* Right Column: Open Slashed Window with Centered Interactive Play / Pause Button */}
-          <div className="testimonial-right-video-window">
-            <button
-              type="button"
-              className={`testimonial-video-play-btn ${isPlaying ? 'is-playing' : 'is-paused'}`}
-              onClick={togglePlay}
-              aria-label={isPlaying ? "Pause video" : "Play video with sound"}
-            >
-              <span className="testimonial-play-btn-pulse" />
-              <span className="testimonial-play-btn-circle">
-                {isPlaying ? (
-                  <Pause size={32} className="testimonial-play-icon" />
-                ) : (
-                  <Play size={32} className="testimonial-play-icon play-offset" />
-                )}
-              </span>
-              <span className="testimonial-play-btn-label">
-                {isPlaying ? "PAUSE VIDEO" : "PLAY VIDEO"}
-              </span>
-            </button>
-          </div>
+          {/* Right Column: Open Slashed Window for Video */}
+          <div className="testimonial-right-video-window" aria-hidden="true" />
         </div>
       </div>
     </section>
