@@ -12,14 +12,10 @@ export default function FaqSection() {
   return (
     <section id="faq" className="section-spacing">
       <div className="container">
-        <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 3.5rem' }}>
-          <h2 className="section-title">
-            Everything you need to know <br />
-            <span className="gradient-text">about deploying your AI workforce.</span>
+        <div className="faq-header-center">
+          <h2 className="section-title text-center faq-main-title">
+            Everything you need to know
           </h2>
-          <p className="section-lead" style={{ margin: '0 auto' }}>
-            Clear answers on voice reliability, telephony forwarding, calendar integration, guardrails, and rapid team deployment.
-          </p>
         </div>
 
         <div className="faq-list">
@@ -28,7 +24,7 @@ export default function FaqSection() {
             return (
               <div
                 key={idx}
-                className="faq-item"
+                className={`faq-item ${isOpen ? 'is-open' : ''}`}
               >
                 <button
                   type="button"
@@ -36,22 +32,22 @@ export default function FaqSection() {
                   onClick={() => toggle(idx)}
                   aria-expanded={isOpen}
                 >
-                  <span>{faq.q}</span>
-                  <ChevronDown
-                    size={18}
-                    style={{
-                      color: isOpen ? 'var(--color-blue-400)' : 'var(--color-white-50)',
-                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform var(--duration-snappy) var(--ease-snappy)',
-                      flexShrink: 0,
-                      marginLeft: '1rem'
-                    }}
-                  />
+                  <span className="faq-question-text">{faq.q}</span>
+                  <div className={`faq-chevron-badge ${isOpen ? 'is-open' : ''}`} aria-hidden="true">
+                    <ChevronDown
+                      size={18}
+                      className="faq-chevron-icon"
+                      style={{
+                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                      }}
+                    />
+                  </div>
                 </button>
 
                 {isOpen && (
                   <div className="faq-answer-block">
-                    {faq.a}
+                    <p className="faq-answer-text">{faq.a}</p>
                   </div>
                 )}
               </div>
