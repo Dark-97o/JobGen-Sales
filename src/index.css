@@ -6192,33 +6192,6 @@ h6 {
   transform: scale(1);
 }
 
-/* Top bar: Stage pill floating cleanly with zero dark tint across the upper image */
-.friction-card-top-bar {
-  position: relative;
-  z-index: 2;
-  padding: 1.5rem 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.friction-stage-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.4rem 0.9rem;
-  border-radius: 9999px;
-  background: rgba(11, 15, 23, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #F8FAFC;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-}
-
 /* Localized Black Overlay: ONLY near the text area, rest of image clearly visible */
 .friction-card-bottom-scrim {
   position: relative;
@@ -6247,44 +6220,12 @@ h6 {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.friction-clean-header-row {
-  display: flex;
-  align-items: center;
-  gap: 1.15rem;
-}
-
-.friction-clay-icon-circle {
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
-  min-height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, #FFFFFF 0%, #EEF2F6 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 
-    0 10px 22px -4px rgba(0, 0, 0, 0.35),
-    0 4px 10px -2px rgba(0, 0, 0, 0.2),
-    inset 0 3px 5px rgba(255, 255, 255, 1),
-    inset 0 -2px 4px rgba(163, 177, 198, 0.35);
-  color: #0052FF;
-  flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-}
-
-.friction-clay-icon {
-  color: #0052FF;
-  filter: drop-shadow(0 2px 6px rgba(0, 82, 255, 0.35));
-}
-
 .friction-clean-title {
   font-family: var(--font-display, 'Plus Jakarta Sans', -apple-system, sans-serif);
-  font-size: clamp(1.28rem, 1.65vw, 1.6rem);
+  font-size: clamp(1.3rem, 1.7vw, 1.65rem);
   font-weight: 850;
   color: #FFFFFF;
-  line-height: 1.24;
+  line-height: 1.25;
   letter-spacing: -0.025em;
   margin: 0;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
@@ -6298,8 +6239,12 @@ h6 {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Glassmorphic Metric Card (Full-Width to Match Text Above on dark scrim) */
+/* Glassmorphic Metric Card with Icon Circle (Full-Width to Match Text Above on dark scrim) */
 .friction-metric-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -6313,6 +6258,12 @@ h6 {
   width: 100%;
   box-sizing: border-box;
   transition: all 0.3s ease;
+}
+
+.friction-metric-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .friction-metric-value {
@@ -6332,6 +6283,32 @@ h6 {
   color: rgba(255, 255, 255, 0.72);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.friction-metric-icon-circle {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #FFFFFF 0%, #EEF2F6 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 10px 22px -4px rgba(0, 0, 0, 0.35),
+    0 4px 10px -2px rgba(0, 0, 0, 0.2),
+    inset 0 3px 5px rgba(255, 255, 255, 1),
+    inset 0 -2px 4px rgba(163, 177, 198, 0.35);
+  color: #0052FF;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.friction-metric-icon {
+  color: #0052FF;
+  filter: drop-shadow(0 2px 6px rgba(0, 82, 255, 0.35));
 }
 
 .friction-comparison-section.is-pending .friction-card-box {
@@ -6569,15 +6546,11 @@ h6 {
     font-size: 0.8rem;
   }
 
-  .friction-clean-header-row {
-    gap: 0.85rem;
-  }
-
-  .friction-clay-icon-circle {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+  .friction-metric-icon-circle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
   }
 
   .friction-metric-card {

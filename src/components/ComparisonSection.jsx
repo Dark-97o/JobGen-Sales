@@ -136,27 +136,21 @@ export default function ComparisonSection() {
                 ))}
               </div>
 
-              {/* Top floating pill: Stage badge on completely visible clear image */}
-              <div className="friction-card-top-bar">
-                <span className="friction-stage-pill">Workflow · Step {activeStage.number}</span>
-              </div>
-
               {/* Bottom text scrim: Black overlay ONLY near the text area */}
               <div className="friction-card-bottom-scrim">
                 <div className="friction-clean-info-container">
-                  {/* Header row: Distinct Claymorphic Favicon next to Headline Text */}
-                  <div className="friction-clean-header-row">
-                    <div className="friction-clay-icon-circle" aria-hidden="true">
-                      <StageIcon size={24} className="friction-clay-icon" />
-                    </div>
-                    <h3 className="friction-clean-title">{activeStage.title}</h3>
-                  </div>
+                  <h3 className="friction-clean-title">{activeStage.title}</h3>
 
                   <p className="friction-clean-desc">{activeStage.description}</p>
 
                   <div className="friction-metric-card">
-                    <div className="friction-metric-value">{activeStage.metric}</div>
-                    <div className="friction-metric-label">{activeStage.metricLabel}</div>
+                    <div className="friction-metric-content">
+                      <div className="friction-metric-value">{activeStage.metric}</div>
+                      <div className="friction-metric-label">{activeStage.metricLabel}</div>
+                    </div>
+                    <div className="friction-metric-icon-circle" aria-hidden="true">
+                      <StageIcon size={24} className="friction-metric-icon" />
+                    </div>
                   </div>
                 </div>
               </div>
