@@ -899,15 +899,10 @@ export default function IndustryShowcase({ onOpenDemo }) {
 
     buildingsRef.current = buildingGroups;
 
-    // Main 60FPS Render & Smooth Morphing Loop (Only runs when visible in viewport)
+    // Main 60FPS Render & Smooth Morphing Loop (Straight Upright Turntable Rotation, No Mouse Tracking)
     let animationFrameId = null;
-    let isVisible = true;
 
     const animate = () => {
-      if (!isVisible) {
-        animationFrameId = null;
-        return;
-      }
       animationFrameId = requestAnimationFrame(animate);
       const targetIdx = targetIndexRef.current;
 
@@ -946,28 +941,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
       renderer.render(scene, camera);
     };
 
-    const startAnimation = () => {
-      if (!animationFrameId) {
-        animationFrameId = requestAnimationFrame(animate);
-      }
-    };
-
-    // Pause Three.js rendering completely when not in viewport to prevent lag
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          startAnimation();
-        } else if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-          animationFrameId = null;
-        }
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(container);
-
-    startAnimation();
+    animate();
 
     // Resize Handler
     const handleResize = () => {
@@ -982,7 +956,6 @@ export default function IndustryShowcase({ onOpenDemo }) {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
       if (renderer.domElement && container.contains(renderer.domElement)) {

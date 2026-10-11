@@ -118,7 +118,6 @@ export default function UnmatchedProductivity() {
 
   useLayoutEffect(() => {
     let animationFrameId = null;
-    let lastProgress = -1;
 
     const handleScroll = () => {
       if (!containerRef.current || !trackRef.current) return;
@@ -129,11 +128,6 @@ export default function UnmatchedProductivity() {
 
       // Progress: 0.0 at top of pinned section, 1.0 when horizontal cards finish sliding
       const progress = Math.min(Math.max(-rect.top / cardScrollable, 0), 1);
-
-      if ((progress === 0 && lastProgress === 0) || (progress === 1 && lastProgress === 1)) {
-        return;
-      }
-      lastProgress = progress;
 
       // Track width and viewport width
       const trackWidth = trackRef.current.scrollWidth;

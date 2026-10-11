@@ -460,21 +460,6 @@ function FluidGradientBackground() {
       animId = requestAnimationFrame(animate);
     };
 
-    // Pause WebGL rendering when off screen to ensure 0% GPU load and zero scrolling lag
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          if (!animId) startAnim();
-        } else if (animId) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
-      },
-      { threshold: 0.02 }
-    );
-    observer.observe(container);
-
     startAnim();
 
     let resizeRaf = null;
@@ -485,7 +470,6 @@ function FluidGradientBackground() {
     window.addEventListener('resize', onResize);
 
     return () => {
-      observer.disconnect();
       if (animId) cancelAnimationFrame(animId);
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       window.removeEventListener('pointermove', handlePointerMove);
@@ -795,7 +779,6 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
   // Phase 4: Jenny & Olivia Stationed & Interactive (0.42 -> 1.00) - No fade, no shift!
   useLayoutEffect(() => {
     let animationFrameId = null;
-    let lastProgress = -1;
 
     const handleScroll = () => {
       if (!trackRef.current || !cardRef.current) return;
@@ -806,12 +789,6 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
 
       // Progress: 0.0 at top of hero track, 1.0 at bottom of hero track
       const progress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
-
-      // Skip redundant layout writes when clamped out of view
-      if ((progress === 0 && lastProgress === 0) || (progress === 1 && lastProgress === 1)) {
-        return;
-      }
-      lastProgress = progress;
 
       // -------------------------------------------------------------
       // PHASE 1: Hero Zoom-Out (progress 0.00 -> 0.14)
