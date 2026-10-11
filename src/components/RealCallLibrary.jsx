@@ -16,7 +16,8 @@ import {
   Plus,
   Sparkles,
   Lock,
-  Volume2
+  Volume2,
+  X
 } from 'lucide-react';
 import { CALL_RECORDINGS } from '../data/landingData';
 
@@ -205,14 +206,6 @@ export default function RealCallLibrary() {
       if (promptShownRef.current) return;
       promptShownRef.current = true;
       setShowPlayPrompt(true);
-
-      setTimeout(() => {
-        setIsPromptFading(true);
-      }, 2600);
-
-      setTimeout(() => {
-        setShowPlayPrompt(false);
-      }, 3100);
     };
 
     const promptObserver = new IntersectionObserver(
@@ -472,15 +465,6 @@ export default function RealCallLibrary() {
                 })}
               </div>
 
-              {/* WhatsApp Windows Footer Banner from screenshot */}
-              <div className="wa-sidebar-bottom-app">
-                <div className="wa-windows-badge">
-                  <div className="wa-green-icon-wrap">
-                    <MessageSquare size={16} fill="currentColor" />
-                  </div>
-                  <span>JobGen Telemetry Active</span>
-                </div>
-              </div>
             </div>
 
             {/* 3. Right Main Chat Pane (Transcribe as Chats) */}
@@ -598,9 +582,9 @@ export default function RealCallLibrary() {
                 </div>
               </div>
 
-              {/* 90% View Floating Animated Prompt Card */}
+              {/* 90% View Floating Animated Prompt Card (Black Card with Close Button & 2s Pulse) */}
               {showPlayPrompt && (
-                <div className={`wa-play-prompt-card ${isPromptFading ? 'is-fading' : ''}`}>
+                <div className="wa-play-prompt-card">
                   <div className="wa-prompt-icon-ring">
                     <Volume2 size={16} />
                   </div>
@@ -608,6 +592,15 @@ export default function RealCallLibrary() {
                     <span className="wa-prompt-headline">Hear the Real Conversation</span>
                     <span className="wa-prompt-subtext">Click play below to listen to verified live AI call audio</span>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowPlayPrompt(false)}
+                    className="wa-prompt-close-btn"
+                    title="Dismiss prompt"
+                    aria-label="Dismiss prompt"
+                  >
+                    <X size={14} />
+                  </button>
                   <span className="wa-prompt-notch" />
                 </div>
               )}

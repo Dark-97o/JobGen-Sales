@@ -69,19 +69,19 @@ export const CHECKPOINTS = [
 // Wide-sweeping continuous organic curve across 1200 x 2760 viewBox
 // Loops around the circular images and stays completely clear of all text blocks
 const SCRIBBLE_WIDE_PATH_D = `
-  M 600,40
-  C 640,80 920,110 970,240
-  C 1020,370 870,440 600,480
-  C 330,520 180,590 230,720
-  C 280,850 560,880 600,980
-  C 640,1080 920,1110 970,1240
-  C 1020,1370 870,1440 600,1480
-  C 330,1520 180,1590 230,1720
-  C 280,1850 560,1880 600,1980
-  C 640,2080 920,2110 970,2240
-  C 1020,2370 870,2440 600,2480
-  C 330,2520 180,2570 230,2650
-  C 270,2720 460,2750 600,2750
+  M 600,28
+  C 640,56 920,78 970,170
+  C 1020,260 870,310 600,340
+  C 330,368 180,418 230,510
+  C 280,600 560,622 600,692
+  C 640,764 920,785 970,876
+  C 1020,968 870,1018 600,1046
+  C 330,1074 180,1124 230,1215
+  C 280,1307 560,1328 600,1400
+  C 640,1470 920,1492 970,1583
+  C 1020,1674 870,1724 600,1752
+  C 330,1780 180,1816 230,1872
+  C 270,1922 460,1945 600,1945
 `.trim();
 
 export default function PlatformJourney() {
@@ -124,7 +124,7 @@ export default function PlatformJourney() {
     };
 
     // Smooth physics loop updating SVG elements directly
-    const CHECKPOINT_Y_THRESHOLDS = [200, 680, 1200, 1680, 2200, 2580];
+    const CHECKPOINT_Y_THRESHOLDS = [140, 480, 850, 1190, 1550, 1820];
 
     const renderLoop = () => {
       const diff = targetP - currentP;
@@ -195,7 +195,7 @@ export default function PlatformJourney() {
           {/* Wide-Travel SVG Scribble Line */}
           <div className="scribble-svg-container" aria-hidden="true">
             <svg
-              viewBox="0 0 1200 2760"
+              viewBox="0 0 1200 1950"
               className="scribble-svg"
               preserveAspectRatio="none"
             >
