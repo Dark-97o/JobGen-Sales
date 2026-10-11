@@ -1240,11 +1240,14 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
             }`}
           >
             <div className="agent-image-wrap">
-              <img
-                src="/assets/jesss.png"
-                alt="Jenny"
-                className="agent-cutout-img agent-cutout-jesss"
-              />
+              <picture className="agent-picture-cutout">
+                <source media="(max-width: 768px)" srcSet="/assets/Jenny.png" />
+                <img
+                  src="/assets/jesss.png"
+                  alt="Jenny"
+                  className="agent-cutout-img agent-cutout-jesss"
+                />
+              </picture>
             </div>
             <div className="agent-info-block agent-info-jenny">
               <span className="agent-name-cursive">Jenny</span>
@@ -1299,11 +1302,14 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
               </button>
             </div>
             <div className="agent-image-wrap">
-              <img
-                src="/assets/olivias.png"
-                alt="Olivia"
-                className="agent-cutout-img agent-cutout-olivias"
-              />
+              <picture className="agent-picture-cutout">
+                <source media="(max-width: 768px)" srcSet="/assets/olivia.png" />
+                <img
+                  src="/assets/olivias.png"
+                  alt="Olivia"
+                  className="agent-cutout-img agent-cutout-olivias"
+                />
+              </picture>
             </div>
           </div>
 

@@ -3,6 +3,18 @@ import { ArrowUp, ArrowRight, PhoneCall, Mail, ShieldCheck, Sparkles } from 'luc
 import FooterKineticWordmark from './FooterKineticWordmark';
 
 export default function Footer({ onOpenDemo, onOpenCalculator }) {
+  const [isPc, setIsPc] = React.useState(
+    typeof window !== 'undefined' ? window.innerWidth > 768 : true
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsPc(window.innerWidth > 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -33,7 +45,7 @@ export default function Footer({ onOpenDemo, onOpenCalculator }) {
           font={{
             fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
             fontWeight: 900,
-            fontSize: '320px',
+            fontSize: isPc ? '272px' : '320px',
             letterSpacing: '-0.03em',
           }}
           handles={{ labels: true, size: 109, spread: 27 }}
@@ -65,70 +77,38 @@ export default function Footer({ onOpenDemo, onOpenCalculator }) {
             <p className="ms-footer-brand-desc">
               Sub-600ms conversational AI voice and telephony infrastructure for autonomous business operations, 24/7 inbound reception, and closed-loop sales execution.
             </p>
-            <div className="ms-footer-live-badge">
-              <span className="ms-live-pulse-dot" />
-              <span>Live Engine • Sub-600ms Latency</span>
-            </div>
           </div>
 
-          {/* Column 2: Navigation Pages & Core AI Workforce */}
+          {/* Column 2: Navigation Pages */}
           <div className="ms-footer-col">
             <h3 className="ms-footer-heading">Platform</h3>
-            <div className="ms-footer-subgrid">
-              {/* Left Sub-list: Platform Navigation */}
-              <ul className="ms-footer-nav-list">
-                <li>
-                  <a href="#home" onClick={(e) => handleNavClick(e, 'home')}>
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#pillars" onClick={(e) => handleNavClick(e, 'pillars')}>
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#features" onClick={(e) => handleNavClick(e, 'features')}>
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#calls" onClick={(e) => handleNavClick(e, 'calls')}>
-                    Real Call Library
-                  </a>
-                </li>
-              </ul>
-
-              {/* Right Sub-list: Core AI Workforce with Signature Arrow Prefixes */}
-              <ul className="ms-footer-nav-list">
-                <li className="ms-footer-sub-header">Core Workforce</li>
-                <li>
-                  <a href="#home" className="ms-footer-sub-link">
-                    ↳ Jenny (Reception)
-                  </a>
-                </li>
-                <li>
-                  <a href="#home" className="ms-footer-sub-link">
-                    ↳ Olivia (Sales)
-                  </a>
-                </li>
-                <li>
-                  <a href="#calls" className="ms-footer-sub-link">
-                    ↳ Jess (Recruiter)
-                  </a>
-                </li>
-                <li>
-                  <a href="#calls" className="ms-footer-sub-link">
-                    ↳ Emma (Advisor)
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <ul className="ms-footer-nav-list">
+              <li>
+                <a href="#home" onClick={(e) => handleNavClick(e, 'home')}>
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#pillars" onClick={(e) => handleNavClick(e, 'pillars')}>
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#features" onClick={(e) => handleNavClick(e, 'features')}>
+                  Features
+                </a>
+              </li>
+              <li>
+                <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="#calls" onClick={(e) => handleNavClick(e, 'calls')}>
+                  Real Call Library
+                </a>
+              </li>
+            </ul>
           </div>
 
           {/* Column 3: Global Headquarters & Telephony Operations */}
@@ -187,13 +167,6 @@ export default function Footer({ onOpenDemo, onOpenCalculator }) {
             <a href="#">Terms of Service</a>
             <span className="ms-footer-meta-dot">•</span>
             <a href="#">Security & Compliance</a>
-            <span className="ms-footer-meta-dot">•</span>
-            <span className="ms-footer-powered-tag">
-              Powered by{' '}
-              <a href="https://jobgen.ai/" className="ms-footer-powered-bold">
-                Jobgen.Ai
-              </a>
-            </span>
           </div>
 
           <button

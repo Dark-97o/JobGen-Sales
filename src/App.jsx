@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import VoiceDemoModal from './components/VoiceDemoModal';
 import DemoBookingModal from './components/DemoBookingModal';
 import WaitingCostModal from './components/WaitingCostModal';
+import IntroAnimation from './components/IntroAnimation';
 
 export default function App() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
@@ -56,6 +57,9 @@ export default function App() {
 
   return (
     <div className="jobgen-app-root">
+      {/* Cinematic Fullscreen Video Intro Animation (from jobgen-candidates) */}
+      <IntroAnimation />
+
       {/* Global Fixed Living Organic Contour Lines Background (Stays In Back As Content Scrolls) */}
       <div className="global-fixed-contour-bg" aria-hidden="true">
         <OrganicContourBackground strokeColor="rgba(37, 39, 30, 0.20)" />

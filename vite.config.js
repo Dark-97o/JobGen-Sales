@@ -12,5 +12,18 @@ export default defineConfig({
       usePolling: true,
       interval: 300
     }
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          three: ['three'],
+          spline: ['@splinetool/runtime', '@splinetool/react-spline'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
 });
