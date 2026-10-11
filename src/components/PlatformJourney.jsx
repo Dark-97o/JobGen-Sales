@@ -78,10 +78,10 @@ const SCRIBBLE_WIDE_PATH_D = `
   C 1020,968 870,1018 600,1046
   C 330,1074 180,1124 230,1215
   C 280,1307 560,1328 600,1400
-  C 640,1470 920,1492 970,1583
-  C 1020,1674 870,1724 600,1752
-  C 330,1780 180,1816 230,1872
-  C 270,1922 460,1945 600,1945
+  C 640,1440 920,1470 970,1510
+  C 1010,1550 860,1580 600,1610
+  C 330,1650 180,1700 220,1760
+  C 260,1830 420,1890 600,1920
 `.trim();
 
 export default function PlatformJourney() {
@@ -124,7 +124,7 @@ export default function PlatformJourney() {
     };
 
     // Smooth physics loop updating SVG elements directly
-    const CHECKPOINT_Y_THRESHOLDS = [140, 480, 850, 1190, 1550, 1820];
+    const CHECKPOINT_Y_THRESHOLDS = [140, 480, 850, 1190, 1510, 1740];
 
     const renderLoop = () => {
       const diff = targetP - currentP;

@@ -22,7 +22,7 @@ const INDUSTRIES_DATA = [
     accentColor: '#3B82F6',
     twoLineInfo: 'Enrolls prospective students 24/7, verifies degree prerequisites, schedules faculty campus tours, and answers tuition questions instantly with zero hold time.',
     buildingName: 'University Campus Hall',
-    agentName: 'Jenny · AI Admissions Officer',
+    agentName: 'AI Admissions Specialist',
     dialogue: [
       {
         sender: 'user',
@@ -32,7 +32,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Admissions)',
+        name: 'AI Admissions',
         time: '10:14 AM',
         text: 'Hello! Fall 2026 CS applications close December 1st. Are you applying for our undergraduate BS program or the postgraduate Master’s?'
       },
@@ -44,7 +44,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Admissions)',
+        name: 'AI Admissions',
         time: '10:15 AM',
         text: 'Great! The faculty dean is hosting tour and lab walkthrough sessions this Thursday at 2:00 PM and Saturday at 11:00 AM. Which day works better for your schedule?'
       },
@@ -56,7 +56,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Admissions)',
+        name: 'AI Admissions',
         time: '10:15 AM',
         text: 'Perfect. Do you require visitor parking on campus or will you be using public transit?'
       },
@@ -68,7 +68,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Admissions)',
+        name: 'AI Admissions',
         time: '10:16 AM',
         text: 'Confirmed! You are registered for Thursday at 2:00 PM. I’ve just dispatched your digital parking permit, lab pass, and department itinerary to your phone.'
       }
@@ -83,7 +83,7 @@ const INDUSTRIES_DATA = [
     accentColor: '#0052FF',
     twoLineInfo: 'Captures urgent tax return intakes, securely collects corporate BAS receipts, books partner consultations, and answers billing queries autonomously.',
     buildingName: 'Corporate Advisory Pavilion',
-    agentName: 'Jenny · AI Practice Receptionist',
+    agentName: 'AI Practice Concierge',
     dialogue: [
       {
         sender: 'user',
@@ -93,7 +93,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Receptionist)',
+        name: 'AI Receptionist',
         time: '02:30 PM',
         text: 'Good afternoon! I can help prepare your quarterly lodgment package right now. Are you filing under your standard corporate entity or an investment trust?'
       },
@@ -105,7 +105,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Receptionist)',
+        name: 'AI Receptionist',
         time: '02:31 PM',
         text: 'Verified in Xero! I see your entity is active. Would you prefer a 20-minute tax strategy call with Senior Partner Mark or our head tax CPA Sarah?'
       },
@@ -117,7 +117,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Receptionist)',
+        name: 'AI Receptionist',
         time: '02:32 PM',
         text: 'Mark has openings tomorrow at 10:30 AM or Thursday at 2:15 PM over Zoom or in-office. Which suits you?'
       },
@@ -129,7 +129,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Receptionist)',
+        name: 'AI Receptionist',
         time: '02:32 PM',
         text: 'Booked and synced to Mark’s calendar! I’ve sent your calendar invite with the encrypted portal link to upload your equipment receipts via SMS.'
       }
@@ -144,7 +144,7 @@ const INDUSTRIES_DATA = [
     accentColor: '#10B981',
     twoLineInfo: 'Pre-qualifies buyers by borrowing budget and purchase timeline, books 1-on-1 private walkthroughs, and logs buyer intent straight into your CRM.',
     buildingName: 'Luxury Architectural Villa',
-    agentName: 'Olivia · AI Property Specialist',
+    agentName: 'AI Property Specialist',
     dialogue: [
       {
         sender: 'user',
@@ -154,7 +154,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Olivia (AI Specialist)',
+        name: 'AI Specialist',
         time: '11:42 AM',
         text: 'Hello! Yes, 42 Ocean Drive is open for private viewings. May I confirm if you are looking for an owner-occupier home and your purchase timeline?'
       },
@@ -166,7 +166,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Olivia (AI Specialist)',
+        name: 'AI Specialist',
         time: '11:43 AM',
         text: 'Fantastic, that matches our vendor’s criteria. Our lead partner Sarah has private 30-minute inspection windows this Saturday at 11:30 AM and 3:00 PM. Which works best?'
       },
@@ -178,7 +178,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Olivia (AI Specialist)',
+        name: 'AI Specialist',
         time: '11:43 AM',
         text: 'Would you also like me to send the preliminary contract of sale and pest inspection report to your email beforehand?'
       },
@@ -190,7 +190,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Olivia (AI Specialist)',
+        name: 'AI Specialist',
         time: '11:44 AM',
         text: 'Confirmed! Your private VIP inspection is locked in for Saturday at 11:30 AM. Contract, vendor disclosure, and gate access pin have been sent to your mobile.'
       }
@@ -205,7 +205,7 @@ const INDUSTRIES_DATA = [
     accentColor: '#F59E0B',
     twoLineInfo: 'Manages peak-hour phone reservations, answers food allergy questions, coordinates VIP events, and confirms party bookings via automated text.',
     buildingName: 'Boutique Dining Bistro',
-    agentName: 'Jenny · AI Concierge',
+    agentName: 'AI Dining Concierge',
     dialogue: [
       {
         sender: 'user',
@@ -215,7 +215,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Concierge)',
+        name: 'AI Concierge',
         time: '04:18 PM',
         text: 'Good evening! We have an indoor banquette table open at 7:30 PM. Our head chef maintains a dedicated certified gluten-free prep kitchen.'
       },
@@ -227,7 +227,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Concierge)',
+        name: 'AI Concierge',
         time: '04:19 PM',
         text: 'Children are very welcome! We offer handcrafted mocktails and a dedicated junior tasting menu. Would you prefer our main dining room or the garden-view atrium?'
       },
@@ -239,7 +239,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Concierge)',
+        name: 'AI Concierge',
         time: '04:19 PM',
         text: 'Would you like me to hold the table for 7:30 PM with valet parking included?'
       },
@@ -251,7 +251,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Concierge)',
+        name: 'AI Concierge',
         time: '04:20 PM',
         text: 'Your reservation for 6 at 7:30 PM is confirmed! I’ve flagged the celiac allergy in Resy for your server and texted your digital reservation pass and valet directions.'
       }
@@ -266,7 +266,7 @@ const INDUSTRIES_DATA = [
     accentColor: '#06B6D4',
     twoLineInfo: 'Toriates patient urgency, coordinates specialist consults, arranges repeat prescription workflows, and verifies private health insurance eligibility.',
     buildingName: 'Modern Clinical Pavilion',
-    agentName: 'Jenny · AI Clinical Receptionist',
+    agentName: 'AI Clinical Coordinator',
     dialogue: [
       {
         sender: 'user',
@@ -276,7 +276,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Medical Desk)',
+        name: 'AI Medical Desk',
         time: '09:05 AM',
         text: 'Good morning. Dr. Chen has a priority telehealth slot today at 4:15 PM and an in-clinic opening tomorrow at 9:00 AM. We directly bill major private health funds with zero gap.'
       },
@@ -288,7 +288,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Medical Desk)',
+        name: 'AI Medical Desk',
         time: '09:06 AM',
         text: 'Yes! Bupa Premier and Corporate covers 100% of Dr. Chen’s specialist consultation. Would you prefer the telehealth session today or in-clinic tomorrow?'
       },
@@ -300,7 +300,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Medical Desk)',
+        name: 'AI Medical Desk',
         time: '09:06 AM',
         text: 'Have you visited our clinic in the last 12 months, or will this be a new patient registration?'
       },
@@ -312,7 +312,7 @@ const INDUSTRIES_DATA = [
       },
       {
         sender: 'ai',
-        name: 'Jenny (AI Medical Desk)',
+        name: 'AI Medical Desk',
         time: '09:07 AM',
         text: 'Understood. You are booked with Dr. Chen for tomorrow at 9:00 AM. I’ve sent your secure pre-consultation medical questionnaire and priority parking barcode to your phone.'
       }
@@ -349,8 +349,8 @@ export default function IndustryShowcase({ onOpenDemo }) {
 
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
     // Straight isometric perspective looking directly at the disc & building
-    camera.position.set(0, 6.2, 17.5);
-    camera.lookAt(0, 1.5, 0);
+    camera.position.set(0, 6.6, 17.5);
+    camera.lookAt(0, 2.0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setClearColor(0x000000, 0);
@@ -382,9 +382,10 @@ export default function IndustryShowcase({ onOpenDemo }) {
     scene.add(rimLight);
 
     // ==========================================
-    // ROTATING TURNTABLE DISC PODIUM
+    // ROTATING TURNTABLE DISC PODIUM (+35% Scale)
     // ==========================================
     const turntable = new THREE.Group();
+    turntable.scale.set(1.35, 1.35, 1.35);
     scene.add(turntable);
 
     // Beveled cylindrical turntable disc base (proportioned to prevent edge-clipping)
@@ -840,14 +841,14 @@ export default function IndustryShowcase({ onOpenDemo }) {
       buildingGroups.forEach((group, idx) => {
         const isTarget = idx === targetIdx;
 
-        // Target scale: 1 when active, 0.001 when inactive
-        const destScale = isTarget ? 1 : 0.001;
+        // Target scale: 1.35 (+35% larger) when active, 0.001 when inactive
+        const destScale = isTarget ? 1.35 : 0.001;
         const currentScale = group.scale.x;
         const newScale = THREE.MathUtils.lerp(currentScale, destScale, 0.08);
         group.scale.set(newScale, newScale, newScale);
 
         // Smooth elevation drop on exit
-        const destY = isTarget ? 0 : -2.5;
+        const destY = isTarget ? 0 : -3.2;
         group.position.y = THREE.MathUtils.lerp(group.position.y, destY, 0.08);
 
         // Continuous horizontal rotation on the disc — straight upright, zero tilt

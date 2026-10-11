@@ -6147,8 +6147,9 @@ h6 {
 .friction-clean-info-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 1.25rem;
+  width: 100%;
   max-width: 490px;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -6202,20 +6203,20 @@ h6 {
   margin: 0;
 }
 
-/* White Tactile Claymorphism Metric Card */
+/* White Tactile Claymorphism Metric Card (Full-Width to Match Text Above) */
 .friction-metric-card {
   background: linear-gradient(145deg, #FFFFFF 0%, #F4F7FB 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   border-radius: 22px;
-  padding: 1.15rem 1.75rem;
+  padding: 1.25rem 1.75rem;
   box-shadow: 
     0 16px 34px -4px rgba(15, 23, 42, 0.08),
     0 6px 14px -2px rgba(15, 23, 42, 0.04),
     inset 0 3px 5px rgba(255, 255, 255, 1),
     inset 0 -3px 5px rgba(163, 177, 198, 0.32);
   margin-top: 0.65rem;
-  min-width: 260px;
-  width: fit-content;
+  width: 100%;
+  box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
