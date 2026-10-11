@@ -228,11 +228,13 @@ export default function IndustryShowcase({ onOpenDemo }) {
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
-    camera.position.set(13, 11, 16);
-    camera.lookAt(0, 1.2, 0);
+    const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+    // Straight isometric perspective looking directly at the disc & building
+    camera.position.set(0, 6.2, 17.5);
+    camera.lookAt(0, 1.5, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setClearColor(0x000000, 0);
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.shadowMap.enabled = true;
@@ -242,43 +244,91 @@ export default function IndustryShowcase({ onOpenDemo }) {
     container.appendChild(renderer.domElement);
 
     // Architectural Studio Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.15);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
-    keyLight.position.set(18, 26, 14);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    keyLight.position.set(12, 22, 14);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.width = 1024;
     keyLight.shadow.mapSize.height = 1024;
     scene.add(keyLight);
 
-    const blueRimLight = new THREE.DirectionalLight(0x38bdf8, 1.4);
-    blueRimLight.position.set(-16, 12, -14);
-    scene.add(blueRimLight);
+    const fillLight = new THREE.DirectionalLight(0xe0f2fe, 1.1);
+    fillLight.position.set(-14, 12, 10);
+    scene.add(fillLight);
 
-    const warmFill = new THREE.DirectionalLight(0xffedd5, 0.8);
-    warmFill.position.set(4, -8, 16);
-    scene.add(warmFill);
+    const rimLight = new THREE.DirectionalLight(0x38bdf8, 1.2);
+    rimLight.position.set(0, 16, -14);
+    scene.add(rimLight);
 
-    // Subtle Ground Shadow Disc
-    const groundGeo = new THREE.CylinderGeometry(5.2, 5.2, 0.12, 48);
-    const groundMat = new THREE.MeshStandardMaterial({
-      color: 0xe2e8f0,
-      roughness: 0.8,
-      metalness: 0.05,
+    // ==========================================
+    // ROTATING TURNTABLE DISC PODIUM
+    // ==========================================
+    const turntable = new THREE.Group();
+    scene.add(turntable);
+
+    // Beveled cylindrical turntable disc base
+    const discBaseGeo = new THREE.CylinderGeometry(5.4, 5.7, 0.3, 64);
+    const discBaseMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.22,
+      metalness: 0.12,
     });
-    const ground = new THREE.Mesh(groundGeo, groundMat);
-    ground.position.y = -0.06;
-    ground.receiveShadow = true;
-    scene.add(ground);
+    const discBase = new THREE.Mesh(discBaseGeo, discBaseMat);
+    discBase.position.y = -0.15;
+    discBase.receiveShadow = true;
+    turntable.add(discBase);
 
-    // Outer Glow Ring
-    const ringGeo = new THREE.RingGeometry(5.3, 5.45, 64);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.35, side: THREE.DoubleSide });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = -Math.PI / 2;
-    ring.position.y = 0.01;
-    scene.add(ring);
+    // Top surface plate of the disc
+    const discTopGeo = new THREE.CylinderGeometry(5.15, 5.15, 0.05, 64);
+    const discTopMat = new THREE.MeshStandardMaterial({
+      color: 0xf8fafc,
+      roughness: 0.35,
+      metalness: 0.08,
+    });
+    const discTop = new THREE.Mesh(discTopGeo, discTopMat);
+    discTop.position.y = 0.02;
+    discTop.receiveShadow = true;
+    turntable.add(discTop);
+
+    // Outer neon accent ring running around the disc perimeter
+    const neonRingGeo = new THREE.TorusGeometry(5.38, 0.065, 16, 64);
+    const neonRingMat = new THREE.MeshStandardMaterial({
+      color: 0x3b82f6,
+      roughness: 0.2,
+      metalness: 0.8,
+      emissive: 0x0052ff,
+      emissiveIntensity: 0.35,
+    });
+    const neonRing = new THREE.Mesh(neonRingGeo, neonRingMat);
+    neonRing.rotation.x = Math.PI / 2;
+    neonRing.position.y = 0.01;
+    turntable.add(neonRing);
+
+    // Subtle radial tick marks along the disc rim for visual rotation feedback
+    const tickGeo = new THREE.BoxGeometry(0.12, 0.04, 0.38);
+    const tickMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.5 });
+    for (let i = 0; i < 24; i++) {
+      const angle = (i / 24) * Math.PI * 2;
+      const tick = new THREE.Mesh(tickGeo, tickMat);
+      tick.position.set(Math.cos(angle) * 4.75, 0.04, Math.sin(angle) * 4.75);
+      tick.rotation.y = -angle;
+      turntable.add(tick);
+    }
+
+    // Soft drop shadow / ambient contact ring underneath the disc
+    const shadowRingGeo = new THREE.RingGeometry(4.4, 5.9, 64);
+    const shadowRingMat = new THREE.MeshBasicMaterial({
+      color: 0x0f172a,
+      transparent: true,
+      opacity: 0.07,
+      side: THREE.DoubleSide
+    });
+    const shadowRing = new THREE.Mesh(shadowRingGeo, shadowRingMat);
+    shadowRing.rotation.x = -Math.PI / 2;
+    shadowRing.position.y = -0.32;
+    scene.add(shadowRing);
 
     // Common Materials
     const stoneMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.45, metalness: 0.1 });
@@ -447,31 +497,23 @@ export default function IndustryShowcase({ onOpenDemo }) {
 
     buildingsRef.current = buildingGroups;
 
-    // Interactive mouse parallax variables
-    let mouseX = 0;
-    let mouseY = 0;
-    const onPointerMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      mouseX = x * 0.45;
-      mouseY = y * 0.25;
-    };
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
-
-    // Main 60FPS Render & Smooth Morphing Loop
+    // Main 60FPS Render & Smooth Morphing Loop (Straight Upright Turntable Rotation, No Mouse Tracking)
     let animationFrameId;
-    let clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
       const targetIdx = targetIndexRef.current;
 
-      // Rotate ground ring slowly
-      ring.rotation.z += 0.003;
+      // Update neon ring accent color to match active industry
+      if (INDUSTRIES_DATA[targetIdx]) {
+        neonRingMat.color.set(INDUSTRIES_DATA[targetIdx].accentColor);
+        neonRingMat.emissive.set(INDUSTRIES_DATA[targetIdx].accentColor);
+      }
 
-      // Morph / Transition Buildings
+      // Rotate turntable disc continuously
+      turntable.rotation.y += 0.0055;
+
+      // Morph & rotate building groups straight upright on the turntable disc
       buildingGroups.forEach((group, idx) => {
         const isTarget = idx === targetIdx;
 
@@ -485,12 +527,10 @@ export default function IndustryShowcase({ onOpenDemo }) {
         const destY = isTarget ? 0 : -2.5;
         group.position.y = THREE.MathUtils.lerp(group.position.y, destY, 0.08);
 
-        // Continuous architectural rotation
+        // Continuous horizontal rotation on the disc — straight upright, zero tilt
         group.rotation.y += 0.0055;
-
-        // Subtle mouse tilt
-        group.rotation.x = THREE.MathUtils.lerp(group.rotation.x, mouseY, 0.05);
-        group.rotation.z = THREE.MathUtils.lerp(group.rotation.z, -mouseX * 0.5, 0.05);
+        group.rotation.x = 0;
+        group.rotation.z = 0;
 
         // Visibility optimization
         group.visible = newScale > 0.01;
@@ -514,7 +554,6 @@ export default function IndustryShowcase({ onOpenDemo }) {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
       if (renderer.domElement && container.contains(renderer.domElement)) {
@@ -545,22 +584,12 @@ export default function IndustryShowcase({ onOpenDemo }) {
           </h2>
         </div>
 
-        {/* Dual-Column Main Stage: Left 3D Rotating Building, Right Info & Claymorphed Chat Card */}
+        {/* Dual-Column Main Stage: Left 3D Rotating Building on Disc, Right Info & Claymorphed Chat Card */}
         <div className="industry-dual-stage">
-          {/* Left Column: Animated 3D Rotating & Morphing Building */}
+          {/* Left Column: 3D Model Straight Rotating on Disc (No Background, No Box, No Pills) */}
           <div className="industry-3d-column">
             <div className="industry-3d-card-frame">
-              {/* Active 3D Badge */}
-              <div className="industry-3d-model-tag">
-                <span className="tag-pulse-dot" />
-                <span>3D Architectural Morph: {activeIndustry.buildingName}</span>
-              </div>
-
-              {/* Three.js Canvas Container */}
               <div ref={mountRef} className="industry-three-canvas-viewport" />
-
-              {/* Ambient Glass Vignette */}
-              <div className="industry-3d-bottom-glow" style={{ '--glow-color': activeIndustry.accentColor }} />
             </div>
           </div>
 

@@ -7319,69 +7319,24 @@ h6 {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 540px;
-  border-radius: 32px;
-  background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #F1F5F9 100%);
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 
-    0 26px 60px -12px rgba(15, 23, 42, 0.12),
-    0 10px 24px -6px rgba(15, 23, 42, 0.06),
-    inset 0 3px 6px #FFFFFF,
-    inset 0 -3.5px 7px rgba(148, 163, 184, 0.2);
-  overflow: hidden;
+  min-height: 520px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: visible;
   display: flex;
-  flex-direction: column;
-}
-
-.industry-3d-model-tag {
-  position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
-  z-index: 10;
-  display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 0.45rem 0.95rem;
-  border-radius: 9999px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  font-weight: 750;
-  color: #1E293B;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 
-    0 4px 14px rgba(15, 23, 42, 0.06),
-    inset 0 1px 2px #FFFFFF;
-  letter-spacing: 0.02em;
-}
-
-.tag-pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 8px #10B981;
-  animation: pulseDot 1.8s infinite ease-in-out;
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
+  justify-content: center;
 }
 
 .industry-three-canvas-viewport {
   width: 100%;
   height: 100%;
-  min-height: 540px;
-  cursor: grab;
+  min-height: 520px;
+  cursor: default;
   position: relative;
   z-index: 2;
-}
-
-.industry-three-canvas-viewport:active {
-  cursor: grabbing;
+  background: transparent !important;
 }
 
 .industry-three-canvas-viewport canvas {
@@ -7389,19 +7344,7 @@ h6 {
   width: 100% !important;
   height: 100% !important;
   outline: none;
-}
-
-.industry-3d-bottom-glow {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  background: radial-gradient(ellipse at bottom, var(--glow-color, #0052FF) 0%, transparent 70%);
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 1;
-  transition: opacity 0.5s ease;
+  background: transparent !important;
 }
 
 /* --------------------------------------------------------------------------
