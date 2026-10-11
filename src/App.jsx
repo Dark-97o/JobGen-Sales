@@ -16,10 +16,12 @@ import FinalCta from './components/FinalCta';
 import Footer from './components/Footer';
 import VoiceDemoModal from './components/VoiceDemoModal';
 import DemoBookingModal from './components/DemoBookingModal';
+import WaitingCostModal from './components/WaitingCostModal';
 
 export default function App() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isCostModalOpen, setIsCostModalOpen] = useState(false);
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -44,6 +46,14 @@ export default function App() {
     setIsBookingModalOpen(false);
   };
 
+  const handleOpenCost = () => {
+    setIsCostModalOpen(true);
+  };
+
+  const handleCloseCost = () => {
+    setIsCostModalOpen(false);
+  };
+
   return (
     <div className="jobgen-app-root">
       {/* Global Fixed Living Organic Contour Lines Background (Stays In Back As Content Scrolls) */}
@@ -57,7 +67,7 @@ export default function App() {
 
       <main>
         {/* Dual-Agent Hero Stage */}
-        <Hero onOpenDemo={handleOpenDemo} />
+        <Hero onOpenDemo={handleOpenDemo} onOpenCalculator={handleOpenCost} />
 
         {/* Black Curved Shell Coming Over Hero Section */}
         <div className="curved-black-shell">
@@ -122,6 +132,14 @@ export default function App() {
       <DemoBookingModal
         isOpen={isBookingModalOpen}
         onClose={handleCloseBooking}
+      />
+
+      {/* Interactive What Waiting Costs Calculator Modal */}
+      <WaitingCostModal
+        isOpen={isCostModalOpen}
+        onClose={handleCloseCost}
+        onOpenDemo={handleOpenDemo}
+        onOpenBooking={handleOpenBooking}
       />
     </div>
   );

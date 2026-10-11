@@ -9132,4 +9132,485 @@ h6 {
   color: #475569;
   margin-bottom: 1.75rem;
 }
+
+/* ==========================================================================
+   WHAT WAITING COSTS: CALCULATOR POPUP MODAL (MATCHING USER REFERENCE)
+   ========================================================================== */
+
+.cost-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 12, 0.85);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  animation: costBackdropFade 0.25s ease-out;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cost-modal-backdrop::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+@keyframes costBackdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cost-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  background: #0B0E14;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  padding: clamp(1.75rem, 3.5vw, 3rem);
+  box-shadow: 
+    0 32px 80px -15px rgba(0, 0, 0, 0.85),
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.8);
+  animation: costCardPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cost-modal-card::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+@keyframes costCardPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.cost-modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #94A3B8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.cost-modal-close-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cost-modal-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(2rem, 3.8vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .cost-modal-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Left Narrative Column */
+.cost-left-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.cost-kicker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  color: #71717A;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.cost-main-title {
+  font-family: var(--font-display, 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.4rem, 4.2vw, 4.2rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  margin: 0 0 1.5rem 0;
+}
+
+.cost-title-highlight {
+  background: linear-gradient(135deg, #FF4B4B 0%, #FF6584 45%, #FFA07A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.cost-desc {
+  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  color: #9CA3AF;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.cost-legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.cost-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: #D1D5DB;
+  font-weight: 500;
+}
+
+.cost-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-coral {
+  background: #FF5E62;
+  box-shadow: 0 0 8px rgba(255, 94, 98, 0.7);
+}
+
+.dot-amber {
+  background: #F59E0B;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.7);
+}
+
+.inline-dot {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+/* Claymorphic Live Impact Summary */
+.cost-impact-summary-clay {
+  background: linear-gradient(155deg, rgba(23, 27, 38, 0.85) 0%, rgba(13, 16, 24, 0.95) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 1.35rem 1.45rem;
+  box-shadow: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.cost-impact-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.text-coral {
+  color: #FF5E62;
+}
+
+.text-amber {
+  color: #F59E0B;
+}
+
+.cost-impact-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  color: #A1A1AA;
+}
+
+.cost-impact-big-value {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.cost-impact-per {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #94A3B8;
+  margin-left: 0.35rem;
+}
+
+.cost-impact-annual-pill {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 94, 98, 0.12);
+  border: 1px solid rgba(255, 94, 98, 0.3);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #FFA07A;
+}
+
+.cost-impact-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cost-breakdown-subitem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cost-subitem-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+.cost-subitem-val {
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: #FFFFFF;
+}
+
+.cost-recovered-cta-box {
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: costCardPop 0.25s ease-out;
+}
+
+.cost-recovered-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: #D1D5DB;
+  line-height: 1.45;
+}
+
+.cost-recover-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: linear-gradient(145deg, #0052FF 0%, #1D4ED8 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 8px 20px -2px rgba(0, 82, 255, 0.4),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1.5px 2px rgba(0, 35, 130, 0.3);
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 750;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cost-recover-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 82, 255, 0.55);
+}
+
+/* Right Card: Sliders Stack */
+.cost-right-card {
+  background: #080A0F;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: clamp(1.4rem, 2.5vw, 2.25rem);
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.6),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.06),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cost-sliders-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.cost-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.cost-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.cost-slider-label {
+  font-size: 0.88rem;
+  color: #E2E8F0;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.cost-slider-val {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Custom Styled Range Sliders Matching Image */
+.cost-slider-track-wrap {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cost-range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right, 
+    #D47FA6 0%, 
+    #F5A352 var(--fill, 20%), 
+    #252934 var(--fill, 20%), 
+    #252934 100%
+  );
+  outline: none;
+  cursor: pointer;
+  margin: 8px 0;
+  transition: background 0.08s ease;
+}
+
+/* WebKit Thumb */
+.cost-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.55),
+    0 0 1px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cost-range-input:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Firefox Thumb */
+.cost-range-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.55),
+    0 0 1px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cost-range-input:hover::-moz-range-thumb {
+  transform: scale(1.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Sunset Pill Button Exactly Matching Image */
+.cost-calculate-btn-row {
+  margin-top: 0.25rem;
+}
+
+.cost-sunset-calc-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #D47FA6 0%, #E88E78 50%, #F5A352 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.98rem;
+  font-weight: 750;
+  color: #0F172A;
+  cursor: pointer;
+  box-shadow: 
+    0 10px 24px -2px rgba(245, 163, 82, 0.35),
+    0 4px 10px rgba(212, 127, 166, 0.25),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cost-sunset-calc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 14px 32px rgba(245, 163, 82, 0.5),
+    0 6px 14px rgba(212, 127, 166, 0.35);
+  filter: brightness(1.04);
+}
+
+.cost-sunset-calc-btn:active {
+  transform: translateY(1px);
+}
+
 

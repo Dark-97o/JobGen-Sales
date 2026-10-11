@@ -15,7 +15,8 @@ import {
   Zap, 
   Layers, 
   TrendingUp, 
-  Cpu 
+  Cpu,
+  Calculator 
 } from 'lucide-react';
 
 function FluidGradientBackground() {
@@ -730,7 +731,7 @@ const OLIVIA_BULLET_POINTS = [
   },
 ];
 
-export default function Hero({ onOpenDemo }) {
+export default function Hero({ onOpenDemo, onOpenCalculator }) {
   const [activeAgent, setActiveAgent] = useState(null); // 'jenny' | 'olivia' | null
   const [closingAgent, setClosingAgent] = useState(null); // 'jenny' | 'olivia' | null
   const autonomousRef = useRef(null);
@@ -1005,9 +1006,14 @@ export default function Hero({ onOpenDemo }) {
                     </div>
                   </button>
 
-                  <a href="#platform" className="btn-cream-secondary-cta">
-                    <span>View Features</span>
-                  </a>
+                  <button
+                    type="button"
+                    onClick={onOpenCalculator}
+                    className="btn-cream-secondary-cta"
+                  >
+                    <Calculator size={15} style={{ marginRight: '6px' }} />
+                    <span>Calculate Waiting Cost</span>
+                  </button>
                 </div>
               </div>
             </div>
