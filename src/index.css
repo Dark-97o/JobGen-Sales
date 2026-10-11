@@ -9192,7 +9192,7 @@ h6 {
 
 .footer-video-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background: transparent !important;
   border-top: none !important;
   padding: 6.5rem 0 3.5rem !important;
@@ -9201,23 +9201,26 @@ h6 {
 
 .footer-video-bg-container {
   position: absolute;
-  inset: 0;
+  top: -120px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 120px);
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
   /* Mask image to make top of the video transparent fade to the background above */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 18%, black 42%);
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 18%, black 42%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 16%, black 42%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 16%, black 42%);
 }
 
 .footer-bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  filter: brightness(0.68) contrast(1.08);
+  object-position: center 20%;
+  filter: brightness(0.98) contrast(1.05);
 }
 
 .footer-video-dark-overlay {
@@ -9228,8 +9231,8 @@ h6 {
   background: linear-gradient(
     180deg, 
     transparent 0%, 
-    rgba(6, 9, 16, 0.4) 25%, 
-    rgba(6, 9, 16, 0.78) 100%
+    rgba(6, 9, 16, 0.12) 20%, 
+    rgba(6, 9, 16, 0.42) 100%
   );
   pointer-events: none;
 }
