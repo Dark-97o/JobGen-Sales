@@ -7,7 +7,7 @@ export default function Navbar({ onOpenDemo }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -30,8 +30,8 @@ export default function Navbar({ onOpenDemo }) {
   };
 
   return (
-    <header className={`navbar-header-full ${isScrolled ? 'is-scrolled' : ''}`}>
-      {/* Blur Transparent White Claymorphed Bar for Navbar Contents */}
+    <header className={`navbar-header-full ${isScrolled ? 'is-scrolled' : 'is-hero-mode'}`}>
+      {/* While in hero section: transparent on hero itself. When scrolled: blur transparent white claymorphed bar */}
       <nav className="navbar-clay-pill-bar" aria-label="Main Navigation">
         {/* Left: JobGen Blue Logo + Brand */}
         <a href="#home" onClick={handleHomeClick} className="navbar-brand-full">
@@ -45,7 +45,7 @@ export default function Navbar({ onOpenDemo }) {
           </span>
         </a>
 
-        {/* Center: Actual Navigation Options (Replaced Hamburger) */}
+        {/* Center: Actual Navigation Options */}
         <div className="navbar-links-center">
           <a
             href="#home"
@@ -84,8 +84,8 @@ export default function Navbar({ onOpenDemo }) {
           </a>
         </div>
 
-        {/* Right: Free Demo + Sign In Buttons */}
-        <div className="navbar-right-cluster">
+        {/* Right: Free Demo + Sign In Buttons (Only shown in clay bar when scrolled, hidden on hero itself) */}
+        <div className={`navbar-right-cluster ${isScrolled ? 'is-visible' : 'is-hidden'}`}>
           <button
             type="button"
             onClick={onOpenDemo}
