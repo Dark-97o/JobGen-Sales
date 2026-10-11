@@ -359,52 +359,41 @@ const INDUSTRIES_DATA = [
 
 export default function IndustryShowcase({ onOpenDemo }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [pipelineStep, setPipelineStep] = useState(0);
-  const [isPipelineVisible, setIsPipelineVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef(null);
   const pipelineRef = useRef(null);
   const activeIndustry = INDUSTRIES_DATA[currentIndex];
 
-  // Animate 3-step pipeline when scrolled into view
+  // Scroll-driven activation for the 3 circles and connecting lines
   useEffect(() => {
-    const el = pipelineRef.current;
-    if (!el) return;
+    const handleScroll = () => {
+      const el = pipelineRef.current;
+      if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsPipelineVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.25, rootMargin: '0px 0px -40px 0px' }
-    );
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight || 800;
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+      // Start trigger when the pipeline top is 85% down the viewport
+      const startTrigger = windowHeight * 0.85;
+      // Complete when the pipeline top reaches 35% of viewport
+      const endTrigger = windowHeight * 0.35;
+      const totalRange = startTrigger - endTrigger;
 
-  useEffect(() => {
-    if (!isPipelineVisible) return;
+      const currentDistance = startTrigger - rect.top;
+      const progress = Math.min(1, Math.max(0, currentDistance / totalRange));
 
-    // Immediately light up Circle 1 (T = 0s)
-    setPipelineStep(1);
+      setScrollProgress(progress);
+    };
 
-    // Line 1 travels (1.5s), Circle 2 lights up (T = 1.5s)
-    const timer1 = setTimeout(() => {
-      setPipelineStep(2);
-    }, 1500);
-
-    // Line 2 travels (1.5s), Circle 3 lights up (T = 3.0s total)
-    const timer2 = setTimeout(() => {
-      setPipelineStep(3);
-    }, 3000);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
-  }, [isPipelineVisible]);
+  }, []);
 
   // 3D Canvas Reference
   const mountRef = useRef(null);
@@ -1076,14 +1065,23 @@ export default function IndustryShowcase({ onOpenDemo }) {
         {/* 3-Step Execution Pipeline with Claymorphic Circles and Animated Connecting Flow */}
         <div 
           ref={pipelineRef} 
-          className={`industry-pipeline-wrapper ${isPipelineVisible ? 'is-visible' : ''}`}
+          className="industry-pipeline-wrapper"
         >
           <div className="industry-pipeline-grid">
             {WORKFLOW_PIPELINE.map((item, idx) => {
               const StepIcon = item.icon;
-              const isActive = pipelineStep > idx;
+              const isActive = idx === 0 
+                ? scrollProgress >= 0.05 
+                : idx === 1 
+                ? scrollProgress >= 0.50 
+                : scrollProgress >= 0.94;
+
               const hasConnectingLine = idx < WORKFLOW_PIPELINE.length - 1;
-              const isLineActive = pipelineStep >= (idx + 1);
+              const lineFillPercent = idx === 0
+                ? Math.min(100, Math.max(0, ((scrollProgress - 0.08) / 0.42) * 100))
+                : idx === 1
+                ? Math.min(100, Math.max(0, ((scrollProgress - 0.52) / 0.42) * 100))
+                : 0;
 
               return (
                 <div 
@@ -1096,7 +1094,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
                       <div className="pipeline-line-track" aria-hidden="true">
                         <div 
                           className="pipeline-line-fill" 
-                          style={{ width: isLineActive ? '100%' : '0%' }}
+                          style={{ width: `${lineFillPercent}%` }}
                         />
                       </div>
                     )}

@@ -8054,7 +8054,7 @@ h6 {
   background: linear-gradient(90deg, #0052FF 0%, #38BDF8 100%);
   box-shadow: 0 0 10px rgba(0, 82, 255, 0.5);
   border-radius: 9999px;
-  transition: width 1.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.18s ease-out;
 }
 
 /* Claymorphic Circle */
@@ -8077,7 +8077,7 @@ h6 {
     inset 0 3px 6px #FFFFFF,
     inset 0 -3px 6px rgba(163, 177, 198, 0.28);
   color: #94A3B8;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pipeline-circle-icon {
@@ -8102,10 +8102,10 @@ h6 {
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
 }
 
-/* Column Title */
+/* Column Title (+3px font size) */
 .pipeline-col-title {
   font-family: var(--font-display, 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1.2rem, 1.4vw, 1.38rem);
+  font-size: calc(clamp(1.2rem, 1.4vw, 1.38rem) + 3px);
   font-weight: 850;
   color: #0B0F19;
   line-height: 1.25;
