@@ -33,12 +33,12 @@ export default function Navbar({ onOpenDemo }) {
     <header className={`navbar-header-full ${isScrolled ? 'is-scrolled' : 'is-hero-mode'}`}>
       {/* While in hero section: transparent on hero itself. When scrolled: blur transparent white claymorphed bar */}
       <nav className="navbar-clay-pill-bar" aria-label="Main Navigation">
-        {/* Left: JobGen Blue Logo + Brand */}
+        {/* Left: Logo (White on Hero, Blue on Scrolled) + Brand */}
         <a href="#home" onClick={handleHomeClick} className="navbar-brand-full">
           <img
-            src="/assets/jobgen-logo.webp"
+            src={isScrolled ? '/assets/jobgen-logo.webp' : '/assets/jobgen-white.webp'}
             alt="JobGen Logo"
-            className="brand-logo-img-blue"
+            className={isScrolled ? 'brand-logo-img-blue' : 'brand-logo-img-white'}
           />
           <span className="brand-title-full">
             JOBGEN<span className="brand-title-accent">.AI</span>
@@ -84,15 +84,15 @@ export default function Navbar({ onOpenDemo }) {
           </a>
         </div>
 
-        {/* Right: Free Demo + Sign In Buttons (Only shown in clay bar when scrolled, hidden on hero itself) */}
-        <div className={`navbar-right-cluster ${isScrolled ? 'is-visible' : 'is-hidden'}`}>
+        {/* Right: Free Demo + Sign In Buttons (Shown in Hero Section and Scrolled Bar) */}
+        <div className="navbar-right-cluster">
           <button
             type="button"
             onClick={onOpenDemo}
             className="btn-nav-signin"
             title="Sign Up or Log In"
           >
-            <LogIn size={15} style={{ color: '#071A52' }} />
+            <LogIn size={15} className="nav-signin-icon" />
             <span>Sign Up / In</span>
           </button>
 
