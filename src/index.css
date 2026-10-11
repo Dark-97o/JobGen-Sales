@@ -2941,16 +2941,7 @@ h6 {
 /* Dot Matrix Diagonal Cross 'X' at Bottom Right Corner - Subtle Glow */
 
 .hero-dot-matrix-cross {
-  position: absolute;
-  bottom: clamp(1.75rem, 3.5vw, 3rem);
-  right: clamp(1.75rem, 3.5vw, 3.25rem);
-  z-index: 20;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.65));
-  animation: dotMatrixGlow 3.5s ease-in-out infinite alternate;
+  display: none !important;
 }
 
 @keyframes dotMatrixGlow {

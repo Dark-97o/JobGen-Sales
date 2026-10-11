@@ -210,23 +210,9 @@ export default function IntroAnimation({
                       margin: 0,
                       padding: 0,
                       textAlign: 'center',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
                     }}
                   >
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        width: '10px',
-                        height: '10px',
-                        borderRadius: '50%',
-                        backgroundColor: '#FFFFFF',
-                        marginRight: '6px',
-                        boxShadow: '0 0 12px rgba(255, 255, 255, 0.8)',
-                      }}
-                    />
-                    <span>{words[index]}</span>
+                    {words[index]}
                   </motion.p>
                 </AnimatePresence>
               </div>
