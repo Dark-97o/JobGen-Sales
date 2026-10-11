@@ -18,6 +18,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
+          motion: ['framer-motion'],
           three: ['three'],
           spline: ['@splinetool/runtime', '@splinetool/react-spline'],
           icons: ['lucide-react'],
