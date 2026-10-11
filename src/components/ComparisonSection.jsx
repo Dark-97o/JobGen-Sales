@@ -11,7 +11,8 @@ const FRICTION_STAGES = [
     legacyText: "Ring out to generic voicemail",
     jobgenText: "Jenny answers in 800ms 24/7",
     metric: "<800ms",
-    metricLabel: "Average pickup response"
+    metricLabel: "Average pickup response",
+    bgImage: "/assets/friction/stage-1.jpg"
   },
   {
     id: 2,
@@ -22,7 +23,8 @@ const FRICTION_STAGES = [
     legacyText: "Scramble across 4 browser tabs",
     jobgenText: "Instant CRM telemetry & memory",
     metric: "100%",
-    metricLabel: "Customer context match"
+    metricLabel: "Customer context match",
+    bgImage: "/assets/friction/stage-2.jpg"
   },
   {
     id: 3,
@@ -33,7 +35,8 @@ const FRICTION_STAGES = [
     legacyText: "Days of manual email & phone tag",
     jobgenText: "Direct calendar lock in 45 seconds",
     metric: "45s",
-    metricLabel: "Complete booking time"
+    metricLabel: "Complete booking time",
+    bgImage: "/assets/friction/stage-3.jpg"
   },
   {
     id: 4,
@@ -44,7 +47,8 @@ const FRICTION_STAGES = [
     legacyText: "Lost follow-ups & forgotten links",
     jobgenText: "Automated WhatsApp dispatch & docs",
     metric: "98%",
-    metricLabel: "Instant message delivery"
+    metricLabel: "Instant message delivery",
+    bgImage: "/assets/friction/stage-4.jpg"
   },
   {
     id: 5,
@@ -55,7 +59,8 @@ const FRICTION_STAGES = [
     legacyText: "Manual typing & missing CRM notes",
     jobgenText: "Structured sync to HubSpot & Salesforce",
     metric: "100%",
-    metricLabel: "Verbatim transcript logging"
+    metricLabel: "Verbatim transcript logging",
+    bgImage: "/assets/friction/stage-5.jpg"
   },
   {
     id: 6,
@@ -66,7 +71,8 @@ const FRICTION_STAGES = [
     legacyText: "Overnight delay for critical calls",
     jobgenText: "Warm live transfer to on-call manager",
     metric: "3s",
-    metricLabel: "Deterministic escalation time"
+    metricLabel: "Deterministic escalation time",
+    bgImage: "/assets/friction/stage-6.jpg"
   }
 ];
 
@@ -112,24 +118,47 @@ export default function ComparisonSection() {
           </div>
         </div>
 
-        {/* Stage Layout: Left Info Container (No Box, No Bg Image) + Right Cards */}
+        {/* Stage Layout: Left Card Box with Image Background + Right Cards */}
         <div className="friction-stage-layout">
-          {/* Left Column: Clean text directly on background + Favicon Next to Headline + Metric Card */}
+          {/* Left Column: Enclosed inside a Card Box with background images */}
           <div className="friction-info-wrapper">
-            <div className="friction-clean-info-container">
-              {/* Header row: Distinct Claymorphic Favicon next to Headline Text */}
-              <div className="friction-clean-header-row">
-                <div className="friction-clay-icon-circle" aria-hidden="true">
-                  <StageIcon size={24} className="friction-clay-icon" />
-                </div>
-                <h3 className="friction-clean-title">{activeStage.title}</h3>
+            <div className="friction-card-box">
+              {/* Background images for all 6 options - crossfade with clear view */}
+              <div className="friction-card-bg-container" aria-hidden="true">
+                {FRICTION_STAGES.map((stage, idx) => (
+                  <img
+                    key={stage.id}
+                    src={stage.bgImage}
+                    alt=""
+                    className={`friction-card-bg-img ${activeIdx === idx ? 'is-active' : ''}`}
+                    loading={idx === 0 ? "eager" : "lazy"}
+                  />
+                ))}
               </div>
 
-              <p className="friction-clean-desc">{activeStage.description}</p>
+              {/* Top floating pill: Stage badge on completely visible clear image */}
+              <div className="friction-card-top-bar">
+                <span className="friction-stage-pill">Workflow · Step {activeStage.number}</span>
+              </div>
 
-              <div className="friction-metric-card">
-                <div className="friction-metric-value">{activeStage.metric}</div>
-                <div className="friction-metric-label">{activeStage.metricLabel}</div>
+              {/* Bottom text scrim: Black overlay ONLY near the text area */}
+              <div className="friction-card-bottom-scrim">
+                <div className="friction-clean-info-container">
+                  {/* Header row: Distinct Claymorphic Favicon next to Headline Text */}
+                  <div className="friction-clean-header-row">
+                    <div className="friction-clay-icon-circle" aria-hidden="true">
+                      <StageIcon size={24} className="friction-clay-icon" />
+                    </div>
+                    <h3 className="friction-clean-title">{activeStage.title}</h3>
+                  </div>
+
+                  <p className="friction-clean-desc">{activeStage.description}</p>
+
+                  <div className="friction-metric-card">
+                    <div className="friction-metric-value">{activeStage.metric}</div>
+                    <div className="friction-metric-label">{activeStage.metricLabel}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

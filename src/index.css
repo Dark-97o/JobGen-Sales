@@ -6127,30 +6127,123 @@ h6 {
   }
 }
 
-/* Stage Layout: Left Fixed-Height Info Card + Right Cards Attached to Right Edge */
+/* Stage Layout: Left Card Box with Image Background + Right Cards Attached to Right Edge */
 .friction-stage-layout {
   display: grid;
-  grid-template-columns: minmax(320px, 440px) 1fr;
+  grid-template-columns: minmax(350px, 470px) 1fr;
   gap: clamp(2rem, 3.5vw, 4rem);
   align-items: center;
   padding-left: clamp(1.5rem, 4vw, 4rem);
   padding-right: 0; /* Cards attached flush to the right */
 }
 
-/* Left Column: Clean text directly on background + Claymorphic Favicon + Metric Card */
+/* Left Column: Card Box with Dynamic Background Images and Localized Text Overlay */
 .friction-info-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
+}
+
+.friction-card-box {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  min-height: 570px;
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #0b0f17;
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 
+    0 24px 60px -12px rgba(15, 23, 42, 0.18),
+    0 12px 28px -6px rgba(15, 23, 42, 0.1);
+  box-sizing: border-box;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+/* Background images for all 6 stages - crossfading smoothly */
+.friction-card-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.friction-card-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.friction-card-bg-img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Top bar: Stage pill floating cleanly with zero dark tint across the upper image */
+.friction-card-top-bar {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.friction-stage-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(11, 15, 23, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #F8FAFC;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Localized Black Overlay: ONLY near the text area, rest of image clearly visible */
+.friction-card-bottom-scrim {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2.75rem 1.75rem 1.75rem 1.75rem;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 13, 22, 0) 0%,
+    rgba(9, 13, 22, 0.45) 22%,
+    rgba(9, 13, 22, 0.85) 55%,
+    rgba(9, 13, 22, 0.96) 100%
+  );
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
 }
 
 .friction-clean-info-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 1.25rem;
+  gap: 1.15rem;
   width: 100%;
-  max-width: 490px;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -6161,10 +6254,10 @@ h6 {
 }
 
 .friction-clay-icon-circle {
-  width: 52px;
-  height: 52px;
-  min-width: 52px;
-  min-height: 52px;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -6172,49 +6265,51 @@ h6 {
   background: linear-gradient(145deg, #FFFFFF 0%, #EEF2F6 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
   box-shadow: 
-    0 10px 22px -4px rgba(37, 99, 235, 0.18),
-    0 4px 10px -2px rgba(15, 23, 42, 0.08),
-    inset 0 3px 5px rgba(255, 255, 255, 0.95),
-    inset 0 -3px 5px rgba(163, 177, 198, 0.35);
-  color: #2563EB;
+    0 10px 22px -4px rgba(0, 0, 0, 0.35),
+    0 4px 10px -2px rgba(0, 0, 0, 0.2),
+    inset 0 3px 5px rgba(255, 255, 255, 1),
+    inset 0 -2px 4px rgba(163, 177, 198, 0.35);
+  color: #0052FF;
   flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 .friction-clay-icon {
-  color: #2563EB;
-  filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.35));
+  color: #0052FF;
+  filter: drop-shadow(0 2px 6px rgba(0, 82, 255, 0.35));
 }
 
 .friction-clean-title {
   font-family: var(--font-display, 'Plus Jakarta Sans', -apple-system, sans-serif);
-  font-size: calc(clamp(1.4rem, 1.9vw, 1.85rem) + 4px);
+  font-size: clamp(1.28rem, 1.65vw, 1.6rem);
   font-weight: 850;
-  color: #0b0f17;
-  line-height: 1.22;
-  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  line-height: 1.24;
+  letter-spacing: -0.025em;
   margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .friction-clean-desc {
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  color: #475569;
-  line-height: 1.6;
+  font-size: clamp(0.92rem, 1.05vw, 1rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
   margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* White Tactile Claymorphism Metric Card (Full-Width to Match Text Above) */
+/* Glassmorphic Metric Card (Full-Width to Match Text Above on dark scrim) */
 .friction-metric-card {
-  background: linear-gradient(145deg, #FFFFFF 0%, #F4F7FB 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-radius: 22px;
-  padding: 1.25rem 1.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  padding: 1.15rem 1.6rem;
   box-shadow: 
-    0 16px 34px -4px rgba(15, 23, 42, 0.08),
-    0 6px 14px -2px rgba(15, 23, 42, 0.04),
-    inset 0 3px 5px rgba(255, 255, 255, 1),
-    inset 0 -3px 5px rgba(163, 177, 198, 0.32);
-  margin-top: 0.65rem;
+    0 16px 32px -6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
+  margin-top: 0.4rem;
   width: 100%;
   box-sizing: border-box;
   transition: all 0.3s ease;
@@ -6222,24 +6317,24 @@ h6 {
 
 .friction-metric-value {
   font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(2rem, 2.7vw, 2.55rem);
+  font-size: clamp(2rem, 2.7vw, 2.5rem);
   font-weight: 850;
-  color: #0052FF;
+  color: #38BDF8;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  margin-bottom: 0.3rem;
-  text-shadow: 0 2px 10px rgba(0, 82, 255, 0.18);
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 16px rgba(56, 189, 248, 0.4);
 }
 
 .friction-metric-label {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: #64748B;
+  color: rgba(255, 255, 255, 0.72);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.friction-comparison-section.is-pending .friction-clean-info-container {
+.friction-comparison-section.is-pending .friction-card-box {
   opacity: 0;
   transform: translateY(24px);
 }
@@ -6424,6 +6519,11 @@ h6 {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     padding-right: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  .friction-card-box {
+    max-width: 100%;
+    min-height: 520px;
   }
 
   .friction-clean-info-container {
