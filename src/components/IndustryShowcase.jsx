@@ -8,7 +8,6 @@ import {
   Building2, 
   UtensilsCrossed, 
   Stethoscope,
-  CheckCircle2,
   Bot,
   User,
   ArrowRight
@@ -950,9 +949,6 @@ export default function IndustryShowcase({ onOpenDemo }) {
                   </button>
                 </div>
               </div>
-              <p className="industry-two-line-desc">
-                {activeIndustry.twoLineInfo}
-              </p>
             </div>
 
             {/* Claymorphed Expected Conversation Chat Card */}
@@ -961,7 +957,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
               <div className="clay-chat-header">
                 <div className="clay-chat-header-agent">
                   <div className="clay-agent-avatar">
-                    <img src="/assets/jesss.png" alt={activeIndustry.agentName} className="clay-agent-avatar-img" />
+                    <img src="/assets/Jenny.png" alt={activeIndustry.agentName} className="clay-agent-avatar-img" />
                   </div>
                   <div className="clay-agent-meta">
                     <strong className="clay-agent-title">{activeIndustry.agentName}</strong>
@@ -991,15 +987,6 @@ export default function IndustryShowcase({ onOpenDemo }) {
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Deterministic Outcome Chip at bottom */}
-              <div className="clay-outcome-bar">
-                <div className="clay-outcome-badge">
-                  <CheckCircle2 size={16} className="clay-outcome-icon" />
-                  <span className="clay-outcome-label">Verified Action:</span>
-                </div>
-                <span className="clay-outcome-text">{activeIndustry.outcome}</span>
               </div>
             </div>
           </div>

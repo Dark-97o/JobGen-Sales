@@ -15,7 +15,6 @@ import {
   Mic,
   Plus,
   Sparkles,
-  CheckCircle2,
   Lock,
   Volume2
 } from 'lucide-react';
@@ -173,7 +172,11 @@ export default function RealCallLibrary() {
   }, [activeCallId]);
 
   const sectionRef = useRef(null);
+  const windowContainerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [showPlayPrompt, setShowPlayPrompt] = useState(false);
+  const [isPromptFading, setIsPromptFading] = useState(false);
+  const promptShownRef = useRef(false);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -191,6 +194,55 @@ export default function RealCallLibrary() {
 
     observer.observe(el);
     return () => observer.disconnect();
+  }, []);
+
+  // 90% View Trigger: pops up animated play prompt card and fades away after 3 seconds
+  useEffect(() => {
+    const el = windowContainerRef.current;
+    if (!el) return;
+
+    const triggerPlayPrompt = () => {
+      if (promptShownRef.current) return;
+      promptShownRef.current = true;
+      setShowPlayPrompt(true);
+
+      setTimeout(() => {
+        setIsPromptFading(true);
+      }, 2600);
+
+      setTimeout(() => {
+        setShowPlayPrompt(false);
+      }, 3100);
+    };
+
+    const promptObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.85) {
+          triggerPlayPrompt();
+        }
+      },
+      { threshold: [0.5, 0.75, 0.85, 0.9, 0.95] }
+    );
+
+    promptObserver.observe(el);
+
+    const handleScroll = () => {
+      if (promptShownRef.current) return;
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+      const ratio = visibleHeight / rect.height;
+      if (ratio >= 0.85 || (rect.top >= 20 && rect.bottom <= windowHeight + 80)) {
+        triggerPlayPrompt();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      promptObserver.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // Format seconds to mm:ss
@@ -222,7 +274,7 @@ export default function RealCallLibrary() {
         />
 
         {/* Mac Window Frame with WhatsApp Interface (Fade In On Scroll) */}
-        <div className={`mac-window-container ${isVisible ? 'is-visible' : ''}`}>
+        <div ref={windowContainerRef} className={`mac-window-container ${isVisible ? 'is-visible' : ''}`}>
           {/* macOS Titlebar with Traffic Lights */}
           <div className="mac-titlebar">
             <div className="mac-traffic-lights">
@@ -543,17 +595,22 @@ export default function RealCallLibrary() {
                       );
                     })}
                   </div>
-
-                  {/* Call Outcome Verified System Card */}
-                  <div className="wa-outcome-card">
-                    <div className="wa-outcome-badge">
-                      <CheckCircle2 size={15} className="wa-outcome-icon" />
-                      <strong className="wa-outcome-label">Deterministic CRM Outcome:</strong>
-                    </div>
-                    <span className="wa-outcome-text">{activeCall.outcome}</span>
-                  </div>
                 </div>
               </div>
+
+              {/* 90% View Floating Animated Prompt Card */}
+              {showPlayPrompt && (
+                <div className={`wa-play-prompt-card ${isPromptFading ? 'is-fading' : ''}`}>
+                  <div className="wa-prompt-icon-ring">
+                    <Volume2 size={16} />
+                  </div>
+                  <div className="wa-prompt-text-group">
+                    <span className="wa-prompt-headline">Hear the Real Conversation</span>
+                    <span className="wa-prompt-subtext">Click play below to listen to verified live AI call audio</span>
+                  </div>
+                  <span className="wa-prompt-notch" />
+                </div>
+              )}
 
               {/* WhatsApp Big Audio Playing & Pause Dock (Replaced "Click any message bubble above...") */}
               <div className="wa-big-audio-dock">

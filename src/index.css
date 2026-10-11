@@ -5252,8 +5252,26 @@ h6 {
   flex: 1;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
   background: #ffffff;
+}
+
+.wa-chats-scroll-list::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.wa-chats-scroll-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wa-chats-scroll-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
+}
+
+.wa-chats-scroll-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .wa-chat-item {
@@ -5424,6 +5442,7 @@ h6 {
   flex-direction: column;
   background-color: #efeae2;
   min-width: 0;
+  position: relative;
 }
 
 .wa-convo-header {
@@ -5526,6 +5545,26 @@ h6 {
   padding: 16px 20px;
   display: flex;
   flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.wa-chat-messages-area::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.wa-chat-messages-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wa-chat-messages-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
+}
+
+.wa-chat-messages-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .wa-doodle-backdrop {
@@ -5580,18 +5619,18 @@ h6 {
   line-height: 1.4;
 }
 
-/* Transcribe Chat Bubbles */
+/* Transcribe Chat Bubbles (Claymorphism Styling) */
 .wa-bubbles-stream {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
 
 .wa-bubble-row {
   display: flex;
   width: 100%;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.18s ease;
 }
 
 .wa-bubble-row.is-incoming {
@@ -5604,35 +5643,50 @@ h6 {
 
 .wa-bubble {
   position: relative;
-  max-width: 68%;
-  padding: 7px 12px 6px;
-  box-shadow: 0 1px 1px rgba(11, 20, 26, 0.12);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 72%;
+  padding: 10px 16px 8px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  word-break: break-word;
 }
 
+/* Claymorphic Incoming Bubble (User / Caller: White Tactile Pillow) */
 .wa-bubble-dark {
-  background: #ffffff;
-  border-radius: 8px 8px 8px 2px;
+  background: linear-gradient(155deg, #ffffff 0%, #f8fafc 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 18px 18px 18px 4px;
+  box-shadow: 
+    0 8px 18px -4px rgba(15, 23, 42, 0.08),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04),
+    inset 0 2.5px 3.5px #ffffff,
+    inset 0 -2.5px 4px rgba(148, 163, 184, 0.18);
 }
 
+/* Claymorphic Outgoing Bubble (Jenny / AI Agent: Soft Mint Green Tactile Pillow) */
 .wa-bubble-green {
-  background: #d9fdd3;
-  border-radius: 8px 8px 2px 8px;
+  background: linear-gradient(155deg, #e4fee2 0%, #d1f8ca 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 
+    0 8px 18px -4px rgba(0, 168, 132, 0.18),
+    0 2px 6px -1px rgba(0, 168, 132, 0.08),
+    inset 0 2.5px 3.5px rgba(255, 255, 255, 0.95),
+    inset 0 -2.5px 4px rgba(0, 140, 110, 0.16);
 }
 
 .wa-bubble-sender-name {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 700;
   color: #027eb5;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
 }
 
 .wa-bubble-text {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: #111b21;
-  line-height: 1.45;
+  line-height: 1.48;
   margin: 0;
-  word-break: break-word;
+  font-weight: 450;
 }
 
 .wa-bubble-meta {
@@ -5640,8 +5694,8 @@ h6 {
   justify-content: flex-end;
   align-items: center;
   gap: 4px;
-  margin-top: 2px;
-  margin-left: 12px;
+  margin-top: 4px;
+  margin-left: 14px;
   float: right;
 }
 
@@ -5656,47 +5710,116 @@ h6 {
 }
 
 .wa-bubble-row.is-live-speaking .wa-bubble {
-  outline: 2px solid #00A884;
-  box-shadow: 0 0 16px rgba(0, 168, 132, 0.35);
-  transform: scale(1.015);
+  outline: 2.5px solid #00A884;
+  box-shadow: 
+    0 12px 28px -2px rgba(0, 168, 132, 0.38),
+    inset 0 2px 4px #ffffff,
+    inset 0 -2px 4px rgba(0, 140, 110, 0.2);
+  transform: translateY(-1px) scale(1.02);
 }
 
-/* Outcome Card in WhatsApp Chat */
-.wa-outcome-card {
-  background: #ffffff;
-  border: 1.5px solid rgba(0, 168, 132, 0.35);
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-top: 14px;
+/* 90% View Floating Animated Prompt Card */
+.wa-play-prompt-card {
+  position: absolute;
+  bottom: 84px;
+  left: 20px;
+  z-index: 50;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  padding: 10px 18px 10px 14px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 
+    0 16px 36px -6px rgba(15, 23, 42, 0.18),
+    0 4px 12px rgba(0, 168, 132, 0.12),
+    inset 0 2px 3px #ffffff,
+    inset 0 -2px 3px rgba(148, 163, 184, 0.18);
+  pointer-events: auto;
+  animation: waPromptPopIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.wa-play-prompt-card.is-fading {
+  animation: waPromptFadeOut 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.wa-prompt-icon-ring {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00f5ba 0%, #00a884 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 168, 132, 0.35);
+  animation: waIconPulse 1.4s infinite ease-in-out;
+}
+
+.wa-prompt-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.wa-prompt-headline {
   color: #111b21;
   font-size: 0.85rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.wa-outcome-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #008069;
-  flex-shrink: 0;
-}
-
-.wa-outcome-icon {
-  flex-shrink: 0;
-}
-
-.wa-outcome-label {
   font-weight: 700;
-  font-size: 0.82rem;
+  line-height: 1.2;
 }
 
-.wa-outcome-text {
-  color: #111b21;
-  font-size: 0.84rem;
+.wa-prompt-subtext {
+  color: #667781;
+  font-size: 0.72rem;
   font-weight: 500;
+  line-height: 1.2;
+}
+
+.wa-prompt-notch {
+  position: absolute;
+  bottom: -6px;
+  left: 28px;
+  width: 12px;
+  height: 12px;
+  background: #f8fafc;
+  transform: rotate(45deg);
+  border-right: 1.5px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1.5px solid rgba(226, 232, 240, 0.9);
+}
+
+@keyframes waPromptPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes waPromptFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    pointer-events: none;
+  }
+}
+
+@keyframes waIconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
 }
 
 /* ==========================================================================
@@ -5715,67 +5838,73 @@ h6 {
   box-sizing: border-box;
 }
 
-/* Big Play & Pause Button */
+/* Big Play & Pause Button (Enhanced 3D Claymorphic Glow) */
 .wa-big-play-btn {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #00D5A5 0%, #00A884 60%, #008f6f 100%);
-  border: 1.5px solid #ffffff;
+  background: linear-gradient(135deg, #05f2ba 0%, #00a884 55%, #007a5f 100%);
+  border: 2px solid rgba(255, 255, 255, 0.95);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
   box-shadow: 
-    0 6px 16px -2px rgba(0, 168, 132, 0.45),
-    inset 0 2px 4px rgba(255, 255, 255, 0.65),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    0 8px 22px -2px rgba(0, 168, 132, 0.5),
+    inset 0 3px 5px rgba(255, 255, 255, 0.8),
+    inset 0 -3px 5px rgba(0, 60, 45, 0.35);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .wa-big-play-btn:hover {
   transform: translateY(-2px) scale(1.08);
   box-shadow: 
-    0 10px 22px -2px rgba(0, 168, 132, 0.6),
-    inset 0 3px 5px rgba(255, 255, 255, 0.8),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.25);
+    0 12px 28px -2px rgba(0, 168, 132, 0.65),
+    inset 0 3px 6px rgba(255, 255, 255, 0.9),
+    inset 0 -3px 5px rgba(0, 60, 45, 0.4);
 }
 
 .wa-big-play-btn:active {
   transform: translateY(1px) scale(0.95);
   box-shadow: 
-    0 3px 8px rgba(0, 168, 132, 0.3),
+    0 4px 10px rgba(0, 168, 132, 0.35),
     inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
-/* Big Audio Waveform Container */
+/* Big Audio Waveform Container (Enhanced Lighting & Bevel) */
 .wa-big-waveform-container {
   flex: 1;
-  height: 48px;
+  height: 52px;
   position: relative;
   background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e9edef;
-  padding: 0 14px;
+  border-radius: 14px;
+  border: 1.5px solid #e2e8f0;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   cursor: pointer;
   overflow: hidden;
   user-select: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-shadow: 
+    inset 0 2px 5px rgba(15, 23, 42, 0.04),
+    0 2px 6px rgba(15, 23, 42, 0.02);
+  transition: all 0.2s ease;
 }
 
 .wa-big-waveform-container:hover {
   background: #ffffff;
   border-color: #00A884;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 168, 132, 0.06),
+    0 4px 14px rgba(0, 168, 132, 0.12);
 }
 
 /* Waveform Bars Track */
 .wa-big-waves-track {
   width: 100%;
-  height: 38px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -5788,15 +5917,15 @@ h6 {
   max-width: 5px;
   height: var(--base-height, 40%);
   min-height: 4px;
-  border-radius: 4px;
-  background: #cbd5e1;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #dbe4ec 0%, #cbd5e1 100%);
   transform-origin: 50% 50%;
-  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wa-big-wave-bar.is-played {
-  background: linear-gradient(180deg, #00D5A5 0%, #00A884 100%);
-  box-shadow: 0 0 6px rgba(0, 168, 132, 0.35);
+  background: linear-gradient(180deg, #05f2ba 0%, #00a884 65%, #007a5f 100%);
+  box-shadow: 0 0 8px rgba(0, 242, 186, 0.45);
 }
 
 /* Animated Sound Waveforms while playing */
@@ -5807,23 +5936,23 @@ h6 {
 @keyframes bigWavePulse {
   0% {
     transform: scaleY(0.7);
-    filter: brightness(0.9);
+    filter: brightness(0.95);
   }
   100% {
-    transform: scaleY(1.35);
-    filter: brightness(1.2);
+    transform: scaleY(1.4);
+    filter: brightness(1.25);
   }
 }
 
 /* Waveform Playhead Needle */
 .wa-waveform-playhead {
   position: absolute;
-  top: 5px;
-  bottom: 5px;
-  width: 2.5px;
-  background: #008069;
-  border-radius: 2px;
-  box-shadow: 0 0 6px rgba(0, 168, 132, 0.5);
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: linear-gradient(180deg, #05f2ba 0%, #008069 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(0, 168, 132, 0.8), 0 0 3px #ffffff;
   pointer-events: none;
   transform: translateX(-50%);
   transition: left 0.08s linear;
