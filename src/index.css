@@ -5718,19 +5718,22 @@ h6 {
   transform: translateY(-1px) scale(1.02);
 }
 
-/* 90% View Floating Animated Prompt Card (Black Card with Close Button & 2s Pulse) */
+/* 90% View Floating Animated Prompt Card (Square Black Card with Close Button & 2s Pulse) */
 .wa-play-prompt-card {
   position: absolute;
   bottom: 84px;
   left: 20px;
   z-index: 50;
+  width: 195px;
+  height: 195px;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px 10px 14px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  box-sizing: border-box;
   background: linear-gradient(145deg, #111b21 0%, #0c1317 100%);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: 
     0 16px 36px -6px rgba(0, 0, 0, 0.55),
     0 0 16px rgba(0, 168, 132, 0.25),
@@ -5740,8 +5743,8 @@ h6 {
 }
 
 .wa-prompt-icon-ring {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: linear-gradient(135deg, #00f5ba 0%, #00a884 100%);
   color: #0b141a;
@@ -5753,46 +5756,47 @@ h6 {
   animation: waIconPulse 1.4s infinite ease-in-out;
 }
 
-.wa-prompt-text-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.wa-prompt-headline {
-  color: #ffffff;
-  font-size: 0.85rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.wa-prompt-subtext {
-  color: #8696a0;
-  font-size: 0.72rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
 .wa-prompt-close-btn {
-  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.12);
   border: none;
   color: #8696a0;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-left: 6px;
-  flex-shrink: 0;
 }
 
 .wa-prompt-close-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.25);
   color: #ffffff;
   transform: scale(1.1);
+}
+
+.wa-prompt-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wa-prompt-headline {
+  color: #ffffff;
+  font-size: 0.98rem; /* +2px larger */
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.wa-prompt-subtext {
+  color: #8696a0;
+  font-size: 0.85rem; /* +2px larger */
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .wa-prompt-notch {
