@@ -9,7 +9,6 @@ import {
   UtensilsCrossed, 
   Stethoscope,
   CheckCircle2,
-  Sparkles,
   Bot,
   User,
   ArrowRight
@@ -538,41 +537,12 @@ export default function IndustryShowcase({ onOpenDemo }) {
   return (
     <section id="industries" ref={containerRef} className="industry-showcase-section">
       <div className="container industry-showcase-container">
-        {/* Section Header Matching Contour Stage Standards */}
+        {/* Section Header */}
         <div className="industry-header-center">
-          <div className="industry-category-badge">
-            <Sparkles size={14} className="industry-badge-icon" />
-            <span>ADAPTIVE VERTICAL ARCHITECTURE</span>
-          </div>
           <h2 className="section-title industry-main-headline">
             <span className="industry-headline-lead">Calibrated for</span>{' '}
             <span className="text-full-blue industry-headline-accent">every Industry</span>
           </h2>
-          <p className="industry-headline-subtitle">
-            Autonomous multi-modal voice and chat workflows trained on specific regulatory boundaries, workflows, and terminology.
-          </p>
-        </div>
-
-        {/* 5 Industry Direct Selection Pills */}
-        <div className="industry-pills-selector-bar" role="tablist" aria-label="Select Industry">
-          {INDUSTRIES_DATA.map((ind, idx) => {
-            const PillIcon = ind.icon;
-            const isActive = idx === currentIndex;
-            return (
-              <button
-                key={ind.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setCurrentIndex(idx)}
-                className={`industry-pill-btn ${isActive ? 'is-active' : ''}`}
-                style={{ '--pill-color': ind.accentColor }}
-              >
-                <PillIcon size={16} className="pill-icon" />
-                <span className="pill-label">{ind.name}</span>
-              </button>
-            );
-          })}
         </div>
 
         {/* Dual-Column Main Stage: Left 3D Rotating Building, Right Info & Claymorphed Chat Card */}
@@ -594,47 +564,38 @@ export default function IndustryShowcase({ onOpenDemo }) {
             </div>
           </div>
 
-          {/* Right Column: Industry Header, 2-Line Info, Controls & Claymorphed Chat Box */}
+          {/* Right Column: Industry Header with Prev/Next Controls, 2-Line Info & Claymorphed Chat Box */}
           <div className="industry-info-column">
-            {/* Top Navigation Row: Sector Indicator + Prev / Next Controls */}
-            <div className="industry-nav-controls-row">
-              <div className="industry-counter-badge">
-                <span className="counter-current">0{currentIndex + 1}</span>
-                <span className="counter-sep">/</span>
-                <span className="counter-total">0{INDUSTRIES_DATA.length}</span>
-                <span className="counter-dash">—</span>
-                <span className="counter-tagline">{activeIndustry.tagline}</span>
-              </div>
-
-              <div className="industry-arrows-cluster">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="industry-arrow-btn"
-                  title="Previous Industry"
-                  aria-label="Previous Industry"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="industry-arrow-btn"
-                  title="Next Industry"
-                  aria-label="Next Industry"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              </div>
-            </div>
-
-            {/* Industry Heading & 2-Line Info */}
+            {/* Industry Heading Row with Next and Previous Controls */}
             <div className="industry-headline-group">
               <div className="industry-title-row">
-                <div className="industry-title-icon-badge" style={{ backgroundColor: `${activeIndustry.accentColor}15`, color: activeIndustry.accentColor }}>
-                  <IconComp size={24} />
+                <div className="industry-title-left">
+                  <div className="industry-title-icon-badge" style={{ backgroundColor: `${activeIndustry.accentColor}15`, color: activeIndustry.accentColor }}>
+                    <IconComp size={24} />
+                  </div>
+                  <h3 className="industry-title-text">{activeIndustry.name}</h3>
                 </div>
-                <h3 className="industry-title-text">{activeIndustry.name}</h3>
+
+                <div className="industry-arrows-cluster">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    className="industry-arrow-btn"
+                    title="Previous Industry"
+                    aria-label="Previous Industry"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="industry-arrow-btn"
+                    title="Next Industry"
+                    aria-label="Next Industry"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                </div>
               </div>
               <p className="industry-two-line-desc">
                 {activeIndustry.twoLineInfo}

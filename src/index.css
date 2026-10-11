@@ -7511,6 +7511,13 @@ h6 {
 .industry-title-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.industry-title-left {
+  display: flex;
+  align-items: center;
   gap: 0.85rem;
 }
 
