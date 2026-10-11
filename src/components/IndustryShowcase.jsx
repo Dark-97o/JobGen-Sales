@@ -354,144 +354,307 @@ export default function IndustryShowcase({ onOpenDemo }) {
     };
 
     // ==========================================
-    // 1. UNIVERSITY CAMPUS BUILDING (Education)
+    // 1. UNIVERSITY CAMPUS BUILDING (Education - Full 360° Neoclassical Grandeur)
     // ==========================================
     const bEducation = new THREE.Group();
-    // Base podium steps
-    addMesh(bEducation, new THREE.BoxGeometry(5.6, 0.4, 4.2), stoneMat, [0, 0.2, 0]);
-    addMesh(bEducation, new THREE.BoxGeometry(5.0, 0.3, 3.8), stoneMat, [0, 0.5, 0]);
-    // Main Neoclassical Hall
-    addMesh(bEducation, new THREE.BoxGeometry(4.4, 2.2, 3.0), stoneMat, [0, 1.7, 0]);
-    // 6 Columns in front
-    for (let c = -1.6; c <= 1.6; c += 0.64) {
-      addMesh(bEducation, new THREE.CylinderGeometry(0.12, 0.14, 2.2, 16), stoneMat, [c, 1.7, 1.6]);
+    // Base podium steps (Front & Back)
+    addMesh(bEducation, new THREE.BoxGeometry(5.6, 0.35, 4.8), stoneMat, [0, 0.18, 0]);
+    addMesh(bEducation, new THREE.BoxGeometry(5.0, 0.25, 4.4), stoneMat, [0, 0.42, 0]);
+    // Main Neoclassical Central Hall
+    addMesh(bEducation, new THREE.BoxGeometry(4.4, 2.2, 3.4), stoneMat, [0, 1.65, 0]);
+    
+    // Front Portico: 6 Neoclassical Columns
+    for (let c = -1.5; c <= 1.5; c += 0.6) {
+      addMesh(bEducation, new THREE.CylinderGeometry(0.11, 0.13, 2.2, 16), stoneMat, [c, 1.65, 1.82]);
     }
-    // Entablature & Pediment
-    addMesh(bEducation, new THREE.BoxGeometry(4.6, 0.35, 3.4), stoneMat, [0, 2.95, 0]);
-    // Triangular roof pediment (Prism)
-    const pedimentGeo = new THREE.ConeGeometry(2.5, 1.1, 4);
-    const pediment = addMesh(bEducation, pedimentGeo, darkSteelMat, [0, 3.6, 0], [0, Math.PI / 4, 0]);
-    pediment.scale.set(1.4, 1, 0.9);
-    // Central Clock Tower Cupola
-    addMesh(bEducation, new THREE.BoxGeometry(1.1, 1.4, 1.1), stoneMat, [0, 4.4, 0]);
-    // Clock faces
-    addMesh(bEducation, new THREE.CylinderGeometry(0.3, 0.3, 0.05, 16), darkSteelMat, [0, 4.4, 0.58], [Math.PI / 2, 0, 0]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.3, 0.3, 0.05, 16), darkSteelMat, [0.58, 4.4, 0], [0, 0, Math.PI / 2]);
-    // Tower Spire
-    addMesh(bEducation, new THREE.ConeGeometry(0.65, 1.5, 8), blueAccentMat, [0, 5.7, 0]);
-    // Front Glass Entrance Doors
-    addMesh(bEducation, new THREE.BoxGeometry(1.2, 1.4, 0.1), glassMat, [0, 1.3, 1.52]);
-    // Side Windows
-    addMesh(bEducation, new THREE.BoxGeometry(0.5, 0.9, 0.05), glassMat, [-1.3, 1.7, 1.52]);
-    addMesh(bEducation, new THREE.BoxGeometry(0.5, 0.9, 0.05), glassMat, [1.3, 1.7, 1.52]);
+    // Back Portico: 6 Symmetrical Neoclassical Columns (Backside Detail)
+    for (let c = -1.5; c <= 1.5; c += 0.6) {
+      addMesh(bEducation, new THREE.CylinderGeometry(0.11, 0.13, 2.2, 16), stoneMat, [c, 1.65, -1.82]);
+    }
+
+    // Entablatures (Front & Back)
+    addMesh(bEducation, new THREE.BoxGeometry(3.6, 0.3, 0.6), stoneMat, [0, 2.85, 1.82]);
+    addMesh(bEducation, new THREE.BoxGeometry(3.6, 0.3, 0.6), stoneMat, [0, 2.85, -1.82]);
+    
+    // Front Pediment (Triangular Gable)
+    const frontPediment = addMesh(bEducation, new THREE.ConeGeometry(2.1, 0.9, 4), darkSteelMat, [0, 3.4, 1.82], [0, Math.PI / 4, 0]);
+    frontPediment.scale.set(1.4, 1, 0.35);
+    // Back Pediment (Triangular Gable)
+    const backPediment = addMesh(bEducation, new THREE.ConeGeometry(2.1, 0.9, 4), darkSteelMat, [0, 3.4, -1.82], [0, Math.PI / 4, 0]);
+    backPediment.scale.set(1.4, 1, 0.35);
+
+    // Main Roof (Hip Roof across entire hall)
+    const mainRoof = addMesh(bEducation, new THREE.ConeGeometry(3.4, 1.2, 4), darkSteelMat, [0, 3.35, 0], [0, Math.PI / 4, 0]);
+    mainRoof.scale.set(1.3, 1, 1.05);
+
+    // Central Octagonal Rotunda / Cupola Drum
+    addMesh(bEducation, new THREE.CylinderGeometry(1.05, 1.05, 1.1, 16), stoneMat, [0, 4.25, 0]);
+    // 8 Mini Colonnettes around rotunda drum
+    for (let a = 0; a < 8; a++) {
+      const ang = (a / 8) * Math.PI * 2;
+      addMesh(bEducation, new THREE.CylinderGeometry(0.06, 0.06, 1.1, 12), stoneMat, [Math.cos(ang) * 0.95, 4.25, Math.sin(ang) * 0.95]);
+    }
+    // Copper Dome
+    addMesh(bEducation, new THREE.SphereGeometry(1.08, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), darkSteelMat, [0, 4.8, 0]);
+    // Gilded Lantern & Spire
+    addMesh(bEducation, new THREE.CylinderGeometry(0.2, 0.25, 0.5, 16), amberBistroMat, [0, 5.9, 0]);
+    addMesh(bEducation, new THREE.ConeGeometry(0.22, 1.4, 16), blueAccentMat, [0, 6.8, 0]);
+
+    // 4 Symmetrical Clock Faces on all 4 Sides (North, South, East, West)
+    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [0, 4.3, 1.06], [Math.PI / 2, 0, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [0, 4.3, -1.06], [Math.PI / 2, 0, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [1.06, 4.3, 0], [0, 0, Math.PI / 2]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [-1.06, 4.3, 0], [0, 0, Math.PI / 2]);
+
+    // Front & Back Grand Entrance Glass Doors
+    addMesh(bEducation, new THREE.BoxGeometry(1.2, 1.5, 0.1), glassMat, [0, 1.3, 1.72]);
+    addMesh(bEducation, new THREE.BoxGeometry(1.2, 1.5, 0.1), glassMat, [0, 1.3, -1.72]);
+
+    // Left Side Windows (West Elevation)
+    for (let w = -1.0; w <= 1.0; w += 0.7) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.9, 0.45), glassMat, [-2.22, 1.7, w]);
+    }
+    // Right Side Windows (East Elevation)
+    for (let w = -1.0; w <= 1.0; w += 0.7) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.9, 0.45), glassMat, [2.22, 1.7, w]);
+    }
+    // Perimeter Roof Cornice Balustrade
+    addMesh(bEducation, new THREE.BoxGeometry(4.5, 0.15, 3.5), stoneMat, [0, 2.82, 0]);
     scene.add(bEducation);
     buildingGroups.push(bEducation);
 
     // ==========================================
-    // 2. FINANCIAL ADVISORY TOWER (Accounting)
+    // 2. FINANCIAL ADVISORY TOWER (Accounting - Full 360° Manhattan Skyscraper)
     // ==========================================
     const bAccounting = new THREE.Group();
-    // Podium plinth
-    addMesh(bAccounting, new THREE.BoxGeometry(4.8, 0.4, 4.0), darkSteelMat, [0, 0.2, 0]);
-    // Main High-rise Tower Tier 1
-    addMesh(bAccounting, new THREE.BoxGeometry(2.8, 3.4, 2.6), glassMat, [0, 1.9, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.9, 0.15, 2.7), darkSteelMat, [0, 1.0, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.9, 0.15, 2.7), darkSteelMat, [0, 2.0, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.9, 0.15, 2.7), darkSteelMat, [0, 3.0, 0]);
-    // Upper Tier 2 (Step-back architecture)
-    addMesh(bAccounting, new THREE.BoxGeometry(2.2, 2.8, 2.0), glassMat, [0, 4.8, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.3, 0.12, 2.1), blueAccentMat, [0, 4.2, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.3, 0.12, 2.1), blueAccentMat, [0, 5.2, 0]);
-    // Penthouse Tier 3
-    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.5, 1.4), darkSteelMat, [0, 6.7, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(1.4, 1.2, 1.2), glassMat, [0, 6.7, 0]);
-    // Rooftop Antenna Spire & Communications Mast
-    addMesh(bAccounting, new THREE.CylinderGeometry(0.04, 0.08, 2.2, 12), blueAccentMat, [0, 8.3, 0]);
-    addMesh(bAccounting, new THREE.SphereGeometry(0.16, 16, 16), blueAccentMat, [0, 9.4, 0]);
-    // Flanking Financial Wings
-    addMesh(bAccounting, new THREE.BoxGeometry(1.2, 1.8, 1.8), stoneMat, [-2.0, 1.1, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(1.2, 1.8, 1.8), stoneMat, [2.0, 1.1, 0]);
+    // Ground Plaza Plinth with Corner Pylons
+    addMesh(bAccounting, new THREE.BoxGeometry(4.8, 0.35, 4.4), darkSteelMat, [0, 0.18, 0]);
+    
+    // Tier 1 Base Tower (Curtain Glass on all 4 sides)
+    addMesh(bAccounting, new THREE.BoxGeometry(3.2, 3.2, 3.2), glassMat, [0, 1.8, 0]);
+    // 4 Symmetrical Floor Mullion Bands around all 4 sides
+    for (let fl = 0.8; fl <= 3.2; fl += 0.8) {
+      addMesh(bAccounting, new THREE.BoxGeometry(3.32, 0.1, 3.32), darkSteelMat, [0, fl, 0]);
+    }
+    // Corner Structural Pylons (All 4 Corners)
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [1.6, 1.8, 1.6]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [-1.6, 1.8, 1.6]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [1.6, 1.8, -1.6]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [-1.6, 1.8, -1.6]);
+
+    // Front & Back Revolving Entrance Atriums
+    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.1, 0.25), darkSteelMat, [0, 0.75, 1.65]);
+    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.1, 0.25), darkSteelMat, [0, 0.75, -1.65]);
+
+    // Tier 2 Mid-Tower (Setback with 360° Observation Terrace)
+    addMesh(bAccounting, new THREE.BoxGeometry(2.4, 2.6, 2.4), glassMat, [0, 4.6, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(2.55, 0.08, 2.55), blueAccentMat, [0, 4.0, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(2.55, 0.08, 2.55), blueAccentMat, [0, 4.8, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(2.55, 0.08, 2.55), blueAccentMat, [0, 5.6, 0]);
+    // 360° Glass Railing along Tier 1 Terrace Setback
+    addMesh(bAccounting, new THREE.BoxGeometry(3.2, 0.35, 0.05), glassMat, [0, 3.55, 1.58]);
+    addMesh(bAccounting, new THREE.BoxGeometry(3.2, 0.35, 0.05), glassMat, [0, 3.55, -1.58]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.05, 0.35, 3.2), glassMat, [1.58, 3.55, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.05, 0.35, 3.2), glassMat, [-1.58, 3.55, 0]);
+
+    // Tier 3 Penthouse Executive Floor
+    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.4, 1.6), darkSteelMat, [0, 6.4, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(1.4, 1.2, 1.4), glassMat, [0, 6.4, 0]);
+
+    // Rooftop Architectural Crown & Mechanical Penthouse
+    addMesh(bAccounting, new THREE.BoxGeometry(1.8, 0.35, 1.8), darkSteelMat, [0, 7.25, 0]);
+    // Glowing Blue Neon Corner Accent Ribs (All 4 Corners)
+    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [0.8, 7.6, 0.8]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [-0.8, 7.6, 0.8]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [0.8, 7.6, -0.8]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [-0.8, 7.6, -0.8]);
+
+    // Rooftop Communications Mast & Beacon
+    addMesh(bAccounting, new THREE.CylinderGeometry(0.04, 0.08, 2.4, 12), darkSteelMat, [0, 8.6, 0]);
+    addMesh(bAccounting, new THREE.SphereGeometry(0.14, 16, 16), redCrossMat, [0, 9.8, 0]);
+    // Satellite Dishes (North & South)
+    addMesh(bAccounting, new THREE.CylinderGeometry(0.3, 0.3, 0.08, 16), darkSteelMat, [0.4, 7.5, 0.5], [0.4, 0.3, 0]);
+    addMesh(bAccounting, new THREE.CylinderGeometry(0.25, 0.25, 0.08, 16), darkSteelMat, [-0.4, 7.5, -0.5], [-0.4, -0.3, 0]);
     scene.add(bAccounting);
     buildingGroups.push(bAccounting);
 
     // ==========================================
-    // 3. LUXURY VILLA (Real Estate)
+    // 3. LUXURY MODERNIST VILLA (Real Estate - Full 360° Architectural Luxury)
     // ==========================================
     const bRealEstate = new THREE.Group();
-    // Base Landscape Deck
-    addMesh(bRealEstate, new THREE.BoxGeometry(6.2, 0.3, 4.6), stoneMat, [0, 0.15, 0]);
-    // Turquoise Swimming Pool / Reflection Water
-    addMesh(bRealEstate, new THREE.BoxGeometry(2.2, 0.06, 1.8), glassMat, [1.7, 0.32, 1.0]);
-    // Ground Floor Living Pavilion
-    addMesh(bRealEstate, new THREE.BoxGeometry(3.6, 1.6, 2.8), stoneMat, [-0.6, 1.0, -0.3]);
-    // Double-Height Glass Facade
-    addMesh(bRealEstate, new THREE.BoxGeometry(3.2, 1.4, 0.1), glassMat, [-0.6, 1.0, 1.1]);
-    // Cantilevered First Floor Suite (Stretching out)
-    addMesh(bRealEstate, new THREE.BoxGeometry(3.8, 1.4, 2.4), darkSteelMat, [0.4, 2.4, 0]);
-    // Floor-to-Ceiling Balcony Glass
-    addMesh(bRealEstate, new THREE.BoxGeometry(3.6, 1.1, 0.08), glassMat, [0.4, 2.4, 1.22]);
-    // Overhanging Roof Slabs (Modernist Cantilever)
-    addMesh(bRealEstate, new THREE.BoxGeometry(4.4, 0.22, 3.2), warmWoodMat, [0.4, 3.2, 0]);
-    // Architectural Accent Column
-    addMesh(bRealEstate, new THREE.BoxGeometry(0.18, 2.3, 0.18), darkSteelMat, [2.1, 1.2, 1.1]);
-    // Timber feature louvers
-    addMesh(bRealEstate, new THREE.BoxGeometry(0.12, 1.4, 1.2), warmWoodMat, [-2.4, 1.0, -0.3]);
+    // Base Landscape Deck (Stone & Timber)
+    addMesh(bRealEstate, new THREE.BoxGeometry(6.4, 0.3, 5.2), stoneMat, [0, 0.15, 0]);
+    // Turquoise Swimming Pool (Front-Right)
+    addMesh(bRealEstate, new THREE.BoxGeometry(2.4, 0.08, 1.8), glassMat, [1.6, 0.32, 1.2]);
+    // Sun Loungers by Pool
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.4, 0.12, 0.9), warmWoodMat, [2.5, 0.36, 0.8]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.4, 0.12, 0.9), warmWoodMat, [2.5, 0.36, 1.8]);
+
+    // Rear Zen Garden & Outdoor Dining Terrace (Back-Left)
+    addMesh(bRealEstate, new THREE.BoxGeometry(2.0, 0.06, 1.6), warmWoodMat, [-1.7, 0.32, -1.4]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.9, 0.35, 0.5), darkSteelMat, [-1.7, 0.5, -1.4]);
+
+    // Ground Floor Living Pavilion (Glass Wrapped on Front, Back & Sides)
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.6, 1.5, 3.2), stoneMat, [-0.4, 1.0, 0]);
+    // Front Sliding Glass Wall
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.2, 1.35, 0.08), glassMat, [-0.4, 1.0, 1.62]);
+    // Rear Sliding Glass Wall (Facing Garden)
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.2, 1.35, 0.08), glassMat, [-0.4, 1.0, -1.62]);
+    // Side Glass Walls
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.08, 1.35, 2.2), glassMat, [-2.22, 1.0, 0]);
+
+    // Cantilevered Upper Master Suite (Extends out both Front & Side)
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.8, 1.4, 3.0), darkSteelMat, [0.5, 2.45, 0.3]);
+    // Front Glass Bedroom Wall & Balcony
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.4, 1.15, 0.08), glassMat, [0.5, 2.45, 1.82]);
+    // Rear Glass Wall & Balcony
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.4, 1.15, 0.08), glassMat, [0.5, 2.45, -1.22]);
+
+    // Wrap-Around Glass Balcony Guardrails (Front, Side & Back)
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.6, 0.45, 0.05), glassMat, [0.5, 2.1, 1.95]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.05, 0.45, 3.2), glassMat, [2.42, 2.1, 0.3]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(3.6, 0.45, 0.05), glassMat, [0.5, 2.1, -1.35]);
+
+    // Overhanging Floating Modernist Roof Slabs
+    addMesh(bRealEstate, new THREE.BoxGeometry(4.4, 0.2, 3.6), warmWoodMat, [0.5, 3.25, 0.3]);
+
+    // Rooftop Timber Pergola Trellis (Visible from all angles)
+    for (let p = -1.2; p <= 1.2; p += 0.48) {
+      addMesh(bRealEstate, new THREE.BoxGeometry(0.08, 0.12, 2.8), warmWoodMat, [p + 0.5, 3.6, 0.3]);
+    }
+    // Planter Boxes with Greenery on Roof
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.4, 0.25, 2.4), emeraldMat, [-1.2, 3.45, 0.3]);
+
+    // Architectural Vertical Chimney Stack (Ground to Roof)
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.5, 4.2, 0.5), stoneMat, [-2.1, 2.1, 0.8]);
+    // Vertical Timber Privacy Louvers (East Elevation)
+    for (let l = -0.8; l <= 0.8; l += 0.3) {
+      addMesh(bRealEstate, new THREE.BoxGeometry(0.06, 1.8, 0.15), warmWoodMat, [-2.25, 1.1, l - 0.7]);
+    }
     scene.add(bRealEstate);
     buildingGroups.push(bRealEstate);
 
     // ==========================================
-    // 4. BOUTIQUE RESTAURANT BISTRO (Restaurants)
+    // 4. BOUTIQUE RESTAURANT BISTRO (Restaurants - Full 360° Parisian Bistro)
     // ==========================================
     const bRestaurant = new THREE.Group();
-    // Ground Street Foundation
-    addMesh(bRestaurant, new THREE.BoxGeometry(5.4, 0.3, 4.4), stoneMat, [0, 0.15, 0]);
-    // Main Bistro 2-Story Building
-    addMesh(bRestaurant, new THREE.BoxGeometry(4.2, 2.8, 3.2), stoneMat, [0, 1.65, -0.2]);
-    // Ground Floor Dining Glass Front
-    addMesh(bRestaurant, new THREE.BoxGeometry(3.6, 1.3, 0.1), glassMat, [0, 0.95, 1.42]);
-    // Distinctive Striped Bistro Awning (Overhang)
-    const awningGeo = new THREE.BoxGeometry(3.8, 0.15, 1.1);
-    const awning = addMesh(bRestaurant, awningGeo, amberBistroMat, [0, 1.9, 1.75], [0.35, 0, 0]);
-    // Upper Floor French Windows
-    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.9, 0.06), glassMat, [-1.2, 2.5, 1.42]);
-    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.9, 0.06), glassMat, [0, 2.5, 1.42]);
-    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.9, 0.06), glassMat, [1.2, 2.5, 1.42]);
-    // Decorative Parapet & Cornice
-    addMesh(bRestaurant, new THREE.BoxGeometry(4.4, 0.35, 3.4), darkSteelMat, [0, 3.15, -0.2]);
-    // Restaurant Name Signage Board on Roof
-    addMesh(bRestaurant, new THREE.BoxGeometry(2.4, 0.6, 0.18), amberBistroMat, [0, 3.65, 1.2]);
-    // Outdoor Terrace Cafe Tables
-    addMesh(bRestaurant, new THREE.CylinderGeometry(0.35, 0.35, 0.45, 16), darkSteelMat, [-1.4, 0.45, 1.4]);
-    addMesh(bRestaurant, new THREE.CylinderGeometry(0.35, 0.35, 0.45, 16), darkSteelMat, [1.4, 0.45, 1.4]);
+    // Street Pavement Foundation
+    addMesh(bRestaurant, new THREE.BoxGeometry(5.4, 0.3, 5.0), stoneMat, [0, 0.15, 0]);
+    // Main 2-Story Bistro Building Structure
+    addMesh(bRestaurant, new THREE.BoxGeometry(4.2, 3.0, 3.8), stoneMat, [0, 1.75, 0]);
+
+    // Front Bistro Facade: Striped Fabric Awning & French Arched Windows
+    addMesh(bRestaurant, new THREE.BoxGeometry(3.6, 1.3, 0.1), glassMat, [0, 1.0, 1.92]);
+    const frontAwning = addMesh(bRestaurant, new THREE.BoxGeometry(3.8, 0.14, 1.1), amberBistroMat, [0, 1.95, 2.15], [0.35, 0, 0]);
+    // Front Upper French Windows with Juliet Balconies
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.95, 0.06), glassMat, [-1.2, 2.65, 1.92]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.95, 0.06), glassMat, [0, 2.65, 1.92]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.95, 0.06), glassMat, [1.2, 2.65, 1.92]);
+    // Juliet Iron Railings
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.8, 0.35, 0.1), darkSteelMat, [-1.2, 2.4, 1.96]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.8, 0.35, 0.1), darkSteelMat, [0, 2.4, 1.96]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.8, 0.35, 0.1), darkSteelMat, [1.2, 2.4, 1.96]);
+
+    // Back Facade: Garden Patio Awning & French Doors (Full Backside Detail)
+    addMesh(bRestaurant, new THREE.BoxGeometry(3.6, 1.3, 0.1), glassMat, [0, 1.0, -1.92]);
+    const backAwning = addMesh(bRestaurant, new THREE.BoxGeometry(3.8, 0.14, 1.1), amberBistroMat, [0, 1.95, -2.15], [-0.35, 0, 0]);
+    // Back Upper French Windows with Juliet Balconies
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.95, 0.06), glassMat, [-1.2, 2.65, -1.92]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.95, 0.06), glassMat, [0, 2.65, -1.92]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.7, 0.95, 0.06), glassMat, [1.2, 2.65, -1.92]);
+
+    // Side Windows (West & East Elevations)
+    for (let sw = -1.0; sw <= 1.0; sw += 0.8) {
+      addMesh(bRestaurant, new THREE.BoxGeometry(0.08, 0.9, 0.5), glassMat, [-2.12, 1.0, sw]);
+      addMesh(bRestaurant, new THREE.BoxGeometry(0.08, 0.8, 0.45), glassMat, [-2.12, 2.6, sw]);
+      addMesh(bRestaurant, new THREE.BoxGeometry(0.08, 0.9, 0.5), glassMat, [2.12, 1.0, sw]);
+      addMesh(bRestaurant, new THREE.BoxGeometry(0.08, 0.8, 0.45), glassMat, [2.12, 2.6, sw]);
+    }
+
+    // Front Sidewalk Cafe Terrace (2 Round Bistro Tables)
+    addMesh(bRestaurant, new THREE.CylinderGeometry(0.35, 0.35, 0.45, 16), darkSteelMat, [-1.5, 0.48, 2.0]);
+    addMesh(bRestaurant, new THREE.CylinderGeometry(0.35, 0.35, 0.45, 16), darkSteelMat, [1.5, 0.48, 2.0]);
+    // Back Garden Courtyard Cafe Table with Parasol
+    addMesh(bRestaurant, new THREE.CylinderGeometry(0.4, 0.4, 0.45, 16), darkSteelMat, [0, 0.48, -2.1]);
+    addMesh(bRestaurant, new THREE.ConeGeometry(0.9, 0.35, 16), amberBistroMat, [0, 1.35, -2.1]);
+    addMesh(bRestaurant, new THREE.CylinderGeometry(0.03, 0.03, 0.9, 8), darkSteelMat, [0, 0.9, -2.1]);
+
+    // Decorative Roof Cornice & Stone Balustrade (All 4 Sides)
+    addMesh(bRestaurant, new THREE.BoxGeometry(4.4, 0.3, 4.0), darkSteelMat, [0, 3.35, 0]);
+
+    // Rooftop Dining Deck with Pergola Trellis & Marquee Sign
+    addMesh(bRestaurant, new THREE.BoxGeometry(3.6, 0.12, 3.2), warmWoodMat, [0, 3.55, 0]);
+    for (let r = -1.0; r <= 1.0; r += 0.6) {
+      addMesh(bRestaurant, new THREE.BoxGeometry(0.06, 0.1, 2.6), warmWoodMat, [r, 4.2, 0]);
+    }
+    // Rooftop Bistro Illuminated Signs (Front & Back)
+    addMesh(bRestaurant, new THREE.BoxGeometry(2.4, 0.55, 0.15), amberBistroMat, [0, 3.9, 1.45]);
+    addMesh(bRestaurant, new THREE.BoxGeometry(2.4, 0.55, 0.15), amberBistroMat, [0, 3.9, -1.45]);
+
+    // Authentic Brick Kitchen Chimney Stack (Rear Corner)
+    addMesh(bRestaurant, new THREE.BoxGeometry(0.6, 4.2, 0.6), warmWoodMat, [-1.7, 2.3, -1.5]);
+    addMesh(bRestaurant, new THREE.CylinderGeometry(0.18, 0.22, 0.4, 12), darkSteelMat, [-1.7, 4.5, -1.5]);
     scene.add(bRestaurant);
     buildingGroups.push(bRestaurant);
 
     // ==========================================
-    // 5. MODERN HOSPITAL PAVILION (Medical)
+    // 5. MODERN HOSPITAL COMPLEX (Medical - Full 360° Multi-Wing Medical Center)
     // ==========================================
     const bMedical = new THREE.Group();
-    // Base Plinth & Ambulance Bay Driveway
-    addMesh(bMedical, new THREE.BoxGeometry(5.6, 0.3, 4.6), stoneMat, [0, 0.15, 0]);
-    // Central Medical Core Tower
-    addMesh(bMedical, new THREE.BoxGeometry(2.8, 4.4, 2.8), stoneMat, [0, 2.45, 0]);
-    // East & West Clinical Inpatient Wings
-    addMesh(bMedical, new THREE.BoxGeometry(1.6, 2.8, 2.2), stoneMat, [-2.0, 1.65, 0]);
-    addMesh(bMedical, new THREE.BoxGeometry(1.6, 2.8, 2.2), stoneMat, [2.0, 1.65, 0]);
-    // Continuous Clinical Ribbon Glass Windows
-    addMesh(bMedical, new THREE.BoxGeometry(2.9, 0.35, 2.9), glassMat, [0, 1.5, 0]);
-    addMesh(bMedical, new THREE.BoxGeometry(2.9, 0.35, 2.9), glassMat, [0, 2.4, 0]);
-    addMesh(bMedical, new THREE.BoxGeometry(2.9, 0.35, 2.9), glassMat, [0, 3.3, 0]);
-    // 3D Luminous Red Medical Cross on Central Facade
-    const crossBar1 = addMesh(bMedical, new THREE.BoxGeometry(0.85, 0.28, 0.14), redCrossMat, [0, 4.0, 1.42]);
-    const crossBar2 = addMesh(bMedical, new THREE.BoxGeometry(0.28, 0.85, 0.14), redCrossMat, [0, 4.0, 1.42]);
-    // Rooftop Helipad Platform
-    addMesh(bMedical, new THREE.CylinderGeometry(1.4, 1.4, 0.18, 32), darkSteelMat, [0, 4.75, 0]);
-    // Helipad 'H' Marking
-    addMesh(bMedical, new THREE.BoxGeometry(0.12, 0.05, 0.8), emeraldMat, [-0.25, 4.88, 0]);
-    addMesh(bMedical, new THREE.BoxGeometry(0.12, 0.05, 0.8), emeraldMat, [0.25, 4.88, 0]);
-    addMesh(bMedical, new THREE.BoxGeometry(0.5, 0.05, 0.12), emeraldMat, [0, 4.88, 0]);
-    // Emergency Canopy Entrance
-    addMesh(bMedical, new THREE.BoxGeometry(2.4, 0.18, 1.2), glassMat, [0, 1.1, 1.8], [0.1, 0, 0]);
+    // Base Plinth & Ambulance Driveway
+    addMesh(bMedical, new THREE.BoxGeometry(5.8, 0.3, 5.0), stoneMat, [0, 0.15, 0]);
+
+    // Central Diagnostic Medical Core Tower
+    addMesh(bMedical, new THREE.BoxGeometry(3.0, 4.6, 3.0), stoneMat, [0, 2.55, 0]);
+
+    // 4 Symmetrical Clinical Wings (Cross/Cruciform Plan: North, South, East, West)
+    // East & West Wings
+    addMesh(bMedical, new THREE.BoxGeometry(1.6, 3.0, 2.2), stoneMat, [-2.1, 1.75, 0]);
+    addMesh(bMedical, new THREE.BoxGeometry(1.6, 3.0, 2.2), stoneMat, [2.1, 1.75, 0]);
+    // North & South Wings (Front & Back Extensions)
+    addMesh(bMedical, new THREE.BoxGeometry(2.2, 3.0, 1.2), stoneMat, [0, 1.75, 1.9]);
+    addMesh(bMedical, new THREE.BoxGeometry(2.2, 3.0, 1.2), stoneMat, [0, 1.75, -1.9]);
+
+    // 360° Continuous Clinical Ribbon Glass Windows on All 4 Wings
+    for (let fl = 1.2; fl <= 3.8; fl += 0.9) {
+      addMesh(bMedical, new THREE.BoxGeometry(3.12, 0.35, 3.12), glassMat, [0, fl, 0]);
+      addMesh(bMedical, new THREE.BoxGeometry(5.9, 0.3, 2.3), glassMat, [0, fl - 0.2, 0]);
+      addMesh(bMedical, new THREE.BoxGeometry(2.3, 0.3, 5.1), glassMat, [0, fl - 0.2, 0]);
+    }
+
+    // 3D Luminous Red Medical Cross on Front Facade
+    addMesh(bMedical, new THREE.BoxGeometry(0.85, 0.28, 0.16), redCrossMat, [0, 4.15, 1.54]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.28, 0.85, 0.16), redCrossMat, [0, 4.15, 1.54]);
+
+    // 3D Luminous Red Medical Cross on Back Facade (Full Backside Detail)
+    addMesh(bMedical, new THREE.BoxGeometry(0.85, 0.28, 0.16), redCrossMat, [0, 4.15, -1.54]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.28, 0.85, 0.16), redCrossMat, [0, 4.15, -1.54]);
+
+    // Emergency Ambulance Entrance Canopy (West Side)
+    addMesh(bMedical, new THREE.BoxGeometry(1.8, 0.16, 2.2), glassMat, [-2.2, 1.2, 0], [0, 0, 0.12]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.12, 1.2, 0.12), darkSteelMat, [-3.0, 0.6, 0.9]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.12, 1.2, 0.12), darkSteelMat, [-3.0, 0.6, -0.9]);
+
+    // Main Patient Entrance Glass Atrium (South/Front Side)
+    addMesh(bMedical, new THREE.BoxGeometry(2.2, 1.3, 0.2), glassMat, [0, 0.85, 2.52]);
+
+    // Rooftop Elevator Penthouse with Glowing Cross
+    addMesh(bMedical, new THREE.BoxGeometry(1.4, 1.2, 1.4), stoneMat, [0, 5.2, -0.4]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.5, 0.18, 0.08), redCrossMat, [0, 5.3, 0.33]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.18, 0.5, 0.08), redCrossMat, [0, 5.3, 0.33]);
+
+    // Rooftop Helipad Platform (Elevated with Circular Deck)
+    addMesh(bMedical, new THREE.CylinderGeometry(1.5, 1.5, 0.2, 32), darkSteelMat, [0, 5.0, 0.4]);
+    // Safety Perimeter Ring
+    addMesh(bMedical, new THREE.TorusGeometry(1.52, 0.04, 8, 32), blueAccentMat, [0, 5.12, 0.4], [Math.PI / 2, 0, 0]);
+    // Luminous Green Helipad 'H' Marking (Visible 360°)
+    addMesh(bMedical, new THREE.BoxGeometry(0.12, 0.06, 0.85), emeraldMat, [-0.28, 5.12, 0.4]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.12, 0.06, 0.85), emeraldMat, [0.28, 5.12, 0.4]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.56, 0.06, 0.12), emeraldMat, [0, 5.12, 0.4]);
+
+    // Clinical Rooftop HVAC Ventilation Units
+    addMesh(bMedical, new THREE.BoxGeometry(0.8, 0.45, 0.8), darkSteelMat, [1.0, 4.95, -0.5]);
+    addMesh(bMedical, new THREE.BoxGeometry(0.7, 0.4, 0.7), darkSteelMat, [-1.0, 4.95, -0.5]);
     scene.add(bMedical);
     buildingGroups.push(bMedical);
 

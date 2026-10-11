@@ -7505,17 +7505,17 @@ h6 {
 .industry-clay-chat-card {
   position: relative;
   background: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
-  border-radius: 28px;
+  border-radius: 32px;
   border: 2px solid rgba(255, 255, 255, 0.95);
   box-shadow: 
-    0 24px 55px -10px rgba(15, 23, 42, 0.1),
-    0 8px 20px -4px rgba(15, 23, 42, 0.05),
+    0 26px 60px -10px rgba(15, 23, 42, 0.12),
+    0 10px 24px -4px rgba(15, 23, 42, 0.06),
     inset 0 3px 6px #FFFFFF,
     inset 0 -3.5px 7px rgba(148, 163, 184, 0.16);
-  padding: clamp(1.2rem, 2vw, 1.6rem);
+  padding: clamp(1.4rem, 2.4vw, 2rem);
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.35rem;
 }
 
 /* Card Header */
@@ -7523,25 +7523,25 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  padding-bottom: 1.1rem;
+  border-bottom: 1.5px solid rgba(226, 232, 240, 0.9);
 }
 
 .clay-chat-header-agent {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .clay-agent-avatar {
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 
-    0 4px 12px rgba(0, 82, 255, 0.35),
+    0 6px 16px rgba(0, 82, 255, 0.35),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.6);
   flex-shrink: 0;
 }
@@ -7552,54 +7552,56 @@ h6 {
 }
 
 .clay-agent-title {
-  font-size: 0.94rem;
-  font-weight: 800;
+  font-size: 1.12rem;
+  font-weight: 850;
   color: #0F172A;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .clay-agent-telemetry {
-  font-size: 0.73rem;
+  font-size: 0.82rem;
   color: #64748B;
   font-family: var(--font-mono, monospace);
   letter-spacing: 0.01em;
+  margin-top: 0.15rem;
 }
 
 .clay-status-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   background: #F0FDF4;
   color: #15803D;
-  padding: 0.25rem 0.65rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 750;
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  box-shadow: inset 0 1px 2px #FFFFFF;
 }
 
 .clay-status-pulse {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #22C55E;
-  box-shadow: 0 0 6px #22C55E;
+  box-shadow: 0 0 8px #22C55E;
   animation: pulseDot 1.5s infinite ease-in-out;
 }
 
-/* Chat Messages Stream */
+/* Chat Messages Stream - Roomy & Highly Readable Like WhatsApp Transcript */
 .clay-messages-stream {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  max-height: 320px;
+  gap: 1.15rem;
+  max-height: 420px;
   overflow-y: auto;
-  padding-right: 0.25rem;
+  padding-right: 0.4rem;
 }
 
 .clay-messages-stream::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 
 .clay-messages-stream::-webkit-scrollbar-track {
@@ -7608,7 +7610,7 @@ h6 {
 
 .clay-messages-stream::-webkit-scrollbar-thumb {
   background: #CBD5E1;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .clay-bubble-row {
@@ -7624,11 +7626,11 @@ h6 {
   justify-content: flex-start;
 }
 
-/* Claymorphed Chat Bubble Base */
+/* Claymorphed Chat Bubble Base - Enlarged Typography */
 .clay-bubble-bubble {
-  max-width: 88%;
-  padding: 0.8rem 1.05rem;
-  border-radius: 18px;
+  max-width: 90%;
+  padding: 1.05rem 1.35rem;
+  border-radius: 22px;
   position: relative;
   transition: transform 0.15s ease;
 }
@@ -7636,37 +7638,37 @@ h6 {
 .clay-bubble-row.is-user .clay-bubble-bubble {
   background: linear-gradient(145deg, #F1F5F9 0%, #E2E8F0 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 6px;
   box-shadow: 
-    0 6px 16px rgba(15, 23, 42, 0.05),
-    inset 0 1.5px 2px #FFFFFF,
-    inset 0 -2px 3px rgba(148, 163, 184, 0.25);
+    0 8px 20px rgba(15, 23, 42, 0.06),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 4px rgba(148, 163, 184, 0.25);
 }
 
 .clay-bubble-row.is-ai .clay-bubble-bubble {
   background: linear-gradient(145deg, #FFFFFF 0%, #F0F7FF 100%);
-  border: 1.5px solid rgba(0, 82, 255, 0.18);
-  border-bottom-left-radius: 4px;
+  border: 1.5px solid rgba(0, 82, 255, 0.2);
+  border-bottom-left-radius: 6px;
   box-shadow: 
-    0 8px 20px rgba(0, 82, 255, 0.07),
+    0 10px 24px rgba(0, 82, 255, 0.08),
     inset 0 2px 3px #FFFFFF,
-    inset 0 -2px 4px rgba(0, 82, 255, 0.1);
+    inset 0 -2px 4px rgba(0, 82, 255, 0.12);
 }
 
 .clay-bubble-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.35rem;
+  gap: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 .clay-bubble-sender {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.75rem;
-  font-weight: 750;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: #475569;
 }
 
@@ -7679,42 +7681,45 @@ h6 {
 }
 
 .clay-bubble-time {
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   color: #94A3B8;
   font-family: var(--font-mono, monospace);
+  font-weight: 600;
 }
 
 .clay-bubble-text {
-  font-size: 0.88rem;
+  font-size: 1.02rem;
   color: #0F172A;
-  line-height: 1.48;
+  line-height: 1.6;
   margin: 0;
-  font-weight: 500;
+  font-weight: 550;
+  letter-spacing: -0.005em;
 }
 
-/* Bottom Outcome Verification Bar */
+/* Bottom Outcome Verification Bar - Enlarged Status Banner */
 .clay-outcome-bar {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.85rem;
   background: #F8FAFC;
-  border-radius: 14px;
-  padding: 0.65rem 0.95rem;
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  padding: 0.85rem 1.25rem;
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
   box-shadow: 
-    inset 0 1.5px 2px #FFFFFF,
-    inset 0 -1.5px 2px rgba(148, 163, 184, 0.1);
-  font-size: 0.78rem;
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -1.5px 2px rgba(148, 163, 184, 0.12);
+  font-size: 0.88rem;
 }
 
 .clay-outcome-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.45rem;
   color: #10B981;
-  font-weight: 800;
+  font-weight: 850;
   flex-shrink: 0;
   font-family: var(--font-mono, monospace);
+  font-size: 0.88rem;
 }
 
 .clay-outcome-icon {
@@ -7728,7 +7733,8 @@ h6 {
 
 .clay-outcome-text {
   color: #334155;
-  font-weight: 600;
+  font-weight: 650;
+  font-size: 0.92rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

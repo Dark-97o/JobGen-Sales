@@ -23,7 +23,11 @@ export default function TestimonialSection() {
     const section = sectionRef.current;
     if (!section) return;
 
+    let isSectionInView = false;
+
     const handleVisibility = (inView) => {
+      if (inView === isSectionInView) return;
+      isSectionInView = inView;
       if (inView) {
         sendIframeCommand('unMute');
         sendIframeCommand('playVideo');
@@ -33,11 +37,15 @@ export default function TestimonialSection() {
       }
     };
 
+    // Ensure video is initially paused and muted on load
+    sendIframeCommand('pauseVideo');
+    sendIframeCommand('mute');
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         handleVisibility(entry.isIntersecting);
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
 
     observer.observe(section);
@@ -46,7 +54,7 @@ export default function TestimonialSection() {
     const onScroll = () => {
       if (!section) return;
       const rect = section.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > window.innerHeight * 0.15;
+      const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
       handleVisibility(inView);
     };
 
@@ -72,7 +80,7 @@ export default function TestimonialSection() {
           <div className="testimonial-video-scaler">
             <iframe
               ref={iframeRef}
-              src="https://www.youtube.com/embed/CA_NEg3xJz0?autoplay=1&mute=0&loop=1&playlist=CA_NEg3xJz0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&enablejsapi=1"
+              src="https://www.youtube.com/embed/CA_NEg3xJz0?autoplay=0&mute=1&loop=1&playlist=CA_NEg3xJz0&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&enablejsapi=1"
               title="Accounting Firm Case Study Video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               referrerPolicy="strict-origin-when-cross-origin"
