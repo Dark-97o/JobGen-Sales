@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shield } from 'lucide-react';
 
 const SPADE_CARDS = [
@@ -90,6 +90,22 @@ const SPADE_CARDS = [
 
 export default function SetupGuardrails() {
   const [activeIdx, setActiveIdx] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isSmallMobile = windowWidth <= 420;
+  const isMobile = windowWidth <= 640;
+  const isTablet = windowWidth <= 900;
+
+  // Responsive spread multipliers
+  const xMultiplier = isSmallMobile ? 0.28 : isMobile ? 0.34 : isTablet ? 0.65 : 1;
+  const yMultiplier = isMobile ? 0.45 : isTablet ? 0.75 : 1;
+  const angleMultiplier = isMobile ? 0.75 : isTablet ? 0.85 : 1;
 
   return (
     <section id="guardrails" className="guardrails-dark-section">
@@ -124,10 +140,11 @@ export default function SetupGuardrails() {
                   key={`hit-${card.id}`}
                   className="spade-hit-area"
                   style={{
-                    transform: `translateX(${card.x}px) translateY(${card.y}px) rotate(${card.angle}deg)`,
+                    transform: `translateX(${card.x * xMultiplier}px) translateY(${card.y * yMultiplier}px) rotate(${card.angle * angleMultiplier}deg)`,
                     zIndex: 20 + idx
                   }}
                   onMouseEnter={() => setActiveIdx(idx)}
+                  onClick={() => setActiveIdx(activeIdx === idx ? null : idx)}
                 />
               ))}
             </div>
@@ -138,9 +155,11 @@ export default function SetupGuardrails() {
               const hasActive = activeIdx !== null;
 
               // Resting position in fan
-              const restingTransform = `translateX(${card.x}px) translateY(${card.y}px) rotate(${card.angle}deg)`;
-              // Active card pops upward in its slot so other cards remain visible on both sides
-              const activeTransform = `translateX(${card.x}px) translateY(-58px) rotate(0deg) scale(1.24)`;
+              const restingTransform = `translateX(${card.x * xMultiplier}px) translateY(${card.y * yMultiplier}px) rotate(${card.angle * angleMultiplier}deg)`;
+              // Active card pops upward in its slot
+              const activeTransform = isMobile
+                ? `translateX(${card.x * xMultiplier * 0.4}px) translateY(-40px) rotate(0deg) scale(1.18)`
+                : `translateX(${card.x}px) translateY(-58px) rotate(0deg) scale(1.24)`;
 
               return (
                 <div

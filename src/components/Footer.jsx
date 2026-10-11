@@ -1,119 +1,210 @@
 import React from 'react';
-import { ArrowUp, Mail } from 'lucide-react';
+import { ArrowUp, ArrowRight, PhoneCall, Mail, ShieldCheck, Sparkles } from 'lucide-react';
+import FooterKineticWordmark from './FooterKineticWordmark';
 
-export default function Footer() {
+export default function Footer({ onOpenDemo, onOpenCalculator }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="footer-wrapper footer-clay-wrapper">
-      <div className="container">
-        <div className="footer-clay-card">
-          {/* Top Header Row: Brand & Live Infrastructure Status */}
-          <div className="footer-clay-top-bar">
-            <div className="footer-brand-header">
+    <footer data-theme="dark" className="ms-style-footer">
+      {/* Background Layer 1: Kinetic Vector Wordmark WebGL Canvas */}
+      <div
+        aria-hidden="true"
+        className="ms-footer-bg-canvas-wrap"
+      >
+        <FooterKineticWordmark
+          text="JOBGEN"
+          background="#030712"
+          textColor="#FFFFFF"
+          shade="rgba(255, 255, 255, 0.14)"
+          accent="rgba(56, 189, 248, 0.65)"
+          font={{
+            fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+            fontWeight: 900,
+            fontSize: '320px',
+            letterSpacing: '-0.03em',
+          }}
+          handles={{ labels: true, size: 109, spread: 27 }}
+        />
+      </div>
+
+      {/* Background Layer 2: Vignette / Atmospheric Depth Radial Gradient */}
+      <div
+        aria-hidden="true"
+        className="ms-footer-vignette-overlay"
+      />
+
+      {/* Foreground Container: Content Grid & Typography Matching Reference */}
+      <div className="container ms-footer-container">
+        {/* Main Multi-Column Content Grid */}
+        <div className="ms-footer-grid">
+          {/* Column 1: Brand & Autonomous Telephony Positioning */}
+          <div className="ms-footer-col ms-footer-brand-col">
+            <a href="/" className="ms-footer-brand-link" onClick={scrollToTop}>
               <img
                 src="/assets/jobgen-white.webp"
-                alt="JobGen White Logo"
-                className="footer-brand-logo-img"
+                alt="JobGen AI"
+                className="ms-footer-brand-logo"
               />
-              <span className="footer-brand-title">
-                JOBGEN<span className="footer-brand-accent">.AI</span>
+              <span className="ms-footer-brand-title">
+                JOBGEN<span className="ms-footer-brand-dot">.AI</span>
               </span>
-            </div>
-
-            <div className="footer-status-clay-pill">
-              <span className="footer-status-pulse-dot" />
-              <span>Sub-600ms Live Voice Infrastructure</span>
+            </a>
+            <p className="ms-footer-brand-desc">
+              Sub-600ms conversational AI voice and telephony infrastructure for autonomous business operations, 24/7 inbound reception, and closed-loop sales execution.
+            </p>
+            <div className="ms-footer-live-badge">
+              <span className="ms-live-pulse-dot" />
+              <span>Live Engine • Sub-600ms Latency</span>
             </div>
           </div>
 
-          <div className="footer-clay-divider" />
-
-          {/* Main 4-Column Navigation Grid */}
-          <div className="footer-clay-grid">
-            {/* Brand Intro Column */}
-            <div className="footer-brand-col">
-              <p className="footer-brand-desc">
-                The unified autonomous AI voice workforce for 24/7 inbound reception, instant calendar bookings, and multi-channel sales outreach.
-              </p>
-              <div className="footer-quick-actions">
-                <a
-                  href="mailto:hello@jobgen.ai"
-                  className="footer-clay-action-pill"
-                >
-                  <Mail size={14} />
-                  <span>hello@jobgen.ai</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Column 1: AI Agents */}
-            <div className="footer-nav-col">
-              <h4 className="footer-col-title">AI Agents</h4>
-              <ul className="footer-link-list">
-                <li><a href="#">Jenny · Inbound Receptionist</a></li>
-                <li><a href="#">Olivia · Outbound Sales Agent</a></li>
-                <li><a href="#">Jess · Technical Recruiter</a></li>
-                <li><a href="#">Emma · Education Advisor</a></li>
-                <li><a href="#calls">Real Call Library</a></li>
+          {/* Column 2: Navigation Pages & Core AI Workforce */}
+          <div className="ms-footer-col">
+            <h3 className="ms-footer-heading">Platform</h3>
+            <div className="ms-footer-subgrid">
+              {/* Left Sub-list: Platform Navigation */}
+              <ul className="ms-footer-nav-list">
+                <li>
+                  <a href="#home" onClick={(e) => handleNavClick(e, 'home')}>
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#pillars" onClick={(e) => handleNavClick(e, 'pillars')}>
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#features" onClick={(e) => handleNavClick(e, 'features')}>
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" onClick={(e) => handleNavClick(e, 'pricing')}>
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a href="#calls" onClick={(e) => handleNavClick(e, 'calls')}>
+                    Real Call Library
+                  </a>
+                </li>
               </ul>
-            </div>
 
-            {/* Column 2: Platform & Features */}
-            <div className="footer-nav-col">
-              <h4 className="footer-col-title">Platform</h4>
-              <ul className="footer-link-list">
-                <li><a href="#platform">Sub-600ms Voice Engine</a></li>
-                <li><a href="#pillars">24/7 After-Hours Answering</a></li>
-                <li><a href="#pillars">Live Diary & CRM Sync</a></li>
-                <li><a href="#compare">Workflow Comparison</a></li>
-                <li><a href="#pricing">Dynamic ROI Calculator</a></li>
-              </ul>
-            </div>
-
-            {/* Column 3: Company & Connect */}
-            <div className="footer-nav-col">
-              <h4 className="footer-col-title">Company</h4>
-              <ul className="footer-link-list">
-                <li><a href="mailto:hello@jobgen.ai">Contact Support</a></li>
-                <li><a href="https://calendly.com/jobgen-demo/30min" target="_blank" rel="noreferrer">Book Executive Demo</a></li>
-                <li><a href="#">Security & Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Partner Program</a></li>
+              {/* Right Sub-list: Core AI Workforce with Signature Arrow Prefixes */}
+              <ul className="ms-footer-nav-list">
+                <li className="ms-footer-sub-header">Core Workforce</li>
+                <li>
+                  <a href="#home" className="ms-footer-sub-link">
+                    ↳ Jenny (Reception)
+                  </a>
+                </li>
+                <li>
+                  <a href="#home" className="ms-footer-sub-link">
+                    ↳ Olivia (Sales)
+                  </a>
+                </li>
+                <li>
+                  <a href="#calls" className="ms-footer-sub-link">
+                    ↳ Jess (Recruiter)
+                  </a>
+                </li>
+                <li>
+                  <a href="#calls" className="ms-footer-sub-link">
+                    ↳ Emma (Advisor)
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
-          <div className="footer-clay-divider" />
+          {/* Column 3: Global Headquarters & Telephony Operations */}
+          <div className="ms-footer-col">
+            <h3 className="ms-footer-heading">Global Headquarters</h3>
+            <p className="ms-footer-address-text">
+              Suite 306, 60 Martin Place<br />
+              Sydney NSW 2000, Australia<br />
+              580 California St, San Francisco, CA 94104
+            </p>
+            <p className="ms-footer-contact-text">
+              Direct: +1 (800) 562-4361<br />
+              Sydney: (02) 8814 7905<br />
+              Email:{' '}
+              <a href="mailto:hello@jobgen.ai" className="ms-footer-inline-email">
+                hello@jobgen.ai
+              </a>
+            </p>
+          </div>
 
-          {/* Bottom Bar: Global Offices & Back to Top */}
-          <div className="footer-clay-bottom-bar">
-            <div className="footer-locations-cluster">
-              <span className="footer-location-clay-pill">
-                🇺🇸 <strong>San Francisco</strong>: 580 California St, CA 94104
-              </span>
-              <span className="footer-location-clay-pill">
-                🇦🇺 <strong>Sydney</strong>: 60 Martin Place, NSW 2000
-              </span>
-            </div>
-
-            <div className="footer-bottom-meta">
-              <span className="footer-copyright">
-                © 2026 JobGen.ai Inc. All rights reserved.
-              </span>
+          {/* Column 4: Quick Action & Demo Launcher */}
+          <div className="ms-footer-col ms-footer-cta-col">
+            <h3 className="ms-footer-heading">Autonomous Action</h3>
+            <p className="ms-footer-cta-desc">
+              Experience zero-latency voice agents built specifically for your enterprise stack.
+            </p>
+            <div className="ms-footer-btn-stack">
               <button
                 type="button"
-                onClick={scrollToTop}
-                className="footer-back-to-top-clay-btn"
-                aria-label="Back to top"
-                title="Back to top"
+                onClick={onOpenDemo}
+                className="ms-footer-primary-btn"
               >
-                <ArrowUp size={15} />
+                <span>Book Free Demo</span>
+                <ArrowRight size={15} />
+              </button>
+              <button
+                type="button"
+                onClick={onOpenCalculator}
+                className="ms-footer-secondary-btn"
+              >
+                <span>Calculate Waiting Cost</span>
               </button>
             </div>
           </div>
+        </div>
+
+        {/* Bottom Bar: Copyright, Compliance Links & Back to Top */}
+        <div className="ms-footer-bottom-bar">
+          <div className="ms-footer-copyright">
+            © 2026 JobGen.Ai Inc. All rights reserved.
+          </div>
+
+          <div className="ms-footer-meta-links">
+            <a href="#">Privacy Policy</a>
+            <span className="ms-footer-meta-dot">•</span>
+            <a href="#">Terms of Service</a>
+            <span className="ms-footer-meta-dot">•</span>
+            <a href="#">Security & Compliance</a>
+            <span className="ms-footer-meta-dot">•</span>
+            <span className="ms-footer-powered-tag">
+              Powered by{' '}
+              <a href="https://jobgen.ai/" className="ms-footer-powered-bold">
+                Jobgen.Ai
+              </a>
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="ms-footer-back-top-btn"
+            aria-label="Back to top"
+            title="Back to top"
+          >
+            <ArrowUp size={15} />
+          </button>
         </div>
       </div>
     </footer>

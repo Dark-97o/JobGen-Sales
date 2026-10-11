@@ -734,6 +734,8 @@ const OLIVIA_BULLET_POINTS = [
 export default function Hero({ onOpenDemo, onOpenCalculator }) {
   const [activeAgent, setActiveAgent] = useState(null); // 'jenny' | 'olivia' | null
   const [closingAgent, setClosingAgent] = useState(null); // 'jenny' | 'olivia' | null
+  const [mobileAgentTab, setMobileAgentTab] = useState('jenny'); // 'jenny' | 'olivia'
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const autonomousRef = useRef(null);
   const crossRef = useRef(null);
   const heroRef = useRef(null);
@@ -752,10 +754,48 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
   const agentsStageRef = useRef(null);
   const pointsWrapRef = useRef(null);
   const activeAgentRef = useRef(activeAgent);
+  const mobileAgentTabRef = useRef(mobileAgentTab);
+  const isMobileRef = useRef(isMobile);
 
   useEffect(() => {
     activeAgentRef.current = activeAgent;
   }, [activeAgent]);
+
+  useEffect(() => {
+    mobileAgentTabRef.current = mobileAgentTab;
+  }, [mobileAgentTab]);
+
+  useEffect(() => {
+    isMobileRef.current = isMobile;
+  }, [isMobile]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleSelectMobileAgent = (agentName) => {
+    setMobileAgentTab(agentName);
+    if (activeAgent && activeAgent !== agentName) {
+      setActiveAgent(null);
+    }
+    if (trackRef.current) {
+      const rect = trackRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const totalScrollable = rect.height - windowH;
+      if (totalScrollable > 0) {
+        // Jenny is stationed at ~0.39, Olivia at ~0.68
+        const targetProgress = agentName === 'jenny' ? 0.39 : 0.68;
+        const currentScroll = window.scrollY;
+        const trackTopDoc = rect.top + currentScroll;
+        const targetScroll = trackTopDoc + totalScrollable * targetProgress;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+    }
+  };
 
   // Smooth agent close handler: fades out bullet points and moves other agent in
   const handleToggleAgent = (agentName) => {
@@ -866,27 +906,111 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
       }
 
       if (jennyClusterRef.current && oliviaClusterRef.current) {
-        if (progress < 0.26) {
-          // Off-screen horizontally
-          jennyClusterRef.current.style.transform = 'translateX(-115vw) translateY(0px)';
-          jennyClusterRef.current.style.opacity = '0';
-          oliviaClusterRef.current.style.transform = 'translateX(115vw) translateY(0px)';
-          oliviaClusterRef.current.style.opacity = '0';
+        if (isMobileRef.current) {
+          // =========================================================
+          // MOBILE: Jenny and Olivia appear ONE BY ONE sequentially on scroll!
+          // Phase 3A: Jenny arrives (0.26 -> 0.36), stations (0.36 -> 0.50), exits (0.50 -> 0.58)
+          // Phase 3B: Olivia arrives (0.58 -> 0.68), stations (0.68 -> 0.88), exits (0.88 -> 0.98)
+          // =========================================================
+          if (progress < 0.25) {
+            jennyClusterRef.current.style.transform = 'translateX(-115vw) translateY(0px)';
+            jennyClusterRef.current.style.opacity = '0';
+            oliviaClusterRef.current.style.transform = 'translateX(115vw) translateY(0px)';
+            oliviaClusterRef.current.style.opacity = '0';
+            if (mobileAgentTabRef.current !== 'jenny') {
+              setMobileAgentTab('jenny');
+            }
+          } else if (progress < 0.53) {
+            // JENNY ACTIVE
+            if (mobileAgentTabRef.current !== 'jenny') {
+              setMobileAgentTab('jenny');
+            }
+            if (activeAgentRef.current === 'olivia') {
+              setActiveAgent(null);
+            }
+
+            // Olivia is off-screen
+            oliviaClusterRef.current.style.transform = 'translateX(120vw) translateY(0px)';
+            oliviaClusterRef.current.style.opacity = '0';
+
+            if (progress < 0.33) {
+              // Jenny entering from left
+              const enterP = Math.min((progress - 0.25) / 0.08, 1);
+              const ease = 1 - Math.pow(1 - enterP, 3);
+              const jX = -(1 - ease) * 100;
+              const jOp = Math.min(enterP * 1.6, 1);
+              jennyClusterRef.current.style.transform = `translateX(${jX}vw) translateY(0px)`;
+              jennyClusterRef.current.style.opacity = `${jOp}`;
+            } else if (progress <= 0.46) {
+              // Jenny stationed in center
+              jennyClusterRef.current.style.transform = 'translateX(0vw) translateY(0px)';
+              jennyClusterRef.current.style.opacity = '1';
+            } else {
+              // Jenny exiting smoothly to left
+              const exitP = Math.min((progress - 0.46) / 0.07, 1);
+              const jX = -exitP * 100;
+              const jOp = Math.max(1 - exitP * 1.4, 0);
+              jennyClusterRef.current.style.transform = `translateX(${jX}vw) translateY(0px)`;
+              jennyClusterRef.current.style.opacity = `${jOp}`;
+              if (activeAgentRef.current === 'jenny') {
+                setActiveAgent(null);
+              }
+            }
+          } else {
+            // OLIVIA ACTIVE (progress >= 0.53)
+            if (mobileAgentTabRef.current !== 'olivia') {
+              setMobileAgentTab('olivia');
+            }
+            if (activeAgentRef.current === 'jenny') {
+              setActiveAgent(null);
+            }
+
+            // Jenny is off-screen
+            jennyClusterRef.current.style.transform = 'translateX(-120vw) translateY(0px)';
+            jennyClusterRef.current.style.opacity = '0';
+
+            if (progress < 0.62) {
+              // Olivia entering from right
+              const enterP = Math.min((progress - 0.53) / 0.09, 1);
+              const ease = 1 - Math.pow(1 - enterP, 3);
+              const oX = (1 - ease) * 100;
+              const oOp = Math.min(enterP * 1.6, 1);
+              oliviaClusterRef.current.style.transform = `translateX(${oX}vw) translateY(0px)`;
+              oliviaClusterRef.current.style.opacity = `${oOp}`;
+            } else if (progress <= 0.77) {
+              // Olivia stationed in center
+              oliviaClusterRef.current.style.transform = 'translateX(0vw) translateY(0px)';
+              oliviaClusterRef.current.style.opacity = '1';
+            } else {
+              // Olivia subtle fade as next section approaches
+              const exitP = Math.min((progress - 0.77) / 0.10, 1);
+              const oOp = Math.max(1 - exitP * 1.3, 0);
+              oliviaClusterRef.current.style.transform = `translateX(0vw) translateY(${exitP * 25}px)`;
+              oliviaClusterRef.current.style.opacity = `${oOp}`;
+              if (activeAgentRef.current === 'olivia' && progress > 0.85) {
+                setActiveAgent(null);
+              }
+            }
+          }
         } else {
-          // Entrance window: 0.26 -> 0.42
-          const enterP = Math.min((progress - 0.26) / 0.16, 1);
-          // Smooth cubic deceleration ease
-          const ease = 1 - Math.pow(1 - enterP, 3);
+          // DESKTOP: dual agents docked side-by-side
+          if (progress < 0.26) {
+            jennyClusterRef.current.style.transform = 'translateX(-115vw) translateY(0px)';
+            jennyClusterRef.current.style.opacity = '0';
+            oliviaClusterRef.current.style.transform = 'translateX(115vw) translateY(0px)';
+            oliviaClusterRef.current.style.opacity = '0';
+          } else {
+            const enterP = Math.min((progress - 0.26) / 0.16, 1);
+            const ease = 1 - Math.pow(1 - enterP, 3);
+            const jennyX = -(1 - ease) * 115;
+            const oliviaX = (1 - ease) * 115;
+            const agentOpacity = Math.min(enterP * 1.8, 1);
 
-          const jennyX = -(1 - ease) * 115;
-          const oliviaX = (1 - ease) * 115;
-          const agentOpacity = Math.min(enterP * 1.8, 1);
-
-          jennyClusterRef.current.style.transform = `translateX(${jennyX}vw) translateY(0px)`;
-          jennyClusterRef.current.style.opacity = `${agentOpacity}`;
-
-          oliviaClusterRef.current.style.transform = `translateX(${oliviaX}vw) translateY(0px)`;
-          oliviaClusterRef.current.style.opacity = `${agentOpacity}`;
+            jennyClusterRef.current.style.transform = `translateX(${jennyX}vw) translateY(0px)`;
+            jennyClusterRef.current.style.opacity = `${agentOpacity}`;
+            oliviaClusterRef.current.style.transform = `translateX(${oliviaX}vw) translateY(0px)`;
+            oliviaClusterRef.current.style.opacity = `${agentOpacity}`;
+          }
         }
       }
 
@@ -1085,6 +1209,26 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
             />
           </div>
 
+          {/* Mobile Agent Pill Switcher (Shown on screens <= 768px) */}
+          <div className="mobile-agent-toggle-bar">
+            <button
+              type="button"
+              className={`mobile-agent-tab-btn ${mobileAgentTab === 'jenny' ? 'is-active' : ''}`}
+              onClick={() => handleSelectMobileAgent('jenny')}
+            >
+              <span className="mobile-tab-avatar-dot dot-jenny" />
+              <span>Jenny · Reception</span>
+            </button>
+            <button
+              type="button"
+              className={`mobile-agent-tab-btn ${mobileAgentTab === 'olivia' ? 'is-active' : ''}`}
+              onClick={() => handleSelectMobileAgent('olivia')}
+            >
+              <span className="mobile-tab-avatar-dot dot-olivia" />
+              <span>Olivia · Sales</span>
+            </button>
+          </div>
+
           {/* Left Cluster: Jenny on Left */}
           <div
             ref={jennyClusterRef}
@@ -1171,6 +1315,17 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
                 closingAgent === 'jenny' ? 'is-closing' : ''
               }`}
             >
+              <div className="agent-points-mobile-bar">
+                <span className="agent-points-mobile-title">Jenny • Core Capabilities</span>
+                <button
+                  type="button"
+                  onClick={() => handleToggleAgent('jenny')}
+                  className="agent-points-close-btn"
+                  aria-label="Close Jenny capabilities"
+                >
+                  <X size={18} />
+                </button>
+              </div>
               {JENNY_BULLET_POINTS.map((pt, idx) => {
                 const IconComp = pt.icon || PhoneCall;
                 return (
@@ -1200,6 +1355,17 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
                 closingAgent === 'olivia' ? 'is-closing' : ''
               }`}
             >
+              <div className="agent-points-mobile-bar">
+                <span className="agent-points-mobile-title">Olivia • Outbound Capabilities</span>
+                <button
+                  type="button"
+                  onClick={() => handleToggleAgent('olivia')}
+                  className="agent-points-close-btn"
+                  aria-label="Close Olivia capabilities"
+                >
+                  <X size={18} />
+                </button>
+              </div>
               {OLIVIA_BULLET_POINTS.map((pt, idx) => {
                 const IconComp = pt.icon || Target;
                 return (

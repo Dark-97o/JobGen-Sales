@@ -120,7 +120,7 @@ export default function App() {
       </main>
 
       {/* Global Corporate Footer */}
-      <Footer />
+      <Footer onOpenDemo={handleOpenDemo} onOpenCalculator={handleOpenCost} />
 
       {/* Interactive Voice Test Sandbox Modal */}
       <VoiceDemoModal

@@ -17,7 +17,8 @@ import {
   Sparkles,
   Lock,
   Volume2,
-  X
+  X,
+  ChevronLeft
 } from 'lucide-react';
 import { CALL_RECORDINGS } from '../data/landingData';
 
@@ -81,6 +82,7 @@ export default function RealCallLibrary() {
   const [duration, setDuration] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
+  const [mobileView, setMobileView] = useState('chat'); // 'chat' | 'list'
   const audioRef = useRef(null);
   const chatScrollRef = useRef(null);
 
@@ -111,6 +113,7 @@ export default function RealCallLibrary() {
     setIsPlaying(false);
     setCurrentTime(0);
     setActiveCallId(id);
+    setMobileView('chat');
   };
 
   const togglePlay = () => {
@@ -356,7 +359,7 @@ export default function RealCallLibrary() {
             </aside>
 
             {/* 2. Left Chat List Panel (People Options with Name as Topic, Last Message as Category) */}
-            <div className="wa-chatlist-panel">
+            <div className={`wa-chatlist-panel ${mobileView === 'chat' ? 'is-mobile-hidden' : ''}`}>
               {/* WhatsApp Top Header */}
               <div className="wa-chatlist-header">
                 <h3 className="wa-header-brand">JobGen Voice Studio</h3>
@@ -468,10 +471,21 @@ export default function RealCallLibrary() {
             </div>
 
             {/* 3. Right Main Chat Pane (Transcribe as Chats) */}
-            <div className="wa-conversation-pane">
+            <div className={`wa-conversation-pane ${mobileView === 'list' ? 'is-mobile-hidden' : ''}`}>
               {/* Conversation Top Header */}
               <div className="wa-convo-header">
                 <div className="wa-convo-header-left">
+                  {/* Mobile Back Button to View All Calls List */}
+                  <button
+                    type="button"
+                    onClick={() => setMobileView('list')}
+                    className="wa-mobile-back-btn"
+                    aria-label="Back to all calls"
+                  >
+                    <ChevronLeft size={20} />
+                    <span>Calls</span>
+                  </button>
+
                   <div
                     className="wa-convo-avatar"
                     style={{ backgroundColor: activeAvatar.bg, color: '#fff' }}
