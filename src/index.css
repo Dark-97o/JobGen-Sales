@@ -9201,25 +9201,25 @@ h6 {
 
 .footer-video-bg-container {
   position: absolute;
-  top: -120px;
+  top: -170px;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  height: calc(100% + 120px);
+  height: calc(100% + 170px);
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
   /* Mask image to make top of the video transparent fade to the background above */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 16%, black 42%);
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.35) 16%, black 42%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.25) 12%, rgba(0, 0, 0, 0.7) 25%, black 45%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.25) 12%, rgba(0, 0, 0, 0.7) 25%, black 45%);
 }
 
 .footer-bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 15%;
   filter: brightness(0.98) contrast(1.05);
 }
 
@@ -9230,9 +9230,9 @@ h6 {
   height: 100%;
   background: linear-gradient(
     180deg, 
-    transparent 0%, 
-    rgba(6, 9, 16, 0.12) 20%, 
-    rgba(6, 9, 16, 0.42) 100%
+    rgba(4, 6, 12, 0.2) 0%, 
+    rgba(4, 6, 12, 0.38) 35%, 
+    rgba(4, 6, 12, 0.58) 100%
   );
   pointer-events: none;
 }
