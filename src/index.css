@@ -725,6 +725,11 @@ h6 {
 
 /* Light Section Adaptations: Black JOBGEN text & darker blue .AI */
 .navbar-header-full.is-light-theme .brand-title-full,
+.curved-black-shell ~ .navbar-header-full .brand-title-full,
+.curved-black-shell ~ .navbar-header-full .brand-logo-img-blue {
+  color: #FFFFFF !important;
+  filter: invert(1) drop-shadow(0 2px 10px rgba(255,255,255,0.5)) !important;
+}
 .navbar-header-full.is-light-theme.is-scrolled .brand-title-full {
   color: #0E121D;
   text-shadow: none;
@@ -2602,9 +2607,20 @@ h6 {
   border-top: 1.5px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.15);
   box-shadow: none;
-  overflow: visible; /* Must be visible so .productivity-sticky-frame sticks cleanly to viewport */
+  overflow: visible;
   isolation: isolate;
+  /* Floating blue mist effect */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at 50% 30%, rgba(96,165,250,0.12), transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: -1;
+  }
 }
+
 
 .curved-black-shell .productivity-pinned-container,
 .curved-black-shell .productivity-sticky-frame {
@@ -6240,8 +6256,18 @@ h6 {
   overflow: hidden;
   opacity: 1;
   transform: translateX(0);
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+  transition: background 0.25s ease, color 0.25s ease,
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.65s ease,
+              background-color 0.22s ease,
+              box-shadow 0.22s ease;
   will-change: transform, opacity;
+}
+
+.friction-pill-row:hover .friction-pill-next-black,
+.friction-pill-row.is-hovered .friction-pill-next-black {
+  background: #2563EB; /* blue on hover */
+  color: #FFFFFF;
 }
 
 .friction-icon-tick {
