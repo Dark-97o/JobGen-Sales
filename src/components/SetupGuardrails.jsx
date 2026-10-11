@@ -158,18 +158,26 @@ export default function SetupGuardrails() {
                   aria-label={`Step ${card.id}: ${card.title}`}
                 >
                   <div className="spade-card-flipper">
-                    {/* BACK FACE (Luxury Spades card back with prominent center emblem and enlarged corner indices) */}
+                    {/* BACK FACE (Luxury card back with prominent center JobGen emblem and enlarged corner indices) */}
                     <div className="spade-card-back">
-                      {/* Top-Left Corner Index (Bigger rank and spade) */}
+                      {/* Top-Left Corner Index (Rank and JobGen white logo) */}
                       <div className="card-corner-index top-left">
                         <span className="corner-rank">{card.rank}</span>
-                        <span className="corner-suit">{card.suit}</span>
+                        <img 
+                          src="/assets/jobgen-white.webp" 
+                          alt="JobGen Logo" 
+                          className="corner-suit-logo" 
+                        />
                       </div>
 
-                      {/* Card Back Filigree Frame & Prominent Center Spade Emblem */}
+                      {/* Card Back Filigree Frame & Prominent Center JobGen Emblem */}
                       <div className="card-back-ornament">
                         <div className="card-spade-center-emblem" aria-hidden="true">
-                          <span className="spade-symbol-icon">♠</span>
+                          <img 
+                            src="/assets/jobgen-white.webp" 
+                            alt="JobGen Logo" 
+                            className="card-jobgen-center-logo" 
+                          />
                         </div>
                         <div className="card-back-headline-box">
                           <h4 className="card-back-headline">{card.title}</h4>
@@ -177,10 +185,14 @@ export default function SetupGuardrails() {
                         </div>
                       </div>
 
-                      {/* Bottom-Right Inverted Corner Index (Bigger rank and spade) */}
+                      {/* Bottom-Right Inverted Corner Index (Rank and JobGen white logo) */}
                       <div className="card-corner-index bottom-right">
                         <span className="corner-rank">{card.rank}</span>
-                        <span className="corner-suit">{card.suit}</span>
+                        <img 
+                          src="/assets/jobgen-white.webp" 
+                          alt="JobGen Logo" 
+                          className="corner-suit-logo" 
+                        />
                       </div>
                     </div>
 
