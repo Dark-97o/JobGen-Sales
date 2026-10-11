@@ -10,9 +10,9 @@ const SPADE_CARDS = [
     description: "Upload your service menu, pricing guidelines, opening hours, or property listings. Define approved answers for questions your staff answers daily.",
     tag: "Multi-PDF Ingestion · Structured Service Catalogs",
     bgImage: "/assets/cards/website-voice.jpg",
-    angle: -24,
-    x: -240,
-    y: 50
+    angle: -22,
+    x: -420,
+    y: 38
   },
   {
     id: 2,
@@ -22,9 +22,9 @@ const SPADE_CARDS = [
     description: "Specify required qualification fields: caller address, timeline, urgency level, or insurance type. Set conditional escalation triggers for VIPs.",
     tag: "Custom CRM Fields · Dynamic Calendar Slots",
     bgImage: "/assets/cards/call-intake.jpg",
-    angle: -16,
-    x: -160,
-    y: 24
+    angle: -15,
+    x: -280,
+    y: 18
   },
   {
     id: 3,
@@ -34,9 +34,9 @@ const SPADE_CARDS = [
     description: "Test phone interactions directly in your browser with your team. Review audio recordings and CRM entries, then point your existing phone lines.",
     tag: "Zero Downtime · Instant Number Forwarding",
     bgImage: "/assets/cards/carrier-forward.jpg",
-    angle: -8,
-    x: -80,
-    y: 6
+    angle: -7,
+    x: -140,
+    y: 5
   },
   {
     id: 4,
@@ -58,9 +58,9 @@ const SPADE_CARDS = [
     description: "Enforces DOB or account number verification before sharing customer-specific information.",
     tag: "Biometric & Cryptographic ID Gateways",
     bgImage: "/assets/cards/crm-leads.jpg",
-    angle: 8,
-    x: 80,
-    y: 6
+    angle: 7,
+    x: 140,
+    y: 5
   },
   {
     id: 6,
@@ -70,9 +70,9 @@ const SPADE_CARDS = [
     description: "High-urgency callers are transferred to live personnel with a pre-briefed dossier.",
     tag: "Zero Blind Transfers · Pre-Briefed Caller State",
     bgImage: "/assets/cards/human-handoff.jpg",
-    angle: 16,
-    x: 160,
-    y: 24
+    angle: 15,
+    x: 280,
+    y: 18
   },
   {
     id: 7,
@@ -82,9 +82,9 @@ const SPADE_CARDS = [
     description: "Full audio logs, word-by-word transcripts, and explicit caller recording consent logged.",
     tag: "Immutable Verbatim Ledger · Audio Vault",
     bgImage: "/assets/cards/calendar-sync.jpg",
-    angle: 24,
-    x: 240,
-    y: 50
+    angle: 22,
+    x: 420,
+    y: 38
   }
 ];
 
@@ -93,7 +93,14 @@ export default function SetupGuardrails() {
 
   return (
     <section id="guardrails" className="guardrails-dark-section">
-      <div className="container guardrails-container">
+      {/* Floating Blue Mist in Background */}
+      <div className="guardrails-mist-container" aria-hidden="true">
+        <div className="guardrails-mist-orb mist-orb-1" />
+        <div className="guardrails-mist-orb mist-orb-2" />
+        <div className="guardrails-mist-orb mist-orb-3" />
+      </div>
+
+      <div className="container guardrails-container relative z-10">
         {/* Section Headline matching exact text & typography requested */}
         <div className="guardrails-header-block">
           <h2 className="section-title">
@@ -132,15 +139,15 @@ export default function SetupGuardrails() {
 
               // Resting position in fan
               const restingTransform = `translateX(${card.x}px) translateY(${card.y}px) rotate(${card.angle}deg)`;
+              // Active card pops upward in its slot so other cards remain visible on both sides
+              const activeTransform = `translateX(${card.x}px) translateY(-58px) rotate(0deg) scale(1.24)`;
 
               return (
                 <div
                   key={card.id}
                   className={`spade-card-slot ${isActive ? 'is-active' : ''} ${hasActive && !isActive ? 'is-dimmed' : ''}`}
                   style={{
-                    transform: isActive
-                      ? 'translateX(0px) translateY(-50px) rotate(0deg) scale(1.36)'
-                      : restingTransform,
+                    transform: isActive ? activeTransform : restingTransform,
                     zIndex: isActive ? 100 : 10 + idx
                   }}
                   onMouseEnter={() => setActiveIdx(idx)}
@@ -161,12 +168,12 @@ export default function SetupGuardrails() {
 
                       {/* Card Back Filigree Frame & Prominent Center Spade Emblem */}
                       <div className="card-back-ornament">
-                        <div className="card-back-inner-border" />
                         <div className="card-spade-center-emblem" aria-hidden="true">
                           <span className="spade-symbol-icon">♠</span>
                         </div>
                         <div className="card-back-headline-box">
                           <h4 className="card-back-headline">{card.title}</h4>
+                          <span className="card-back-deck-sub">JOBGEN.AI DECK</span>
                         </div>
                       </div>
 

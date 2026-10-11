@@ -44,6 +44,30 @@ export default function Navbar({ onOpenDemo }) {
             }
           }
 
+          // Explicit Black/Dark Sections: Force isWhite = false so logo and text turn white!
+          const guardrailsDark = document.querySelector('.guardrails-dark-section');
+          if (guardrailsDark) {
+            const gRect = guardrailsDark.getBoundingClientRect();
+            if (gRect.top <= 75 && gRect.bottom >= 20) {
+              isWhite = false;
+            }
+          }
+
+          const testimonialDark = document.querySelector('.testimonial-dark-slide-section');
+          if (testimonialDark) {
+            const tRect = testimonialDark.getBoundingClientRect();
+            if (tRect.top <= 75 && tRect.bottom >= 20) {
+              isWhite = false;
+            }
+          }
+
+          if (blackShell) {
+            const bRect = blackShell.getBoundingClientRect();
+            if (bRect.top <= 75 && bRect.bottom >= 20) {
+              isWhite = false;
+            }
+          }
+
           setIsLightMode(isWhite);
           ticking = false;
         });

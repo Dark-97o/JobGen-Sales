@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { XCircle, CheckCircle2 } from 'lucide-react';
+import { XCircle, CheckCircle2, PhoneCall, Cpu, Calendar, MessageSquare, FileText, UserCheck } from 'lucide-react';
 
 const FRICTION_STAGES = [
   {
     id: 1,
     number: "01",
+    icon: PhoneCall,
     title: "Zero dropped rings. Instant 24/7 reception.",
     description: "65% of callers hang up on voicemail and dial a competitor. Jenny answers in 800ms, speaks with natural human prosody in your company voice, and locks in qualified bookings.",
     legacyText: "Ring out to generic voicemail",
@@ -15,6 +16,7 @@ const FRICTION_STAGES = [
   {
     id: 2,
     number: "02",
+    icon: Cpu,
     title: "Instant CRM telemetry before caller finishes speaking.",
     description: "Staff no longer scramble across 4 different tabs or fragmented sticky notes. JobGen queries live CRM records to identify the customer, prior invoices, and approved business guidelines.",
     legacyText: "Scramble across 4 browser tabs",
@@ -25,6 +27,7 @@ const FRICTION_STAGES = [
   {
     id: 3,
     number: "03",
+    icon: Calendar,
     title: "Deterministic calendar locks without phone tag.",
     description: "Replace hours of back-and-forth emails. The AI verifies technician availability in real time, books consultations directly into your calendar, and prevents double-booking.",
     legacyText: "Days of manual email & phone tag",
@@ -35,6 +38,7 @@ const FRICTION_STAGES = [
   {
     id: 4,
     number: "04",
+    icon: MessageSquare,
     title: "Seamless voice-to-WhatsApp conversation bridge.",
     description: "While the call is ending, the caller instantly receives an automated WhatsApp confirmation with calendar invites, prep checklists, and direct directions.",
     legacyText: "Lost follow-ups & forgotten links",
@@ -45,6 +49,7 @@ const FRICTION_STAGES = [
   {
     id: 5,
     number: "05",
+    icon: FileText,
     title: "100% verbatim writeback and clean CRM hygiene.",
     description: "Stop relying on staff memory and hurried notes. Structured summaries, verbatim transcripts, sentiment tags, and follow-up tasks are automatically synced to your CRM.",
     legacyText: "Manual typing & missing CRM notes",
@@ -55,6 +60,7 @@ const FRICTION_STAGES = [
   {
     id: 6,
     number: "06",
+    icon: UserCheck,
     title: "Graceful live transfer to your team when it matters.",
     description: "When an emergency, sensitive query, or high-value deal is identified, deterministic guardrails execute an immediate live transfer with full caller briefing.",
     legacyText: "Overnight delay for critical calls",
@@ -69,6 +75,7 @@ export default function ComparisonSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
   const activeStage = FRICTION_STAGES[activeIdx];
+  const StageIcon = activeStage.icon;
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -105,21 +112,24 @@ export default function ComparisonSection() {
           </div>
         </div>
 
-        {/* Stage Layout: Left Fixed-Height Info Card + Right Cards Attached to Right Edge */}
+        {/* Stage Layout: Left Info Container (No Box, No Bg Image) + Right Cards */}
         <div className="friction-stage-layout">
-          {/* Left Column: Fixed-Height Info Container containing ONLY headline, desc, metric card */}
+          {/* Left Column: Clean text directly on background + Favicon Next to Headline + Metric Card */}
           <div className="friction-info-wrapper">
-            <div className="friction-fixed-info-card">
-              <div className="friction-card-bg-overlay" aria-hidden="true" />
-              <div className="friction-card-content">
-                <div className="friction-card-body">
-                  <h3 className="friction-card-title">{activeStage.title}</h3>
-                  <p className="friction-card-desc">{activeStage.description}</p>
+            <div className="friction-clean-info-container">
+              {/* Header row: Distinct Claymorphic Favicon next to Headline Text */}
+              <div className="friction-clean-header-row">
+                <div className="friction-clay-icon-circle" aria-hidden="true">
+                  <StageIcon size={24} className="friction-clay-icon" />
                 </div>
-                <div className="friction-metric-card">
-                  <div className="friction-metric-value">{activeStage.metric}</div>
-                  <div className="friction-metric-label">{activeStage.metricLabel}</div>
-                </div>
+                <h3 className="friction-clean-title">{activeStage.title}</h3>
+              </div>
+
+              <p className="friction-clean-desc">{activeStage.description}</p>
+
+              <div className="friction-metric-card">
+                <div className="friction-metric-value">{activeStage.metric}</div>
+                <div className="friction-metric-label">{activeStage.metricLabel}</div>
               </div>
             </div>
           </div>

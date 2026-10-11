@@ -283,12 +283,14 @@ export default function PlatformJourney() {
                   {/* Left Column: Text or Circular Photo depending on side */}
                   <div className="checkpoint-col col-left">
                     {cp.side === 'left' ? (
-                      /* Compact Text-Only Checkpoint (NO BOX) */
+                      /* Compact Text-Only Checkpoint with Claymorphic Circular Icon to the Left of Headline */
                       <div className="checkpoint-text-block">
-                        <div className="checkpoint-favicon-wrap" aria-hidden="true">
-                          <IconComp size={24} className="checkpoint-favicon-icon" />
+                        <div className="checkpoint-header-row">
+                          <div className="checkpoint-clay-icon-circle" aria-hidden="true">
+                            <IconComp size={24} className="checkpoint-favicon-icon" />
+                          </div>
+                          <h3 className="checkpoint-text-title">{cp.title}</h3>
                         </div>
-                        <h3 className="checkpoint-text-title">{cp.title}</h3>
                         <p className="checkpoint-text-desc">{cp.summary}</p>
                       </div>
                     ) : (
@@ -309,12 +311,14 @@ export default function PlatformJourney() {
                   {/* Right Column: Circular Photo or Text depending on side */}
                   <div className="checkpoint-col col-right">
                     {cp.side === 'right' ? (
-                      /* Compact Text-Only Checkpoint (NO BOX) */
+                      /* Compact Text-Only Checkpoint with Claymorphic Circular Icon to the Left of Headline */
                       <div className="checkpoint-text-block">
-                        <div className="checkpoint-favicon-wrap" aria-hidden="true">
-                          <IconComp size={24} className="checkpoint-favicon-icon" />
+                        <div className="checkpoint-header-row">
+                          <div className="checkpoint-clay-icon-circle" aria-hidden="true">
+                            <IconComp size={24} className="checkpoint-favicon-icon" />
+                          </div>
+                          <h3 className="checkpoint-text-title">{cp.title}</h3>
                         </div>
-                        <h3 className="checkpoint-text-title">{cp.title}</h3>
                         <p className="checkpoint-text-desc">{cp.summary}</p>
                       </div>
                     ) : (

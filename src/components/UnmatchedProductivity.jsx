@@ -198,14 +198,12 @@ export default function UnmatchedProductivity() {
         <div className="productivity-glow-aura aura-left" />
         <div className="productivity-glow-aura aura-right" />
 
-        {/* Section Header: Brought down by 180px, matching font and title case for main headline, all-caps for faded watermark */}
+        {/* Section Header: Clean headline without faded watermark */}
         <div className="productivity-header-wrap">
           <div className="productivity-headline-container">
-            <span className="productivity-bg-faded-text" aria-hidden="true">
-              UNMATCHED PRODUCTIVITY
-            </span>
             <h2 className="productivity-main-headline">
-              Unmatched <span className="productivity-blue-highlight">Productivity</span>
+              <span className="productivity-unmatched-word">Unmatched</span>{' '}
+              <span className="productivity-blue-highlight">Productivity</span>
             </h2>
           </div>
         </div>
