@@ -11,23 +11,12 @@ const TIME_SLOTS = [
   '05:15 PM'
 ];
 
-const INDUSTRIES = [
-  'Accounting & Tax',
-  'Healthcare & Clinics',
-  'Legal Practices',
-  'Trades & Home Services',
-  'Real Estate & Property',
-  'Hospitality & Other'
-];
-
 export default function DemoBookingModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
-    company: '',
-    industry: 'Accounting & Tax',
-    agentPreference: 'both' // 'inbound', 'outbound', 'both'
+    company: ''
   });
 
   // Dynamic next 5 days
@@ -126,16 +115,12 @@ export default function DemoBookingModal({ isOpen, onClose }) {
                 <span className="demo-detail-val">{formData.email || 'Email provided'}</span>
               </div>
               <div className="demo-detail-row">
-                <span className="demo-detail-label">Practice/Company:</span>
-                <span className="demo-detail-val">{formData.company || formData.industry}</span>
+                <span className="demo-detail-label">Phone / Mobile:</span>
+                <span className="demo-detail-val">{formData.phone || 'Phone provided'}</span>
               </div>
               <div className="demo-detail-row">
-                <span className="demo-detail-label">Focus:</span>
-                <span className="demo-detail-val">
-                  {formData.agentPreference === 'inbound' ? 'Jenny · 24/7 Inbound Reception' :
-                   formData.agentPreference === 'outbound' ? 'Olivia · Outbound Sales Agent' :
-                   'Dual Engine (Jenny Inbound + Olivia Outbound)'}
-                </span>
+                <span className="demo-detail-label">Practice/Company:</span>
+                <span className="demo-detail-val">{formData.company || 'Not specified'}</span>
               </div>
             </div>
 
@@ -157,10 +142,6 @@ export default function DemoBookingModal({ isOpen, onClose }) {
           <form onSubmit={handleSubmit} className="demo-modal-form">
             {/* Header */}
             <div className="demo-modal-header">
-              <div className="demo-modal-badge-clay">
-                <Sparkles size={13} className="text-full-blue" />
-                <span>Schedule a 1-on-1 Walkthrough</span>
-              </div>
               <h2 className="demo-modal-title">Experience JobGen Live</h2>
               <p className="demo-modal-desc">
                 Select your preferred date & time. Our solutions engineers will tailor the live call flow to your business.
@@ -238,23 +219,6 @@ export default function DemoBookingModal({ isOpen, onClose }) {
                     className="demo-input-clay"
                   />
                 </div>
-              </div>
-            </div>
-
-            {/* Industry Selector */}
-            <div className="demo-field-section">
-              <label className="demo-field-label">Industry Vertical</label>
-              <div className="demo-industry-pills-row">
-                {INDUSTRIES.map((ind) => (
-                  <button
-                    key={ind}
-                    type="button"
-                    onClick={() => setFormData(prev => ({ ...prev, industry: ind }))}
-                    className={`demo-industry-clay-pill ${formData.industry === ind ? 'is-selected' : ''}`}
-                  >
-                    {ind}
-                  </button>
-                ))}
               </div>
             </div>
 

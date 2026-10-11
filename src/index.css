@@ -8649,6 +8649,14 @@ h6 {
   z-index: 99999;
   padding: 1rem;
   animation: demoBackdropFade 0.25s ease-out;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.demo-modal-backdrop::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 @keyframes demoBackdropFade {
@@ -8659,9 +8667,12 @@ h6 {
 .demo-modal-clay-card {
   position: relative;
   width: 100%;
-  max-width: 640px;
-  max-height: calc(100vh - 2rem);
+  max-width: 620px;
+  max-height: calc(100vh - 2.5rem);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
   background: linear-gradient(160deg, #FFFFFF 0%, #F5F9FF 100%);
   border: 2px solid rgba(255, 255, 255, 0.95);
   border-radius: 28px;
@@ -8672,6 +8683,12 @@ h6 {
     inset 0 3px 6px #FFFFFF,
     inset 0 -3px 6px rgba(163, 177, 198, 0.28);
   animation: demoCardPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.demo-modal-clay-card::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 @keyframes demoCardPop {
@@ -8715,28 +8732,7 @@ h6 {
 
 .demo-modal-header {
   text-align: center;
-  margin-bottom: 1.75rem;
-}
-
-.demo-modal-badge-clay {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.95rem;
-  border-radius: 9999px;
-  background: linear-gradient(145deg, #FFFFFF 0%, #EEF4FB 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 
-    0 4px 10px rgba(15, 23, 42, 0.05),
-    inset 0 1.5px 2px #FFFFFF,
-    inset 0 -1.5px 2px rgba(163, 177, 198, 0.2);
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 750;
-  letter-spacing: 0.06em;
-  color: #0052FF;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .demo-modal-title {
