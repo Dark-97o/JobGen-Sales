@@ -474,72 +474,85 @@ export default function IndustryShowcase({ onOpenDemo }) {
     };
 
     // ==========================================
-    // 1. UNIVERSITY CAMPUS BUILDING (Education - Full 360° Neoclassical Grandeur)
+    // 1. UNIVERSITY CAMPUS LIBRARY & ACADEMIC HALL (Education - Iconic Collegiate Campus)
     // ==========================================
     const bEducation = new THREE.Group();
-    // Base podium steps (Front & Back - proportioned to fit turntable disc)
-    addMesh(bEducation, new THREE.BoxGeometry(4.8, 0.25, 4.0), stoneMat, [0, 0.13, 0]);
-    addMesh(bEducation, new THREE.BoxGeometry(4.4, 0.2, 3.6), stoneMat, [0, 0.35, 0]);
-    // Main Neoclassical Central Hall
-    addMesh(bEducation, new THREE.BoxGeometry(4.2, 2.2, 3.2), stoneMat, [0, 1.55, 0]);
-    
-    // Front Portico: 6 Neoclassical Columns
-    for (let c = -1.4; c <= 1.4; c += 0.56) {
-      addMesh(bEducation, new THREE.CylinderGeometry(0.1, 0.12, 2.2, 16), stoneMat, [c, 1.55, 1.72]);
+    // Base campus quad plinth & steps
+    addMesh(bEducation, new THREE.BoxGeometry(4.8, 0.22, 4.0), stoneMat, [0, 0.11, 0]);
+    addMesh(bEducation, new THREE.BoxGeometry(4.4, 0.16, 3.6), stoneMat, [0, 0.28, 0]);
+
+    // Central Grand Academic Reading Hall
+    addMesh(bEducation, new THREE.BoxGeometry(3.0, 2.2, 2.8), stoneMat, [0, 1.45, 0]);
+
+    // Front Elevation: 3 Tall Arched Academic Library Windows
+    for (let x of [-0.85, 0, 0.85]) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.55, 1.35, 0.08), glassMat, [x, 1.6, 1.42]);
+      addMesh(bEducation, new THREE.CylinderGeometry(0.275, 0.275, 0.08, 16), glassMat, [x, 2.28, 1.42], [Math.PI / 2, 0, 0]);
     }
-    // Back Portico: 6 Symmetrical Neoclassical Columns (Backside Detail)
-    for (let c = -1.4; c <= 1.4; c += 0.56) {
-      addMesh(bEducation, new THREE.CylinderGeometry(0.1, 0.12, 2.2, 16), stoneMat, [c, 1.55, -1.72]);
+    // Back Elevation: 3 Tall Symmetrical Arched Windows (360° rotation)
+    for (let x of [-0.85, 0, 0.85]) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.55, 1.35, 0.08), glassMat, [x, 1.6, -1.42]);
+      addMesh(bEducation, new THREE.CylinderGeometry(0.275, 0.275, 0.08, 16), glassMat, [x, 2.28, -1.42], [Math.PI / 2, 0, 0]);
     }
 
-    // Entablatures (Front & Back)
-    addMesh(bEducation, new THREE.BoxGeometry(3.4, 0.3, 0.55), stoneMat, [0, 2.75, 1.72]);
-    addMesh(bEducation, new THREE.BoxGeometry(3.4, 0.3, 0.55), stoneMat, [0, 2.75, -1.72]);
-    
-    // Front Pediment (Triangular Gable)
-    const frontPediment = addMesh(bEducation, new THREE.ConeGeometry(2.0, 0.85, 4), darkSteelMat, [0, 3.3, 1.72], [0, Math.PI / 4, 0]);
-    frontPediment.scale.set(1.4, 1, 0.35);
-    // Back Pediment (Triangular Gable)
-    const backPediment = addMesh(bEducation, new THREE.ConeGeometry(2.0, 0.85, 4), darkSteelMat, [0, 3.3, -1.72], [0, Math.PI / 4, 0]);
-    backPediment.scale.set(1.4, 1, 0.35);
+    // Grand Academic Entrance Portals (Front & Back)
+    addMesh(bEducation, new THREE.BoxGeometry(1.6, 0.18, 0.4), darkSteelMat, [0, 0.95, 1.55]);
+    addMesh(bEducation, new THREE.BoxGeometry(1.2, 0.82, 0.08), glassMat, [0, 0.45, 1.44]);
+    addMesh(bEducation, new THREE.BoxGeometry(1.6, 0.18, 0.4), darkSteelMat, [0, 0.95, -1.55]);
+    addMesh(bEducation, new THREE.BoxGeometry(1.2, 0.82, 0.08), glassMat, [0, 0.45, -1.44]);
 
-    // Main Roof (Hip Roof across entire hall)
-    const mainRoof = addMesh(bEducation, new THREE.ConeGeometry(3.2, 1.15, 4), darkSteelMat, [0, 3.25, 0], [0, Math.PI / 4, 0]);
-    mainRoof.scale.set(1.3, 1, 1.05);
-
-    // Central Octagonal Rotunda / Cupola Drum
-    addMesh(bEducation, new THREE.CylinderGeometry(0.95, 0.95, 1.0, 16), stoneMat, [0, 4.15, 0]);
-    // 8 Mini Colonnettes around rotunda drum
-    for (let a = 0; a < 8; a++) {
-      const ang = (a / 8) * Math.PI * 2;
-      addMesh(bEducation, new THREE.CylinderGeometry(0.05, 0.05, 1.0, 12), stoneMat, [Math.cos(ang) * 0.86, 4.15, Math.sin(ang) * 0.86]);
+    // West Academic Wing (Lecture Pavilion - Left)
+    addMesh(bEducation, new THREE.BoxGeometry(1.15, 1.7, 2.4), stoneMat, [-2.05, 1.15, 0]);
+    const westRoof = addMesh(bEducation, new THREE.ConeGeometry(1.3, 0.65, 4), darkSteelMat, [-2.05, 2.3, 0], [0, Math.PI / 4, 0]);
+    westRoof.scale.set(0.95, 1, 1.55);
+    // West Elevation Side Windows
+    for (let z of [-0.65, 0, 0.65]) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.9, 0.45), glassMat, [-2.65, 1.15, z]);
     }
-    // Copper Dome
-    addMesh(bEducation, new THREE.SphereGeometry(0.98, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), darkSteelMat, [0, 4.65, 0]);
-    // Gilded Lantern & Spire
-    addMesh(bEducation, new THREE.CylinderGeometry(0.18, 0.22, 0.45, 16), amberBistroMat, [0, 5.65, 0]);
-    addMesh(bEducation, new THREE.ConeGeometry(0.2, 1.2, 16), blueAccentMat, [0, 6.45, 0]);
+    // West Wing Front & Back Windows
+    addMesh(bEducation, new THREE.BoxGeometry(0.55, 0.9, 0.08), glassMat, [-2.05, 1.15, 1.22]);
+    addMesh(bEducation, new THREE.BoxGeometry(0.55, 0.9, 0.08), glassMat, [-2.05, 1.15, -1.22]);
 
-    // 4 Symmetrical Clock Faces on all 4 Sides (North, South, East, West)
-    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [0, 4.2, 0.96], [Math.PI / 2, 0, 0]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [0, 4.2, -0.96], [Math.PI / 2, 0, 0]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [0.96, 4.2, 0], [0, 0, Math.PI / 2]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [-0.96, 4.2, 0], [0, 0, Math.PI / 2]);
-
-    // Front & Back Grand Entrance Glass Doors
-    addMesh(bEducation, new THREE.BoxGeometry(1.1, 1.4, 0.1), glassMat, [0, 1.2, 1.62]);
-    addMesh(bEducation, new THREE.BoxGeometry(1.1, 1.4, 0.1), glassMat, [0, 1.2, -1.62]);
-
-    // Left Side Windows (West Elevation)
-    for (let w = -0.9; w <= 0.9; w += 0.6) {
-      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.85, 0.4), glassMat, [-2.12, 1.6, w]);
+    // East Academic Wing (Research & Science Pavilion - Right)
+    addMesh(bEducation, new THREE.BoxGeometry(1.15, 1.7, 2.4), stoneMat, [2.05, 1.15, 0]);
+    const eastRoof = addMesh(bEducation, new THREE.ConeGeometry(1.3, 0.65, 4), darkSteelMat, [2.05, 2.3, 0], [0, Math.PI / 4, 0]);
+    eastRoof.scale.set(0.95, 1, 1.55);
+    // East Elevation Side Windows
+    for (let z of [-0.65, 0, 0.65]) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.9, 0.45), glassMat, [2.65, 1.15, z]);
     }
-    // Right Side Windows (East Elevation)
-    for (let w = -0.9; w <= 0.9; w += 0.6) {
-      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.85, 0.4), glassMat, [2.12, 1.6, w]);
-    }
-    // Perimeter Roof Cornice Balustrade
-    addMesh(bEducation, new THREE.BoxGeometry(4.3, 0.15, 3.3), stoneMat, [0, 2.72, 0]);
+    // East Wing Front & Back Windows
+    addMesh(bEducation, new THREE.BoxGeometry(0.55, 0.9, 0.08), glassMat, [2.05, 1.15, 1.22]);
+    addMesh(bEducation, new THREE.BoxGeometry(0.55, 0.9, 0.08), glassMat, [2.05, 1.15, -1.22]);
+
+    // Main Central Hall Roof (Steep Collegiate Mansard / Hip Roof)
+    addMesh(bEducation, new THREE.BoxGeometry(3.1, 0.12, 2.9), darkSteelMat, [0, 2.58, 0]);
+    const mainHallRoof = addMesh(bEducation, new THREE.ConeGeometry(2.5, 0.95, 4), darkSteelMat, [0, 3.1, 0], [0, Math.PI / 4, 0]);
+    mainHallRoof.scale.set(1.25, 1, 1.1);
+
+    // Proportionate Collegiate Clock & Bell Tower (Height calibrated to ~4.5)
+    addMesh(bEducation, new THREE.BoxGeometry(1.1, 0.85, 1.1), stoneMat, [0, 3.48, 0]);
+    // 4 Symmetrical Clock Faces on all 4 Tower Facades
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), darkSteelMat, [0, 3.48, 0.57], [Math.PI / 2, 0, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), darkSteelMat, [0, 3.48, -0.57], [Math.PI / 2, 0, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), darkSteelMat, [0.57, 3.48, 0], [0, 0, Math.PI / 2]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), darkSteelMat, [-0.57, 3.48, 0], [0, 0, Math.PI / 2]);
+    // Clock Face Center Accents
+    addMesh(bEducation, new THREE.SphereGeometry(0.06, 8, 8), blueAccentMat, [0, 3.48, 0.6]);
+    addMesh(bEducation, new THREE.SphereGeometry(0.06, 8, 8), blueAccentMat, [0, 3.48, -0.6]);
+    addMesh(bEducation, new THREE.SphereGeometry(0.06, 8, 8), blueAccentMat, [0.6, 3.48, 0]);
+    addMesh(bEducation, new THREE.SphereGeometry(0.06, 8, 8), blueAccentMat, [-0.6, 3.48, 0]);
+
+    // Open Belfry Lantern with Warm Golden Campus Bell
+    addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.45, 0.08), darkSteelMat, [0.42, 4.08, 0.42]);
+    addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.45, 0.08), darkSteelMat, [-0.42, 4.08, 0.42]);
+    addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.45, 0.08), darkSteelMat, [0.42, 4.08, -0.42]);
+    addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.45, 0.08), darkSteelMat, [-0.42, 4.08, -0.42]);
+    addMesh(bEducation, new THREE.SphereGeometry(0.15, 12, 12), amberBistroMat, [0, 4.08, 0]);
+
+    // Pyramidal Copper Tower Cap & Finial
+    addMesh(bEducation, new THREE.ConeGeometry(0.82, 0.55, 4), blueAccentMat, [0, 4.55, 0], [0, Math.PI / 4, 0]);
+    addMesh(bEducation, new THREE.SphereGeometry(0.08, 12, 12), amberBistroMat, [0, 4.88, 0]);
     scene.add(bEducation);
     buildingGroups.push(bEducation);
 
