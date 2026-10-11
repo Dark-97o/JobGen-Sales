@@ -366,32 +366,23 @@ export default function IndustryShowcase({ onOpenDemo }) {
 
   // Scroll-driven activation for the 3 circles and connecting lines
   useEffect(() => {
-    let ticking = false;
     const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        const el = pipelineRef.current;
-        if (!el) return;
+      const el = pipelineRef.current;
+      if (!el) return;
 
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || 800;
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight || 800;
 
-        // Skip calculations if element is far out of view
-        if (rect.bottom < -100 || rect.top > windowHeight + 100) return;
+      // Start trigger when the pipeline top is 85% down the viewport
+      const startTrigger = windowHeight * 0.85;
+      // Complete when the pipeline top reaches 35% of viewport
+      const endTrigger = windowHeight * 0.35;
+      const totalRange = startTrigger - endTrigger;
 
-        // Start trigger when the pipeline top is 85% down the viewport
-        const startTrigger = windowHeight * 0.85;
-        // Complete when the pipeline top reaches 35% of viewport
-        const endTrigger = windowHeight * 0.35;
-        const totalRange = startTrigger - endTrigger;
+      const currentDistance = startTrigger - rect.top;
+      const progress = Math.min(1, Math.max(0, currentDistance / totalRange));
 
-        const currentDistance = startTrigger - rect.top;
-        const progress = Math.min(1, Math.max(0, currentDistance / totalRange));
-
-        setScrollProgress((prev) => (Math.abs(prev - progress) > 0.005 ? progress : prev));
-      });
+      setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -433,7 +424,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -900,7 +891,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
     buildingsRef.current = buildingGroups;
 
     // Main 60FPS Render & Smooth Morphing Loop (Straight Upright Turntable Rotation, No Mouse Tracking)
-    let animationFrameId = null;
+    let animationFrameId;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -957,7 +948,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animationFrameId);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }

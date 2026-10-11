@@ -1,33 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 export default function Footer() {
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <footer className="footer-wrapper footer-video-wrapper">
       {/* Background Video with Top Fade to Background Above */}
       <div className="footer-video-bg-container" aria-hidden="true">
         <video
-          ref={videoRef}
           autoPlay
           loop
           muted

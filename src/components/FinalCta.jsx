@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Calendar, CheckCircle } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function FinalCta({ onOpenDemo, onOpenBooking }) {

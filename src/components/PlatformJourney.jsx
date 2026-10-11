@@ -112,17 +112,21 @@ export default function PlatformJourney() {
     let targetP = 0;
     let currentP = 0;
     let animId = null;
-    let isVisible = true;
+
+    const updateScrollTarget = () => {
+      const rect = section.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // Start as section upper reaches enters view, end near the last checkpoint
+      const scrollStart = windowH * 0.45;
+      const scrollTotal = rect.height - windowH * 0.35;
+      const p = Math.max(0, Math.min(1, (scrollStart - rect.top) / Math.max(scrollTotal, 1)));
+      targetP = p;
+    };
 
     // Smooth physics loop updating SVG elements directly
     const CHECKPOINT_Y_THRESHOLDS = [140, 480, 850, 1190, 1510, 1740];
 
     const renderLoop = () => {
-      if (!isVisible) {
-        animId = null;
-        return;
-      }
-
       const diff = targetP - currentP;
       if (Math.abs(diff) > 0.0002) {
         currentP += diff * 0.12; // buttery responsive momentum
@@ -161,61 +165,15 @@ export default function PlatformJourney() {
             terminusTextRef.current.classList.add('is-hidden');
           }
         }
-
-        animId = requestAnimationFrame(renderLoop);
-      } else {
-        // Settled - rest the loop to save CPU
-        animId = null;
       }
+      animId = requestAnimationFrame(renderLoop);
     };
 
-    const startLoop = () => {
-      if (!animId && isVisible) {
-        animId = requestAnimationFrame(renderLoop);
-      }
-    };
-
-    let scrollTicking = false;
-    const updateScrollTarget = () => {
-      if (scrollTicking) return;
-      scrollTicking = true;
-      requestAnimationFrame(() => {
-        scrollTicking = false;
-        if (!section) return;
-        const rect = section.getBoundingClientRect();
-        const windowH = window.innerHeight;
-
-        // Early return if far away
-        if (rect.bottom < -200 || rect.top > windowH + 200) return;
-
-        // Start as section upper reaches enters view, end near the last checkpoint
-        const scrollStart = windowH * 0.45;
-        const scrollTotal = rect.height - windowH * 0.35;
-        const p = Math.max(0, Math.min(1, (scrollStart - rect.top) / Math.max(scrollTotal, 1)));
-        targetP = p;
-        startLoop();
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          updateScrollTarget();
-        } else if (animId) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
-      },
-      { threshold: 0.02 }
-    );
-    observer.observe(section);
-
+    animId = requestAnimationFrame(renderLoop);
     window.addEventListener('scroll', updateScrollTarget, { passive: true });
     updateScrollTarget();
 
     return () => {
-      observer.disconnect();
       window.removeEventListener('scroll', updateScrollTarget);
       if (animId) cancelAnimationFrame(animId);
     };

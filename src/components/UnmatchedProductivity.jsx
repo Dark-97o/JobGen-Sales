@@ -135,8 +135,10 @@ export default function UnmatchedProductivity() {
       const maxScrollDist = Math.max(trackWidth - windowW + 160, 0);
 
       // Cards move from RIGHT to LEFT on scroll:
+      // When progress = 0: translateX = 0
+      // As user scrolls down (progress -> 1): translateX moves negative so cards slide in from the right toward the left
       const currentTranslateX = -progress * maxScrollDist;
-      trackRef.current.style.transform = `translate3d(${currentTranslateX}px, 0, 0)`;
+      trackRef.current.style.transform = `translateX(${currentTranslateX}px)`;
     };
 
     const onScroll = () => {

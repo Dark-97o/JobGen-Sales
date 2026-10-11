@@ -51,16 +51,11 @@ export default function TestimonialSection() {
     observer.observe(section);
 
     // Active scroll listener for instant audio/video synchrony
-    let scrollRaf = null;
     const onScroll = () => {
-      if (scrollRaf) return;
-      scrollRaf = requestAnimationFrame(() => {
-        scrollRaf = null;
-        if (!section) return;
-        const rect = section.getBoundingClientRect();
-        const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
-        handleVisibility(inView);
-      });
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+      handleVisibility(inView);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -68,7 +63,6 @@ export default function TestimonialSection() {
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', onScroll);
-      if (scrollRaf) cancelAnimationFrame(scrollRaf);
       sendIframeCommand('pauseVideo');
       sendIframeCommand('mute');
     };
