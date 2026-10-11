@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 export default function Footer() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <footer className="footer-wrapper footer-video-wrapper">
       {/* Background Video with Top Fade to Background Above */}
       <div className="footer-video-bg-container" aria-hidden="true">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
@@ -30,7 +52,6 @@ export default function Footer() {
               <span className="footer-brand-title">
                 JOBGEN<span className="footer-brand-accent">.AI</span>
               </span>
-              <span className="brand-badge footer-brand-badge">ENTERPRISE</span>
             </div>
             <p className="footer-brand-desc">
               The unified autonomous AI voice workforce for 24/7 inbound reception, instant calendar bookings, and multi-channel sales outreach.

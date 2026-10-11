@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Calendar, CheckCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function FinalCta({ onOpenDemo, onOpenBooking }) {
@@ -25,14 +25,6 @@ export default function FinalCta({ onOpenDemo, onOpenBooking }) {
       <div className="container">
         <div className="final-stadium-card final-compact-clay-card">
           <div className="stadium-glow-flare" />
-
-          {/* Claymorphic Pill Kicker (Replaces Avatar Images) */}
-          <div className="contact-kicker-clay-wrap">
-            <div className="contact-kicker-clay-badge">
-              <Sparkles size={13} className="text-full-blue" />
-              <span>24/7 AI TELEPHONY & OUTREACH</span>
-            </div>
-          </div>
 
           <div className="contact-content-inner">
             <h2 className="contact-card-title">

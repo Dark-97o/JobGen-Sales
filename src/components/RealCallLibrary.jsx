@@ -219,15 +219,21 @@ export default function RealCallLibrary() {
 
     promptObserver.observe(el);
 
+    let scrollTicking = false;
     const handleScroll = () => {
-      if (promptShownRef.current) return;
-      const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
-      const ratio = visibleHeight / rect.height;
-      if (ratio >= 0.85 || (rect.top >= 20 && rect.bottom <= windowHeight + 80)) {
-        triggerPlayPrompt();
-      }
+      if (promptShownRef.current || scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        scrollTicking = false;
+        if (promptShownRef.current) return;
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+        const ratio = visibleHeight / rect.height;
+        if (ratio >= 0.85 || (rect.top >= 20 && rect.bottom <= windowHeight + 80)) {
+          triggerPlayPrompt();
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

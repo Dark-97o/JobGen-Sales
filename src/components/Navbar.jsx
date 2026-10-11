@@ -6,8 +6,17 @@ export default function Navbar({ onOpenDemo, onOpenBooking }) {
   const [activeTab, setActiveTab] = useState('Home');
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        setIsScrolled((prev) => {
+          const next = window.scrollY > 50;
+          return prev === next ? prev : next;
+        });
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
