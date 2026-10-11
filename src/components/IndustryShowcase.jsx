@@ -30,7 +30,7 @@ const WORKFLOW_PIPELINE = [
   {
     step: "02",
     icon: Calendar,
-    title: "books, changes, and routes the next step",
+    title: "Books, changes, and routes the next step",
     pills: [
       "Real-time availability and appointment booking",
       "Rescheduling, cancellation, and confirmations",
@@ -40,7 +40,7 @@ const WORKFLOW_PIPELINE = [
   {
     step: "03",
     icon: CheckCircle2,
-    title: "follows up and keeps every detail organised",
+    title: "Follows up and keeps every detail organised",
     pills: [
       "Call summaries and searchable transcripts",
       "Email scanning and document intake",
@@ -1102,9 +1102,6 @@ export default function IndustryShowcase({ onOpenDemo }) {
                     )}
                     <div className={`pipeline-clay-circle ${isActive ? 'is-active' : ''}`}>
                       <StepIcon size={34} className="pipeline-circle-icon" />
-                      <span className={`pipeline-circle-badge ${isActive ? 'is-active' : ''}`}>
-                        {item.step}
-                      </span>
                     </div>
                   </div>
 

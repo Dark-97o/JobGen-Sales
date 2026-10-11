@@ -8000,9 +8000,9 @@ h6 {
 }
 
 .industry-pipeline-wrapper {
-  margin-top: clamp(4.5rem, 7vw, 7rem);
-  padding-top: clamp(3rem, 5vw, 4.5rem);
-  border-top: 1px dashed rgba(203, 213, 225, 0.7);
+  margin-top: clamp(1.25rem, 2.5vw, 2.5rem);
+  padding-top: 0;
+  border-top: none;
   width: 100%;
   position: relative;
 }
@@ -8021,16 +8021,7 @@ h6 {
   align-items: center;
   position: relative;
   box-sizing: border-box;
-}
-
-/* Vertical dashed dividers between columns (like reference image) */
-.industry-pipeline-col:not(:last-child) {
-  border-right: 1px dashed rgba(203, 213, 225, 0.7);
-  padding-right: clamp(1rem, 2vw, 2.5rem);
-}
-
-.industry-pipeline-col:not(:first-child) {
-  padding-left: clamp(1rem, 2vw, 2.5rem);
+  padding: 0;
 }
 
 /* Circle Area with Horizontal Connecting Line */
@@ -8043,13 +8034,13 @@ h6 {
   min-height: 104px;
 }
 
-/* Connecting track behind circles */
+/* Connecting track behind circles - spans securely into the next circle */
 .pipeline-line-track {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateY(-50%);
-  width: calc(100% + var(--pipeline-gap));
+  width: calc(100% + var(--pipeline-gap) + 14px);
   height: 3px;
   background: #E2E8F0;
   z-index: 1;
@@ -8109,32 +8100,6 @@ h6 {
 
 .pipeline-clay-circle.is-active .pipeline-circle-icon {
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
-}
-
-/* Number Badge on Circle (01, 02, 03) */
-.pipeline-circle-badge {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  font-weight: 800;
-  background: #E2E8F0;
-  color: #64748B;
-  border: 2px solid #FFFFFF;
-  transition: all 0.4s ease;
-}
-
-.pipeline-circle-badge.is-active {
-  background: #FFFFFF;
-  color: #0052FF;
-  box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
 }
 
 /* Column Title */
@@ -8225,9 +8190,9 @@ h6 {
 
   .industry-pipeline-col:not(:last-child) {
     border-right: none;
-    border-bottom: 1px dashed rgba(203, 213, 225, 0.7);
+    border-bottom: none;
     padding-right: 0;
-    padding-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .industry-pipeline-col:not(:first-child) {
