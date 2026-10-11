@@ -35,19 +35,43 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Jenny (AI Admissions)',
         time: '10:14 AM',
-        text: 'Hello! Fall 2026 CS applications close December 1st. I have tour slots open this Thursday at 2:00 PM and Saturday at 11:00 AM with the faculty dean. Which day suits you best?'
+        text: 'Hello! Fall 2026 CS applications close December 1st. Are you applying for our undergraduate BS program or the postgraduate Master’s?'
       },
       {
         sender: 'user',
         name: 'Prospective Student',
-        time: '10:15 AM',
-        text: 'Thursday at 2:00 PM works perfectly for me.'
+        time: '10:14 AM',
+        text: 'Postgraduate Master’s in Data Science & Machine Learning.'
       },
       {
         sender: 'ai',
         name: 'Jenny (AI Admissions)',
         time: '10:15 AM',
-        text: 'Confirmed! You are registered for Thursday, Oct 15 at 2:00 PM. I’ve just dispatched your digital parking permit and department itinerary to your phone.'
+        text: 'Great! The faculty dean is hosting tour and lab walkthrough sessions this Thursday at 2:00 PM and Saturday at 11:00 AM. Which day works better for your schedule?'
+      },
+      {
+        sender: 'user',
+        name: 'Prospective Student',
+        time: '10:15 AM',
+        text: 'Thursday at 2:00 PM works best for me.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Admissions)',
+        time: '10:15 AM',
+        text: 'Perfect. Do you require visitor parking on campus or will you be using public transit?'
+      },
+      {
+        sender: 'user',
+        name: 'Prospective Student',
+        time: '10:16 AM',
+        text: 'I will be driving, a parking permit would be great.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Admissions)',
+        time: '10:16 AM',
+        text: 'Confirmed! You are registered for Thursday at 2:00 PM. I’ve just dispatched your digital parking permit, lab pass, and department itinerary to your phone.'
       }
     ],
     outcome: 'Campus Tour Booked · Slate CRM Synced · Visitor Pass Texted via SMS'
@@ -59,7 +83,7 @@ const INDUSTRIES_DATA = [
     icon: Calculator,
     accentColor: '#0052FF',
     twoLineInfo: 'Captures urgent tax return intakes, securely collects corporate BAS receipts, books partner consultations, and answers billing queries autonomously.',
-    buildingName: 'Financial Advisory Tower',
+    buildingName: 'Corporate Advisory Pavilion',
     agentName: 'Jenny · AI Practice Receptionist',
     dialogue: [
       {
@@ -72,7 +96,7 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Jenny (AI Receptionist)',
         time: '02:30 PM',
-        text: 'Good afternoon! I can prepare your quarterly lodgment package right now. Are you filing under your standard corporate ABN or an investment trust?'
+        text: 'Good afternoon! I can help prepare your quarterly lodgment package right now. Are you filing under your standard corporate entity or an investment trust?'
       },
       {
         sender: 'user',
@@ -84,7 +108,31 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Jenny (AI Receptionist)',
         time: '02:31 PM',
-        text: 'Verified in Xero! I’ve sent your encrypted document link via SMS and booked a 20-min strategy review with Senior Partner Mark for Wednesday at 10:30 AM.'
+        text: 'Verified in Xero! I see your entity is active. Would you prefer a 20-minute tax strategy call with Senior Partner Mark or our head tax CPA Sarah?'
+      },
+      {
+        sender: 'user',
+        name: 'Corporate Client',
+        time: '02:31 PM',
+        text: 'Senior Partner Mark if he has availability.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Receptionist)',
+        time: '02:32 PM',
+        text: 'Mark has openings tomorrow at 10:30 AM or Thursday at 2:15 PM over Zoom or in-office. Which suits you?'
+      },
+      {
+        sender: 'user',
+        name: 'Corporate Client',
+        time: '02:32 PM',
+        text: 'Tomorrow at 10:30 AM on Zoom, please.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Receptionist)',
+        time: '02:32 PM',
+        text: 'Booked and synced to Mark’s calendar! I’ve sent your calendar invite with the encrypted portal link to upload your equipment receipts via SMS.'
       }
     ],
     outcome: 'ABN Entity Verified in Xero · 20-Min Partner Slot Booked · Encrypted Upload SMS Sent'
@@ -109,19 +157,43 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Olivia (AI Specialist)',
         time: '11:42 AM',
-        text: 'Hello! Yes, 42 Ocean Drive is open for private appointments. May I confirm if you are looking for an owner-occupier home and your preferred purchase window?'
+        text: 'Hello! Yes, 42 Ocean Drive is open for private viewings. May I confirm if you are looking for an owner-occupier home and your purchase timeline?'
       },
       {
         sender: 'user',
         name: 'Verified Buyer',
-        time: '11:43 AM',
-        text: 'Owner-occupier, pre-approved finance, ready to make an offer within 30 days.'
+        time: '11:42 AM',
+        text: 'Owner-occupier, pre-approved finance up to $2.2M, ready to make an offer within 30 days.'
       },
       {
         sender: 'ai',
         name: 'Olivia (AI Specialist)',
         time: '11:43 AM',
-        text: 'Excellent. I have reserved an exclusive private viewing for you this Saturday at 11:30 AM with our lead partner Sarah. Digital brochure and contract sent to your mobile.'
+        text: 'Fantastic, that matches our vendor’s criteria. Our lead partner Sarah has private 30-minute inspection windows this Saturday at 11:30 AM and 3:00 PM. Which works best?'
+      },
+      {
+        sender: 'user',
+        name: 'Verified Buyer',
+        time: '11:43 AM',
+        text: '11:30 AM on Saturday works great.'
+      },
+      {
+        sender: 'ai',
+        name: 'Olivia (AI Specialist)',
+        time: '11:43 AM',
+        text: 'Would you also like me to send the preliminary contract of sale and pest inspection report to your email beforehand?'
+      },
+      {
+        sender: 'user',
+        name: 'Verified Buyer',
+        time: '11:44 AM',
+        text: 'Yes please, that would be very helpful.'
+      },
+      {
+        sender: 'ai',
+        name: 'Olivia (AI Specialist)',
+        time: '11:44 AM',
+        text: 'Confirmed! Your private VIP inspection is locked in for Saturday at 11:30 AM. Contract, vendor disclosure, and gate access pin have been sent to your mobile.'
       }
     ],
     outcome: 'Buyer Pre-Qualified ($1.8M+) · Private Inspection Confirmed · Contract Sent via SMS'
@@ -146,19 +218,43 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Jenny (AI Concierge)',
         time: '04:18 PM',
-        text: 'Good evening! We have an indoor banquette table open at 7:30 PM. Our head chef maintains a dedicated gluten-free kitchen station and approved evening menu.'
+        text: 'Good evening! We have an indoor banquette table open at 7:30 PM. Our head chef maintains a dedicated certified gluten-free prep kitchen.'
       },
       {
         sender: 'user',
         name: 'Dinner Guest',
-        time: '04:19 PM',
-        text: 'That’s wonderful peace of mind, let’s reserve that table please.'
+        time: '04:18 PM',
+        text: 'That’s wonderful! Are children welcome at that seating, or is it adult-only dining?'
       },
       {
         sender: 'ai',
         name: 'Jenny (AI Concierge)',
         time: '04:19 PM',
-        text: 'Your reservation for 6 at 7:30 PM is confirmed! I’ve sent your SMS booking pass with dietary notes pre-flagged for your server, plus valet directions.'
+        text: 'Children are very welcome! We offer handcrafted mocktails and a dedicated junior tasting menu. Would you prefer our main dining room or the garden-view atrium?'
+      },
+      {
+        sender: 'user',
+        name: 'Dinner Guest',
+        time: '04:19 PM',
+        text: 'The garden-view atrium sounds lovely.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Concierge)',
+        time: '04:19 PM',
+        text: 'Would you like me to hold the table for 7:30 PM with valet parking included?'
+      },
+      {
+        sender: 'user',
+        name: 'Dinner Guest',
+        time: '04:20 PM',
+        text: 'Yes please, let’s reserve that table.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Concierge)',
+        time: '04:20 PM',
+        text: 'Your reservation for 6 at 7:30 PM is confirmed! I’ve flagged the celiac allergy in Resy for your server and texted your digital reservation pass and valet directions.'
       }
     ],
     outcome: 'Table for 6 Booked · Dietary Notes Flagged in Resy · SMS Confirmation Dispatched'
@@ -183,7 +279,19 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Jenny (AI Medical Desk)',
         time: '09:05 AM',
-        text: 'Good morning. Dr. Chen has a priority telehealth slot today at 4:15 PM and an in-clinic opening tomorrow at 9:00 AM. We directly bill major private insurers with zero gap.'
+        text: 'Good morning. Dr. Chen has a priority telehealth slot today at 4:15 PM and an in-clinic opening tomorrow at 9:00 AM. We directly bill major private health funds with zero gap.'
+      },
+      {
+        sender: 'user',
+        name: 'Patient',
+        time: '09:05 AM',
+        text: 'Are you able to check if Bupa covers the full consultation fee?'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Medical Desk)',
+        time: '09:06 AM',
+        text: 'Yes! Bupa Premier and Corporate covers 100% of Dr. Chen’s specialist consultation. Would you prefer the telehealth session today or in-clinic tomorrow?'
       },
       {
         sender: 'user',
@@ -195,7 +303,19 @@ const INDUSTRIES_DATA = [
         sender: 'ai',
         name: 'Jenny (AI Medical Desk)',
         time: '09:06 AM',
-        text: 'You are booked with Dr. Chen for tomorrow at 9:00 AM. Your secure pre-consultation medical questionnaire and parking pass are dispatched to your mobile.'
+        text: 'Have you visited our clinic in the last 12 months, or will this be a new patient registration?'
+      },
+      {
+        sender: 'user',
+        name: 'Patient',
+        time: '09:07 AM',
+        text: 'This will be my first visit.'
+      },
+      {
+        sender: 'ai',
+        name: 'Jenny (AI Medical Desk)',
+        time: '09:07 AM',
+        text: 'Understood. You are booked with Dr. Chen for tomorrow at 9:00 AM. I’ve sent your secure pre-consultation medical questionnaire and priority parking barcode to your phone.'
       }
     ],
     outcome: 'Appointment Scheduled in Best Practice · Insurance Pre-Verified · Pre-Intake SMS Sent'
@@ -268,20 +388,20 @@ export default function IndustryShowcase({ onOpenDemo }) {
     const turntable = new THREE.Group();
     scene.add(turntable);
 
-    // Beveled cylindrical turntable disc base
-    const discBaseGeo = new THREE.CylinderGeometry(5.4, 5.7, 0.3, 64);
+    // Beveled cylindrical turntable disc base (proportioned to prevent edge-clipping)
+    const discBaseGeo = new THREE.CylinderGeometry(4.0, 4.25, 0.22, 64);
     const discBaseMat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
       roughness: 0.22,
       metalness: 0.12,
     });
     const discBase = new THREE.Mesh(discBaseGeo, discBaseMat);
-    discBase.position.y = -0.15;
+    discBase.position.y = -0.11;
     discBase.receiveShadow = true;
     turntable.add(discBase);
 
     // Top surface plate of the disc
-    const discTopGeo = new THREE.CylinderGeometry(5.15, 5.15, 0.05, 64);
+    const discTopGeo = new THREE.CylinderGeometry(3.9, 3.9, 0.04, 64);
     const discTopMat = new THREE.MeshStandardMaterial({
       color: 0xf8fafc,
       roughness: 0.35,
@@ -293,7 +413,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
     turntable.add(discTop);
 
     // Outer neon accent ring running around the disc perimeter
-    const neonRingGeo = new THREE.TorusGeometry(5.38, 0.065, 16, 64);
+    const neonRingGeo = new THREE.TorusGeometry(3.98, 0.045, 16, 64);
     const neonRingMat = new THREE.MeshStandardMaterial({
       color: 0x3b82f6,
       roughness: 0.2,
@@ -307,18 +427,18 @@ export default function IndustryShowcase({ onOpenDemo }) {
     turntable.add(neonRing);
 
     // Subtle radial tick marks along the disc rim for visual rotation feedback
-    const tickGeo = new THREE.BoxGeometry(0.12, 0.04, 0.38);
+    const tickGeo = new THREE.BoxGeometry(0.1, 0.035, 0.32);
     const tickMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.5 });
     for (let i = 0; i < 24; i++) {
       const angle = (i / 24) * Math.PI * 2;
       const tick = new THREE.Mesh(tickGeo, tickMat);
-      tick.position.set(Math.cos(angle) * 4.75, 0.04, Math.sin(angle) * 4.75);
+      tick.position.set(Math.cos(angle) * 3.55, 0.04, Math.sin(angle) * 3.55);
       tick.rotation.y = -angle;
       turntable.add(tick);
     }
 
     // Soft drop shadow / ambient contact ring underneath the disc
-    const shadowRingGeo = new THREE.RingGeometry(4.4, 5.9, 64);
+    const shadowRingGeo = new THREE.RingGeometry(3.0, 4.35, 64);
     const shadowRingMat = new THREE.MeshBasicMaterial({
       color: 0x0f172a,
       transparent: true,
@@ -327,7 +447,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
     });
     const shadowRing = new THREE.Mesh(shadowRingGeo, shadowRingMat);
     shadowRing.rotation.x = -Math.PI / 2;
-    shadowRing.position.y = -0.32;
+    shadowRing.position.y = -0.24;
     scene.add(shadowRing);
 
     // Common Materials
@@ -357,124 +477,140 @@ export default function IndustryShowcase({ onOpenDemo }) {
     // 1. UNIVERSITY CAMPUS BUILDING (Education - Full 360° Neoclassical Grandeur)
     // ==========================================
     const bEducation = new THREE.Group();
-    // Base podium steps (Front & Back)
-    addMesh(bEducation, new THREE.BoxGeometry(5.6, 0.35, 4.8), stoneMat, [0, 0.18, 0]);
-    addMesh(bEducation, new THREE.BoxGeometry(5.0, 0.25, 4.4), stoneMat, [0, 0.42, 0]);
+    // Base podium steps (Front & Back - proportioned to fit turntable disc)
+    addMesh(bEducation, new THREE.BoxGeometry(4.8, 0.25, 4.0), stoneMat, [0, 0.13, 0]);
+    addMesh(bEducation, new THREE.BoxGeometry(4.4, 0.2, 3.6), stoneMat, [0, 0.35, 0]);
     // Main Neoclassical Central Hall
-    addMesh(bEducation, new THREE.BoxGeometry(4.4, 2.2, 3.4), stoneMat, [0, 1.65, 0]);
+    addMesh(bEducation, new THREE.BoxGeometry(4.2, 2.2, 3.2), stoneMat, [0, 1.55, 0]);
     
     // Front Portico: 6 Neoclassical Columns
-    for (let c = -1.5; c <= 1.5; c += 0.6) {
-      addMesh(bEducation, new THREE.CylinderGeometry(0.11, 0.13, 2.2, 16), stoneMat, [c, 1.65, 1.82]);
+    for (let c = -1.4; c <= 1.4; c += 0.56) {
+      addMesh(bEducation, new THREE.CylinderGeometry(0.1, 0.12, 2.2, 16), stoneMat, [c, 1.55, 1.72]);
     }
     // Back Portico: 6 Symmetrical Neoclassical Columns (Backside Detail)
-    for (let c = -1.5; c <= 1.5; c += 0.6) {
-      addMesh(bEducation, new THREE.CylinderGeometry(0.11, 0.13, 2.2, 16), stoneMat, [c, 1.65, -1.82]);
+    for (let c = -1.4; c <= 1.4; c += 0.56) {
+      addMesh(bEducation, new THREE.CylinderGeometry(0.1, 0.12, 2.2, 16), stoneMat, [c, 1.55, -1.72]);
     }
 
     // Entablatures (Front & Back)
-    addMesh(bEducation, new THREE.BoxGeometry(3.6, 0.3, 0.6), stoneMat, [0, 2.85, 1.82]);
-    addMesh(bEducation, new THREE.BoxGeometry(3.6, 0.3, 0.6), stoneMat, [0, 2.85, -1.82]);
+    addMesh(bEducation, new THREE.BoxGeometry(3.4, 0.3, 0.55), stoneMat, [0, 2.75, 1.72]);
+    addMesh(bEducation, new THREE.BoxGeometry(3.4, 0.3, 0.55), stoneMat, [0, 2.75, -1.72]);
     
     // Front Pediment (Triangular Gable)
-    const frontPediment = addMesh(bEducation, new THREE.ConeGeometry(2.1, 0.9, 4), darkSteelMat, [0, 3.4, 1.82], [0, Math.PI / 4, 0]);
+    const frontPediment = addMesh(bEducation, new THREE.ConeGeometry(2.0, 0.85, 4), darkSteelMat, [0, 3.3, 1.72], [0, Math.PI / 4, 0]);
     frontPediment.scale.set(1.4, 1, 0.35);
     // Back Pediment (Triangular Gable)
-    const backPediment = addMesh(bEducation, new THREE.ConeGeometry(2.1, 0.9, 4), darkSteelMat, [0, 3.4, -1.82], [0, Math.PI / 4, 0]);
+    const backPediment = addMesh(bEducation, new THREE.ConeGeometry(2.0, 0.85, 4), darkSteelMat, [0, 3.3, -1.72], [0, Math.PI / 4, 0]);
     backPediment.scale.set(1.4, 1, 0.35);
 
     // Main Roof (Hip Roof across entire hall)
-    const mainRoof = addMesh(bEducation, new THREE.ConeGeometry(3.4, 1.2, 4), darkSteelMat, [0, 3.35, 0], [0, Math.PI / 4, 0]);
+    const mainRoof = addMesh(bEducation, new THREE.ConeGeometry(3.2, 1.15, 4), darkSteelMat, [0, 3.25, 0], [0, Math.PI / 4, 0]);
     mainRoof.scale.set(1.3, 1, 1.05);
 
     // Central Octagonal Rotunda / Cupola Drum
-    addMesh(bEducation, new THREE.CylinderGeometry(1.05, 1.05, 1.1, 16), stoneMat, [0, 4.25, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.95, 0.95, 1.0, 16), stoneMat, [0, 4.15, 0]);
     // 8 Mini Colonnettes around rotunda drum
     for (let a = 0; a < 8; a++) {
       const ang = (a / 8) * Math.PI * 2;
-      addMesh(bEducation, new THREE.CylinderGeometry(0.06, 0.06, 1.1, 12), stoneMat, [Math.cos(ang) * 0.95, 4.25, Math.sin(ang) * 0.95]);
+      addMesh(bEducation, new THREE.CylinderGeometry(0.05, 0.05, 1.0, 12), stoneMat, [Math.cos(ang) * 0.86, 4.15, Math.sin(ang) * 0.86]);
     }
     // Copper Dome
-    addMesh(bEducation, new THREE.SphereGeometry(1.08, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), darkSteelMat, [0, 4.8, 0]);
+    addMesh(bEducation, new THREE.SphereGeometry(0.98, 24, 16, 0, Math.PI * 2, 0, Math.PI / 2), darkSteelMat, [0, 4.65, 0]);
     // Gilded Lantern & Spire
-    addMesh(bEducation, new THREE.CylinderGeometry(0.2, 0.25, 0.5, 16), amberBistroMat, [0, 5.9, 0]);
-    addMesh(bEducation, new THREE.ConeGeometry(0.22, 1.4, 16), blueAccentMat, [0, 6.8, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.18, 0.22, 0.45, 16), amberBistroMat, [0, 5.65, 0]);
+    addMesh(bEducation, new THREE.ConeGeometry(0.2, 1.2, 16), blueAccentMat, [0, 6.45, 0]);
 
     // 4 Symmetrical Clock Faces on all 4 Sides (North, South, East, West)
-    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [0, 4.3, 1.06], [Math.PI / 2, 0, 0]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [0, 4.3, -1.06], [Math.PI / 2, 0, 0]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [1.06, 4.3, 0], [0, 0, Math.PI / 2]);
-    addMesh(bEducation, new THREE.CylinderGeometry(0.28, 0.28, 0.04, 16), stoneMat, [-1.06, 4.3, 0], [0, 0, Math.PI / 2]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [0, 4.2, 0.96], [Math.PI / 2, 0, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [0, 4.2, -0.96], [Math.PI / 2, 0, 0]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [0.96, 4.2, 0], [0, 0, Math.PI / 2]);
+    addMesh(bEducation, new THREE.CylinderGeometry(0.26, 0.26, 0.04, 16), stoneMat, [-0.96, 4.2, 0], [0, 0, Math.PI / 2]);
 
     // Front & Back Grand Entrance Glass Doors
-    addMesh(bEducation, new THREE.BoxGeometry(1.2, 1.5, 0.1), glassMat, [0, 1.3, 1.72]);
-    addMesh(bEducation, new THREE.BoxGeometry(1.2, 1.5, 0.1), glassMat, [0, 1.3, -1.72]);
+    addMesh(bEducation, new THREE.BoxGeometry(1.1, 1.4, 0.1), glassMat, [0, 1.2, 1.62]);
+    addMesh(bEducation, new THREE.BoxGeometry(1.1, 1.4, 0.1), glassMat, [0, 1.2, -1.62]);
 
     // Left Side Windows (West Elevation)
-    for (let w = -1.0; w <= 1.0; w += 0.7) {
-      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.9, 0.45), glassMat, [-2.22, 1.7, w]);
+    for (let w = -0.9; w <= 0.9; w += 0.6) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.85, 0.4), glassMat, [-2.12, 1.6, w]);
     }
     // Right Side Windows (East Elevation)
-    for (let w = -1.0; w <= 1.0; w += 0.7) {
-      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.9, 0.45), glassMat, [2.22, 1.7, w]);
+    for (let w = -0.9; w <= 0.9; w += 0.6) {
+      addMesh(bEducation, new THREE.BoxGeometry(0.08, 0.85, 0.4), glassMat, [2.12, 1.6, w]);
     }
     // Perimeter Roof Cornice Balustrade
-    addMesh(bEducation, new THREE.BoxGeometry(4.5, 0.15, 3.5), stoneMat, [0, 2.82, 0]);
+    addMesh(bEducation, new THREE.BoxGeometry(4.3, 0.15, 3.3), stoneMat, [0, 2.72, 0]);
     scene.add(bEducation);
     buildingGroups.push(bEducation);
 
     // ==========================================
-    // 2. FINANCIAL ADVISORY TOWER (Accounting - Full 360° Manhattan Skyscraper)
+    // 2. MODERN CORPORATE HEADQUARTERS (Accounting & Corporate Advisory - Proportionate Mid-Rise Pavilion)
     // ==========================================
     const bAccounting = new THREE.Group();
-    // Ground Plaza Plinth with Corner Pylons
-    addMesh(bAccounting, new THREE.BoxGeometry(4.8, 0.35, 4.4), darkSteelMat, [0, 0.18, 0]);
+    // Ground Plaza Plinth
+    addMesh(bAccounting, new THREE.BoxGeometry(4.4, 0.2, 3.6), darkSteelMat, [0, 0.1, 0]);
     
-    // Tier 1 Base Tower (Curtain Glass on all 4 sides)
-    addMesh(bAccounting, new THREE.BoxGeometry(3.2, 3.2, 3.2), glassMat, [0, 1.8, 0]);
-    // 4 Symmetrical Floor Mullion Bands around all 4 sides
-    for (let fl = 0.8; fl <= 3.2; fl += 0.8) {
-      addMesh(bAccounting, new THREE.BoxGeometry(3.32, 0.1, 3.32), darkSteelMat, [0, fl, 0]);
+    // Level 1: Ground Atrium / Grand Corporate Lobby (Curtain Glass with Obsidian Columns)
+    addMesh(bAccounting, new THREE.BoxGeometry(3.8, 1.1, 2.9), glassMat, [0, 0.75, 0]);
+    // 4 Corner Structural Obsidian Columns
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 1.15, 0.3), darkSteelMat, [1.8, 0.75, 1.35]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 1.15, 0.3), darkSteelMat, [-1.8, 0.75, 1.35]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 1.15, 0.3), darkSteelMat, [1.8, 0.75, -1.35]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 1.15, 0.3), darkSteelMat, [-1.8, 0.75, -1.35]);
+    
+    // Front & Back Revolving Entrance Vestibules
+    addMesh(bAccounting, new THREE.BoxGeometry(1.4, 0.85, 0.2), darkSteelMat, [0, 0.55, 1.48]);
+    addMesh(bAccounting, new THREE.BoxGeometry(1.4, 0.85, 0.2), darkSteelMat, [0, 0.55, -1.48]);
+    // Corporate Gold/Bronze Accent Signage Band
+    addMesh(bAccounting, new THREE.BoxGeometry(1.8, 0.18, 0.06), amberBistroMat, [0, 1.12, 1.48]);
+    addMesh(bAccounting, new THREE.BoxGeometry(1.8, 0.18, 0.06), amberBistroMat, [0, 1.12, -1.48]);
+
+    // Intermediate Architectural Floor Slab
+    addMesh(bAccounting, new THREE.BoxGeometry(4.1, 0.12, 3.2), darkSteelMat, [0, 1.38, 0]);
+
+    // Level 2: Cantilevered Advisory & Office Floor with 360° Ribbon Glass & Sun Louvers
+    addMesh(bAccounting, new THREE.BoxGeometry(3.8, 0.95, 2.9), stoneMat, [0, 1.9, 0]);
+    // Ribbon Windows on All 4 Elevations
+    addMesh(bAccounting, new THREE.BoxGeometry(3.6, 0.55, 0.06), glassMat, [0, 1.9, 1.48]);
+    addMesh(bAccounting, new THREE.BoxGeometry(3.6, 0.55, 0.06), glassMat, [0, 1.9, -1.48]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.06, 0.55, 2.7), glassMat, [1.92, 1.9, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.06, 0.55, 2.7), glassMat, [-1.92, 1.9, 0]);
+
+    // Vertical Blue Accent Architectural Louvers along Ribbon Glass (360° rhythm)
+    for (let lx = -1.4; lx <= 1.4; lx += 0.7) {
+      addMesh(bAccounting, new THREE.BoxGeometry(0.06, 0.75, 0.1), blueAccentMat, [lx, 1.9, 1.52]);
+      addMesh(bAccounting, new THREE.BoxGeometry(0.06, 0.75, 0.1), blueAccentMat, [lx, 1.9, -1.52]);
     }
-    // Corner Structural Pylons (All 4 Corners)
-    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [1.6, 1.8, 1.6]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [-1.6, 1.8, 1.6]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [1.6, 1.8, -1.6]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.3, 3.4, 0.3), darkSteelMat, [-1.6, 1.8, -1.6]);
+    for (let lz = -0.8; lz <= 0.8; lz += 0.8) {
+      addMesh(bAccounting, new THREE.BoxGeometry(0.1, 0.75, 0.06), blueAccentMat, [1.95, 1.9, lz]);
+      addMesh(bAccounting, new THREE.BoxGeometry(0.1, 0.75, 0.06), blueAccentMat, [-1.95, 1.9, lz]);
+    }
 
-    // Front & Back Revolving Entrance Atriums
-    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.1, 0.25), darkSteelMat, [0, 0.75, 1.65]);
-    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.1, 0.25), darkSteelMat, [0, 0.75, -1.65]);
+    // Level 2 Roof Terrace Slab / Cornice Setback
+    addMesh(bAccounting, new THREE.BoxGeometry(4.2, 0.12, 3.3), darkSteelMat, [0, 2.44, 0]);
 
-    // Tier 2 Mid-Tower (Setback with 360° Observation Terrace)
-    addMesh(bAccounting, new THREE.BoxGeometry(2.4, 2.6, 2.4), glassMat, [0, 4.6, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.55, 0.08, 2.55), blueAccentMat, [0, 4.0, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.55, 0.08, 2.55), blueAccentMat, [0, 4.8, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(2.55, 0.08, 2.55), blueAccentMat, [0, 5.6, 0]);
-    // 360° Glass Railing along Tier 1 Terrace Setback
-    addMesh(bAccounting, new THREE.BoxGeometry(3.2, 0.35, 0.05), glassMat, [0, 3.55, 1.58]);
-    addMesh(bAccounting, new THREE.BoxGeometry(3.2, 0.35, 0.05), glassMat, [0, 3.55, -1.58]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.05, 0.35, 3.2), glassMat, [1.58, 3.55, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.05, 0.35, 3.2), glassMat, [-1.58, 3.55, 0]);
+    // Level 3: Executive Boardroom Pavilion & Panoramic Terrace
+    addMesh(bAccounting, new THREE.BoxGeometry(2.6, 0.85, 2.0), glassMat, [0, 2.92, 0]);
+    // Corner Framing Posts for Boardroom
+    addMesh(bAccounting, new THREE.BoxGeometry(0.12, 0.85, 0.12), darkSteelMat, [1.3, 2.92, 1.0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.12, 0.85, 0.12), darkSteelMat, [-1.3, 2.92, 1.0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.12, 0.85, 0.12), darkSteelMat, [1.3, 2.92, -1.0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.12, 0.85, 0.12), darkSteelMat, [-1.3, 2.92, -1.0]);
 
-    // Tier 3 Penthouse Executive Floor
-    addMesh(bAccounting, new THREE.BoxGeometry(1.6, 1.4, 1.6), darkSteelMat, [0, 6.4, 0]);
-    addMesh(bAccounting, new THREE.BoxGeometry(1.4, 1.2, 1.4), glassMat, [0, 6.4, 0]);
+    // Glass Balustrade along Terrace Perimeter
+    addMesh(bAccounting, new THREE.BoxGeometry(3.8, 0.32, 0.04), glassMat, [0, 2.66, 1.58]);
+    addMesh(bAccounting, new THREE.BoxGeometry(3.8, 0.32, 0.04), glassMat, [0, 2.66, -1.58]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.04, 0.32, 3.16), glassMat, [1.88, 2.66, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.04, 0.32, 3.16), glassMat, [-1.88, 2.66, 0]);
 
-    // Rooftop Architectural Crown & Mechanical Penthouse
-    addMesh(bAccounting, new THREE.BoxGeometry(1.8, 0.35, 1.8), darkSteelMat, [0, 7.25, 0]);
-    // Glowing Blue Neon Corner Accent Ribs (All 4 Corners)
-    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [0.8, 7.6, 0.8]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [-0.8, 7.6, 0.8]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [0.8, 7.6, -0.8]);
-    addMesh(bAccounting, new THREE.BoxGeometry(0.08, 1.4, 0.08), blueAccentMat, [-0.8, 7.6, -0.8]);
+    // Rooftop Greenery Planters on Terrace
+    addMesh(bAccounting, new THREE.BoxGeometry(0.35, 0.2, 1.6), emeraldMat, [-1.5, 2.6, 0]);
+    addMesh(bAccounting, new THREE.BoxGeometry(0.35, 0.2, 1.6), emeraldMat, [1.5, 2.6, 0]);
 
-    // Rooftop Communications Mast & Beacon
-    addMesh(bAccounting, new THREE.CylinderGeometry(0.04, 0.08, 2.4, 12), darkSteelMat, [0, 8.6, 0]);
-    addMesh(bAccounting, new THREE.SphereGeometry(0.14, 16, 16), redCrossMat, [0, 9.8, 0]);
-    // Satellite Dishes (North & South)
-    addMesh(bAccounting, new THREE.CylinderGeometry(0.3, 0.3, 0.08, 16), darkSteelMat, [0.4, 7.5, 0.5], [0.4, 0.3, 0]);
-    addMesh(bAccounting, new THREE.CylinderGeometry(0.25, 0.25, 0.08, 16), darkSteelMat, [-0.4, 7.5, -0.5], [-0.4, -0.3, 0]);
+    // Floating Architectural Roof Canopy Slab
+    addMesh(bAccounting, new THREE.BoxGeometry(3.0, 0.1, 2.3), darkSteelMat, [0, 3.4, 0]);
+    // Low-Profile Blue-Lit Modernist Skylight
+    addMesh(bAccounting, new THREE.BoxGeometry(1.2, 0.12, 0.8), blueAccentMat, [0, 3.5, 0]);
     scene.add(bAccounting);
     buildingGroups.push(bAccounting);
 
@@ -482,17 +618,17 @@ export default function IndustryShowcase({ onOpenDemo }) {
     // 3. LUXURY MODERNIST VILLA (Real Estate - Full 360° Architectural Luxury)
     // ==========================================
     const bRealEstate = new THREE.Group();
-    // Base Landscape Deck (Stone & Timber)
-    addMesh(bRealEstate, new THREE.BoxGeometry(6.4, 0.3, 5.2), stoneMat, [0, 0.15, 0]);
+    // Base Landscape Deck (Stone & Timber - calibrated to disc)
+    addMesh(bRealEstate, new THREE.BoxGeometry(5.2, 0.25, 4.2), stoneMat, [0, 0.13, 0]);
     // Turquoise Swimming Pool (Front-Right)
-    addMesh(bRealEstate, new THREE.BoxGeometry(2.4, 0.08, 1.8), glassMat, [1.6, 0.32, 1.2]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(2.0, 0.08, 1.5), glassMat, [1.3, 0.28, 1.0]);
     // Sun Loungers by Pool
-    addMesh(bRealEstate, new THREE.BoxGeometry(0.4, 0.12, 0.9), warmWoodMat, [2.5, 0.36, 0.8]);
-    addMesh(bRealEstate, new THREE.BoxGeometry(0.4, 0.12, 0.9), warmWoodMat, [2.5, 0.36, 1.8]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.38, 0.12, 0.8), warmWoodMat, [1.9, 0.32, 0.5]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.38, 0.12, 0.8), warmWoodMat, [1.9, 0.32, 1.3]);
 
     // Rear Zen Garden & Outdoor Dining Terrace (Back-Left)
-    addMesh(bRealEstate, new THREE.BoxGeometry(2.0, 0.06, 1.6), warmWoodMat, [-1.7, 0.32, -1.4]);
-    addMesh(bRealEstate, new THREE.BoxGeometry(0.9, 0.35, 0.5), darkSteelMat, [-1.7, 0.5, -1.4]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(1.8, 0.06, 1.4), warmWoodMat, [-1.4, 0.28, -1.2]);
+    addMesh(bRealEstate, new THREE.BoxGeometry(0.8, 0.35, 0.45), darkSteelMat, [-1.4, 0.45, -1.2]);
 
     // Ground Floor Living Pavilion (Glass Wrapped on Front, Back & Sides)
     addMesh(bRealEstate, new THREE.BoxGeometry(3.6, 1.5, 3.2), stoneMat, [-0.4, 1.0, 0]);
@@ -538,8 +674,8 @@ export default function IndustryShowcase({ onOpenDemo }) {
     // 4. BOUTIQUE RESTAURANT BISTRO (Restaurants - Full 360° Parisian Bistro)
     // ==========================================
     const bRestaurant = new THREE.Group();
-    // Street Pavement Foundation
-    addMesh(bRestaurant, new THREE.BoxGeometry(5.4, 0.3, 5.0), stoneMat, [0, 0.15, 0]);
+    // Street Pavement Foundation (calibrated to disc)
+    addMesh(bRestaurant, new THREE.BoxGeometry(4.8, 0.25, 4.2), stoneMat, [0, 0.13, 0]);
     // Main 2-Story Bistro Building Structure
     addMesh(bRestaurant, new THREE.BoxGeometry(4.2, 3.0, 3.8), stoneMat, [0, 1.75, 0]);
 
@@ -601,8 +737,8 @@ export default function IndustryShowcase({ onOpenDemo }) {
     // 5. MODERN HOSPITAL COMPLEX (Medical - Full 360° Multi-Wing Medical Center)
     // ==========================================
     const bMedical = new THREE.Group();
-    // Base Plinth & Ambulance Driveway
-    addMesh(bMedical, new THREE.BoxGeometry(5.8, 0.3, 5.0), stoneMat, [0, 0.15, 0]);
+    // Base Plinth & Ambulance Driveway (calibrated to disc)
+    addMesh(bMedical, new THREE.BoxGeometry(4.8, 0.25, 4.2), stoneMat, [0, 0.13, 0]);
 
     // Central Diagnostic Medical Core Tower
     addMesh(bMedical, new THREE.BoxGeometry(3.0, 4.6, 3.0), stoneMat, [0, 2.55, 0]);
@@ -799,17 +935,12 @@ export default function IndustryShowcase({ onOpenDemo }) {
               {/* Card Header */}
               <div className="clay-chat-header">
                 <div className="clay-chat-header-agent">
-                  <div className="clay-agent-avatar" style={{ backgroundColor: activeIndustry.accentColor }}>
-                    <Bot size={16} color="#FFFFFF" />
+                  <div className="clay-agent-avatar">
+                    <img src="/assets/jesss.png" alt={activeIndustry.agentName} className="clay-agent-avatar-img" />
                   </div>
                   <div className="clay-agent-meta">
                     <strong className="clay-agent-title">{activeIndustry.agentName}</strong>
-                    <span className="clay-agent-telemetry">Live Voice / Chat Synchronizer · Active</span>
                   </div>
-                </div>
-                <div className="clay-status-chip">
-                  <span className="clay-status-pulse" />
-                  <span>Real-time</span>
                 </div>
               </div>
 

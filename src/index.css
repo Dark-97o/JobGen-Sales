@@ -6889,9 +6889,7 @@ h6 {
   margin-top: calc(clamp(-3.5rem, -5.5vw, -6rem) - 9px);
   border-radius: clamp(40px, 6vw, 80px);
   border: 1.5px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 
-    0 -25px 60px rgba(0, 0, 0, 0.75),
-    0 30px 70px rgba(0, 0, 0, 0.6);
+  box-shadow: none !important;
   padding: clamp(4rem, 6vw, 6.5rem) 0;
   overflow: hidden;
   min-height: 560px;
@@ -7505,17 +7503,17 @@ h6 {
 .industry-clay-chat-card {
   position: relative;
   background: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
-  border-radius: 32px;
+  border-radius: 28px;
   border: 2px solid rgba(255, 255, 255, 0.95);
   box-shadow: 
-    0 26px 60px -10px rgba(15, 23, 42, 0.12),
-    0 10px 24px -4px rgba(15, 23, 42, 0.06),
+    0 24px 55px -10px rgba(15, 23, 42, 0.1),
+    0 8px 20px -4px rgba(15, 23, 42, 0.05),
     inset 0 3px 6px #FFFFFF,
     inset 0 -3.5px 7px rgba(148, 163, 184, 0.16);
-  padding: clamp(1.4rem, 2.4vw, 2rem);
+  padding: clamp(1.2rem, 2vw, 1.6rem);
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.1rem;
 }
 
 /* Card Header */
@@ -7523,27 +7521,37 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1.1rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1.5px solid rgba(226, 232, 240, 0.9);
 }
 
 .clay-chat-header-agent {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.85rem;
 }
 
 .clay-agent-avatar {
-  width: 3rem;
-  height: 3rem;
+  width: 2.85rem;
+  height: 2.85rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   box-shadow: 
     0 6px 16px rgba(0, 82, 255, 0.35),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.6);
   flex-shrink: 0;
+  border: 2px solid #FFFFFF;
+}
+
+.clay-agent-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
 .clay-agent-meta {
@@ -7552,56 +7560,24 @@ h6 {
 }
 
 .clay-agent-title {
-  font-size: 1.12rem;
+  font-size: 1.05rem;
   font-weight: 850;
   color: #0F172A;
   letter-spacing: -0.015em;
 }
 
-.clay-agent-telemetry {
-  font-size: 0.82rem;
-  color: #64748B;
-  font-family: var(--font-mono, monospace);
-  letter-spacing: 0.01em;
-  margin-top: 0.15rem;
-}
-
-.clay-status-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: #F0FDF4;
-  color: #15803D;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
-  font-weight: 800;
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  box-shadow: inset 0 1px 2px #FFFFFF;
-}
-
-.clay-status-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #22C55E;
-  box-shadow: 0 0 8px #22C55E;
-  animation: pulseDot 1.5s infinite ease-in-out;
-}
-
-/* Chat Messages Stream - Roomy & Highly Readable Like WhatsApp Transcript */
+/* Chat Messages Stream */
 .clay-messages-stream {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
-  max-height: 420px;
+  gap: 0.85rem;
+  max-height: 380px;
   overflow-y: auto;
-  padding-right: 0.4rem;
+  padding-right: 0.35rem;
 }
 
 .clay-messages-stream::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 .clay-messages-stream::-webkit-scrollbar-track {
@@ -7626,11 +7602,11 @@ h6 {
   justify-content: flex-start;
 }
 
-/* Claymorphed Chat Bubble Base - Enlarged Typography */
+/* Claymorphed Chat Bubble Base - Reverted Compact Size */
 .clay-bubble-bubble {
-  max-width: 90%;
-  padding: 1.05rem 1.35rem;
-  border-radius: 22px;
+  max-width: 88%;
+  padding: 0.8rem 1.05rem;
+  border-radius: 18px;
   position: relative;
   transition: transform 0.15s ease;
 }
@@ -7638,37 +7614,37 @@ h6 {
 .clay-bubble-row.is-user .clay-bubble-bubble {
   background: linear-gradient(145deg, #F1F5F9 0%, #E2E8F0 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.95);
-  border-bottom-right-radius: 6px;
+  border-bottom-right-radius: 4px;
   box-shadow: 
-    0 8px 20px rgba(15, 23, 42, 0.06),
-    inset 0 2px 3px #FFFFFF,
-    inset 0 -2px 4px rgba(148, 163, 184, 0.25);
+    0 6px 16px rgba(15, 23, 42, 0.05),
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -2px 3px rgba(148, 163, 184, 0.25);
 }
 
 .clay-bubble-row.is-ai .clay-bubble-bubble {
   background: linear-gradient(145deg, #FFFFFF 0%, #F0F7FF 100%);
-  border: 1.5px solid rgba(0, 82, 255, 0.2);
-  border-bottom-left-radius: 6px;
+  border: 1.5px solid rgba(0, 82, 255, 0.18);
+  border-bottom-left-radius: 4px;
   box-shadow: 
-    0 10px 24px rgba(0, 82, 255, 0.08),
+    0 8px 20px rgba(0, 82, 255, 0.07),
     inset 0 2px 3px #FFFFFF,
-    inset 0 -2px 4px rgba(0, 82, 255, 0.12);
+    inset 0 -2px 4px rgba(0, 82, 255, 0.1);
 }
 
 .clay-bubble-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.85rem;
-  margin-bottom: 0.5rem;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
 }
 
 .clay-bubble-sender {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.85rem;
-  font-weight: 800;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 750;
   color: #475569;
 }
 
@@ -7681,45 +7657,45 @@ h6 {
 }
 
 .clay-bubble-time {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   color: #94A3B8;
   font-family: var(--font-mono, monospace);
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .clay-bubble-text {
-  font-size: 1.02rem;
+  font-size: 0.88rem;
   color: #0F172A;
-  line-height: 1.6;
+  line-height: 1.48;
   margin: 0;
-  font-weight: 550;
+  font-weight: 500;
   letter-spacing: -0.005em;
 }
 
-/* Bottom Outcome Verification Bar - Enlarged Status Banner */
+/* Bottom Outcome Verification Bar */
 .clay-outcome-bar {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.65rem;
   background: #F8FAFC;
-  border-radius: 16px;
-  padding: 0.85rem 1.25rem;
-  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  border-radius: 14px;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 
-    inset 0 2px 3px #FFFFFF,
-    inset 0 -1.5px 2px rgba(148, 163, 184, 0.12);
-  font-size: 0.88rem;
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -1.5px 2px rgba(148, 163, 184, 0.1);
+  font-size: 0.78rem;
 }
 
 .clay-outcome-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
   color: #10B981;
-  font-weight: 850;
+  font-weight: 800;
   flex-shrink: 0;
   font-family: var(--font-mono, monospace);
-  font-size: 0.88rem;
+  font-size: 0.78rem;
 }
 
 .clay-outcome-icon {
@@ -7733,8 +7709,8 @@ h6 {
 
 .clay-outcome-text {
   color: #334155;
-  font-weight: 650;
-  font-size: 0.92rem;
+  font-weight: 600;
+  font-size: 0.82rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
