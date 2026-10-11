@@ -2,79 +2,80 @@ import React from 'react';
 import { ArrowRight, Calendar, CheckCircle, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export default function FinalCta({ onOpenDemo }) {
-  const handleStartTrial = () => {
+export default function FinalCta({ onOpenDemo, onOpenBooking }) {
+  const handleRequestDemo = () => {
     try {
       confetti({
-        particleCount: 90,
-        spread: 80,
+        particleCount: 80,
+        spread: 70,
         origin: { y: 0.6 }
       });
     } catch (e) {
       // fallback
     }
-    onOpenDemo();
+    if (onOpenBooking) {
+      onOpenBooking();
+    } else if (onOpenDemo) {
+      onOpenDemo();
+    }
   };
 
   return (
-    <section className="section-spacing" style={{ paddingTop: '2rem' }}>
+    <section className="section-spacing contact-compact-section">
       <div className="container">
-        <div className="final-stadium-card">
+        <div className="final-stadium-card final-compact-clay-card">
           <div className="stadium-glow-flare" />
 
-          {/* Dual Avatars Cluster */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-            <div style={{ position: 'relative', zIndex: 2, width: '4.5rem', height: '4.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid #2563EB', boxShadow: '0 0 25px rgba(37,99,235,0.6)' }}>
-              <img src="/assets/jenny-portrait.jpg" alt="Jenny AI Receptionist" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-            <div style={{ position: 'relative', zIndex: 1, width: '4.5rem', height: '4.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid #60A5FA', marginLeft: '-1.5rem', boxShadow: '0 0 25px rgba(96,165,250,0.4)' }}>
-              <img src="/assets/olivia-portrait.jpg" alt="Olivia AI Sales Agent" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          {/* Claymorphic Pill Kicker (Replaces Avatar Images) */}
+          <div className="contact-kicker-clay-wrap">
+            <div className="contact-kicker-clay-badge">
+              <Sparkles size={13} className="text-full-blue" />
+              <span>24/7 AI TELEPHONY & OUTREACH</span>
             </div>
           </div>
 
-          <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 3 }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 5.2vw, 4.25rem)', fontWeight: 800, color: '#fff', margin: '0 0 1.5rem', lineHeight: 1.08, letterSpacing: '-0.04em' }}>
+          <div className="contact-content-inner">
+            <h2 className="contact-card-title">
               Deploy your 24/7 AI workforce <br />
               <span className="gradient-text">before your next customer calls.</span>
             </h2>
 
-            <p style={{ fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)', color: 'var(--color-white-70)', lineHeight: 1.65, marginBottom: '2.5rem' }}>
-              Join forward-thinking clinics, real estate brokerages, law firms, and service enterprises answering every inbound call and turning cold databases into revenue.
+            <p className="contact-card-desc">
+              Join forward-thinking practices, brokerages, and service enterprises answering every inbound call and booking qualified appointments around the clock.
             </p>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+            <div className="contact-actions-row">
               <button
                 type="button"
-                onClick={handleStartTrial}
-                className="btn-primary"
-                style={{ fontSize: '1rem', padding: '0.75rem 0.75rem 0.75rem 1.75rem' }}
+                onClick={handleRequestDemo}
+                className="btn-primary contact-clay-primary-btn"
               >
-                <span>Start 14-Day Free Trial</span>
-                <div className="btn-icon-pill" style={{ width: '2.25rem', height: '2.25rem' }}>
-                  <ArrowRight size={16} />
+                <Calendar size={17} />
+                <span>Request a Demo</span>
+                <div className="btn-icon-pill">
+                  <ArrowRight size={15} />
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={onOpenDemo}
-                className="btn-secondary"
-                style={{ fontSize: '1rem', padding: '0.85rem 1.6rem' }}
+                className="btn-secondary contact-clay-secondary-btn"
               >
-                <Calendar size={18} style={{ color: 'var(--color-blue-400)' }} />
-                <span>Test Live Phone Sandbox</span>
+                <Sparkles size={16} className="text-full-blue" />
+                <span>Test Live Voice Sandbox</span>
               </button>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', fontSize: '0.8125rem', color: 'var(--color-white-50)', flexWrap: 'wrap' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <CheckCircle size={14} style={{ color: 'var(--color-success)' }} /> No credit card required
+            <div className="contact-trust-row">
+              <span className="contact-trust-item">
+                <CheckCircle size={14} className="contact-check-icon" /> No credit card required
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <CheckCircle size={14} style={{ color: 'var(--color-success)' }} /> Keep your existing phone number
+              <span className="contact-trust-item">
+                <CheckCircle size={14} className="contact-check-icon" /> Keep your existing phone number
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <CheckCircle size={14} style={{ color: 'var(--color-success)' }} /> Deterministic failover to human rep
+              <span className="contact-trust-item">
+                <CheckCircle size={14} className="contact-check-icon" /> Warm staff failover
               </span>
             </div>
           </div>

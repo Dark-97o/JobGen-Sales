@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LogIn } from 'lucide-react';
 
-export default function Navbar({ onOpenDemo }) {
+export default function Navbar({ onOpenDemo, onOpenBooking }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
 
@@ -98,9 +98,9 @@ export default function Navbar({ onOpenDemo }) {
 
           <button
             type="button"
-            onClick={onOpenDemo}
+            onClick={onOpenBooking || onOpenDemo}
             className="btn-animated-demo"
-            title="Launch Live Demo"
+            title="Request a Free Demo"
           >
             <span>Free Demo</span>
           </button>

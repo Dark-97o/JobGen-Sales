@@ -15,9 +15,11 @@ import FaqSection from './components/FaqSection';
 import FinalCta from './components/FinalCta';
 import Footer from './components/Footer';
 import VoiceDemoModal from './components/VoiceDemoModal';
+import DemoBookingModal from './components/DemoBookingModal';
 
 export default function App() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -34,6 +36,14 @@ export default function App() {
     setIsDemoModalOpen(false);
   };
 
+  const handleOpenBooking = () => {
+    setIsBookingModalOpen(true);
+  };
+
+  const handleCloseBooking = () => {
+    setIsBookingModalOpen(false);
+  };
+
   return (
     <div className="jobgen-app-root">
       {/* Global Fixed Living Organic Contour Lines Background (Stays In Back As Content Scrolls) */}
@@ -43,7 +53,7 @@ export default function App() {
       </div>
 
       {/* Floating Glass Navigation */}
-      <Navbar onOpenDemo={handleOpenDemo} />
+      <Navbar onOpenDemo={handleOpenDemo} onOpenBooking={handleOpenBooking} />
 
       <main>
         {/* Dual-Agent Hero Stage */}
@@ -94,7 +104,7 @@ export default function App() {
             <FaqSection />
 
             {/* High-Conversion Final Call to Action */}
-            <FinalCta onOpenDemo={handleOpenDemo} />
+            <FinalCta onOpenDemo={handleOpenDemo} onOpenBooking={handleOpenBooking} />
           </div>
         </div>
       </main>
@@ -106,6 +116,12 @@ export default function App() {
       <VoiceDemoModal
         isOpen={isDemoModalOpen}
         onClose={handleCloseDemo}
+      />
+
+      {/* Interactive Claymorphic Demo Request & Time Slot Booking Modal */}
+      <DemoBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={handleCloseBooking}
       />
     </div>
   );
