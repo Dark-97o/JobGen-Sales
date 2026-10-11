@@ -83,16 +83,7 @@ export default function StrategicPillars({ onOpenDemo }) {
                       key={key}
                       type="button"
                       onClick={() => setInboundScenario(key)}
-                      style={{
-                        background: inboundScenario === key ? 'var(--color-blue-600)' : 'rgba(255,255,255,0.05)',
-                        border: '1px solid ' + (inboundScenario === key ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'),
-                        color: '#fff',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        padding: '0.3rem 0.65rem',
-                        borderRadius: 'var(--radius-pill)',
-                        cursor: 'pointer'
-                      }}
+                      className={`scenario-pill-btn ${inboundScenario === key ? 'is-active' : ''}`}
                     >
                       {inboundScenarios[key].title}
                     </button>
@@ -168,16 +159,7 @@ export default function StrategicPillars({ onOpenDemo }) {
                       key={key}
                       type="button"
                       onClick={() => setOutboundScenario(key)}
-                      style={{
-                        background: outboundScenario === key ? 'var(--color-blue-600)' : 'rgba(255,255,255,0.05)',
-                        border: '1px solid ' + (outboundScenario === key ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'),
-                        color: '#fff',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        padding: '0.3rem 0.65rem',
-                        borderRadius: 'var(--radius-pill)',
-                        cursor: 'pointer'
-                      }}
+                      className={`scenario-pill-btn ${outboundScenario === key ? 'is-active' : ''}`}
                     >
                       {outboundScenarios[key].title}
                     </button>

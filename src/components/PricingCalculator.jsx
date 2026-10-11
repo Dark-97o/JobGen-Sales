@@ -76,38 +76,18 @@ export default function PricingCalculator({ onOpenDemo }) {
           {/* Controls */}
           <div>
             {/* Direction Selector */}
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', gap: '0.65rem', marginBottom: '2rem' }}>
               <button
                 type="button"
                 onClick={() => setDirection('inbound')}
-                style={{
-                  flex: 1,
-                  padding: '0.65rem 1rem',
-                  borderRadius: 'var(--radius-pill)',
-                  background: direction === 'inbound' ? 'var(--color-blue-600)' : 'rgba(255,255,255,0.04)',
-                  border: '1px solid ' + (direction === 'inbound' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'),
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                  cursor: 'pointer'
-                }}
+                className={`pricing-dir-tab ${direction === 'inbound' ? 'is-active' : ''}`}
               >
                 Jenny · Inbound Reception
               </button>
               <button
                 type="button"
                 onClick={() => setDirection('outbound')}
-                style={{
-                  flex: 1,
-                  padding: '0.65rem 1rem',
-                  borderRadius: 'var(--radius-pill)',
-                  background: direction === 'outbound' ? 'var(--color-blue-600)' : 'rgba(255,255,255,0.04)',
-                  border: '1px solid ' + (direction === 'outbound' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'),
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                  cursor: 'pointer'
-                }}
+                className={`pricing-dir-tab ${direction === 'outbound' ? 'is-active' : ''}`}
               >
                 Olivia · Outbound Outreach
               </button>
@@ -168,15 +148,7 @@ export default function PricingCalculator({ onOpenDemo }) {
                     key={opt.id}
                     type="button"
                     onClick={() => setSelectedLlm(opt.id)}
-                    style={{
-                      background: selectedLlm === opt.id ? 'rgba(37,99,235,0.2)' : 'rgba(255,255,255,0.03)',
-                      border: '1px solid ' + (selectedLlm === opt.id ? 'var(--color-blue-500)' : 'rgba(255,255,255,0.08)'),
-                      color: selectedLlm === opt.id ? '#fff' : 'var(--color-white-70)',
-                      fontSize: '0.75rem',
-                      padding: '0.35rem 0.65rem',
-                      borderRadius: 'var(--radius-pill)',
-                      cursor: 'pointer'
-                    }}
+                    className={`llm-chip-btn ${selectedLlm === opt.id ? 'is-active' : ''}`}
                   >
                     {opt.label}
                   </button>

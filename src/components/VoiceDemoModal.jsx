@@ -60,7 +60,8 @@ export default function VoiceDemoModal({ isOpen, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          style={{ position: 'absolute', top: '1.25rem', right: '1.25rem', background: 'transparent', border: 'none', color: 'var(--color-white-50)', cursor: 'pointer', padding: '0.5rem' }}
+          className="btn-close-fancy-menu"
+          style={{ position: 'absolute', top: '1.25rem', right: '1.25rem' }}
           aria-label="Close demo modal"
         >
           <X size={20} />
@@ -132,20 +133,7 @@ export default function VoiceDemoModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={handleEndCall}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              background: 'var(--color-danger)',
-              color: '#fff',
-              border: 'none',
-              padding: '0.85rem 2.25rem',
-              borderRadius: 'var(--radius-pill)',
-              fontWeight: 700,
-              fontSize: '1rem',
-              cursor: 'pointer',
-              boxShadow: '0 8px 25px rgba(239, 68, 68, 0.45)'
-            }}
+            className="btn-danger"
           >
             <PhoneOff size={18} />
             <span>End Active Call</span>
