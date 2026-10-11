@@ -7989,4 +7989,257 @@ h6 {
     white-space: normal;
   }
 }
+
+/* ==========================================================================
+   CALIBRATED FOR EVERY INDUSTRY - 3-STEP EXECUTION PIPELINE
+   Claymorphic Circles, Animated Blue Sequential Flow, Claymorphic Bullet Pills
+   ========================================================================== */
+
+:root {
+  --pipeline-gap: clamp(1.5rem, 3vw, 3.5rem);
+}
+
+.industry-pipeline-wrapper {
+  margin-top: clamp(4.5rem, 7vw, 7rem);
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+  border-top: 1px dashed rgba(203, 213, 225, 0.7);
+  width: 100%;
+  position: relative;
+}
+
+.industry-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--pipeline-gap);
+  position: relative;
+  width: 100%;
+}
+
+.industry-pipeline-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Vertical dashed dividers between columns (like reference image) */
+.industry-pipeline-col:not(:last-child) {
+  border-right: 1px dashed rgba(203, 213, 225, 0.7);
+  padding-right: clamp(1rem, 2vw, 2.5rem);
+}
+
+.industry-pipeline-col:not(:first-child) {
+  padding-left: clamp(1rem, 2vw, 2.5rem);
+}
+
+/* Circle Area with Horizontal Connecting Line */
+.pipeline-circle-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 104px;
+}
+
+/* Connecting track behind circles */
+.pipeline-line-track {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% + var(--pipeline-gap));
+  height: 3px;
+  background: #E2E8F0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.pipeline-line-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0052FF 0%, #38BDF8 100%);
+  box-shadow: 0 0 10px rgba(0, 82, 255, 0.5);
+  border-radius: 9999px;
+  transition: width 1.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Claymorphic Circle */
+.pipeline-clay-circle {
+  width: 92px;
+  height: 92px;
+  min-width: 92px;
+  min-height: 92px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(145deg, #FFFFFF 0%, #F1F5F9 100%);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 14px 28px -4px rgba(15, 23, 42, 0.08),
+    0 4px 10px -2px rgba(15, 23, 42, 0.04),
+    inset 0 3px 6px #FFFFFF,
+    inset 0 -3px 6px rgba(163, 177, 198, 0.28);
+  color: #94A3B8;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pipeline-circle-icon {
+  color: inherit;
+  transition: all 0.4s ease;
+}
+
+/* Active State: Circle Turns Blue! */
+.pipeline-clay-circle.is-active {
+  background: linear-gradient(145deg, #0052FF 0%, #1D4ED8 100%);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 16px 36px -4px rgba(0, 82, 255, 0.45),
+    0 6px 14px -2px rgba(0, 82, 255, 0.25),
+    inset 0 3px 6px rgba(255, 255, 255, 0.45),
+    inset 0 -3px 6px rgba(0, 35, 130, 0.35);
+  color: #FFFFFF;
+  transform: scale(1.06);
+}
+
+.pipeline-clay-circle.is-active .pipeline-circle-icon {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+
+/* Number Badge on Circle (01, 02, 03) */
+.pipeline-circle-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 800;
+  background: #E2E8F0;
+  color: #64748B;
+  border: 2px solid #FFFFFF;
+  transition: all 0.4s ease;
+}
+
+.pipeline-circle-badge.is-active {
+  background: #FFFFFF;
+  color: #0052FF;
+  box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
+}
+
+/* Column Title */
+.pipeline-col-title {
+  font-family: var(--font-display, 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.2rem, 1.4vw, 1.38rem);
+  font-weight: 850;
+  color: #0B0F19;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  text-align: center;
+  margin: 1.5rem 0 1.25rem 0;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bullet Points Stack */
+.pipeline-pills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 370px;
+}
+
+/* Claymorphic Pill */
+.pipeline-clay-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.72rem 1.15rem;
+  border-radius: 9999px;
+  background: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 8px 18px -4px rgba(15, 23, 42, 0.06),
+    0 2px 6px -2px rgba(15, 23, 42, 0.04),
+    inset 0 2px 4px #FFFFFF,
+    inset 0 -2px 4px rgba(163, 177, 198, 0.22);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.4s ease;
+}
+
+.pipeline-clay-pill.is-active {
+  border-color: rgba(0, 82, 255, 0.22);
+  box-shadow: 
+    0 10px 22px -4px rgba(0, 82, 255, 0.12),
+    0 3px 8px -1px rgba(15, 23, 42, 0.04),
+    inset 0 2px 4px #FFFFFF,
+    inset 0 -2px 4px rgba(0, 82, 255, 0.08);
+}
+
+.pipeline-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+}
+
+.pipeline-clay-pill.is-active .pipeline-pill-dot {
+  background: #0052FF;
+  box-shadow: 0 0 8px rgba(0, 82, 255, 0.6);
+}
+
+.pipeline-pill-text {
+  font-size: clamp(0.82rem, 0.95vw, 0.88rem);
+  font-weight: 600;
+  color: #475569;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.pipeline-clay-pill.is-active .pipeline-pill-text {
+  color: #0F172A;
+}
+
+/* Responsive adjustments for 3-Step Pipeline */
+@media (max-width: 960px) {
+  .industry-pipeline-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .industry-pipeline-col:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px dashed rgba(203, 213, 225, 0.7);
+    padding-right: 0;
+    padding-bottom: 2.5rem;
+  }
+
+  .industry-pipeline-col:not(:first-child) {
+    padding-left: 0;
+  }
+
+  .pipeline-line-track {
+    display: none;
+  }
+
+  .pipeline-col-title {
+    min-height: auto;
+  }
+}
 

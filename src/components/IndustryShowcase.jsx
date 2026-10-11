@@ -10,8 +10,44 @@ import {
   Stethoscope,
   Bot,
   User,
-  ArrowRight
+  ArrowRight,
+  PhoneCall,
+  Calendar,
+  CheckCircle2
 } from 'lucide-react';
+
+const WORKFLOW_PIPELINE = [
+  {
+    step: "01",
+    icon: PhoneCall,
+    title: "Answers every client call day or night",
+    pills: [
+      "24/7 call answering in a natural, on-brand voice",
+      "Takes and confirms messages accurately",
+      "Offers a live transfer or callback handoff"
+    ]
+  },
+  {
+    step: "02",
+    icon: Calendar,
+    title: "books, changes, and routes the next step",
+    pills: [
+      "Real-time availability and appointment booking",
+      "Rescheduling, cancellation, and confirmations",
+      "Messages, checklists, and staff handoffs"
+    ]
+  },
+  {
+    step: "03",
+    icon: CheckCircle2,
+    title: "follows up and keeps every detail organised",
+    pills: [
+      "Call summaries and searchable transcripts",
+      "Email scanning and document intake",
+      "Follow-up tasks and workflow monitoring"
+    ]
+  }
+];
 
 const INDUSTRIES_DATA = [
   {
@@ -323,8 +359,52 @@ const INDUSTRIES_DATA = [
 
 export default function IndustryShowcase({ onOpenDemo }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [pipelineStep, setPipelineStep] = useState(0);
+  const [isPipelineVisible, setIsPipelineVisible] = useState(false);
   const containerRef = useRef(null);
+  const pipelineRef = useRef(null);
   const activeIndustry = INDUSTRIES_DATA[currentIndex];
+
+  // Animate 3-step pipeline when scrolled into view
+  useEffect(() => {
+    const el = pipelineRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsPipelineVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isPipelineVisible) return;
+
+    // Immediately light up Circle 1 (T = 0s)
+    setPipelineStep(1);
+
+    // Line 1 travels (1.5s), Circle 2 lights up (T = 1.5s)
+    const timer1 = setTimeout(() => {
+      setPipelineStep(2);
+    }, 1500);
+
+    // Line 2 travels (1.5s), Circle 3 lights up (T = 3.0s total)
+    const timer2 = setTimeout(() => {
+      setPipelineStep(3);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [isPipelineVisible]);
 
   // 3D Canvas Reference
   const mountRef = useRef(null);
@@ -990,6 +1070,59 @@ export default function IndustryShowcase({ onOpenDemo }) {
                 })}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* 3-Step Execution Pipeline with Claymorphic Circles and Animated Connecting Flow */}
+        <div 
+          ref={pipelineRef} 
+          className={`industry-pipeline-wrapper ${isPipelineVisible ? 'is-visible' : ''}`}
+        >
+          <div className="industry-pipeline-grid">
+            {WORKFLOW_PIPELINE.map((item, idx) => {
+              const StepIcon = item.icon;
+              const isActive = pipelineStep > idx;
+              const hasConnectingLine = idx < WORKFLOW_PIPELINE.length - 1;
+              const isLineActive = pipelineStep >= (idx + 1);
+
+              return (
+                <div 
+                  key={item.step} 
+                  className={`industry-pipeline-col ${isActive ? 'is-active' : ''}`}
+                >
+                  {/* Top Circle Area with Horizontal Connecting Line */}
+                  <div className="pipeline-circle-wrapper">
+                    {hasConnectingLine && (
+                      <div className="pipeline-line-track" aria-hidden="true">
+                        <div 
+                          className="pipeline-line-fill" 
+                          style={{ width: isLineActive ? '100%' : '0%' }}
+                        />
+                      </div>
+                    )}
+                    <div className={`pipeline-clay-circle ${isActive ? 'is-active' : ''}`}>
+                      <StepIcon size={34} className="pipeline-circle-icon" />
+                      <span className={`pipeline-circle-badge ${isActive ? 'is-active' : ''}`}>
+                        {item.step}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Column Title */}
+                  <h4 className="pipeline-col-title">{item.title}</h4>
+
+                  {/* Bullet Points in Claymorphism Pills */}
+                  <div className="pipeline-pills-list">
+                    {item.pills.map((pillText, pIdx) => (
+                      <div key={pIdx} className={`pipeline-clay-pill ${isActive ? 'is-active' : ''}`}>
+                        <span className="pipeline-pill-dot" />
+                        <span className="pipeline-pill-text">{pillText}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
