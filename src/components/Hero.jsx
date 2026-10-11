@@ -1,6 +1,22 @@
 import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import * as THREE from 'three';
-import { ArrowRight, Check, X } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Check, 
+  X, 
+  PhoneCall, 
+  ShieldCheck, 
+  Calendar, 
+  Database, 
+  Users, 
+  MessageSquare, 
+  BookOpen, 
+  Target, 
+  Zap, 
+  Layers, 
+  TrendingUp, 
+  Cpu 
+} from 'lucide-react';
 
 function FluidGradientBackground() {
   const containerRef = useRef(null);
@@ -642,30 +658,37 @@ const JENNY_BULLET_POINTS = [
   {
     title: 'Instant 24/7 Call Answering',
     desc: 'Sub-second pickup with natural, human-level conversational intelligence.',
+    icon: PhoneCall,
   },
   {
     title: 'Autonomous Lead Qualification',
     desc: 'Live assessment of caller intent, budget scope, urgency, and decision authority.',
+    icon: ShieldCheck,
   },
   {
     title: 'Direct Calendar Scheduling',
     desc: 'Instantly books confirmed slots across Google Calendar, Calendly, and Outlook.',
+    icon: Calendar,
   },
   {
     title: 'Real-Time CRM & SMS Sync',
     desc: 'Logs call audio, structured notes, and next actions directly into HubSpot & Salesforce.',
+    icon: Database,
   },
   {
     title: 'Warm Human Rep Escalation',
     desc: 'Seamlessly transfers VIP accounts and high-intent callers to your team in real time.',
+    icon: Users,
   },
   {
     title: 'Automated Post-Call Follow-Up',
     desc: 'Dispatches instant branded confirmation SMS texts and recap emails automatically.',
+    icon: MessageSquare,
   },
   {
     title: 'Company Knowledge Retrieval',
     desc: 'Accurately answers complex pricing, product, and policy questions from your docs.',
+    icon: BookOpen,
   },
 ];
 
@@ -673,30 +696,37 @@ const OLIVIA_BULLET_POINTS = [
   {
     title: 'Autonomous ICP Lead Discovery',
     desc: 'Identifies and verifies high-value decision-makers matching your ideal customer profile.',
+    icon: Target,
   },
   {
     title: 'Hyper-Personalized Cold Calls',
     desc: 'Executes natural outbound voice conversations tailored to prospect role and industry.',
+    icon: PhoneCall,
   },
   {
     title: 'Dynamic Objection Handling',
     desc: 'Fluidly overcomes timing hesitations, budget pushbacks, and competitor comparisons.',
+    icon: Zap,
   },
   {
     title: 'Multi-Touch Nurture Sequences',
     desc: 'Orchestrates synchronized phone, email, and SMS touchpoints until interest is confirmed.',
+    icon: Layers,
   },
   {
     title: 'Autonomous Demo Booking',
     desc: "Secures qualified sales meetings directly onto your closers' live calendars 24/7.",
+    icon: Calendar,
   },
   {
     title: 'Closed-Loop Pipeline Updates',
     desc: 'Automatically advances deal stages, logs next actions, and writes deal summaries.',
+    icon: TrendingUp,
   },
   {
     title: 'Self-Optimizing Pitch Intelligence',
     desc: 'Analyzes call outcomes and continuously refines conversation angles for higher win rates.',
+    icon: Cpu,
   },
 ];
 
@@ -1135,19 +1165,24 @@ export default function Hero({ onOpenDemo }) {
                 closingAgent === 'jenny' ? 'is-closing' : ''
               }`}
             >
-              {JENNY_BULLET_POINTS.map((pt, idx) => (
-                <div
-                  key={idx}
-                  className="agent-text-point-item"
-                  style={{ animationDelay: `${0.05 + idx * 0.07}s` }}
-                >
-                  <span className="point-bullet-dot" />
-                  <div className="point-text-content">
-                    <strong className="point-bold-title">{pt.title}</strong>
-                    <span className="point-desc-text"> — {pt.desc}</span>
+              {JENNY_BULLET_POINTS.map((pt, idx) => {
+                const IconComp = pt.icon || PhoneCall;
+                return (
+                  <div
+                    key={idx}
+                    className="agent-text-point-item"
+                    style={{ animationDelay: `${0.05 + idx * 0.07}s` }}
+                  >
+                    <div className="point-favicon-glass-circle" aria-hidden="true">
+                      <IconComp size={16} className="point-favicon-icon" />
+                    </div>
+                    <div className="point-text-content">
+                      <strong className="point-bold-title">{pt.title}</strong>
+                      <span className="point-desc-text"> — {pt.desc}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
@@ -1159,19 +1194,24 @@ export default function Hero({ onOpenDemo }) {
                 closingAgent === 'olivia' ? 'is-closing' : ''
               }`}
             >
-              {OLIVIA_BULLET_POINTS.map((pt, idx) => (
-                <div
-                  key={idx}
-                  className="agent-text-point-item"
-                  style={{ animationDelay: `${0.05 + idx * 0.07}s` }}
-                >
-                  <span className="point-bullet-dot" />
-                  <div className="point-text-content">
-                    <strong className="point-bold-title">{pt.title}</strong>
-                    <span className="point-desc-text"> — {pt.desc}</span>
+              {OLIVIA_BULLET_POINTS.map((pt, idx) => {
+                const IconComp = pt.icon || Target;
+                return (
+                  <div
+                    key={idx}
+                    className="agent-text-point-item"
+                    style={{ animationDelay: `${0.05 + idx * 0.07}s` }}
+                  >
+                    <div className="point-favicon-glass-circle" aria-hidden="true">
+                      <IconComp size={16} className="point-favicon-icon" />
+                    </div>
+                    <div className="point-text-content">
+                      <strong className="point-bold-title">{pt.title}</strong>
+                      <span className="point-desc-text"> — {pt.desc}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
