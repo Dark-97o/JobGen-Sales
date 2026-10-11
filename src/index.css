@@ -7153,4 +7153,680 @@ h6 {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-}
+}
+
+/* ==========================================================================
+   CALIBRATED FOR EVERY INDUSTRY SHOWCASE SECTION
+   Procedural 3D Morphing Architecture | Claymorphed Dialogue Chat Cards
+   ========================================================================== */
+
+.industry-showcase-section {
+  position: relative;
+  z-index: 10;
+  padding: clamp(5rem, 8vw, 8rem) 0 clamp(4rem, 6vw, 6rem) 0;
+  width: 100%;
+}
+
+.industry-showcase-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3.5vw, 2.5rem);
+}
+
+/* Section Header */
+.industry-header-center {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.industry-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFFFFF;
+  color: #0052FF;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 750;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 82, 255, 0.16);
+  box-shadow: 
+    0 6px 18px rgba(0, 82, 255, 0.08),
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -1.5px 2px rgba(0, 82, 255, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.category-sparkle {
+  color: #0052FF;
+  animation: pulseSparkle 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseSparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+  50% { transform: scale(1.15) rotate(12deg); opacity: 1; }
+}
+
+.industry-main-headline {
+  font-family: var(--font-display, 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  font-weight: 850;
+  color: #0B0F19;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  margin: 0 0 1.1rem 0;
+}
+
+.industry-headline-subtitle {
+  font-size: clamp(1rem, 1.2vw, 1.18rem);
+  color: #475569;
+  line-height: 1.6;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+/* 5 Industries Quick Selector Bar */
+.industry-pills-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
+  max-width: 900px;
+}
+
+.industry-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  color: #334155;
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 3px rgba(148, 163, 184, 0.12);
+  user-select: none;
+}
+
+.industry-pill-btn:hover {
+  transform: translateY(-2px);
+  color: #0B0F19;
+  border-color: rgba(203, 213, 225, 1);
+  box-shadow: 
+    0 8px 20px rgba(15, 23, 42, 0.08),
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -2px 4px rgba(148, 163, 184, 0.16);
+}
+
+.industry-pill-btn.is-active {
+  background: #0B0F19;
+  color: #FFFFFF;
+  border-color: #0B0F19;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 10px 26px rgba(11, 15, 25, 0.22),
+    0 2px 6px rgba(11, 15, 25, 0.1),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.industry-pill-btn.is-active .pill-icon {
+  color: var(--pill-color, #38BDF8);
+}
+
+/* Dual Column Stage */
+.industry-dual-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  align-items: stretch;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT COLUMN: 3D ROTATING ARCHITECTURAL MODEL STAGE
+   -------------------------------------------------------------------------- */
+.industry-3d-column {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.industry-3d-card-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 50% 30%, #FFFFFF 0%, #F1F5F9 100%);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 26px 60px -12px rgba(15, 23, 42, 0.12),
+    0 10px 24px -6px rgba(15, 23, 42, 0.06),
+    inset 0 3px 6px #FFFFFF,
+    inset 0 -3.5px 7px rgba(148, 163, 184, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.industry-3d-model-tag {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 750;
+  color: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 4px 14px rgba(15, 23, 42, 0.06),
+    inset 0 1px 2px #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.tag-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulseDot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.industry-three-canvas-viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+}
+
+.industry-three-canvas-viewport:active {
+  cursor: grabbing;
+}
+
+.industry-three-canvas-viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+.industry-3d-bottom-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: radial-gradient(ellipse at bottom, var(--glow-color, #0052FF) 0%, transparent 70%);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT COLUMN: INDUSTRY TEXT, CONTROLS & CLAYMORPHED CONVERSATION CARD
+   -------------------------------------------------------------------------- */
+.industry-info-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.4rem;
+}
+
+/* Navigation controls row */
+.industry-nav-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.industry-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.88rem;
+  font-weight: 750;
+  color: #0F172A;
+}
+
+.counter-current {
+  color: #0052FF;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.counter-sep {
+  color: #94A3B8;
+}
+
+.counter-total {
+  color: #64748B;
+}
+
+.counter-dash {
+  color: #CBD5E1;
+  margin: 0 0.2rem;
+}
+
+.counter-tagline {
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.85rem;
+  color: #475569;
+  font-weight: 650;
+}
+
+.industry-arrows-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Claymorphed Next/Prev Arrow Buttons */
+.industry-arrow-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 
+    0 6px 16px rgba(15, 23, 42, 0.06),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 4px rgba(148, 163, 184, 0.18);
+}
+
+.industry-arrow-btn:hover {
+  transform: translateY(-2px);
+  color: #0052FF;
+  border-color: rgba(0, 82, 255, 0.4);
+  box-shadow: 
+    0 10px 22px rgba(0, 82, 255, 0.12),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 4px rgba(148, 163, 184, 0.22);
+}
+
+.industry-arrow-btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 
+    0 2px 6px rgba(15, 23, 42, 0.08),
+    inset 0 2px 5px rgba(148, 163, 184, 0.3);
+}
+
+/* Industry Headline Group */
+.industry-headline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.industry-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.industry-title-icon-badge {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 
+    0 6px 16px rgba(15, 23, 42, 0.05),
+    inset 0 1.5px 3px #FFFFFF,
+    inset 0 -2px 3px rgba(148, 163, 184, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.industry-title-text {
+  font-family: var(--font-display, 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.85rem, 2.6vw, 2.35rem);
+  font-weight: 850;
+  color: #0B0F19;
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* 2-Line Explanation Description */
+.industry-two-line-desc {
+  font-size: clamp(0.96rem, 1.1vw, 1.05rem);
+  color: #334155;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 620px;
+}
+
+/* --------------------------------------------------------------------------
+   CLAYMORPHED CONVERSATION CHAT CARD
+   Soft 3D Tactile Cushion Shell with High-Precision Dialog Stream
+   -------------------------------------------------------------------------- */
+.industry-clay-chat-card {
+  position: relative;
+  background: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
+  border-radius: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 24px 55px -10px rgba(15, 23, 42, 0.1),
+    0 8px 20px -4px rgba(15, 23, 42, 0.05),
+    inset 0 3px 6px #FFFFFF,
+    inset 0 -3.5px 7px rgba(148, 163, 184, 0.16);
+  padding: clamp(1.2rem, 2vw, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* Card Header */
+.clay-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.clay-chat-header-agent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.clay-agent-avatar {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 12px rgba(0, 82, 255, 0.35),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.clay-agent-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.clay-agent-title {
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.01em;
+}
+
+.clay-agent-telemetry {
+  font-size: 0.73rem;
+  color: #64748B;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.01em;
+}
+
+.clay-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #F0FDF4;
+  color: #15803D;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 750;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.clay-status-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 6px #22C55E;
+  animation: pulseDot 1.5s infinite ease-in-out;
+}
+
+/* Chat Messages Stream */
+.clay-messages-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.clay-messages-stream::-webkit-scrollbar {
+  width: 4px;
+}
+
+.clay-messages-stream::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.clay-messages-stream::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+.clay-bubble-row {
+  display: flex;
+  width: 100%;
+}
+
+.clay-bubble-row.is-user {
+  justify-content: flex-end;
+}
+
+.clay-bubble-row.is-ai {
+  justify-content: flex-start;
+}
+
+/* Claymorphed Chat Bubble Base */
+.clay-bubble-bubble {
+  max-width: 88%;
+  padding: 0.8rem 1.05rem;
+  border-radius: 18px;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.clay-bubble-row.is-user .clay-bubble-bubble {
+  background: linear-gradient(145deg, #F1F5F9 0%, #E2E8F0 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-bottom-right-radius: 4px;
+  box-shadow: 
+    0 6px 16px rgba(15, 23, 42, 0.05),
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -2px 3px rgba(148, 163, 184, 0.25);
+}
+
+.clay-bubble-row.is-ai .clay-bubble-bubble {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F0F7FF 100%);
+  border: 1.5px solid rgba(0, 82, 255, 0.18);
+  border-bottom-left-radius: 4px;
+  box-shadow: 
+    0 8px 20px rgba(0, 82, 255, 0.07),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -2px 4px rgba(0, 82, 255, 0.1);
+}
+
+.clay-bubble-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.clay-bubble-sender {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 750;
+  color: #475569;
+}
+
+.clay-bubble-row.is-ai .clay-bubble-sender {
+  color: #0052FF;
+}
+
+.bubble-role-icon {
+  flex-shrink: 0;
+}
+
+.clay-bubble-time {
+  font-size: 0.7rem;
+  color: #94A3B8;
+  font-family: var(--font-mono, monospace);
+}
+
+.clay-bubble-text {
+  font-size: 0.88rem;
+  color: #0F172A;
+  line-height: 1.48;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Bottom Outcome Verification Bar */
+.clay-outcome-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #F8FAFC;
+  border-radius: 14px;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 
+    inset 0 1.5px 2px #FFFFFF,
+    inset 0 -1.5px 2px rgba(148, 163, 184, 0.1);
+  font-size: 0.78rem;
+}
+
+.clay-outcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #10B981;
+  font-weight: 800;
+  flex-shrink: 0;
+  font-family: var(--font-mono, monospace);
+}
+
+.clay-outcome-icon {
+  color: #10B981;
+  flex-shrink: 0;
+}
+
+.clay-outcome-label {
+  letter-spacing: 0.02em;
+}
+
+.clay-outcome-text {
+  color: #334155;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1040px) {
+  .industry-dual-stage {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .industry-3d-card-frame {
+    min-height: 440px;
+  }
+
+  .industry-three-canvas-viewport {
+    min-height: 440px;
+  }
+
+  .industry-clay-chat-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .industry-pill-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.84rem;
+  }
+
+  .industry-3d-card-frame {
+    min-height: 380px;
+    border-radius: 24px;
+  }
+
+  .industry-three-canvas-viewport {
+    min-height: 380px;
+  }
+
+  .industry-clay-chat-card {
+    border-radius: 22px;
+    padding: 1.1rem;
+  }
+
+  .clay-bubble-bubble {
+    max-width: 95%;
+  }
+
+  .clay-outcome-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .clay-outcome-text {
+    white-space: normal;
+  }
+}
+

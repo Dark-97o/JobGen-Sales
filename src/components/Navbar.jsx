@@ -55,8 +55,8 @@ export default function Navbar({ onOpenDemo }) {
             Home
           </a>
           <a
-            href="#calls"
-            onClick={(e) => { e.preventDefault(); handleNavClick('calls', 'Industries'); }}
+            href="#industries"
+            onClick={(e) => { e.preventDefault(); handleNavClick('industries', 'Industries'); }}
             className={`nav-clay-link ${activeTab === 'Industries' ? 'is-active' : ''}`}
           >
             Industries
