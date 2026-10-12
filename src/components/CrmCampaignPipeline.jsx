@@ -111,11 +111,11 @@ export default function CrmCampaignPipeline() {
             <div className="pipeline-slot pipeline-slot-left">
               <div ref={smsCardRef} className="pipeline-text-area pipeline-sms-area">
                 <h3 className="pipeline-area-heading">
-                  SMS &amp; Email Campaigns
+                  SMS &amp; Email Campaigns Included
                 </h3>
                 <p className="pipeline-area-desc">
-                  Never lose a warm prospect. JobGen AI triggers tailored multi-channel follow-ups
-                  quoting caller requirements, estimates, and calendar links.
+                  We provide complete multi-channel campaign automation. Instant SMS follow-ups,
+                  dynamic email nurture sequences, and booking links are all handled for you.
                 </p>
 
                 {/* 3 Bullet Points with Tactile Claymorphic Circle Favicons */}
@@ -125,9 +125,9 @@ export default function CrmCampaignPipeline() {
                       <Send size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Instant 45-Second SMS Follow-Up</h4>
+                      <h4 className="pipeline-bullet-title">Turnkey SMS Follow-Up Campaigns</h4>
                       <p className="pipeline-bullet-text">
-                        Dispatches immediate SMS confirmations, quotes, and booking links while caller intent is highest.
+                        We deploy instant branded SMS campaigns with booking links and estimates while intent is highest.
                       </p>
                     </div>
                   </div>
@@ -137,9 +137,9 @@ export default function CrmCampaignPipeline() {
                       <Mail size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Hyper-Personalized Email Sequences</h4>
+                      <h4 className="pipeline-bullet-title">Done-For-You Email Drip Sequences</h4>
                       <p className="pipeline-bullet-text">
-                        Dynamic email sequences tailored with caller requirements, meeting dossiers, and attached brochures.
+                        We run personalized email nurture sequences referencing exact caller requirements and proposals.
                       </p>
                     </div>
                   </div>
@@ -149,9 +149,9 @@ export default function CrmCampaignPipeline() {
                       <Zap size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Autonomous Two-Way Re-engagement</h4>
+                      <h4 className="pipeline-bullet-title">Autonomous Two-Way Campaign Replies</h4>
                       <p className="pipeline-bullet-text">
-                        Answers SMS replies automatically, overcomes hesitations, and locks appointments on your calendar.
+                        Our AI replies to incoming SMS messages, answers prospect questions, and locks appointments.
                       </p>
                     </div>
                   </div>
@@ -163,11 +163,11 @@ export default function CrmCampaignPipeline() {
             <div className="pipeline-slot pipeline-slot-right">
               <div ref={crmCardRef} className="pipeline-text-area pipeline-crm-area">
                 <h3 className="pipeline-area-heading">
-                  Company CRM Integration
+                  All-In-One Company CRM Included
                 </h3>
                 <p className="pipeline-area-desc">
-                  Eliminate manual staff data entry. Full caller dossiers, audio recordings, transcripts,
-                  and verified dates flow directly into your company CRM.
+                  We provide your complete dedicated Company CRM. Manage deals, view full call recordings,
+                  track lead pipelines, and monitor team performance in one unified platform.
                 </p>
 
                 {/* 3 Bullet Points with Tactile Claymorphic Circle Favicons */}
@@ -177,9 +177,9 @@ export default function CrmCampaignPipeline() {
                       <Database size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Instant Pipeline Record Creation</h4>
+                      <h4 className="pipeline-bullet-title">Complete Dedicated Company CRM</h4>
                       <p className="pipeline-bullet-text">
-                        Auto-creates or enriches deals and contacts in HubSpot, Salesforce, Zoho, or your proprietary CRM.
+                        A full turnkey CRM platform with deal stages, contact timelines, and automated pipeline tracking.
                       </p>
                     </div>
                   </div>
@@ -189,9 +189,9 @@ export default function CrmCampaignPipeline() {
                       <FileText size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Verbatim Dossiers &amp; Sentiment Tags</h4>
+                      <h4 className="pipeline-bullet-title">Full Lead Dossiers &amp; Recordings</h4>
                       <p className="pipeline-bullet-text">
-                        Embeds word-for-word transcript logs, call audio links, and qualification tags right in the CRM feed.
+                        Every contact card includes verbatim transcript logs, one-click call audio, and qualification tags.
                       </p>
                     </div>
                   </div>
@@ -201,9 +201,9 @@ export default function CrmCampaignPipeline() {
                       <Share2 size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Smart Workflow &amp; Webhook Triggers</h4>
+                      <h4 className="pipeline-bullet-title">Automated Pipeline &amp; Rep Routing</h4>
                       <p className="pipeline-bullet-text">
-                        Notifies your account executives on Slack/Teams and assigns high-priority follow-up tasks instantly.
+                        Automatically routes won leads to your sales reps with instant notifications and scheduled tasks.
                       </p>
                     </div>
                   </div>
