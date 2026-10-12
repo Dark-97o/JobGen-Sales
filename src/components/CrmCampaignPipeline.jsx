@@ -121,7 +121,7 @@ export default function CrmCampaignPipeline() {
                 {/* 3 Bullet Points with Tactile Claymorphic Circle Favicons */}
                 <div className="pipeline-bullets-list">
                   <div className="pipeline-bullet-item">
-                    <div className="pipeline-clay-circle">
+                    <div className="pipeline-crm-circle">
                       <Send size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
@@ -133,7 +133,7 @@ export default function CrmCampaignPipeline() {
                   </div>
 
                   <div className="pipeline-bullet-item">
-                    <div className="pipeline-clay-circle">
+                    <div className="pipeline-crm-circle">
                       <Mail size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
@@ -145,7 +145,7 @@ export default function CrmCampaignPipeline() {
                   </div>
 
                   <div className="pipeline-bullet-item">
-                    <div className="pipeline-clay-circle">
+                    <div className="pipeline-crm-circle">
                       <Zap size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
@@ -173,7 +173,7 @@ export default function CrmCampaignPipeline() {
                 {/* 3 Bullet Points with Tactile Claymorphic Circle Favicons */}
                 <div className="pipeline-bullets-list">
                   <div className="pipeline-bullet-item">
-                    <div className="pipeline-clay-circle">
+                    <div className="pipeline-crm-circle">
                       <Database size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
@@ -185,7 +185,7 @@ export default function CrmCampaignPipeline() {
                   </div>
 
                   <div className="pipeline-bullet-item">
-                    <div className="pipeline-clay-circle">
+                    <div className="pipeline-crm-circle">
                       <FileText size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
@@ -197,7 +197,7 @@ export default function CrmCampaignPipeline() {
                   </div>
 
                   <div className="pipeline-bullet-item">
-                    <div className="pipeline-clay-circle">
+                    <div className="pipeline-crm-circle">
                       <Share2 size={26} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">

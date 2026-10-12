@@ -1099,7 +1099,7 @@ export default function IndustryShowcase({ onOpenDemo }) {
                       </div>
                     )}
                     <div className={`pipeline-clay-circle ${isActive ? 'is-active' : ''}`}>
-                      <StepIcon size={34} className="pipeline-circle-icon" />
+                      <StepIcon size={38} className="pipeline-circle-icon" />
                     </div>
                   </div>
 
