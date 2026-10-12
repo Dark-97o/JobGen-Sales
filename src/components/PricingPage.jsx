@@ -254,22 +254,6 @@ export default function PricingPage({ onOpenDemo, onOpenBooking, onOpenCalculato
           <h1 className="pricing-hero-title">
             Price every conversation with confidence.
           </h1>
-
-          <p className="pricing-hero-subtitle">
-            Choose your call type, product area and conversation length to see the price your team would pay.
-          </p>
-
-          <div className="pricing-hero-meta-row">
-            <span className="pricing-meta-tag">
-              <CheckCircle2 size={15} /> Flexible call volume
-            </span>
-            <span className="pricing-meta-tag">
-              <CheckCircle2 size={15} /> Choose your setup
-            </span>
-            <span className="pricing-meta-tag">
-              <CheckCircle2 size={15} /> Live estimate
-            </span>
-          </div>
         </section>
 
         {/* Interactive Calculator Cockpit */}
