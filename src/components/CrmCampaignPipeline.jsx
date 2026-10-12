@@ -1,30 +1,21 @@
-import React, { useRef, useState, useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import {
-  MessageSquare,
+  Send,
   Mail,
   Zap,
   Database,
   FileText,
   Share2,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
-  Send,
-  Layers,
 } from 'lucide-react';
 
 export default function CrmCampaignPipeline() {
   const containerRef = useRef(null);
-  const leftColRef = useRef(null);
-  const rightColRef = useRef(null);
   const laptopWrapRef = useRef(null);
   const img1Ref = useRef(null);
   const img2Ref = useRef(null);
   const smsCardRef = useRef(null);
   const crmCardRef = useRef(null);
-
-  // Active step for manual tabs or visual state indicator (0 = SMS/Email, 1 = CRM)
-  const [activeStep, setActiveStep] = useState(0);
+  const progressFillRef = useRef(null);
 
   useLayoutEffect(() => {
     let animId = null;
@@ -34,61 +25,53 @@ export default function CrmCampaignPipeline() {
       const rect = containerRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
 
-      // Scrollable distance within the pinned container:
+      // Scrollable vertical distance of the pinned section
       const totalScrollable = Math.max(rect.height - windowH, 1);
-      // Raw progress 0.0 -> 1.0
-      const p = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
+      const rawProgress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
 
-      // Transition starts at 0.30 and finishes at 0.70
-      const startT = 0.25;
-      const endT = 0.75;
-      const glideProgress = Math.min(Math.max((p - startT) / (endT - startT), 0), 1);
+      // Glide runs between 0.15 and 0.85 of the scroll section
+      const startT = 0.15;
+      const endT = 0.85;
+      const glideProgress = Math.min(Math.max((rawProgress - startT) / (endT - startT), 0), 1);
 
-      // Measure column distance
-      let colDistance = 0;
-      if (leftColRef.current && rightColRef.current) {
-        const leftRect = leftColRef.current.getBoundingClientRect();
-        const rightRect = rightColRef.current.getBoundingClientRect();
-        colDistance = Math.max(rightRect.left - leftRect.left, 0);
-      }
-
-      // 1. Laptop gliding from Right Column to Left Column
+      // 1. Laptop glides horizontally across from Right Slot (50%) to Left Slot (0%)
       if (laptopWrapRef.current) {
-        const currentTranslateX = -glideProgress * colDistance;
-        laptopWrapRef.current.style.transform = `translate3d(${currentTranslateX}px, 0, 0)`;
+        const translateXPercent = -glideProgress * 100;
+        laptopWrapRef.current.style.transform = `translate3d(${translateXPercent}%, 0, 0)`;
       }
 
       // 2. Cross-fade between comp1 (SMS/Email) and comp2 (Company CRM)
       if (img1Ref.current && img2Ref.current) {
-        const comp1Opacity = Math.max(0, 1 - glideProgress * 1.25);
-        const comp2Opacity = Math.min(1, glideProgress * 1.25);
-        img1Ref.current.style.opacity = comp1Opacity;
-        img2Ref.current.style.opacity = comp2Opacity;
+        // img1 fades out between glide 0.35 and 0.65
+        const img1Opacity = Math.min(1, Math.max(0, 1 - (glideProgress - 0.3) * 2.5));
+        // img2 fades in between glide 0.35 and 0.65
+        const img2Opacity = Math.min(1, Math.max(0, (glideProgress - 0.35) * 2.5));
+
+        img1Ref.current.style.opacity = img1Opacity;
+        img2Ref.current.style.opacity = img2Opacity;
       }
 
-      // 3. SMS/Email Text Card on Left: Fades out and slides slightly left as user scrolls down
+      // 3. SMS/Email Text Card on Left: fades out and slides away to left
       if (smsCardRef.current) {
-        const smsOpacity = Math.max(0, 1 - glideProgress * 1.4);
-        const smsTranslateX = -glideProgress * 36;
+        const smsOpacity = Math.min(1, Math.max(0, 1 - glideProgress * 2.2));
+        const smsX = -glideProgress * 50;
         smsCardRef.current.style.opacity = smsOpacity;
-        smsCardRef.current.style.transform = `translate3d(${smsTranslateX}px, 0, 0)`;
-        smsCardRef.current.style.pointerEvents = glideProgress > 0.6 ? 'none' : 'auto';
+        smsCardRef.current.style.transform = `translate3d(${smsX}px, 0, 0)`;
+        smsCardRef.current.style.pointerEvents = glideProgress > 0.5 ? 'none' : 'auto';
       }
 
-      // 4. Company CRM Text Card on Right: Fades in and slides in from right as user scrolls down
+      // 4. Company CRM Text Card on Right: fades in and slides into place from right
       if (crmCardRef.current) {
-        const crmOpacity = Math.min(1, Math.max(0, (glideProgress - 0.2) * 1.35));
-        const crmTranslateX = (1 - glideProgress) * 36;
+        const crmOpacity = Math.min(1, Math.max(0, (glideProgress - 0.45) * 2.2));
+        const crmX = (1 - glideProgress) * 50;
         crmCardRef.current.style.opacity = crmOpacity;
-        crmCardRef.current.style.transform = `translate3d(${crmTranslateX}px, 0, 0)`;
-        crmCardRef.current.style.pointerEvents = glideProgress < 0.4 ? 'none' : 'auto';
+        crmCardRef.current.style.transform = `translate3d(${crmX}px, 0, 0)`;
+        crmCardRef.current.style.pointerEvents = glideProgress < 0.5 ? 'none' : 'auto';
       }
 
-      // Update active step state
-      if (p >= 0.5) {
-        setActiveStep(1);
-      } else {
-        setActiveStep(0);
+      // 5. Bottom horizontal progress indicator fill
+      if (progressFillRef.current) {
+        progressFillRef.current.style.width = `${glideProgress * 100}%`;
       }
     };
 
@@ -108,85 +91,35 @@ export default function CrmCampaignPipeline() {
     };
   }, []);
 
-  const scrollToStep = (step) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const containerTop = rect.top + scrollTop;
-    const windowH = window.innerHeight;
-    const totalScrollable = Math.max(containerRef.current.offsetHeight - windowH, 1);
-
-    const targetScroll = step === 0 ? containerTop + 20 : containerTop + totalScrollable * 0.85;
-
-    window.scrollTo({
-      top: targetScroll,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <section ref={containerRef} className="pipeline-scroll-section" id="crm-campaign-pipeline">
       <div className="pipeline-sticky-wrapper">
         <div className="container relative z-10 pipeline-inner-container">
-          {/* Main Section Header */}
+          {/* Streamlined Section Header */}
           <div className="pipeline-header-block text-center">
-            <div className="pipeline-eyebrow-pill">
-              <Sparkles size={14} className="text-blue-500" />
-              <span>LEAD INGESTION &amp; PIPELINE ENGINE</span>
-            </div>
-
             <h2 className="pipeline-main-title">
               We collect leads and ensure they run in your CRM
             </h2>
-
-            <p className="pipeline-sub-description">
-              We help businesses capture high-intent callers and effortlessly power both
-              real-time CRM synchronization and high-converting SMS &amp; email follow-up campaigns.
+            <p className="pipeline-lead-sub">
+              We help businesses with CRM, email &amp; SMS campaigns
             </p>
-
-            {/* Claymorphic Step Switcher Pills */}
-            <div className="pipeline-switch-bar">
-              <button
-                type="button"
-                onClick={() => scrollToStep(0)}
-                className={`pipeline-switch-btn ${activeStep === 0 ? 'is-active' : ''}`}
-              >
-                <Send size={15} />
-                <span>01 · SMS &amp; Email Campaigns</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollToStep(1)}
-                className={`pipeline-switch-btn ${activeStep === 1 ? 'is-active' : ''}`}
-              >
-                <Database size={15} />
-                <span>02 · Company CRM Integration</span>
-              </button>
-            </div>
           </div>
 
-          {/* Gliding 2-Column Stage */}
-          <div className="pipeline-gliding-stage">
-            {/* Left Column Area */}
-            <div ref={leftColRef} className="pipeline-col pipeline-col-left">
-              {/* Step 1: SMS / Email Campaign Text Card */}
+          {/* Gliding Stage Viewport */}
+          <div className="pipeline-stage-viewport">
+            {/* Left Slot: SMS / Email Campaign Card */}
+            <div className="pipeline-slot pipeline-slot-left">
               <div ref={smsCardRef} className="pipeline-content-card pipeline-sms-card">
-                <div className="pipeline-card-badge">
-                  <span className="pipeline-step-number">01</span>
-                  <span>AUTONOMOUS OUTREACH</span>
-                </div>
-
                 <h3 className="pipeline-card-heading">
-                  SMS &amp; Email Follow-Up Campaigns
+                  SMS &amp; Email Campaigns
                 </h3>
-
                 <p className="pipeline-card-desc">
-                  Never lose a warm prospect to slow response times. The instant a voice call
-                  concludes, JobGen AI triggers tailored multi-channel follow-ups quoting the
-                  caller’s exact requirements, pricing estimates, and calendar links.
+                  Never lose a warm prospect. The instant a voice call concludes, JobGen AI triggers
+                  tailored multi-channel follow-ups quoting the caller’s exact requirements,
+                  estimates, and calendar links.
                 </p>
 
-                {/* 3 Bullet Points with Claymorphism Circles */}
+                {/* 3 Bullet Points with Tactile Claymorphic Circles */}
                 <div className="pipeline-bullets-list">
                   <div className="pipeline-bullet-item">
                     <div className="pipeline-clay-circle">
@@ -195,7 +128,7 @@ export default function CrmCampaignPipeline() {
                     <div className="pipeline-bullet-content">
                       <h4 className="pipeline-bullet-title">Instant 45-Second SMS Follow-Up</h4>
                       <p className="pipeline-bullet-text">
-                        Dispatches immediate SMS confirmations, quotes, and booking links while caller intent is at its highest.
+                        Dispatches immediate SMS confirmations, quotes, and booking links while caller intent is highest.
                       </p>
                     </div>
                   </div>
@@ -205,9 +138,9 @@ export default function CrmCampaignPipeline() {
                       <Mail size={20} className="pipeline-bullet-icon" />
                     </div>
                     <div className="pipeline-bullet-content">
-                      <h4 className="pipeline-bullet-title">Hyper-Personalized Email Nurture</h4>
+                      <h4 className="pipeline-bullet-title">Hyper-Personalized Email Sequences</h4>
                       <p className="pipeline-bullet-text">
-                        Dynamic email sequences tailored with caller requirements, meeting dossiers, and PDF brochures.
+                        Dynamic email sequences tailored with caller requirements, meeting dossiers, and attached brochures.
                       </p>
                     </div>
                   </div>
@@ -227,26 +160,19 @@ export default function CrmCampaignPipeline() {
               </div>
             </div>
 
-            {/* Right Column Area */}
-            <div ref={rightColRef} className="pipeline-col pipeline-col-right">
-              {/* Step 2: Company CRM Details Card (Initially Faded Out, revealed as laptop glides left) */}
+            {/* Right Slot: Company CRM Details Card */}
+            <div className="pipeline-slot pipeline-slot-right">
               <div ref={crmCardRef} className="pipeline-content-card pipeline-crm-card">
-                <div className="pipeline-card-badge">
-                  <span className="pipeline-step-number">02</span>
-                  <span>ENTERPRISE CRM WRITEBACK</span>
-                </div>
-
                 <h3 className="pipeline-card-heading">
-                  Company CRM Integration &amp; Real-Time Sync
+                  Company CRM Integration
                 </h3>
-
                 <p className="pipeline-card-desc">
-                  Eliminate manual staff data entry and fragmented lead sheets. Full caller
-                  dossiers, recordings, transcripts, and verified booking dates flow directly into
-                  your company’s central CRM with zero human intervention.
+                  Eliminate manual staff data entry and fragmented lead sheets. Full caller dossiers,
+                  recordings, transcripts, and verified booking dates flow directly into your company’s
+                  central CRM with zero human intervention.
                 </p>
 
-                {/* 3 Bullet Points with Claymorphism Circles */}
+                {/* 3 Bullet Points with Tactile Claymorphic Circles */}
                 <div className="pipeline-bullets-list">
                   <div className="pipeline-bullet-item">
                     <div className="pipeline-clay-circle">
@@ -285,30 +211,32 @@ export default function CrmCampaignPipeline() {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* The Gliding Laptop Wrapper (Initially situated in Right Column, glides across to Left Column) */}
-              <div ref={laptopWrapRef} className="pipeline-gliding-laptop">
-                <div className="pipeline-laptop-card-frame">
-                  {/* Glowing Claymorphic Backdrop Accent */}
-                  <div className="pipeline-laptop-glow" aria-hidden="true" />
-
-                  {/* Image 1: comp1.png (SMS / Email Campaign laptop) */}
-                  <img
-                    ref={img1Ref}
-                    src="/assets/comp1.png"
-                    alt="SMS and Email Campaign Management on Laptop"
-                    className="pipeline-laptop-img pipeline-laptop-img1"
-                  />
-
-                  {/* Image 2: comp2.png (Company CRM laptop) */}
-                  <img
-                    ref={img2Ref}
-                    src="/assets/comp2.png"
-                    alt="Company CRM Management on Laptop"
-                    className="pipeline-laptop-img pipeline-laptop-img2"
-                  />
-                </div>
+            {/* Dedicated Gliding Laptop Unit: Sits in Right Slot initially, glides to Left Slot */}
+            <div ref={laptopWrapRef} className="pipeline-gliding-laptop-unit">
+              <div className="pipeline-laptop-visual-box">
+                <div className="pipeline-laptop-glow-aura" aria-hidden="true" />
+                <img
+                  ref={img1Ref}
+                  src="/assets/comp1.png"
+                  alt="SMS and Email Campaign Management"
+                  className="pipeline-laptop-img pipeline-laptop-img-1"
+                />
+                <img
+                  ref={img2Ref}
+                  src="/assets/comp2.png"
+                  alt="Company CRM Management"
+                  className="pipeline-laptop-img pipeline-laptop-img-2"
+                />
               </div>
+            </div>
+          </div>
+
+          {/* Sleek Horizontal Flow Indicator */}
+          <div className="pipeline-scroll-tracker">
+            <div className="pipeline-tracker-bar">
+              <div ref={progressFillRef} className="pipeline-tracker-fill" />
             </div>
           </div>
         </div>
