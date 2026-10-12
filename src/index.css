@@ -11128,12 +11128,12 @@ h6 {
 /* Mega Dropdown Floating Glass Card */
 .nav-mega-dropdown {
   position: absolute;
-  top: calc(100% + 14px);
+  top: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  transform: translateX(-50%) translateY(6px);
   opacity: 0;
   pointer-events: none;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 10000;
   width: max-content;
   min-width: 720px;
@@ -11148,6 +11148,18 @@ h6 {
     0 24px 60px -10px rgba(0, 0, 0, 0.75),
     0 8px 24px rgba(0, 0, 0, 0.4),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.22);
+}
+
+/* Invisible Hover Bridge: Keeps mouse hover active when cursor moves down across the gap */
+.nav-mega-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: transparent;
+  pointer-events: auto;
 }
 
 .nav-dropdown-wrapper:hover .nav-mega-dropdown,

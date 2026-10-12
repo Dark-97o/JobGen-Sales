@@ -45,6 +45,32 @@ export default function Navbar({
   const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
   const [isMobileIndustriesOpen, setIsMobileIndustriesOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
+
+  const handleIndustriesEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setIsIndustriesOpen(true);
+  };
+
+  const handleIndustriesLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsIndustriesOpen(false);
+    }, 250); // 250ms grace period so moving down onto the dropdown never loses focus
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,11 +108,13 @@ export default function Navbar({
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
         setIsIndustriesOpen(false);
       }
     };
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
         setIsIndustriesOpen(false);
       }
     };
@@ -185,12 +213,15 @@ export default function Navbar({
           <div
             ref={dropdownRef}
             className={`nav-dropdown-wrapper ${isIndustriesOpen ? 'is-open' : ''}`}
-            onMouseEnter={() => setIsIndustriesOpen(true)}
-            onMouseLeave={() => setIsIndustriesOpen(false)}
+            onMouseEnter={handleIndustriesEnter}
+            onMouseLeave={handleIndustriesLeave}
           >
             <button
               type="button"
-              onClick={() => setIsIndustriesOpen(!isIndustriesOpen)}
+              onClick={() => {
+                if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+                setIsIndustriesOpen((prev) => !prev);
+              }}
               className={`nav-clay-link nav-dropdown-trigger ${isIndustriesOpen ? 'is-active' : ''}`}
               aria-expanded={isIndustriesOpen}
               aria-haspopup="true"
@@ -203,7 +234,12 @@ export default function Navbar({
             </button>
 
             {/* Mega Dropdown Panel */}
-            <div className="nav-mega-dropdown" role="menu">
+            <div
+              className="nav-mega-dropdown"
+              role="menu"
+              onMouseEnter={handleIndustriesEnter}
+              onMouseLeave={handleIndustriesLeave}
+            >
               <div className="nav-mega-grid">
                 {INDUSTRY_GROUPS.map((group, gIdx) => {
                   const IconComponent = group.icon;
