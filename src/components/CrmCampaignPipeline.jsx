@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import {
   Send,
   Mail,
@@ -16,6 +16,7 @@ export default function CrmCampaignPipeline() {
   const smsCardRef = useRef(null);
   const crmCardRef = useRef(null);
   const progressFillRef = useRef(null);
+  const [activeStep, setActiveStep] = useState(0);
 
   useLayoutEffect(() => {
     let animId = null;
@@ -25,53 +26,64 @@ export default function CrmCampaignPipeline() {
       const rect = containerRef.current.getBoundingClientRect();
       const windowH = window.innerHeight;
 
-      // Scrollable vertical distance of the pinned section
+      // Total scrollable height for pinning
       const totalScrollable = Math.max(rect.height - windowH, 1);
       const rawProgress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
 
-      // Glide runs between 0.15 and 0.85 of the scroll section
-      const startT = 0.15;
+      // Glide active between 0.10 and 0.85 of this pinned section
+      const startT = 0.08;
       const endT = 0.85;
       const glideProgress = Math.min(Math.max((rawProgress - startT) / (endT - startT), 0), 1);
 
-      // 1. Laptop glides horizontally across from Right Slot (50%) to Left Slot (0%)
+      // Smooth ease-in-out curve for the laptop gliding across
+      const easeT =
+        glideProgress < 0.5
+          ? 2 * glideProgress * glideProgress
+          : 1 - Math.pow(-2 * glideProgress + 2, 2) / 2;
+
+      // 1. Gliding Laptop: translates from Right Column (0%) to Left Column (-100%)
       if (laptopWrapRef.current) {
-        const translateXPercent = -glideProgress * 100;
+        const translateXPercent = -easeT * 100;
         laptopWrapRef.current.style.transform = `translate3d(${translateXPercent}%, 0, 0)`;
       }
 
       // 2. Cross-fade between comp1 (SMS/Email) and comp2 (Company CRM)
       if (img1Ref.current && img2Ref.current) {
-        // img1 fades out between glide 0.35 and 0.65
-        const img1Opacity = Math.min(1, Math.max(0, 1 - (glideProgress - 0.3) * 2.5));
-        // img2 fades in between glide 0.35 and 0.65
-        const img2Opacity = Math.min(1, Math.max(0, (glideProgress - 0.35) * 2.5));
+        const img1Opacity = Math.min(1, Math.max(0, 1 - (glideProgress - 0.25) * 2.2));
+        const img2Opacity = Math.min(1, Math.max(0, (glideProgress - 0.3) * 2.2));
 
         img1Ref.current.style.opacity = img1Opacity;
         img2Ref.current.style.opacity = img2Opacity;
       }
 
-      // 3. SMS/Email Text Card on Left: fades out and slides away to left
+      // 3. SMS/Email Text Card on Left: slides out to left & fades
       if (smsCardRef.current) {
-        const smsOpacity = Math.min(1, Math.max(0, 1 - glideProgress * 2.2));
-        const smsX = -glideProgress * 50;
+        const smsOpacity = Math.min(1, Math.max(0, 1 - (glideProgress - 0.1) * 2.0));
+        const smsX = -easeT * 50;
         smsCardRef.current.style.opacity = smsOpacity;
         smsCardRef.current.style.transform = `translate3d(${smsX}px, 0, 0)`;
         smsCardRef.current.style.pointerEvents = glideProgress > 0.5 ? 'none' : 'auto';
       }
 
-      // 4. Company CRM Text Card on Right: fades in and slides into place from right
+      // 4. Company CRM Text Card on Right: slides in from right & fades in
       if (crmCardRef.current) {
-        const crmOpacity = Math.min(1, Math.max(0, (glideProgress - 0.45) * 2.2));
-        const crmX = (1 - glideProgress) * 50;
+        const crmOpacity = Math.min(1, Math.max(0, (glideProgress - 0.35) * 2.0));
+        const crmX = (1 - easeT) * 50;
         crmCardRef.current.style.opacity = crmOpacity;
         crmCardRef.current.style.transform = `translate3d(${crmX}px, 0, 0)`;
         crmCardRef.current.style.pointerEvents = glideProgress < 0.5 ? 'none' : 'auto';
       }
 
-      // 5. Bottom horizontal progress indicator fill
+      // 5. Progress tracker bar fill
       if (progressFillRef.current) {
         progressFillRef.current.style.width = `${glideProgress * 100}%`;
+      }
+
+      // Update step indicator
+      if (glideProgress >= 0.5) {
+        setActiveStep(1);
+      } else {
+        setActiveStep(0);
       }
     };
 
@@ -84,7 +96,11 @@ export default function CrmCampaignPipeline() {
     window.addEventListener('resize', onScroll, { passive: true });
     handleScroll();
 
+    // Secondary trigger in case styles or fonts load after mount
+    const timer = setTimeout(handleScroll, 80);
+
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       if (animId) cancelAnimationFrame(animId);
@@ -213,7 +229,7 @@ export default function CrmCampaignPipeline() {
               </div>
             </div>
 
-            {/* Dedicated Gliding Laptop Unit: Sits in Right Slot initially, glides to Left Slot */}
+            {/* Dedicated Gliding Laptop Unit: Sits in Right Slot initially, glides across to Left Slot */}
             <div ref={laptopWrapRef} className="pipeline-gliding-laptop-unit">
               <div className="pipeline-laptop-visual-box">
                 <div className="pipeline-laptop-glow-aura" aria-hidden="true" />
@@ -221,20 +237,30 @@ export default function CrmCampaignPipeline() {
                   ref={img1Ref}
                   src="/assets/comp1.png"
                   alt="SMS and Email Campaign Management"
+                  loading="eager"
                   className="pipeline-laptop-img pipeline-laptop-img-1"
                 />
                 <img
                   ref={img2Ref}
                   src="/assets/comp2.png"
                   alt="Company CRM Management"
+                  loading="eager"
                   className="pipeline-laptop-img pipeline-laptop-img-2"
                 />
               </div>
             </div>
           </div>
 
-          {/* Sleek Horizontal Flow Indicator */}
+          {/* Sleek Horizontal Flow Progress Tracker */}
           <div className="pipeline-scroll-tracker">
+            <div className="pipeline-tracker-labels">
+              <span className={`pipeline-step-tag ${activeStep === 0 ? 'is-active' : ''}`}>
+                01 · SMS &amp; Email Campaigns
+              </span>
+              <span className={`pipeline-step-tag ${activeStep === 1 ? 'is-active' : ''}`}>
+                02 · Company CRM Integration
+              </span>
+            </div>
             <div className="pipeline-tracker-bar">
               <div ref={progressFillRef} className="pipeline-tracker-fill" />
             </div>

@@ -3489,7 +3489,7 @@ h6 {
   position: relative;
   z-index: 40;
   background-color: transparent;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .white-contour-canvas-bg {
@@ -13260,16 +13260,37 @@ h6 {
 /* Bottom Progress Tracker */
 .pipeline-scroll-tracker {
   display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
   width: 100%;
 }
 
+.pipeline-tracker-labels {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.pipeline-step-tag {
+  font-size: 0.76rem;
+  font-weight: 650;
+  color: #94A3B8;
+  letter-spacing: 0.04em;
+  transition: color 0.25s ease;
+}
+
+.pipeline-step-tag.is-active {
+  color: #2563EB;
+  font-weight: 750;
+}
+
 .pipeline-tracker-bar {
-  width: 220px;
+  width: 240px;
   height: 6px;
   border-radius: 9999px;
-  background: rgba(226, 232, 240, 0.8);
+  background: rgba(226, 232, 240, 0.85);
   overflow: hidden;
   position: relative;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
