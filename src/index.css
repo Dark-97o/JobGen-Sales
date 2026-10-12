@@ -12389,14 +12389,16 @@ h6 {
   padding: 0.35rem 0.2rem;
 }
 
-/* Right Column: Sticky Live Summary Claymorphic Card */
+/* Right Column: Floating Sticky Live Summary Claymorphic Card */
 .jobgen-pricing-v2 .pricing-summary-col {
   position: relative;
+  height: 100%;
 }
 
 .jobgen-pricing-v2 .sticky-clay-summary-card {
+  position: -webkit-sticky;
   position: sticky;
-  top: 105px;
+  top: 92px;
   background: linear-gradient(155deg, rgba(255, 255, 255, 0.97) 0%, rgba(248, 250, 252, 0.94) 100%);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
@@ -12408,6 +12410,7 @@ h6 {
     0 8px 24px rgba(7, 26, 82, 0.08),
     inset 0 2px 3px #FFFFFF,
     inset 0 -2px 4px rgba(203, 213, 225, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .jobgen-pricing-v2 .summary-card-header {

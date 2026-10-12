@@ -251,11 +251,6 @@ export default function PricingPage({ onOpenDemo, onOpenBooking, onOpenCalculato
       <div className="container pricing-container">
         {/* Hero Section */}
         <section className="pricing-hero-section">
-          <div className="pricing-hero-badge">
-            <Sparkles size={14} className="badge-sparkle-icon" />
-            <span>Simple, transparent pricing</span>
-          </div>
-
           <h1 className="pricing-hero-title">
             Price every conversation with confidence.
           </h1>
@@ -275,30 +270,11 @@ export default function PricingPage({ onOpenDemo, onOpenBooking, onOpenCalculato
               <CheckCircle2 size={15} /> Live estimate
             </span>
           </div>
-
-          <div className="pricing-hero-note-card">
-            <div className="note-card-badge">
-              <CheckCircle2 size={15} />
-              <span>Your plan</span>
-            </div>
-            <strong className="note-card-headline">Built around your conversations</strong>
-            <p className="note-card-sub">
-              Longer calls and higher monthly volume update the estimate instantly. Choose the telephone option that fits your business.
-            </p>
-          </div>
         </section>
 
-        {/* Section 01: Configure your plan & Interactive Calculator */}
+        {/* Interactive Calculator Cockpit */}
         <section className="pricing-interactive-calc-section">
-          <div className="pricing-section-header-compact">
-            <span className="pricing-eyebrow">01 · Configure your plan</span>
-            <h2 className="pricing-section-title">See your price in seconds.</h2>
-            <p className="pricing-section-desc">
-              Compare Property, Education and Accounting using the same call volume and average call length.
-            </p>
-          </div>
-
-          {/* 2-Column Responsive Cockpit */}
+          {/* 2-Column Responsive Cockpit: Choosing Options on Left, Floating Summary Card on Right */}
           <div className="pricing-cockpit-grid">
             {/* Left Column: Compact Controls */}
             <div className="pricing-controls-col">
@@ -591,7 +567,7 @@ export default function PricingPage({ onOpenDemo, onOpenBooking, onOpenCalculato
               </div>
             </div>
 
-            {/* Right Column: Sticky Live Summary Claymorphic Card */}
+            {/* Right Column: Floating Sticky Live Summary Claymorphic Card */}
             <div className="pricing-summary-col">
               <aside className="sticky-clay-summary-card">
                 <div className="summary-card-header">
@@ -650,88 +626,6 @@ export default function PricingPage({ onOpenDemo, onOpenBooking, onOpenCalculato
                 </div>
               </aside>
             </div>
-          </div>
-        </section>
-
-        {/* Section 02: Conversation Length Model */}
-        <section className="pricing-duration-section">
-          <div className="pricing-section-header-compact">
-            <span className="pricing-eyebrow">02 · Conversation length</span>
-            <h2 className="pricing-section-title">Longer calls, clearly priced.</h2>
-            <p className="pricing-section-desc">
-              See how the estimated conversation price changes as a call continues.
-            </p>
-          </div>
-
-          <div className="duration-milestones-grid">
-            {[1, 2, 3, 4, 5].map((minutes) => (
-              <div key={minutes} className="duration-milestone-card">
-                <span className="milestone-time">At {minutes} minute{minutes === 1 ? '' : 's'}</span>
-                <strong className="milestone-price">{formatCurrency(calculation.atDuration(minutes), 3)}</strong>
-                <small className="milestone-label">Estimated price / conversation</small>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 03: Included in your estimate */}
-        <section className="pricing-includes-section">
-          <div className="pricing-section-header-compact">
-            <span className="pricing-eyebrow">03 · Included in your estimate</span>
-            <h2 className="pricing-section-title">One clear number, built from your setup.</h2>
-            <p className="pricing-section-desc">
-              Choose the experience you want and adjust the call pattern to match your team.
-            </p>
-          </div>
-
-          <div className="includes-cards-grid">
-            <article className="include-feature-card">
-              <span className="include-number">01</span>
-              <div className="include-icon-wrap">
-                <Sparkles size={20} />
-              </div>
-              <h3 className="include-title">AI conversations</h3>
-              <p className="include-desc">
-                Your selected AI model handles the conversation for your chosen product area.
-              </p>
-            </article>
-
-            <article className="include-feature-card">
-              <span className="include-number">02</span>
-              <div className="include-icon-wrap">
-                <Volume2 size={20} />
-              </div>
-              <h3 className="include-title">Natural voice</h3>
-              <p className="include-desc">
-                Choose the voice experience that matches your brand and callers.
-              </p>
-            </article>
-
-            <article className="include-feature-card">
-              <span className="include-number">03</span>
-              <div className="include-icon-wrap">
-                <AudioLines size={20} />
-              </div>
-              <h3 className="include-title">Live transcription</h3>
-              <p className="include-desc">
-                Your assistant can understand callers in real time throughout the conversation.
-              </p>
-            </article>
-
-            <article className="include-feature-card">
-              <span className="include-number">04</span>
-              <div className="include-icon-wrap">
-                <Globe size={20} />
-              </div>
-              <h3 className="include-title">
-                {telephoneProvider === 'managed' ? 'JobGen Telephone' : 'Customer Telephone'}
-              </h3>
-              <p className="include-desc">
-                {telephoneProvider === 'managed'
-                  ? 'Use JobGen Telephone with your chosen number type and audio connection.'
-                  : 'Keep your current telephone provider and use the AI conversation layer alongside it.'}
-              </p>
-            </article>
           </div>
         </section>
 
