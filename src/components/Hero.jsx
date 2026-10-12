@@ -831,63 +831,70 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
       const progress = Math.min(Math.max(-rect.top / totalScrollable, 0), 1);
 
       // -------------------------------------------------------------
-      // PHASE 1: Hero Zoom-Out (progress 0.00 -> 0.14)
-      // Scale down by 55% (1.0 -> 0.45)
+      // PHASE 1: Hero Zoom-Out & Fade-Out (progress 0.00 -> 0.14)
+      // Card scales down (1.0 -> 0.45) AND fades out (1.0 -> 0.0)
+      // so the background text behind it becomes completely visible!
       // -------------------------------------------------------------
       const zoomProgress = Math.min(progress / 0.14, 1);
       const scale = 1 - zoomProgress * 0.55; // 1.0 -> 0.45
       const radius = zoomProgress * 36;
-      const shadowAlpha = zoomProgress * 0.45;
+      const shadowAlpha = (1 - zoomProgress) * 0.45;
 
-      // Reveal of Automate signature and pills during initial zoom
-      const automateAppearP = Math.min(Math.max((progress - 0.04) / 0.08, 0), 1);
+      // Hero section fades out smoothly in tandem with the zoom
+      const heroOpacity = Math.max(1 - zoomProgress * 1.15, 0);
 
-      // -------------------------------------------------------------
-      // PHASE 2: Automate Viewing Window -> 0.14 to 0.26
-      // Hero exit fade when transitioning to Jenny & Olivia (0.26 -> 0.36)
-      // -------------------------------------------------------------
-      let heroOpacity = 1;
-      let heroExitY = 0;
+      // Stage exit fade & translation when transitioning to Dual Agents (progress > 0.26)
+      let stageExitY = 0;
+      let stageExitOpacity = 1;
       if (progress > 0.26) {
         const fadeP = Math.min((progress - 0.26) / 0.10, 1);
-        heroOpacity = 1 - fadeP;
-        heroExitY = -(fadeP * 100);
+        stageExitOpacity = Math.max(1 - fadeP, 0);
+        stageExitY = -(fadeP * 100);
       }
 
-      cardRef.current.style.transform = `scale(${scale}) translateY(${heroExitY}px)`;
+      cardRef.current.style.transform = `scale(${scale}) translateY(${stageExitY}px)`;
       cardRef.current.style.borderRadius = `${radius}px`;
-      cardRef.current.style.boxShadow = `0 30px 80px rgba(0, 0, 0, ${shadowAlpha}), 0 0 0 1px rgba(255, 255, 255, ${zoomProgress * 0.35})`;
+      cardRef.current.style.boxShadow = `0 30px 80px rgba(0, 0, 0, ${shadowAlpha}), 0 0 0 1px rgba(255, 255, 255, ${(1 - zoomProgress) * 0.35})`;
       cardRef.current.style.opacity = `${heroOpacity}`;
+      cardRef.current.style.pointerEvents = heroOpacity < 0.08 ? 'none' : 'auto';
+      cardRef.current.style.visibility = heroOpacity === 0 ? 'hidden' : 'visible';
 
-      // Moving text lines directly behind hero card
+      // Background moving text stack (Lines 1 & 2)
       if (movingTextRef.current) {
-        let movingOpacity = zoomProgress;
-        if (progress > 0.26) {
-          movingOpacity = heroOpacity;
-        }
+        const textEnterOpacity = Math.min(progress / 0.08, 1);
+        const movingOpacity = textEnterOpacity * stageExitOpacity;
         movingTextRef.current.style.opacity = `${movingOpacity}`;
-        movingTextRef.current.style.transform = `translateY(calc(-50% + ${heroExitY}px))`;
+        movingTextRef.current.style.transform = `translateY(calc(-50% + ${stageExitY}px))`;
+      }
+
+      // Background text appearing from LEFT (Line 1) and RIGHT (Line 2) on scroll
+      if (line1Ref.current && line2Ref.current) {
+        const travelDistance = Math.max(window.innerWidth * 0.7, 650);
+        const scrubProgress = Math.min(progress / 0.30, 1.35);
+
+        // Line 1: Starts shifted off to the left and moves right on scroll
+        const line1X = -travelDistance + scrubProgress * (travelDistance * 1.35);
+
+        // Line 2: Starts shifted off to the right and moves left on scroll
+        const line2X = travelDistance - scrubProgress * (travelDistance * 1.35);
+
+        line1Ref.current.style.transform = `translate3d(${line1X}px, 0, 0)`;
+        line2Ref.current.style.transform = `translate3d(${line2X}px, 0, 0)`;
       }
 
       // Red signature text: "Automate"
       if (bigTextRef.current) {
-        const textScale = 0.8 + automateAppearP * 0.2;
-        let textOpacity = automateAppearP;
-        if (progress > 0.26) {
-          textOpacity = automateAppearP * heroOpacity;
-        }
+        const textScale = 0.8 + zoomProgress * 0.2;
+        const textOpacity = zoomProgress * stageExitOpacity;
         bigTextRef.current.style.opacity = `${textOpacity}`;
-        bigTextRef.current.style.transform = `translate(-50%, calc(-50% + ${heroExitY}px)) scale(${textScale}) rotate(-25deg)`;
+        bigTextRef.current.style.transform = `translate(-50%, calc(-50% + ${stageExitY}px)) scale(${textScale}) rotate(-25deg)`;
       }
 
       // Floating company logos in Automate section
       if (pillsRef.current) {
-        let pillsOpacity = automateAppearP;
-        if (progress > 0.26) {
-          pillsOpacity = automateAppearP * heroOpacity;
-        }
+        const pillsOpacity = zoomProgress * stageExitOpacity;
         pillsRef.current.style.opacity = `${pillsOpacity}`;
-        pillsRef.current.style.transform = `translateY(${heroExitY}px)`;
+        pillsRef.current.style.transform = `translateY(${stageExitY}px)`;
       }
 
       // -------------------------------------------------------------
@@ -1069,9 +1076,9 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
 
           {/* Stack of Moving Text Lines Centered Directly Behind Shrunk Hero Card With Zero Spacing */}
           <div ref={movingTextRef} className="hero-bg-text-stack" style={{ opacity: 0 }}>
-            {/* Line 1: Automatically moves Left to Right */}
+            {/* Line 1: Appears from Left on scroll */}
             <div className="hero-bg-text-line hero-bg-line-1">
-              <div className="hero-bg-text-track hero-track-left-to-right">
+              <div ref={line1Ref} className="hero-bg-text-track">
                 <span>
                   AUTONOMOUS REVENUE ENGINE • 24/7 AI SALES AGENTS • INSTANT QUALIFICATION • ZERO LATENCY CLOSING • SELF-DRIVING WORKFLOWS •&nbsp;
                 </span>
@@ -1081,9 +1088,9 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
               </div>
             </div>
 
-            {/* Line 2: Automatically moves Right to Left (Alternate) */}
+            {/* Line 2: Appears from Right on scroll */}
             <div className="hero-bg-text-line hero-bg-line-2">
-              <div className="hero-bg-text-track hero-track-right-to-left">
+              <div ref={line2Ref} className="hero-bg-text-track">
                 <span>
                   INTELLIGENT PIPELINE • NEXT-GEN CONVERSATIONAL AI • HIGHER CONVERSIONS • HYPER-PERSONALIZED OUTREACH • CLOSED-LOOP AUTOMATION •&nbsp;
                 </span>

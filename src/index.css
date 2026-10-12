@@ -1927,6 +1927,7 @@ h6 {
   white-space: nowrap;
   width: max-content;
   flex-shrink: 0;
+  will-change: transform;
 }
 
 .hero-bg-text-track span {
@@ -1934,7 +1935,6 @@ h6 {
   font-weight: 900;
   font-size: clamp(5.6rem, 11.5vw, 12rem);
   line-height: 0.84;
-  /* Tight zero-spacing line height */
   margin: 0;
   padding: 0;
   text-transform: uppercase;
@@ -1942,38 +1942,6 @@ h6 {
   color: #0E121D;
   user-select: none;
   display: inline-block;
-}
-
-/* Line 1: Automatically moves Left to Right */
-.hero-track-left-to-right {
-  animation: moveLeftToRight 28s linear infinite;
-  will-change: transform;
-}
-
-@keyframes moveLeftToRight {
-  0% {
-    transform: translateX(-50%);
-  }
-
-  100% {
-    transform: translateX(0%);
-  }
-}
-
-/* Line 2: Automatically moves Right to Left (Alternate) */
-.hero-track-right-to-left {
-  animation: moveRightToLeft 28s linear infinite;
-  will-change: transform;
-}
-
-@keyframes moveRightToLeft {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 /* Zooming-Out Hero Section Card */
