@@ -1,267 +1,790 @@
-import React, { useState } from 'react';
-import { Check, ArrowRight, Sparkles, Calculator, ShieldCheck, Zap, HelpCircle } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import {
+  PhoneIncoming,
+  PhoneOutgoing,
+  Building,
+  GraduationCap,
+  Calculator,
+  Sparkles,
+  Volume2,
+  Mic2,
+  Radio,
+  AudioLines,
+  FileText,
+  Activity,
+  ListOrdered,
+  Smartphone,
+  PhoneCall,
+  ArrowRight,
+  CheckCircle2,
+  Sliders,
+  ShieldCheck,
+  Cpu,
+  Coins,
+  Globe,
+  Clock,
+  Layers,
+  ArrowUpRight
+} from 'lucide-react';
+
+// Product domain presets matching sales.jobgen.ai/pricing
+const PRODUCT_AREAS = [
+  {
+    id: 'property',
+    label: 'Property',
+    detail: 'Real-estate receptionist and outreach',
+    icon: Building,
+    badge: 'Real Estate & Strata',
+    inbound: {
+      detail: 'Inbound receptionist',
+      conversationBase: 0.104,
+      conversationGrowth: 0.027,
+      requestsPerMinute: 3.9,
+      ttsPerMinute: 0.026,
+      sttPerMinute: 0.0087
+    },
+    outbound: {
+      detail: 'Outbound outreach',
+      conversationBase: 0.066,
+      conversationGrowth: 0.024,
+      requestsPerMinute: 3.9,
+      ttsPerMinute: 0.026,
+      sttPerMinute: 0.0087
+    }
+  },
+  {
+    id: 'education',
+    label: 'Education',
+    detail: 'Student services and outreach',
+    icon: GraduationCap,
+    badge: 'Universities & RTOs',
+    inbound: {
+      detail: 'Inbound student services',
+      conversationBase: 0.111,
+      conversationGrowth: 0.022,
+      requestsPerMinute: 4.6,
+      ttsPerMinute: 0.026,
+      sttPerMinute: 0.0087
+    },
+    outbound: {
+      detail: 'Outbound student outreach',
+      conversationBase: 0.052,
+      conversationGrowth: 0.019,
+      requestsPerMinute: 5.3,
+      ttsPerMinute: 0.026,
+      sttPerMinute: 0.0087
+    }
+  },
+  {
+    id: 'accounting',
+    label: 'Accounting',
+    detail: 'Receptionist and tax workflows',
+    icon: Calculator,
+    badge: 'Practices & Law',
+    inbound: {
+      detail: 'Inbound receptionist / tax',
+      conversationBase: 0.194,
+      conversationGrowth: 0.037,
+      requestsPerMinute: 3.4,
+      ttsPerMinute: 0.026,
+      sttPerMinute: 0.0087
+    },
+    outbound: {
+      detail: 'Outbound service follow-up',
+      conversationBase: 0.194,
+      conversationGrowth: 0.037,
+      requestsPerMinute: 3.4,
+      ttsPerMinute: 0.026,
+      sttPerMinute: 0.0087
+    }
+  }
+];
+
+const CALL_DIRECTIONS = [
+  {
+    id: 'inbound',
+    label: 'Inbound',
+    detail: 'Customer calls your number',
+    icon: PhoneIncoming
+  },
+  {
+    id: 'outbound',
+    label: 'Outbound',
+    detail: 'Your campaign calls the customer',
+    icon: PhoneOutgoing
+  }
+];
+
+const AI_MODELS = [
+  { id: 'gpt-5.5', label: 'GPT-5.5', detail: 'Flagship', multiplier: 1.55, icon: Sparkles, tag: 'Most Capable' },
+  { id: 'gpt-5.4-mini', label: 'GPT-5.4 mini', detail: 'Balanced', multiplier: 0.5, icon: Cpu, tag: 'Fast & Smart' },
+  { id: 'gpt-4.1', label: 'GPT-4.1', detail: 'Reliable', multiplier: 1.15, icon: ShieldCheck, tag: 'Enterprise' },
+  { id: 'gpt-4.1-mini', label: 'GPT-4.1 mini', detail: 'Efficient', multiplier: 0.55, icon: Sliders, tag: 'Low Latency' },
+  { id: 'gpt-4o', label: 'GPT-4o', detail: 'Recommended', multiplier: 1.0, icon: Sparkles, tag: 'Recommended' },
+  { id: 'gpt-4o-mini', label: 'GPT-4o mini', detail: 'Lowest price', multiplier: 0.3, icon: Coins, tag: 'Lowest Cost' }
+];
+
+const VOICES = [
+  { id: 'eleven-flash', label: 'ElevenLabs Flash / Turbo', detail: 'Natural conversational voice', multiplier: 1.0, icon: Volume2 },
+  { id: 'eleven-v3-conversational', label: 'ElevenLabs v3 Conversational', detail: 'Natural conversational voice', multiplier: 1.0, icon: Mic2 },
+  { id: 'eleven-v3', label: 'ElevenLabs v3', detail: 'Expressive voice generation', multiplier: 2.0, icon: Radio }
+];
+
+const TRANSCRIPTION_MODELS = [
+  { id: 'scribe-realtime', label: 'ElevenLabs Scribe v2 Realtime', detail: 'Realtime transcription', multiplier: 1.0, icon: AudioLines },
+  { id: 'scribe', label: 'ElevenLabs Scribe v2', detail: 'Accurate transcription', multiplier: 0.56, icon: FileText },
+  { id: 'gpt-live-transcribe', label: 'GPT live transcribe', detail: 'Realtime transcription', multiplier: 0.044, icon: Activity },
+  { id: 'gpt-4o-mini-transcribe', label: 'GPT-4o mini transcribe', detail: 'Accurate transcription', multiplier: 0.008, icon: ListOrdered }
+];
+
+const TELEPHONY_RATES = {
+  local: { label: 'AU local / landline', monthly: 4.05, inbound: 0.0135, outbound: 0.034, icon: PhoneCall },
+  mobile: { label: 'AU mobile', monthly: 11.14, inbound: 0.0675, outbound: 0.1013, icon: Smartphone }
+};
+
+const AUDIO_STREAM_RATE = 0.0059;
+
+function formatCurrency(amount, digits = 2) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  }).format(Number.isFinite(amount) ? amount : 0);
+}
+
+function formatMinutes(mins) {
+  const num = Number(mins);
+  return `${num.toFixed(num % 1 ? 2 : 0)} min`;
+}
 
 export default function PricingPage({ onOpenDemo, onOpenBooking, onOpenCalculator }) {
-  const [billingCycle, setBillingCycle] = useState('monthly'); // 'monthly' | 'annually'
-  const isAnnual = billingCycle === 'annually';
+  // Calculator state
+  const [callDirection, setCallDirection] = useState('outbound');
+  const [productArea, setProductArea] = useState('property');
+  const [monthlyCalls, setMonthlyCalls] = useState(100);
+  const [callLength, setCallLength] = useState(1.34);
+  const [aiModel, setAiModel] = useState('gpt-4o');
+  const [voice, setVoice] = useState('eleven-flash');
+  const [transcription, setTranscription] = useState('scribe-realtime');
+  const [telephoneProvider, setTelephoneProvider] = useState('managed'); // 'existing' | 'managed'
+  const [phoneType, setPhoneType] = useState('mobile'); // 'local' | 'mobile'
+  const [numbersNeeded, setNumbersNeeded] = useState(1);
+  const [audioStreaming, setAudioStreaming] = useState(true);
 
-  const plans = [
-    {
-      id: 'starter',
-      name: 'Starter Reception',
-      badge: 'Boutique & Solo Practices',
-      description: 'Ideal for local clinics, solo practices, and service trades testing 24/7 automated intake.',
-      price: isAnnual ? '$79' : '$99',
-      period: '/ month',
-      subtext: isAnnual ? 'Billed annually ($948/yr)' : 'Billed monthly',
-      featured: false,
-      ctaText: 'Start 14-Day Free Pilot',
-      features: [
-        'Up to 250 handled voice minutes / mo',
-        'Jenny 24/7 Inbound Receptionist',
-        'Google & Outlook Calendar sync',
-        'Instant WhatsApp & SMS dispatch',
-        'Voicemail-to-text verbatim transcripts',
-        'Standard email & live chat support',
-      ],
-    },
-    {
-      id: 'growth',
-      name: 'Growth Dual Engine',
-      badge: 'MOST POPULAR',
-      description: 'Full dual AI workforce: 24/7 Jenny reception plus proactive sales outreach and CRM sync.',
-      price: isAnnual ? '$239' : '$299',
-      period: '/ month',
-      subtext: isAnnual ? 'Billed annually ($2,868/yr)' : 'Billed monthly',
-      featured: true,
-      ctaText: 'Deploy Growth Engine',
-      features: [
-        'Up to 1,000 handled voice minutes / mo',
-        'Both Jenny (Inbound) + Olivia (Outbound)',
-        'Sub-5 minute lead reactivation outreach',
-        'HubSpot, Salesforce & custom CRM sync',
-        'Live warm staff call transfer',
-        'Custom knowledge base ingestion',
-        'Priority solution architect onboarding',
-      ],
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise Scale',
-      badge: 'Multi-Location & High Volume',
-      description: 'For franchise groups, multi-location practices, and high-volume custom telephony fleets.',
-      price: isAnnual ? '$559' : '$699',
-      period: '/ month',
-      subtext: isAnnual ? 'Billed annually ($6,708/yr)' : 'Billed monthly',
-      featured: false,
-      ctaText: 'Contact Enterprise Team',
-      features: [
-        '3,000+ pooled voice minutes / mo',
-        'Unlimited concurrent inbound lines',
-        'Bespoke studio voice clones & accents',
-        'Dedicated account manager & 99.9% SLA',
-        'HIPAA BAA & SOC-2 compliance docs',
-        'Custom Webhooks & REST API access',
-        'Quarterly AI prompt calibration reviews',
-      ],
-    },
-  ];
+  // Active configs
+  const activeDomain = useMemo(
+    () => PRODUCT_AREAS.find((item) => item.id === productArea) || PRODUCT_AREAS[0],
+    [productArea]
+  );
+  const activeDirection = useMemo(
+    () => activeDomain[callDirection] || activeDomain.outbound,
+    [activeDomain, callDirection]
+  );
 
-  const comparisonRows = [
-    { title: 'Handled Voice Minutes', starter: '250 mins', growth: '1,000 mins', enterprise: '3,000+ mins (pooled)' },
-    { title: 'Concurrent Call Lines', starter: '3 lines', growth: '10 lines', enterprise: 'Unlimited lines' },
-    { title: 'Jenny 24/7 Receptionist', starter: 'Included', growth: 'Included', enterprise: 'Included' },
-    { title: 'Olivia Proactive Sales Agent', starter: '—', growth: 'Included', enterprise: 'Included' },
-    { title: 'Voice Response Latency', starter: '< 650ms', growth: '< 550ms', enterprise: '< 400ms (Dedicated Trunks)' },
-    { title: 'Calendar Sync (Google / Outlook)', starter: 'Included', growth: 'Included', enterprise: 'Included' },
-    { title: 'CRM 2-Way Sync (HubSpot, Salesforce)', starter: 'Add-on', growth: 'Included', enterprise: 'Included (Custom Data)' },
-    { title: 'Warm Staff Call Transfer', starter: 'Basic', growth: 'Smart Priority Routing', enterprise: 'Multi-Department Matrix' },
-    { title: 'Custom Voice Clone', starter: '—', growth: '—', enterprise: 'Studio Custom Clone' },
-    { title: 'Compliance & Audit Logs', starter: 'Standard', growth: 'Advanced Logs', enterprise: 'HIPAA BAA & SOC-2 Ready' },
-  ];
+  const selectedModel = useMemo(
+    () => AI_MODELS.find((m) => m.id === aiModel) || AI_MODELS[4],
+    [aiModel]
+  );
+  const selectedVoice = useMemo(
+    () => VOICES.find((v) => v.id === voice) || VOICES[0],
+    [voice]
+  );
+  const selectedTranscription = useMemo(
+    () => TRANSCRIPTION_MODELS.find((t) => t.id === transcription) || TRANSCRIPTION_MODELS[0],
+    [transcription]
+  );
+
+  // Core Math Calculation
+  const calculation = useMemo(() => {
+    const telRates = TELEPHONY_RATES[phoneType];
+
+    const calcForDuration = (durationMins) => {
+      const mins = Math.max(0.25, Number(durationMins) || 0.25);
+      // LLM conversation cost
+      const llm = mins * (activeDirection.conversationBase + (activeDirection.conversationGrowth * mins) / 2) * selectedModel.multiplier;
+      // TTS cost
+      const tts = mins * activeDirection.ttsPerMinute * selectedVoice.multiplier;
+      // STT cost
+      const stt = mins * activeDirection.sttPerMinute * selectedTranscription.multiplier;
+      // Telecom per min cost
+      const telephony = telephoneProvider === 'managed'
+        ? mins * (callDirection === 'inbound' ? telRates.inbound : telRates.outbound)
+        : 0;
+      // Audio streaming
+      const stream = telephoneProvider === 'managed' && audioStreaming ? mins * AUDIO_STREAM_RATE : 0;
+
+      return llm + tts + stt + telephony + stream;
+    };
+
+    const currentMins = Math.max(0.25, Number(callLength) || 0.25);
+    const perCallCost = calcForDuration(currentMins);
+    const rentalCost = telephoneProvider === 'managed' ? telRates.monthly * Math.max(0, Number(numbersNeeded) || 0) : 0;
+    const monthlyTotal = perCallCost * Number(monthlyCalls) + rentalCost;
+
+    return {
+      perCall: perCallCost,
+      monthlyTotal,
+      numberRental: rentalCost,
+      atDuration: calcForDuration,
+      model: selectedModel,
+      voice: selectedVoice,
+      transcription: selectedTranscription,
+      telephonyRate: telRates
+    };
+  }, [
+    activeDirection,
+    selectedModel,
+    selectedVoice,
+    selectedTranscription,
+    phoneType,
+    telephoneProvider,
+    callDirection,
+    audioStreaming,
+    callLength,
+    numbersNeeded,
+    monthlyCalls
+  ]);
 
   return (
-    <div className="pricing-page-root">
-      {/* Header */}
-      <section className="pricing-hero-section">
-        <div className="container pricing-container">
+    <div className="pricing-page-root jobgen-pricing-v2">
+      <div className="container pricing-container">
+        {/* Hero Section */}
+        <section className="pricing-hero-section">
           <div className="pricing-hero-badge">
-            <span className="pricing-badge-dot" />
-            <span>Transparent Autonomous Telephony Plans</span>
+            <Sparkles size={14} className="badge-sparkle-icon" />
+            <span>Simple, transparent pricing</span>
           </div>
 
           <h1 className="pricing-hero-title">
-            Predictable Pricing for Autonomous Voice Operations
+            Price every conversation with confidence.
           </h1>
 
           <p className="pricing-hero-subtitle">
-            Deploy intelligent voice agents that answer immediately, qualify customers, and book calendar appointments—at a fraction of traditional staffing overhead.
+            Choose your call type, product area and conversation length to see the price your team would pay.
           </p>
 
-          {/* Billing Switcher */}
-          <div className="pricing-toggle-wrap">
-            <button
-              type="button"
-              className={`pricing-toggle-btn ${billingCycle === 'monthly' ? 'is-active' : ''}`}
-              onClick={() => setBillingCycle('monthly')}
-            >
-              Monthly Billing
-            </button>
-            <button
-              type="button"
-              className={`pricing-toggle-btn ${billingCycle === 'annually' ? 'is-active' : ''}`}
-              onClick={() => setBillingCycle('annually')}
-            >
-              Annual Billing
-              <span className="pricing-discount-pill">Save 20%</span>
-            </button>
+          <div className="pricing-hero-meta-row">
+            <span className="pricing-meta-tag">
+              <CheckCircle2 size={15} /> Flexible call volume
+            </span>
+            <span className="pricing-meta-tag">
+              <CheckCircle2 size={15} /> Choose your setup
+            </span>
+            <span className="pricing-meta-tag">
+              <CheckCircle2 size={15} /> Live estimate
+            </span>
           </div>
-        </div>
-      </section>
 
-      {/* Pricing Cards Grid */}
-      <section className="pricing-cards-section">
-        <div className="container pricing-container">
-          <div className="pricing-cards-grid">
-            {plans.map((plan) => (
-              <div
-                key={plan.id}
-                className={`pricing-card-item ${plan.featured ? 'is-featured' : ''}`}
-              >
-                {plan.featured && (
-                  <div className="pricing-popular-ribbon">
-                    <Sparkles size={13} style={{ marginRight: '4px' }} />
-                    <span>{plan.badge}</span>
+          <div className="pricing-hero-note-card">
+            <div className="note-card-badge">
+              <CheckCircle2 size={15} />
+              <span>Your plan</span>
+            </div>
+            <strong className="note-card-headline">Built around your conversations</strong>
+            <p className="note-card-sub">
+              Longer calls and higher monthly volume update the estimate instantly. Choose the telephone option that fits your business.
+            </p>
+          </div>
+        </section>
+
+        {/* Section 01: Configure your plan & Interactive Calculator */}
+        <section className="pricing-interactive-calc-section">
+          <div className="pricing-section-header-compact">
+            <span className="pricing-eyebrow">01 · Configure your plan</span>
+            <h2 className="pricing-section-title">See your price in seconds.</h2>
+            <p className="pricing-section-desc">
+              Compare Property, Education and Accounting using the same call volume and average call length.
+            </p>
+          </div>
+
+          {/* 2-Column Responsive Cockpit */}
+          <div className="pricing-cockpit-grid">
+            {/* Left Column: Compact Controls */}
+            <div className="pricing-controls-col">
+              {/* 1. Call Direction */}
+              <div className="pricing-compact-block">
+                <div className="compact-block-label">
+                  <PhoneCall size={16} className="block-label-icon" />
+                  <div>
+                    <strong>Call direction</strong>
+                    <small>Choose how conversations begin</small>
                   </div>
-                )}
-
-                <div className="pricing-card-header">
-                  {!plan.featured && (
-                    <span className="pricing-plan-badge">{plan.badge}</span>
-                  )}
-                  <h3 className="pricing-plan-name">{plan.name}</h3>
-                  <p className="pricing-plan-desc">{plan.description}</p>
                 </div>
+                <div className="compact-pills-row">
+                  {CALL_DIRECTIONS.map((dir) => {
+                    const DirIcon = dir.icon;
+                    const isActive = callDirection === dir.id;
+                    return (
+                      <button
+                        key={dir.id}
+                        type="button"
+                        onClick={() => setCallDirection(dir.id)}
+                        className={`compact-clay-pill ${isActive ? 'is-active' : ''}`}
+                      >
+                        <DirIcon size={14} className="pill-favicon" />
+                        <span className="pill-title">{dir.label}</span>
+                        <span className="pill-sub">{dir.detail}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-                <div className="pricing-price-block">
-                  <div className="pricing-price-row">
-                    <span className="pricing-price-val">{plan.price}</span>
-                    <span className="pricing-price-period">{plan.period}</span>
+              {/* 2. Product Area */}
+              <div className="pricing-compact-block">
+                <div className="compact-block-label">
+                  <Building size={16} className="block-label-icon" />
+                  <div>
+                    <strong>Product area</strong>
+                    <small>{activeDirection.detail}</small>
                   </div>
-                  <span className="pricing-price-sub">{plan.subtext}</span>
                 </div>
+                <div className="compact-pills-row">
+                  {PRODUCT_AREAS.map((area) => {
+                    const AreaIcon = area.icon;
+                    const isActive = productArea === area.id;
+                    return (
+                      <button
+                        key={area.id}
+                        type="button"
+                        onClick={() => setProductArea(area.id)}
+                        className={`compact-clay-pill ${isActive ? 'is-active' : ''}`}
+                      >
+                        <AreaIcon size={14} className="pill-favicon" />
+                        <span className="pill-title">{area.label}</span>
+                        <span className="pill-sub">{area.detail}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-                <button
-                  type="button"
-                  onClick={onOpenBooking || onOpenDemo}
-                  className={`pricing-plan-btn ${plan.featured ? 'btn-featured' : 'btn-normal'}`}
-                >
-                  <span>{plan.ctaText}</span>
-                  <ArrowRight size={15} />
-                </button>
-
-                <div className="pricing-features-list">
-                  <span className="pricing-features-title">Everything included:</span>
-                  {plan.features.map((feat, idx) => (
-                    <div key={idx} className="pricing-feat-line">
-                      <Check size={16} className="pricing-check-icon" />
-                      <span>{feat}</span>
+              {/* 3. Monthly Calls Slider */}
+              <div className="pricing-compact-block">
+                <div className="slider-header-row">
+                  <div className="slider-label-group">
+                    <span className="slider-icon-badge">
+                      <Clock size={15} />
+                    </span>
+                    <div>
+                      <strong>Monthly calls</strong>
+                      <small>Number of conversations</small>
                     </div>
-                  ))}
+                  </div>
+                  <b className="slider-live-value">{Number(monthlyCalls).toLocaleString()}</b>
                 </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="1000"
+                  step="1"
+                  value={monthlyCalls}
+                  onChange={(e) => setMonthlyCalls(Number(e.target.value))}
+                  className="compact-clay-range"
+                />
+                <div className="slider-limits-row">
+                  <span>1 call</span>
+                  <span>1,000 calls</span>
+                </div>
+              </div>
+
+              {/* 4. Average Call Length Slider */}
+              <div className="pricing-compact-block">
+                <div className="slider-header-row">
+                  <div className="slider-label-group">
+                    <span className="slider-icon-badge">
+                      <Clock size={15} />
+                    </span>
+                    <div>
+                      <strong>Average call length</strong>
+                      <small>Connected time per conversation</small>
+                    </div>
+                  </div>
+                  <b className="slider-live-value">{formatMinutes(callLength)}</b>
+                </div>
+                <input
+                  type="range"
+                  min="0.5"
+                  max="10"
+                  step="0.05"
+                  value={callLength}
+                  onChange={(e) => setCallLength(Number(e.target.value))}
+                  className="compact-clay-range"
+                />
+                <div className="slider-limits-row">
+                  <span>30 sec</span>
+                  <span>10 min</span>
+                </div>
+              </div>
+
+              {/* 5. AI Model */}
+              <div className="pricing-compact-block">
+                <div className="compact-block-label">
+                  <Sparkles size={16} className="block-label-icon" />
+                  <div>
+                    <strong>AI model</strong>
+                    <small>Choose the conversation intelligence</small>
+                  </div>
+                </div>
+                <div className="compact-chips-grid">
+                  {AI_MODELS.map((model) => {
+                    const ModelIcon = model.icon;
+                    const isActive = aiModel === model.id;
+                    return (
+                      <button
+                        key={model.id}
+                        type="button"
+                        onClick={() => setAiModel(model.id)}
+                        className={`compact-clay-chip ${isActive ? 'is-active' : ''}`}
+                      >
+                        <div className="chip-head">
+                          <ModelIcon size={13} className="chip-favicon" />
+                          <span className="chip-name">{model.label}</span>
+                        </div>
+                        <span className="chip-tag">{model.detail}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 6. Voice */}
+              <div className="pricing-compact-block">
+                <div className="compact-block-label">
+                  <Volume2 size={16} className="block-label-icon" />
+                  <div>
+                    <strong>Voice generation</strong>
+                    <small>Choose how your assistant sounds</small>
+                  </div>
+                </div>
+                <div className="compact-pills-row">
+                  {VOICES.map((v) => {
+                    const VoiceIcon = v.icon;
+                    const isActive = voice === v.id;
+                    return (
+                      <button
+                        key={v.id}
+                        type="button"
+                        onClick={() => setVoice(v.id)}
+                        className={`compact-clay-pill ${isActive ? 'is-active' : ''}`}
+                      >
+                        <VoiceIcon size={14} className="pill-favicon" />
+                        <span className="pill-title">{v.label}</span>
+                        <span className="pill-sub">{v.detail}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 7. Transcription */}
+              <div className="pricing-compact-block">
+                <div className="compact-block-label">
+                  <AudioLines size={16} className="block-label-icon" />
+                  <div>
+                    <strong>Transcription</strong>
+                    <small>Choose how callers are understood in real-time</small>
+                  </div>
+                </div>
+                <div className="compact-chips-grid">
+                  {TRANSCRIPTION_MODELS.map((stt) => {
+                    const SttIcon = stt.icon;
+                    const isActive = transcription === stt.id;
+                    return (
+                      <button
+                        key={stt.id}
+                        type="button"
+                        onClick={() => setTranscription(stt.id)}
+                        className={`compact-clay-chip ${isActive ? 'is-active' : ''}`}
+                      >
+                        <div className="chip-head">
+                          <SttIcon size={13} className="chip-favicon" />
+                          <span className="chip-name">{stt.label}</span>
+                        </div>
+                        <span className="chip-tag">{stt.detail}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 8. Telephone Setup */}
+              <div className="pricing-compact-block">
+                <div className="compact-block-label">
+                  <Globe size={16} className="block-label-icon" />
+                  <div>
+                    <strong>Telephone infrastructure</strong>
+                    <small>Choose whose telecom network you use</small>
+                  </div>
+                </div>
+
+                <div className="segmented-clay-switch">
+                  <button
+                    type="button"
+                    onClick={() => setTelephoneProvider('existing')}
+                    className={`segmented-switch-btn ${telephoneProvider === 'existing' ? 'is-active' : ''}`}
+                  >
+                    Customer Telephone
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTelephoneProvider('managed')}
+                    className={`segmented-switch-btn ${telephoneProvider === 'managed' ? 'is-active' : ''}`}
+                  >
+                    JobGen Telephone
+                  </button>
+                </div>
+
+                {telephoneProvider === 'managed' ? (
+                  <div className="managed-telecom-settings">
+                    <div className="segmented-clay-switch sub-switch">
+                      <button
+                        type="button"
+                        onClick={() => setPhoneType('local')}
+                        className={`segmented-switch-btn ${phoneType === 'local' ? 'is-active' : ''}`}
+                      >
+                        <PhoneCall size={13} /> Landline
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPhoneType('mobile')}
+                        className={`segmented-switch-btn ${phoneType === 'mobile' ? 'is-active' : ''}`}
+                      >
+                        <Smartphone size={13} /> Mobile
+                      </button>
+                    </div>
+
+                    <label className="compact-inline-input">
+                      <span>
+                        Numbers needed
+                        <small>JobGen provisions and manages the numbers</small>
+                      </span>
+                      <input
+                        type="number"
+                        min="0"
+                        max="99"
+                        value={numbersNeeded}
+                        onChange={(e) => setNumbersNeeded(Math.max(0, parseInt(e.target.value) || 0))}
+                        className="clay-num-input"
+                      />
+                    </label>
+
+                    <label className="compact-check-row">
+                      <input
+                        type="checkbox"
+                        checked={audioStreaming}
+                        onChange={(e) => setAudioStreaming(e.target.checked)}
+                        className="clay-checkbox"
+                      />
+                      <span>
+                        Include audio streaming
+                        <small>Direct low-latency WebSocket connection to AI engine</small>
+                      </span>
+                    </label>
+                  </div>
+                ) : (
+                  <p className="customer-choice-note">
+                    Use your own telephone provider and number. The estimate covers the AI conversation experience only.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Right Column: Sticky Live Summary Claymorphic Card */}
+            <div className="pricing-summary-col">
+              <aside className="sticky-clay-summary-card">
+                <div className="summary-card-header">
+                  <span className="summary-eyebrow">Estimated price / conversation</span>
+                  <small>Based on your selected setup</small>
+                  <strong className="summary-big-per-call">
+                    {formatCurrency(calculation.perCall, 3)}
+                  </strong>
+                </div>
+
+                <div className="summary-monthly-highlight">
+                  <div className="highlight-label">
+                    For {Number(monthlyCalls).toLocaleString()} conversations
+                  </div>
+                  <div className="highlight-big-total">
+                    {formatCurrency(calculation.monthlyTotal)}
+                  </div>
+                  <span className="highlight-sub">Estimated monthly price</span>
+                </div>
+
+                <div className="summary-inclusions-list">
+                  <div className="inclusion-item">
+                    <CheckCircle2 size={16} className="inclusion-check" />
+                    <span>AI conversation ({calculation.model.label})</span>
+                  </div>
+                  <div className="inclusion-item">
+                    <CheckCircle2 size={16} className="inclusion-check" />
+                    <span>Voice ({calculation.voice.label})</span>
+                  </div>
+                  <div className="inclusion-item">
+                    <CheckCircle2 size={16} className="inclusion-check" />
+                    <span>
+                      {telephoneProvider === 'managed' ? 'JobGen Telephone selected' : 'Customer Telephone selected'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="summary-action-stack">
+                  <button
+                    type="button"
+                    onClick={onOpenDemo || onOpenBooking}
+                    className="summary-primary-cta"
+                  >
+                    <span>Start with AI Property</span>
+                    <ArrowRight size={16} />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={onOpenCalculator}
+                    className="summary-secondary-cta"
+                  >
+                    <span>Check Waiting Lost Revenue</span>
+                    <ArrowUpRight size={15} />
+                  </button>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 02: Conversation Length Model */}
+        <section className="pricing-duration-section">
+          <div className="pricing-section-header-compact">
+            <span className="pricing-eyebrow">02 · Conversation length</span>
+            <h2 className="pricing-section-title">Longer calls, clearly priced.</h2>
+            <p className="pricing-section-desc">
+              See how the estimated conversation price changes as a call continues.
+            </p>
+          </div>
+
+          <div className="duration-milestones-grid">
+            {[1, 2, 3, 4, 5].map((minutes) => (
+              <div key={minutes} className="duration-milestone-card">
+                <span className="milestone-time">At {minutes} minute{minutes === 1 ? '' : 's'}</span>
+                <strong className="milestone-price">{formatCurrency(calculation.atDuration(minutes), 3)}</strong>
+                <small className="milestone-label">Estimated price / conversation</small>
               </div>
             ))}
           </div>
+        </section>
 
-          {/* Interactive Calculator Callout */}
-          <div className="pricing-calc-callout">
-            <div className="pricing-calc-inner">
-              <div className="pricing-calc-left">
-                <div className="pricing-calc-icon">
-                  <Calculator size={26} color="#0052FF" />
-                </div>
-                <div>
-                  <h4>Curious how much missed calls cost your business?</h4>
-                  <p>Calculate your annual revenue leak from unanswered calls and staff wait time in 30 seconds.</p>
-                </div>
+        {/* Section 03: Included in your estimate */}
+        <section className="pricing-includes-section">
+          <div className="pricing-section-header-compact">
+            <span className="pricing-eyebrow">03 · Included in your estimate</span>
+            <h2 className="pricing-section-title">One clear number, built from your setup.</h2>
+            <p className="pricing-section-desc">
+              Choose the experience you want and adjust the call pattern to match your team.
+            </p>
+          </div>
+
+          <div className="includes-cards-grid">
+            <article className="include-feature-card">
+              <span className="include-number">01</span>
+              <div className="include-icon-wrap">
+                <Sparkles size={20} />
               </div>
+              <h3 className="include-title">AI conversations</h3>
+              <p className="include-desc">
+                Your selected AI model handles the conversation for your chosen product area.
+              </p>
+            </article>
+
+            <article className="include-feature-card">
+              <span className="include-number">02</span>
+              <div className="include-icon-wrap">
+                <Volume2 size={20} />
+              </div>
+              <h3 className="include-title">Natural voice</h3>
+              <p className="include-desc">
+                Choose the voice experience that matches your brand and callers.
+              </p>
+            </article>
+
+            <article className="include-feature-card">
+              <span className="include-number">03</span>
+              <div className="include-icon-wrap">
+                <AudioLines size={20} />
+              </div>
+              <h3 className="include-title">Live transcription</h3>
+              <p className="include-desc">
+                Your assistant can understand callers in real time throughout the conversation.
+              </p>
+            </article>
+
+            <article className="include-feature-card">
+              <span className="include-number">04</span>
+              <div className="include-icon-wrap">
+                <Globe size={20} />
+              </div>
+              <h3 className="include-title">
+                {telephoneProvider === 'managed' ? 'JobGen Telephone' : 'Customer Telephone'}
+              </h3>
+              <p className="include-desc">
+                {telephoneProvider === 'managed'
+                  ? 'Use JobGen Telephone with your chosen number type and audio connection.'
+                  : 'Keep your current telephone provider and use the AI conversation layer alongside it.'}
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* Section 04: Pricing Notes */}
+        <section className="pricing-notes-section">
+          <div className="notes-header-block">
+            <span className="pricing-eyebrow">Pricing notes</span>
+            <h2 className="notes-title">Designed to stay simple.</h2>
+            <p className="notes-desc">
+              Prices are estimates in USD and update as you change your call pattern, product area and setup. Start with a plan that matches your expected usage.
+            </p>
+          </div>
+
+          <div className="notes-items-grid">
+            <div className="note-item-pill">
+              <CheckCircle2 size={16} />
+              <span>No hidden setup in the estimate</span>
+            </div>
+            <div className="note-item-pill">
+              <CheckCircle2 size={16} />
+              <span>Change your calling provider anytime</span>
+            </div>
+            <div className="note-item-pill">
+              <CheckCircle2 size={16} />
+              <span>Adjust your plan as usage grows</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="pricing-final-cta-section">
+          <div className="final-cta-clay-card">
+            <span className="final-cta-tag">Ready when you are</span>
+            <h2 className="final-cta-title">Make every call count.</h2>
+            <p className="final-cta-sub">
+              Start with AI Property and shape the experience around your business.
+            </p>
+            <div className="final-cta-btn-group">
               <button
                 type="button"
-                onClick={onOpenCalculator}
-                className="pricing-calc-action-btn"
+                onClick={onOpenDemo || onOpenBooking}
+                className="final-cta-btn-primary"
               >
-                <span>Calculate Waiting Cost</span>
-                <ArrowRight size={15} />
+                <span>Start Free Pilot</span>
+                <ArrowRight size={16} />
               </button>
+              <a href="/" className="final-cta-btn-secondary">
+                Back to home
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Feature Comparison Matrix */}
-      <section className="pricing-matrix-section">
-        <div className="container pricing-container">
-          <div className="pricing-section-center">
-            <span className="pricing-badge-text">Detailed Matrix</span>
-            <h2 className="pricing-matrix-title">Compare Capabilities by Plan</h2>
-          </div>
-
-          <div className="pricing-table-wrap">
-            <table className="pricing-matrix-table">
-              <thead>
-                <tr>
-                  <th style={{ width: '40%' }}>Core Capabilities</th>
-                  <th style={{ width: '20%' }}>Starter</th>
-                  <th style={{ width: '20%' }} className="highlight-col">Growth</th>
-                  <th style={{ width: '20%' }}>Enterprise</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="row-title">{row.title}</td>
-                    <td>{row.starter}</td>
-                    <td className="highlight-col"><strong>{row.growth}</strong></td>
-                    <td>{row.enterprise}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Summary for Pricing */}
-      <section className="pricing-faq-section">
-        <div className="container pricing-container">
-          <div className="pricing-section-center">
-            <span className="pricing-badge-text">Frequently Asked Questions</span>
-            <h2 className="pricing-faq-title">Billing & Onboarding Details</h2>
-          </div>
-
-          <div className="pricing-faq-grid">
-            <div className="pricing-faq-card">
-              <h4>What happens if we exceed our included monthly minutes?</h4>
-              <p>Additional minutes are billed at a flat rate of $0.18/minute. You can also upgrade your plan tier anytime with zero interruption to your live phone numbers.</p>
-            </div>
-
-            <div className="pricing-faq-card">
-              <h4>Do we need to change our existing business phone number?</h4>
-              <p>No. You can easily forward unanswered calls, busy calls, or after-hours calls from your existing carrier (Telstra, Optus, AT&T, Verizon, RingCentral) directly to JobGen in under 3 minutes.</p>
-            </div>
-
-            <div className="pricing-faq-card">
-              <h4>How long does setup and knowledge training take?</h4>
-              <p>Most boutique practices go live within 24 to 48 hours. Our solutions engineers upload your website FAQ, appointment guidelines, and calendar integration during your onboarding walkthrough.</p>
-            </div>
-
-            <div className="pricing-faq-card">
-              <h4>Is there a long-term lock-in contract?</h4>
-              <p>No. Monthly plans can be cancelled or paused at any time without cancellation penalties. Annual plans come with a 20% discount and a 30-day money-back satisfaction guarantee.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
