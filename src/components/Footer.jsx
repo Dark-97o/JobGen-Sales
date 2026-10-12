@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUp, ArrowRight, PhoneCall, Mail, ShieldCheck, Sparkles } from 'lucide-react';
 import FooterKineticWordmark from './FooterKineticWordmark';
 
-export default function Footer({ onOpenDemo, onOpenCalculator }) {
+export default function Footer({ onOpenDemo, onOpenCalculator, onNavigate }) {
   const [isPc, setIsPc] = React.useState(
     typeof window !== 'undefined' ? window.innerWidth > 768 : true
   );
@@ -21,6 +21,24 @@ export default function Footer({ onOpenDemo, onOpenCalculator }) {
 
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
+    if (onNavigate) {
+      if (targetId === 'home') {
+        onNavigate('home');
+        return;
+      }
+      if (targetId === 'about') {
+        onNavigate('about');
+        return;
+      }
+      if (targetId === 'pricing') {
+        onNavigate('pricing');
+        return;
+      }
+      if (targetId === 'features') {
+        onNavigate('features');
+        return;
+      }
+    }
     const el = document.getElementById(targetId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
