@@ -5,6 +5,7 @@ import UnmatchedProductivity from './components/UnmatchedProductivity';
 import LeadHandoverSection from './components/LeadHandoverSection';
 import OrganicContourBackground from './components/OrganicContourBackground';
 import RealCallLibrary from './components/RealCallLibrary';
+import CrmCampaignPipeline from './components/CrmCampaignPipeline';
 import PlatformJourney from './components/PlatformJourney';
 import ComparisonSection from './components/ComparisonSection';
 import SetupGuardrails from './components/SetupGuardrails';
@@ -176,6 +177,9 @@ export default function App() {
             <div className="white-contour-inner">
               {/* Verbatim Real Calls & Live Transcript Synchronizer */}
               <RealCallLibrary />
+
+              {/* Lead Collection, CRM Synchronization & Campaign Outreach */}
+              <CrmCampaignPipeline />
 
               {/* The 6 Platform Capabilities */}
               <PlatformJourney />
