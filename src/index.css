@@ -2738,6 +2738,32 @@ h6 {
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
+.hero-headline-with-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22em;
+  white-space: nowrap;
+}
+
+.hero-ai-badge-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.hero-headline-ai-img {
+  height: 0.88em;
+  width: auto;
+  max-height: clamp(5rem, 11vw, 11rem);
+  object-fit: contain;
+  vertical-align: middle;
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.35));
+  transform: translateY(-0.04em);
+  display: inline-block;
+  user-select: none;
+}
+
 /* Page Load: Headline Words Reveal Word-by-Word */
 .hero-word {
   display: inline-block;
@@ -2765,6 +2791,10 @@ h6 {
 
 .hero-word-5 {
   animation-delay: 0.82s;
+}
+
+.hero-word-6 {
+  animation-delay: 0.95s;
 }
 
 @keyframes heroWordReveal {

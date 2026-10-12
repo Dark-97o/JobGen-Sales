@@ -273,7 +273,18 @@ export default function Navbar({
             </div>
           </div>
 
-          {/* 4. Feature */}
+          {/* 4. Web Development */}
+          <a
+            href="https://jobgen.ai/web-development"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-clay-link nav-webdev-link"
+          >
+            <span>Web Development</span>
+            <ArrowUpRight size={13} className="nav-external-arrow" />
+          </a>
+
+          {/* 5. Feature */}
           <a
             href="#platform"
             onClick={handleFeaturesClick}
@@ -422,7 +433,19 @@ export default function Navbar({
               )}
             </div>
 
-            {/* 4. Feature */}
+            {/* 4. Web Development */}
+            <a
+              href="https://jobgen.ai/web-development"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-nav-item mobile-external-link"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span>Web Development</span>
+              <ArrowUpRight size={16} />
+            </a>
+
+            {/* 5. Feature */}
             <button
               type="button"
               onClick={handleFeaturesClick}

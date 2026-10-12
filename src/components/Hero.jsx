@@ -1115,13 +1115,20 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
                   <span className="hero-handwritten-lead">
                     <span className="hero-word hero-word-1">Make</span>{' '}
                     <span className="hero-word hero-word-2">Your</span>{' '}
-                    <span className="hero-word hero-word-3">Own</span>
+                    <span className="hero-word hero-word-3">Business</span>
                   </span>
                   <span ref={autonomousRef} className="hero-cream-headline-line">
                     <span className="hero-word hero-word-4">AUTONOMOUS</span>
                   </span>
-                  <span className="hero-cream-headline-line hero-cream-headline-white">
-                    <span className="hero-word hero-word-5">BUSINESS</span>
+                  <span className="hero-cream-headline-line hero-cream-headline-white hero-headline-with-ai">
+                    <span className="hero-word hero-word-5">WITH</span>
+                    <span className="hero-word hero-word-6 hero-ai-badge-wrap">
+                      <img
+                        src="/assets/ai.png"
+                        alt="AI"
+                        className="hero-headline-ai-img"
+                      />
+                    </span>
                   </span>
                 </h1>
 
