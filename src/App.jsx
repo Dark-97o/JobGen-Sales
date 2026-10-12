@@ -20,7 +20,6 @@ import WaitingCostModal from './components/WaitingCostModal';
 import IntroAnimation from './components/IntroAnimation';
 import AboutPage from './components/AboutPage';
 import PricingPage from './components/PricingPage';
-import CustomCursor from './components/CustomCursor';
 
 const getInitialPage = () => {
   if (typeof window === 'undefined') return 'home';
@@ -114,9 +113,6 @@ export default function App() {
 
   return (
     <div className="jobgen-app-root">
-      {/* Global Interactive Custom Cursor */}
-      <CustomCursor />
-
       {/* Intro Animation (shown on home page or initial load) */}
       <IntroAnimation />
 
