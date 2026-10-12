@@ -253,8 +253,8 @@ export default function RealCallLibrary() {
     <section id="calls" ref={sectionRef} className="section-spacing real-calls-section">
       <div className="container">
         {/* Section Headline */}
-        <div className="calls-section-header">
-          <h2 className="section-title">
+        <div className="calls-section-header text-center mx-auto">
+          <h2 className="section-title text-center">
             <span className="calls-headline-main">Listen to our AI workforce</span> <br />
             <span className="text-full-blue calls-headline-sub">handling real enterprise calls.</span>
           </h2>
