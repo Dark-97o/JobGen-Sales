@@ -13015,8 +13015,8 @@ h6 {
   position: sticky;
   top: 0;
   height: 100vh;
-  min-height: 700px;
-  max-height: 1120px;
+  min-height: 740px;
+  max-height: 1180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13032,12 +13032,15 @@ h6 {
   justify-content: space-between;
   padding-top: 3.5rem;
   padding-bottom: 2rem;
+  padding-left: clamp(2.5rem, 6vw, 6rem);
+  padding-right: clamp(2.5rem, 6vw, 6rem);
   width: 100%;
-  max-width: 1560px;
+  max-width: 1680px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* Header: Bigger by 10px, 2-line split (black / blue) */
+/* Header: "We collect leads and" is +6px larger; blue half stays as is */
 .pipeline-header-block {
   margin-bottom: 1.25rem;
   padding: 0 1.5rem;
@@ -13054,23 +13057,28 @@ h6 {
 
 .pipeline-title-dark {
   color: #0F172A;
+  font-size: calc(1em + 6px);
+  display: inline-block;
 }
 
 .pipeline-title-blue {
   color: #2563EB;
+  font-size: 1em;
+  display: inline-block;
 }
 
-/* Gliding Stage Viewport */
+/* Gliding Stage Viewport with Left/Right Padding Gap */
 .pipeline-stage-viewport {
   position: relative;
   width: 100%;
-  max-width: 1540px;
+  max-width: 1600px;
   margin: 0 auto;
-  min-height: 580px;
-  height: 600px;
+  min-height: 620px;
+  height: 660px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 4rem;
   overflow: visible;
 }
 
@@ -13093,7 +13101,7 @@ h6 {
   justify-content: flex-end;
 }
 
-/* Pure Text & Favicons (No Container Box) */
+/* Pure Text & Favicons */
 .pipeline-text-area {
   width: 100%;
   max-width: 580px;
@@ -13110,23 +13118,30 @@ h6 {
   font-weight: 800;
   color: #0F172A;
   line-height: 1.2;
-  margin-bottom: 0.95rem;
+  margin-bottom: 0.85rem;
   letter-spacing: -0.025em;
 }
 
+/* Info Description: -6px smaller, adjusted in 2 lines only */
 .pipeline-area-desc {
-  font-size: 1.45rem;
+  font-size: 1.08rem;
   color: #475569;
-  line-height: 1.52;
-  margin-bottom: 1.85rem;
+  line-height: 1.5;
+  margin-bottom: 1.75rem;
   font-weight: 450;
+  max-width: 540px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Bullet Points with Claymorphic Circle Favicons */
 .pipeline-bullets-list {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.25rem;
 }
 
 .pipeline-bullet-item {
@@ -13177,18 +13192,19 @@ h6 {
   font-size: 1.45rem;
   font-weight: 750;
   color: #0F172A;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
   line-height: 1.3;
 }
 
+/* Bullet Point Description: -5px smaller */
 .pipeline-bullet-text {
-  font-size: 1.35rem;
+  font-size: 1.04rem;
   color: #64748B;
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0;
 }
 
-/* Dedicated Gliding Laptop Unit: 80% Larger */
+/* Dedicated Gliding Laptop Unit: Image size increased by 50% */
 .pipeline-gliding-laptop-unit {
   position: absolute;
   top: 0;
@@ -13208,8 +13224,8 @@ h6 {
 .pipeline-laptop-visual-box {
   position: relative;
   width: 100%;
-  max-width: 980px;
-  height: 600px;
+  max-width: 1440px;
+  height: 660px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13217,11 +13233,11 @@ h6 {
 
 .pipeline-laptop-glow-aura {
   position: absolute;
-  width: 90%;
-  height: 90%;
+  width: 95%;
+  height: 95%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.32) 0%, rgba(37, 99, 235, 0.08) 50%, transparent 75%);
-  filter: blur(48px);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, rgba(37, 99, 235, 0.08) 50%, transparent 75%);
+  filter: blur(52px);
   z-index: 1;
   pointer-events: none;
 }
@@ -13232,11 +13248,11 @@ h6 {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 960px;
+  max-width: 1420px;
   height: auto;
-  max-height: 580px;
+  max-height: 660px;
   object-fit: contain;
-  filter: drop-shadow(0 30px 50px rgba(15, 23, 42, 0.28)) drop-shadow(0 10px 24px rgba(37, 99, 235, 0.16));
+  filter: drop-shadow(0 32px 55px rgba(15, 23, 42, 0.28)) drop-shadow(0 12px 28px rgba(37, 99, 235, 0.16));
   will-change: opacity;
   transition: opacity 0.15s ease-out;
   z-index: 2;
@@ -13253,9 +13269,10 @@ h6 {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1200px) {
+@media (max-width: 1380px) {
   .pipeline-stage-viewport {
-    height: 540px;
+    height: 560px;
+    gap: 2.5rem;
   }
 
   .pipeline-slot-left {
@@ -13267,25 +13284,35 @@ h6 {
   }
 
   .pipeline-laptop-visual-box {
-    height: 500px;
-    max-width: 800px;
+    height: 540px;
+    max-width: 1100px;
   }
 
   .pipeline-laptop-img {
-    max-width: 780px;
-    max-height: 480px;
+    max-width: 1080px;
+    max-height: 520px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .pipeline-inner-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
-  .pipeline-area-desc {
-    font-size: 1.25rem;
+  .pipeline-stage-viewport {
+    height: 500px;
+    gap: 2rem;
   }
 
-  .pipeline-bullet-title {
-    font-size: 1.25rem;
+  .pipeline-laptop-visual-box {
+    height: 460px;
+    max-width: 900px;
   }
 
-  .pipeline-bullet-text {
-    font-size: 1.15rem;
+  .pipeline-laptop-img {
+    max-width: 880px;
+    max-height: 440px;
   }
 }
 
@@ -13308,6 +13335,8 @@ h6 {
     max-height: none;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .pipeline-stage-viewport {

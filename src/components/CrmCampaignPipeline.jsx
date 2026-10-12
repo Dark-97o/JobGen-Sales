@@ -96,10 +96,10 @@ export default function CrmCampaignPipeline() {
     <section ref={containerRef} className="pipeline-scroll-section" id="crm-campaign-pipeline">
       <div className="pipeline-sticky-wrapper">
         <div className="container relative z-10 pipeline-inner-container">
-          {/* Bold 2-Line Headline: half dark, half blue */}
+          {/* Bold 2-Line Headline: "We collect leads and" is +6px larger */}
           <div className="pipeline-header-block text-center">
             <h2 className="pipeline-main-title">
-              <span className="pipeline-title-dark">We collect leads and </span>
+              <span className="pipeline-title-dark">We collect leads and</span>
               <br />
               <span className="pipeline-title-blue">ensure they run in your CRM</span>
             </h2>
@@ -107,16 +107,15 @@ export default function CrmCampaignPipeline() {
 
           {/* Gliding Stage Viewport */}
           <div className="pipeline-stage-viewport">
-            {/* Left Slot: SMS / Email Campaign Text (Pure text & claymorphic favicons on canvas) */}
+            {/* Left Slot: SMS / Email Campaign Text */}
             <div className="pipeline-slot pipeline-slot-left">
               <div ref={smsCardRef} className="pipeline-text-area pipeline-sms-area">
                 <h3 className="pipeline-area-heading">
                   SMS &amp; Email Campaigns
                 </h3>
                 <p className="pipeline-area-desc">
-                  Never lose a warm prospect. The instant a voice call concludes, JobGen AI triggers
-                  tailored multi-channel follow-ups quoting the caller’s exact requirements,
-                  estimates, and calendar links.
+                  Never lose a warm prospect. JobGen AI triggers tailored multi-channel follow-ups
+                  quoting caller requirements, estimates, and calendar links.
                 </p>
 
                 {/* 3 Bullet Points with Tactile Claymorphic Circle Favicons */}
@@ -160,16 +159,15 @@ export default function CrmCampaignPipeline() {
               </div>
             </div>
 
-            {/* Right Slot: Company CRM Details Text (Pure text & claymorphic favicons on canvas) */}
+            {/* Right Slot: Company CRM Details Text */}
             <div className="pipeline-slot pipeline-slot-right">
               <div ref={crmCardRef} className="pipeline-text-area pipeline-crm-area">
                 <h3 className="pipeline-area-heading">
                   Company CRM Integration
                 </h3>
                 <p className="pipeline-area-desc">
-                  Eliminate manual staff data entry and fragmented lead sheets. Full caller dossiers,
-                  recordings, transcripts, and verified booking dates flow directly into your company’s
-                  central CRM with zero human intervention.
+                  Eliminate manual staff data entry. Full caller dossiers, audio recordings, transcripts,
+                  and verified dates flow directly into your company CRM.
                 </p>
 
                 {/* 3 Bullet Points with Tactile Claymorphic Circle Favicons */}
