@@ -20,6 +20,8 @@ import WaitingCostModal from './components/WaitingCostModal';
 import IntroAnimation from './components/IntroAnimation';
 import AboutPage from './components/AboutPage';
 import PricingPage from './components/PricingPage';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 
 const getInitialPage = () => {
   if (typeof window === 'undefined') return 'home';
@@ -42,6 +44,66 @@ export default function App() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Initialize Lenis Frictionless Inertial Smooth Scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Snappy exponential frictionless glide
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.05,
+      touchMultiplier: 1.6,
+      infinite: false,
+    });
+
+    window.lenis = lenis;
+
+    let rafId;
+    function raf(time) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    // Frictionless in-page anchor navigation
+    const handleAnchorClick = (e) => {
+      const anchor = e.target.closest('a');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const targetId = href.slice(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          lenis.scrollTo(targetEl, { offset: -70, duration: 1.0 });
+        }
+      }
+    };
+    document.addEventListener('click', handleAnchorClick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      document.removeEventListener('click', handleAnchorClick);
+      lenis.destroy();
+      delete window.lenis;
+    };
+  }, []);
+
+  // Freeze/unfreeze Lenis scrolling when modal dialogues are open
+  useEffect(() => {
+    if (isDemoModalOpen || isBookingModalOpen || isCostModalOpen) {
+      window.lenis?.stop();
+    } else {
+      window.lenis?.start();
+    }
+  }, [isDemoModalOpen, isBookingModalOpen, isCostModalOpen]);
+
+  // Handle route change & recalculate scroll heights
+  useEffect(() => {
+    window.lenis?.resize();
+  }, [currentPage]);
+
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname.toLowerCase();
@@ -52,7 +114,11 @@ export default function App() {
       } else {
         setCurrentPage('home');
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -63,26 +129,50 @@ export default function App() {
     if (page === 'home') {
       setCurrentPage('home');
       window.history.pushState({}, '', '/');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else if (page === 'about') {
       setCurrentPage('about');
       window.history.pushState({}, '', '/about');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else if (page === 'pricing') {
       setCurrentPage('pricing');
       window.history.pushState({}, '', '/pricing');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     } else if (page === 'features') {
       if (currentPage !== 'home') {
         setCurrentPage('home');
         window.history.pushState({}, '', '/#platform');
         setTimeout(() => {
           const el = document.getElementById('platform') || document.getElementById('features');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 80);
+          if (el) {
+            if (window.lenis) {
+              window.lenis.scrollTo(el, { offset: -70, duration: 0.85 });
+            } else {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        }, 120);
       } else {
         const el = document.getElementById('platform') || document.getElementById('features');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        if (el) {
+          if (window.lenis) {
+            window.lenis.scrollTo(el, { offset: -70, duration: 0.85 });
+          } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
       }
     }
   };

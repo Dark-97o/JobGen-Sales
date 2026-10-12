@@ -16,7 +16,11 @@ export default function Footer({ onOpenDemo, onOpenCalculator, onNavigate }) {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleNavClick = (e, targetId) => {
@@ -41,9 +45,17 @@ export default function Footer({ onOpenDemo, onOpenCalculator, onNavigate }) {
     }
     const el = document.getElementById(targetId);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(el, { offset: -70, duration: 0.85 });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   };
 
