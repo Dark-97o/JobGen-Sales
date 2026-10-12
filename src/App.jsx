@@ -11,7 +11,6 @@ import ComparisonSection from './components/ComparisonSection';
 import SetupGuardrails from './components/SetupGuardrails';
 import TestimonialSection from './components/TestimonialSection';
 import IndustryShowcase from './components/IndustryShowcase';
-import PricingCalculator from './components/PricingCalculator';
 import FaqSection from './components/FaqSection';
 import FinalCta from './components/FinalCta';
 import Footer from './components/Footer';
@@ -196,8 +195,6 @@ export default function App() {
               {/* Calibrated for every Industry (3D Rotating Building & Claymorphed Chat Card) */}
               <IndustryShowcase onOpenDemo={handleOpenDemo} />
 
-              {/* Dynamic Investment & Call Cost Estimator */}
-              <PricingCalculator onOpenDemo={handleOpenDemo} />
 
               {/* Accordion FAQ */}
               <FaqSection />
