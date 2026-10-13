@@ -9,7 +9,7 @@ export default function AboutPage({ onOpenDemo, onOpenBooking }) {
       <section className="about-founder-section" aria-label="Founder">
         <div className="container about-container">
           <div className="about-founder-grid">
-            {/* LEFT COLUMN: Bigger Kush cutout unboxed on background + Claymorphed Pill */}
+            {/* LEFT COLUMN: Kush Cutout unboxed directly on background */}
             <div className="kush-portrait-column">
               <div className="kush-portrait-stage">
                 <div className="kush-image-wrapper">
@@ -19,13 +19,6 @@ export default function AboutPage({ onOpenDemo, onOpenBooking }) {
                     className="kush-portrait-img"
                     loading="eager"
                   />
-                </div>
-
-                {/* Claymorphed Pill for Name & Founder */}
-                <div className="kush-clay-pill" aria-label="Kush - Founder JobGen">
-                  <span className="kush-pill-name">KUSH</span>
-                  <span className="kush-pill-dot" aria-hidden="true" />
-                  <span className="kush-pill-role">FOUNDER JOBGEN</span>
                 </div>
               </div>
             </div>

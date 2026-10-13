@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import UnmatchedProductivity from './components/UnmatchedProductivity';
@@ -20,6 +20,7 @@ import WaitingCostModal from './components/WaitingCostModal';
 import IntroAnimation from './components/IntroAnimation';
 import AboutPage from './components/AboutPage';
 import PricingPage from './components/PricingPage';
+import PageTransitionCurtain from './components/PageTransitionCurtain';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
@@ -36,6 +37,9 @@ export default function App() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isCostModalOpen, setIsCostModalOpen] = useState(false);
+  const [isTransitionActive, setIsTransitionActive] = useState(false);
+  const [pendingNavigation, setPendingNavigation] = useState(null);
+  const safetyTimeoutRef = useRef(null);
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -104,77 +108,136 @@ export default function App() {
     window.lenis?.resize();
   }, [currentPage]);
 
+  // Handle browser back/forward buttons with transition
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname.toLowerCase();
-      if (path.startsWith('/about')) {
-        setCurrentPage('about');
-      } else if (path.startsWith('/pricing')) {
-        setCurrentPage('pricing');
+      let target = 'home';
+      if (path.startsWith('/about')) target = 'about';
+      else if (path.startsWith('/pricing')) target = 'pricing';
+
+      if (target !== currentPage) {
+        if (!isTransitionActive) {
+          if (safetyTimeoutRef.current) clearTimeout(safetyTimeoutRef.current);
+          safetyTimeoutRef.current = setTimeout(() => {
+            setIsTransitionActive(false);
+            setPendingNavigation(null);
+          }, 1800);
+          setPendingNavigation({ page: target, isPopState: true });
+          setIsTransitionActive(true);
+        }
       } else {
-        setCurrentPage('home');
-      }
-      if (window.lenis) {
-        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [currentPage, isTransitionActive]);
 
-  const handleNavigate = (page) => {
-    if (page === 'home') {
-      setCurrentPage('home');
-      window.history.pushState({}, '', '/');
-      if (window.lenis) {
-        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Triggered when 3 blue bars fully cover the screen and logo finishes spin
+  const handleTransitionCovered = () => {
+    if (!pendingNavigation) return;
+    const { page, hash, isPopState } = pendingNavigation;
+
+    // 1. Switch active page behind the curtain
+    setCurrentPage(page);
+
+    // 2. Update browser history URL
+    if (!isPopState) {
+      if (page === 'home') {
+        window.history.pushState({}, '', hash ? `/${hash}` : '/');
+      } else if (page === 'about') {
+        window.history.pushState({}, '', '/about');
+      } else if (page === 'pricing') {
+        window.history.pushState({}, '', '/pricing');
       }
-    } else if (page === 'about') {
-      setCurrentPage('about');
-      window.history.pushState({}, '', '/about');
-      if (window.lenis) {
-        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    } else if (page === 'pricing') {
-      setCurrentPage('pricing');
-      window.history.pushState({}, '', '/pricing');
-      if (window.lenis) {
-        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    } else if (page === 'features') {
-      if (currentPage !== 'home') {
-        setCurrentPage('home');
-        window.history.pushState({}, '', '/#platform');
-        setTimeout(() => {
-          const el = document.getElementById('platform') || document.getElementById('features');
-          if (el) {
-            if (window.lenis) {
-              window.lenis.scrollTo(el, { offset: -70, duration: 0.85 });
-            } else {
-              el.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        }, 120);
-      } else {
+    }
+
+    // 3. Immediately reset scroll position to top and ensure scrolling is fluid
+    if (window.lenis) {
+      window.lenis.start();
+      window.lenis.scrollTo(0, { immediate: true });
+      window.lenis.resize();
+    }
+    window.scrollTo(0, 0);
+
+    // 4. If target has a hash anchor (like #platform), scroll to it once rendered
+    if (hash) {
+      setTimeout(() => {
         const el = document.getElementById('platform') || document.getElementById('features');
         if (el) {
           if (window.lenis) {
-            window.lenis.scrollTo(el, { offset: -70, duration: 0.85 });
+            window.lenis.scrollTo(el, { offset: -70, immediate: true });
           } else {
-            el.scrollIntoView({ behavior: 'smooth' });
+            el.scrollIntoView();
           }
         }
-      }
+      }, 60);
     }
+  };
+
+  // Triggered once the 3 blue bars have slid back up
+  const handleTransitionComplete = () => {
+    if (safetyTimeoutRef.current) {
+      clearTimeout(safetyTimeoutRef.current);
+      safetyTimeoutRef.current = null;
+    }
+    setIsTransitionActive(false);
+    setPendingNavigation(null);
+    if (window.lenis) {
+      window.lenis.start();
+      window.lenis.resize();
+    }
+  };
+
+  const handleNavigate = (page) => {
+    // If features anchor on current home page: smoothly scroll to platform section
+    if (page === 'features' && currentPage === 'home') {
+      const el = document.getElementById('platform') || document.getElementById('features');
+      if (el) {
+        if (window.lenis) {
+          window.lenis.scrollTo(el, { offset: -70, duration: 0.85 });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      return;
+    }
+
+    const targetPage = page === 'features' ? 'home' : page;
+    const targetHash = page === 'features' ? '#platform' : null;
+
+    // If navigating to the same page, scroll to top
+    if (targetPage === currentPage && !targetHash) {
+      if (targetPage === 'home') {
+        window.history.pushState({}, '', '/');
+      }
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: false, duration: 0.85 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    // If a transition is already in flight, prevent duplicate clicks
+    if (isTransitionActive) return;
+
+    // Safety timeout ensures transition flag never stays locked
+    if (safetyTimeoutRef.current) clearTimeout(safetyTimeoutRef.current);
+    safetyTimeoutRef.current = setTimeout(() => {
+      setIsTransitionActive(false);
+      setPendingNavigation(null);
+    }, 1800);
+
+    // Redirect to different page: trigger the 3 blue bars animation!
+    setPendingNavigation({ page: targetPage, hash: targetHash });
+    setIsTransitionActive(true);
   };
 
   const handleOpenDemo = () => {
@@ -203,6 +266,13 @@ export default function App() {
 
   return (
     <div className="jobgen-app-root">
+      {/* Page Redirect Transition Curtain (Three Blue Bars + Spinning White Logo) */}
+      <PageTransitionCurtain
+        isActive={isTransitionActive}
+        onCovered={handleTransitionCovered}
+        onComplete={handleTransitionComplete}
+      />
+
       {/* Intro Animation (shown on home page or initial load) */}
       <IntroAnimation />
 

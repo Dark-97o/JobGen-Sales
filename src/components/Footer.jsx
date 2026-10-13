@@ -49,6 +49,15 @@ export default function Footer({ onOpenDemo, onOpenCalculator, onNavigate }) {
     }
   };
 
+  const handleBrandClick = (e) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate('home');
+    } else {
+      scrollToTop();
+    }
+  };
+
   const handleNavClick = (e, targetId) => {
     e.preventDefault();
     if (onNavigate) {
@@ -120,7 +129,7 @@ export default function Footer({ onOpenDemo, onOpenCalculator, onNavigate }) {
         <div className="ms-footer-grid">
           {/* Column 1: Brand & Locations & Socials */}
           <div className="ms-footer-col ms-footer-brand-col">
-            <a href="/" className="ms-footer-brand-link" onClick={scrollToTop}>
+            <a href="/" className="ms-footer-brand-link" onClick={handleBrandClick}>
               <img
                 src="/assets/jobgen-white.webp"
                 alt="JobGen AI"
