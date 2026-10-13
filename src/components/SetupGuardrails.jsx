@@ -108,7 +108,7 @@ export default function SetupGuardrails() {
   const angleMultiplier = isMobile ? 0.75 : isTablet ? 0.85 : 1;
 
   return (
-    <section id="guardrails" className="guardrails-dark-section">
+    <section id="guardrails" className="guardrails-dark-section" data-nav-theme="dark">
       {/* Floating Blue Mist in Background */}
       <div className="guardrails-mist-container" aria-hidden="true">
         <div className="guardrails-mist-orb mist-orb-1" />

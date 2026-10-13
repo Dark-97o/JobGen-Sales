@@ -1080,10 +1080,10 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
             <div className="hero-bg-text-line hero-bg-line-1">
               <div ref={line1Ref} className="hero-bg-text-track">
                 <span>
-                  AUTONOMOUS REVENUE ENGINE • 24/7 AI SALES AGENTS • INSTANT QUALIFICATION • ZERO LATENCY CLOSING • SELF-DRIVING WORKFLOWS •&nbsp;
+                  AUTOMATED REVENUE ENGINE • 24/7 AI SALES AGENTS • INSTANT QUALIFICATION • ZERO LATENCY CLOSING • SELF-DRIVING WORKFLOWS •&nbsp;
                 </span>
                 <span>
-                  AUTONOMOUS REVENUE ENGINE • 24/7 AI SALES AGENTS • INSTANT QUALIFICATION • ZERO LATENCY CLOSING • SELF-DRIVING WORKFLOWS •&nbsp;
+                  AUTOMATED REVENUE ENGINE • 24/7 AI SALES AGENTS • INSTANT QUALIFICATION • ZERO LATENCY CLOSING • SELF-DRIVING WORKFLOWS •&nbsp;
                 </span>
               </div>
             </div>
@@ -1118,17 +1118,10 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
                     <span className="hero-word hero-word-3">Business</span>
                   </span>
                   <span ref={autonomousRef} className="hero-cream-headline-line">
-                    <span className="hero-word hero-word-4">AUTONOMOUS</span>
+                    <span className="hero-word hero-word-4">AUTOMATED</span>
                   </span>
-                  <span className="hero-cream-headline-line hero-cream-headline-white hero-headline-with-ai">
+                  <span className="hero-cream-headline-line hero-cream-headline-white">
                     <span className="hero-word hero-word-5">WITH</span>
-                    <span className="hero-word hero-word-6 hero-ai-badge-wrap">
-                      <img
-                        src="/assets/ai.png"
-                        alt="AI"
-                        className="hero-headline-ai-img"
-                      />
-                    </span>
                   </span>
                 </h1>
 

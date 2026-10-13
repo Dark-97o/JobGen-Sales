@@ -245,7 +245,7 @@ export default function App() {
           <Hero onOpenDemo={handleOpenDemo} onOpenCalculator={handleOpenCost} />
 
           {/* Black Curved Shell Coming Over Hero Section */}
-          <div className="curved-black-shell">
+          <div className="curved-black-shell" data-nav-theme="dark">
             {/* Unmatched Productivity: Horizontal Cards Moving Left to Right on Scroll */}
             <UnmatchedProductivity onOpenDemo={handleOpenDemo} />
 
@@ -255,12 +255,9 @@ export default function App() {
 
           {/* White Contour Lines Stage */}
           <div className="white-contour-stage">
-            {/* Ambient Misty Blue Glows */}
+            {/* Canvas Contour Grain Background */}
             <div className="white-contour-canvas-bg" aria-hidden="true">
               <div className="hero-contour-grain" />
-              <div className="misty-blue-glow misty-glow-1" style={{ top: '8%', left: '-10%' }} />
-              <div className="misty-blue-glow misty-glow-2" style={{ top: '38%', right: '-8%' }} />
-              <div className="misty-blue-glow misty-glow-3" style={{ bottom: '12%', left: '4%' }} />
             </div>
 
             <div className="white-contour-inner">

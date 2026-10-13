@@ -93,7 +93,7 @@ export default function CrmCampaignPipeline() {
   }, []);
 
   return (
-    <section ref={containerRef} className="pipeline-scroll-section" id="crm-campaign-pipeline">
+    <section ref={containerRef} className="pipeline-scroll-section" id="crm-campaign-pipeline" data-nav-theme="dark">
       <div className="pipeline-sticky-wrapper">
         <div className="container relative z-10 pipeline-inner-container">
           {/* Bold 2-Line Headline: "We collect leads and" is +6px larger */}
@@ -214,7 +214,6 @@ export default function CrmCampaignPipeline() {
             {/* Dedicated Gliding Laptop Unit: Sits in Right Slot initially, glides across to Left Slot */}
             <div ref={laptopWrapRef} className="pipeline-gliding-laptop-unit">
               <div className="pipeline-laptop-visual-box">
-                <div className="pipeline-laptop-glow-aura" aria-hidden="true" />
                 <img
                   ref={img1Ref}
                   src="/assets/comp1.png"

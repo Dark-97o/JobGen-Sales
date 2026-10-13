@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 
 export default function OrganicContourBackground({ strokeColor = 'rgba(37, 39, 30, 0.20)' }) {
   const canvasRef = useRef(null);
+  const backdropRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -21,6 +22,7 @@ export default function OrganicContourBackground({ strokeColor = 'rgba(37, 39, 3
     let values = null;
     let isVisible = true;
     let lastDrawTime = 0;
+    let currentDarkRatio = 0;
 
     // Observe canvas visibility so it consumes ZERO CPU when scrolled away
     const observer = new IntersectionObserver(
@@ -74,6 +76,29 @@ export default function OrganicContourBackground({ strokeColor = 'rgba(37, 39, 3
       return [x1 + (x2 - x1) * f, y1 + (y2 - y1) * f];
     }
 
+    function checkCrmDarkSection() {
+      const crmSection = document.getElementById('crm-campaign-pipeline');
+      if (!crmSection) return 0;
+      const rect = crmSection.getBoundingClientRect();
+      const vh = window.innerHeight;
+
+      // When section is in view:
+      if (rect.top < vh && rect.bottom > 0) {
+        // Entering smoothly as top approaches center
+        if (rect.top > 0) {
+          const enterRatio = 1 - rect.top / vh;
+          return Math.min(1, Math.max(0, (enterRatio - 0.15) / 0.6));
+        }
+        // Exiting smoothly as bottom approaches top
+        if (rect.bottom < vh * 0.8) {
+          return Math.min(1, Math.max(0, rect.bottom / (vh * 0.8)));
+        }
+        // Pinned and fully active
+        return 1;
+      }
+      return 0;
+    }
+
     function draw(t) {
       ctx.clearRect(0, 0, width, height);
       if (!values) return;
@@ -117,8 +142,14 @@ export default function OrganicContourBackground({ strokeColor = 'rgba(37, 39, 3
         }
       }
 
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = 1.1;
+      // Smooth color transition from dark gray to white contour lines
+      const r = Math.round(37 + (255 - 37) * currentDarkRatio);
+      const g = Math.round(39 + (255 - 39) * currentDarkRatio);
+      const b = Math.round(30 + (255 - 30) * currentDarkRatio);
+      const a = (0.20 + 0.15 * currentDarkRatio).toFixed(3);
+
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+      ctx.lineWidth = 1.1 + 0.2 * currentDarkRatio;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
       ctx.stroke();
@@ -130,6 +161,19 @@ export default function OrganicContourBackground({ strokeColor = 'rgba(37, 39, 3
         frameId = 0;
         return;
       }
+
+      // Update dark transition smoothly
+      const targetDark = checkCrmDarkSection();
+      currentDarkRatio += (targetDark - currentDarkRatio) * 0.12;
+      if (Math.abs(targetDark - currentDarkRatio) < 0.005) {
+        currentDarkRatio = targetDark;
+      }
+
+      // Update black backdrop opacity directly
+      if (backdropRef.current) {
+        backdropRef.current.style.opacity = currentDarkRatio.toFixed(3);
+      }
+
       // Throttle rendering to ~30fps for smooth ambient wave and zero CPU lag
       if (now - lastDrawTime >= 32) {
         draw((now - start) / 1000);
@@ -153,10 +197,18 @@ export default function OrganicContourBackground({ strokeColor = 'rgba(37, 39, 3
   }, [strokeColor]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="hero-contour-canvas"
-      aria-hidden="true"
-    />
+    <>
+      {/* Background that slowly turns black when scrolling to CRM pipeline */}
+      <div
+        ref={backdropRef}
+        className="global-contour-dark-backdrop"
+        aria-hidden="true"
+      />
+      <canvas
+        ref={canvasRef}
+        className="hero-contour-canvas"
+        aria-hidden="true"
+      />
+    </>
   );
 }

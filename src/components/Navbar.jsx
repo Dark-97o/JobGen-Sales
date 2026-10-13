@@ -41,6 +41,7 @@ export default function Navbar({
   onNavigate,
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverDark, setIsOverDark] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
   const [isMobileIndustriesOpen, setIsMobileIndustriesOpen] = useState(false);
@@ -73,19 +74,51 @@ export default function Navbar({
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+
+    const checkOverDark = () => {
+      // Find all sections marked as dark or containing dark backgrounds
+      const darkElements = document.querySelectorAll(
+        '[data-nav-theme="dark"], .curved-black-shell, .guardrails-dark-section, footer.ms-style-footer, [data-theme="dark"]'
+      );
+
+      const navCenterY = 50; // The navbar pill bar sits around Y = 20-75px in the viewport
+      let overDark = false;
+
+      for (const el of darkElements) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= navCenterY && rect.bottom >= navCenterY) {
+          overDark = true;
+          break;
+        }
+      }
+
+      setIsOverDark(overDark);
+    };
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          checkOverDark();
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     const handleResize = () => {
       if (window.innerWidth > 920) {
         setIsMobileMenuOpen(false);
       }
+      checkOverDark();
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
     handleScroll();
+    checkOverDark();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
@@ -158,34 +191,23 @@ export default function Navbar({
     }
   };
 
-  const handleFeaturesClick = (e) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    setIsIndustriesOpen(false);
-    if (onNavigate) {
-      onNavigate('features');
-    } else {
-      const el = document.getElementById('platform') || document.getElementById('features');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   // Determine if header should have hero transparent mode (only on home and when not scrolled)
   const isHeroMode = currentPage === 'home' && !isScrolled;
+  const useWhiteLogo = isHeroMode || isOverDark;
 
   return (
     <header
       className={`navbar-header-full ${
         isHeroMode ? 'is-hero-mode' : 'is-scrolled'
-      } ${isMobileMenuOpen ? 'is-menu-open' : ''}`}
+      } ${isOverDark ? 'is-over-dark' : ''} ${isMobileMenuOpen ? 'is-menu-open' : ''}`}
     >
-      <nav className="navbar-clay-pill-bar" aria-label="Main Navigation">
+      <nav className={`navbar-clay-pill-bar ${isOverDark ? 'is-over-dark' : ''}`} aria-label="Main Navigation">
         {/* Left: JobGen Logo + Brand */}
         <a href="/" onClick={handleHomeClick} className="navbar-brand-full">
           <img
-            src={isHeroMode ? '/assets/jobgen-white.webp' : '/assets/jobgen-logo.webp'}
+            src={useWhiteLogo ? '/assets/jobgen-white.webp' : '/assets/jobgen-logo.webp'}
             alt="JobGen Logo"
-            className={isHeroMode ? 'brand-logo-img-white' : 'brand-logo-img-blue'}
+            className={useWhiteLogo ? 'brand-logo-img-white' : 'brand-logo-img-blue'}
           />
           <span className="brand-title-full">
             JOBGEN<span className="brand-title-accent">.AI</span>
@@ -287,15 +309,6 @@ export default function Navbar({
             <ArrowUpRight size={13} className="nav-external-arrow" />
           </a>
 
-          {/* 5. Feature */}
-          <a
-            href="#platform"
-            onClick={handleFeaturesClick}
-            className="nav-clay-link"
-          >
-            Feature
-          </a>
-
           {/* 5. Pricing */}
           <a
             href="/pricing"
@@ -317,7 +330,7 @@ export default function Navbar({
           </a>
         </div>
 
-        {/* Right: Free Demo + Sign In Buttons + Mobile Hamburger */}
+        {/* Right: Sign In Button + Mobile Hamburger */}
         <div className="navbar-right-cluster">
           <button
             type="button"
@@ -327,15 +340,6 @@ export default function Navbar({
           >
             <LogIn size={15} className="nav-signin-icon" />
             <span className="nav-signin-text">Sign In</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={onOpenBooking || onOpenDemo}
-            className="btn-animated-demo"
-            title="Request a Free Demo"
-          >
-            <span>Free Demo</span>
           </button>
 
           {/* Mobile Hamburger Toggle */}
@@ -448,16 +452,6 @@ export default function Navbar({
               <ArrowUpRight size={16} />
             </a>
 
-            {/* 5. Feature */}
-            <button
-              type="button"
-              onClick={handleFeaturesClick}
-              className="mobile-nav-item"
-            >
-              <span>Feature</span>
-              <span className="mobile-nav-item-indicator" />
-            </button>
-
             {/* 5. Pricing */}
             <button
               type="button"
@@ -492,16 +486,6 @@ export default function Navbar({
             >
               <LogIn size={16} />
               <span>Sign In</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                (onOpenBooking || onOpenDemo)();
-              }}
-              className="mobile-drawer-btn-demo"
-            >
-              <span>Book Free Demo</span>
             </button>
           </div>
         </div>

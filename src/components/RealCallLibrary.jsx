@@ -2,108 +2,80 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   Play,
   Pause,
-  Search,
-  MoreVertical,
-  Phone,
-  Video,
-  MessageSquare,
-  Settings,
-  Users,
-  CheckCheck,
-  Paperclip,
-  Smile,
-  Mic,
-  Plus,
+  ChevronDown,
+  ChevronUp,
+  Bot,
+  User,
+  Clock,
   Sparkles,
-  Lock,
-  Volume2,
-  X,
-  ChevronLeft
+  CheckCircle2,
+  Volume2
 } from 'lucide-react';
 import { CALL_RECORDINGS } from '../data/landingData';
 
-// Normalized waveform heights representing realistic voice call audio frequencies
+// Enhanced call data with descriptive subtitles and call types matching the reference design
+const ENHANCED_CALLS = CALL_RECORDINGS.map((call) => {
+  let callType = 'Inbound call';
+  let description = 'A client books an appointment and verifies service requirements.';
+
+  if (call.id === 'sales-property-report') {
+    callType = 'Outbound call';
+    description = 'A homeowner accepts a property report and books an appraisal call.';
+  } else if (call.id === 'inbound-appointment') {
+    callType = 'Inbound call';
+    description = 'A client books an in-person tax consultation and confirms financial accounts.';
+  } else if (call.id === 'education-support') {
+    callType = 'Inbound call';
+    description = 'A student verifies class schedule, room location, and tuition totals.';
+  } else if (call.id === 'stale-listing') {
+    callType = 'Outbound call';
+    description = 'An agent assistant checks in on a 97-day property listing and arranges an appraisal call.';
+  } else if (call.id === 'restaurant-booking') {
+    callType = 'Inbound call';
+    description = 'A guest requests a birthday celebration dinner booking and dietary options.';
+  }
+
+  const categoryClean = call.category.split(' ')[0] || 'Enterprise';
+
+  return {
+    ...call,
+    categoryClean,
+    callType,
+    description,
+    speakerClean: 'AI Voice Agent'
+  };
+});
+
+// Normalized waveform heights representing realistic speech frequencies (42 bars)
 const WAVE_BARS = [
-  32, 48, 26, 62, 82, 42, 74, 96, 56, 86, 100, 68, 92, 78, 52, 88,
-  100, 82, 64, 94, 74, 54, 70, 90, 50, 84, 98, 64, 46, 74, 92, 54,
-  40, 68, 82, 58, 36, 54, 30, 22
+  24, 38, 48, 36, 42, 54, 32, 46, 58, 36, 28, 44, 62, 50, 34,
+  56, 74, 42, 60, 48, 30, 44, 68, 52, 38, 58, 80, 54, 40, 64,
+  88, 62, 46, 70, 94, 68, 42, 60, 78, 52, 34, 26
 ];
 
-// Custom avatars with recognizable colors & initial badges matching enterprise roles
-const CALL_AVATARS = {
-  'inbound-appointment': {
-    initials: 'MS',
-    color: '#00A884',
-    bg: '#00A884',
-    name: 'M&S Solutions · Tax Client',
-    isGroup: false,
-  },
-  'sales-property-report': {
-    initials: 'HP',
-    color: '#0284C7',
-    bg: '#0284C7',
-    name: 'Hart Property · Homeowner',
-    isGroup: false,
-  },
-  'education-support': {
-    initials: 'MI',
-    color: '#DB2777',
-    bg: '#DB2777',
-    name: 'McGill Institute · IT Student',
-    isGroup: false,
-  },
-  'stale-listing': {
-    initials: 'BD',
-    color: '#D97706',
-    bg: '#D97706',
-    name: 'Buta Deogun · Vendor Outreach',
-    isGroup: false,
-  },
-  'restaurant-booking': {
-    initials: 'GT',
-    color: '#059669',
-    bg: '#059669',
-    name: 'Golden Time · Table Reservation',
-    isGroup: false,
-  },
-  'daycare-tour': {
-    initials: 'CC',
-    color: '#7C3AED',
-    bg: '#7C3AED',
-    name: 'Child Care · Parent Tour',
-    isGroup: false,
-  },
-};
-
 export default function RealCallLibrary() {
-  const [activeCallId, setActiveCallId] = useState(CALL_RECORDINGS[0].id);
+  // Default to 'sales-property-report' to match the reference image
+  const [activeCallId, setActiveCallId] = useState('sales-property-report');
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [mobileView, setMobileView] = useState('chat'); // 'chat' | 'list'
+  const [isTranscriptOpen, setIsTranscriptOpen] = useState(true);
+
   const audioRef = useRef(null);
-  const chatScrollRef = useRef(null);
+  const sectionRef = useRef(null);
+  const activeLineRef = useRef(null);
 
-  const activeCall = CALL_RECORDINGS.find((c) => c.id === activeCallId) || CALL_RECORDINGS[0];
-  const activeAvatar = CALL_AVATARS[activeCall.id] || {
-    initials: 'JG',
-    color: '#00A884',
-    bg: '#005c4b',
-    name: activeCall.title,
-  };
+  const activeCall = ENHANCED_CALLS.find((c) => c.id === activeCallId) || ENHANCED_CALLS[0];
 
-  const filteredCalls = CALL_RECORDINGS.filter((call) => {
-    const matchesSearch =
-      call.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      call.category.toLowerCase().includes(searchQuery.toLowerCase());
-    if (!matchesSearch) return false;
-    if (activeFilter === 'All') return true;
-    if (activeFilter === 'Unread') return true;
-    if (activeFilter === 'Groups') return true;
-    return true;
-  });
+  // Auto-scroll transcript container smoothly so it moves with the live recording
+  useEffect(() => {
+    if (activeLineRef.current && isPlaying && isTranscriptOpen) {
+      activeLineRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+    }
+  }, [currentTime, isPlaying, isTranscriptOpen]);
 
   const handleSelectCall = (id) => {
     if (audioRef.current) {
@@ -113,7 +85,6 @@ export default function RealCallLibrary() {
     setIsPlaying(false);
     setCurrentTime(0);
     setActiveCallId(id);
-    setMobileView('chat');
   };
 
   const togglePlay = () => {
@@ -146,102 +117,26 @@ export default function RealCallLibrary() {
     }
   };
 
-  const handleJumpToTime = (time) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = time;
-      if (!isPlaying) {
-        audioRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
   const handleAudioScrub = (e) => {
+    if (!audioRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
-    const newProgress = Math.max(0, Math.min(1, clickX / rect.width));
-    if (audioRef.current && duration) {
-      const newTime = newProgress * duration;
-      audioRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
+    const clickFraction = Math.max(0, Math.min(1, clickX / rect.width));
+    const newTime = clickFraction * (duration || 96);
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const handleJumpToTime = (secs) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = secs;
+      setCurrentTime(secs);
+      if (!isPlaying) {
+        audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
     }
   };
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    const handleEnded = () => setIsPlaying(false);
-    audio.addEventListener('ended', handleEnded);
-    return () => audio.removeEventListener('ended', handleEnded);
-  }, [activeCallId]);
-
-  const sectionRef = useRef(null);
-  const windowContainerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [showPlayPrompt, setShowPlayPrompt] = useState(false);
-  const [isPromptFading, setIsPromptFading] = useState(false);
-  const promptShownRef = useRef(false);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // 90% View Trigger: pops up animated play prompt card and fades away after 3 seconds
-  useEffect(() => {
-    const el = windowContainerRef.current;
-    if (!el) return;
-
-    const triggerPlayPrompt = () => {
-      if (promptShownRef.current) return;
-      promptShownRef.current = true;
-      setShowPlayPrompt(true);
-    };
-
-    const promptObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio >= 0.85) {
-          triggerPlayPrompt();
-        }
-      },
-      { threshold: [0.5, 0.75, 0.85, 0.9, 0.95] }
-    );
-
-    promptObserver.observe(el);
-
-    const handleScroll = () => {
-      if (promptShownRef.current) return;
-      const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
-      const ratio = visibleHeight / rect.height;
-      if (ratio >= 0.85 || (rect.top >= 20 && rect.bottom <= windowHeight + 80)) {
-        triggerPlayPrompt();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      promptObserver.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  // Format seconds to mm:ss
   const formatTime = (secs) => {
     if (isNaN(secs) || secs < 0) return '0:00';
     const m = Math.floor(secs / 60);
@@ -266,280 +161,178 @@ export default function RealCallLibrary() {
           src={activeCall.audioSrc}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
+          onEnded={() => setIsPlaying(false)}
           preload="metadata"
         />
 
-        {/* Mac Window Frame with WhatsApp Interface (Fade In On Scroll) */}
-        <div ref={windowContainerRef} className={`mac-window-container ${isVisible ? 'is-visible' : ''}`}>
-          {/* macOS Titlebar with Traffic Lights */}
-          <div className="mac-titlebar">
-            <div className="mac-traffic-lights">
-              <span className="mac-dot mac-dot-close" />
-              <span className="mac-dot mac-dot-minimize" />
-              <span className="mac-dot mac-dot-maximize" />
+        {/* Main Split Stage: Left Floating Rounded Rectangles, Right Reference Card */}
+        <div className="real-calls-split-stage">
+          {/* Left Side: Floating Rounded Rectangles with Different Options */}
+          <div className="calls-floating-options-column" role="tablist" aria-label="Available call options">
+            <div className="floating-options-intro">
+              <span className="floating-options-label">SELECT SCENARIO</span>
+              <span className="floating-options-count">{ENHANCED_CALLS.length} Recorded Calls</span>
             </div>
-            <div className="mac-window-title">
-              <span className="mac-window-title-app">JobGen AI Voice Studio</span>
+
+            <div className="floating-rectangles-stack">
+              {ENHANCED_CALLS.map((call, idx) => {
+                const isSelected = call.id === activeCallId;
+
+                return (
+                  <button
+                    key={call.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={() => handleSelectCall(call.id)}
+                    className={`floating-call-rectangle ${isSelected ? 'is-selected' : ''}`}
+                    style={{ '--float-delay': `${idx * 0.12}s` }}
+                  >
+                    <div className="floating-rect-top">
+                      <span className="floating-rect-type-pill">
+                        {call.categoryClean} · {call.callType}
+                      </span>
+                      <span className="floating-rect-duration">
+                        <Clock size={11} className="duration-icon" />
+                        {call.duration}
+                      </span>
+                    </div>
+
+                    <h4 className="floating-rect-title">{call.title}</h4>
+
+                    <div className="floating-rect-bottom">
+                      <div className="floating-rect-speaker">
+                        <span className="speaker-avatar-circle tone-agent">
+                          <Bot size={11} />
+                        </span>
+                        <span className="speaker-name-text">AI Voice Agent</span>
+                      </div>
+                      {isSelected && (
+                        <div className="floating-rect-now-playing">
+                          <span className="now-playing-pulse" />
+                          <span>Active</span>
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-            <div className="mac-titlebar-right" />
           </div>
 
-          {/* WhatsApp Main Interface Body */}
-          <div className="whatsapp-app-body">
-            {/* 1. Far Left Narrow Icon Rail (WhatsApp Desktop) */}
-            <aside className="wa-icon-rail" aria-label="WhatsApp Navigation">
-              <div className="wa-rail-top">
-                <button
-                  type="button"
-                  className="wa-rail-btn is-active"
-                  title="Chats"
-                  aria-label="Chats"
-                >
-                  <div className="wa-rail-badge-wrap">
-                    <MessageSquare size={20} strokeWidth={2.2} />
-                    <span className="wa-unread-pill">99+</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="wa-rail-btn"
-                  title="Calls"
-                  aria-label="Calls"
-                >
-                  <Phone size={19} />
-                </button>
-
-                <button
-                  type="button"
-                  className="wa-rail-btn"
-                  title="Status"
-                  aria-label="Status"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="9" strokeDasharray="3 3" />
-                  </svg>
-                </button>
-
-                <button
-                  type="button"
-                  className="wa-rail-btn"
-                  title="Communities"
-                  aria-label="Communities"
-                >
-                  <Users size={19} />
-                </button>
-
-                <button
-                  type="button"
-                  className="wa-rail-btn wa-meta-ai-btn"
-                  title="Meta AI"
-                  aria-label="Meta AI"
-                >
-                  <div className="wa-meta-ai-icon">
-                    <Sparkles size={16} />
-                  </div>
-                </button>
+          {/* Right Side: Exact Reference Card Implementation */}
+          <div className="calls-reference-card-column">
+            <div className="ref-audio-showcase-card">
+              {/* Top Meta Line: "Property · Outbound call" and [REAL RECORDING] Pill */}
+              <div className="ref-card-header-row">
+                <span className="ref-card-category-text">
+                  {activeCall.categoryClean} · {activeCall.callType}
+                </span>
+                <span className="ref-real-recording-pill">REAL RECORDING</span>
               </div>
 
-              <div className="wa-rail-bottom">
+              {/* Main Headline: "Property value follow-up" */}
+              <h3 className="ref-card-title">{activeCall.title}</h3>
+
+              {/* Subtitle / Description */}
+              <p className="ref-card-description">{activeCall.description}</p>
+
+              {/* Audio Waveform Player Row */}
+              <div className="ref-player-container">
+                {/* Big Circular Play / Pause Button */}
                 <button
                   type="button"
-                  className="wa-rail-btn"
-                  title="Settings"
-                  aria-label="Settings"
+                  onClick={togglePlay}
+                  className="ref-big-play-btn"
+                  title={isPlaying ? 'Pause call audio' : 'Play call audio'}
+                  aria-label={isPlaying ? 'Pause call audio' : 'Play call audio'}
                 >
-                  <Settings size={19} />
+                  {isPlaying ? (
+                    <Pause size={22} fill="#FFFFFF" color="#FFFFFF" />
+                  ) : (
+                    <Play size={22} fill="#FFFFFF" color="#FFFFFF" style={{ marginLeft: '3px' }} />
+                  )}
                 </button>
 
-                <div className="wa-rail-profile" title="JobGen Enterprise">
-                  <div className="wa-profile-avatar">JG</div>
-                </div>
-              </div>
-            </aside>
+                {/* Waveform Visualization Bars */}
+                <div
+                  className="ref-waveform-track"
+                  onClick={handleAudioScrub}
+                  title="Click anywhere to scrub audio"
+                  role="slider"
+                  aria-label="Audio scrubber"
+                  aria-valuenow={currentTime}
+                  aria-valuemin={0}
+                  aria-valuemax={duration || 96}
+                >
+                  <div className="ref-bars-wrapper">
+                    {WAVE_BARS.map((barHeight, idx) => {
+                      const barFraction = idx / WAVE_BARS.length;
+                      const isPlayed = barFraction <= (duration ? currentTime / duration : 0);
+                      // In the reference image: alternate amber (agent) and warm gray (caller) bars
+                      const isAgentBar = (idx >= 0 && idx <= 14) || (idx >= 22 && idx <= 32);
 
-            {/* 2. Left Chat List Panel (People Options with Name as Topic, Last Message as Category) */}
-            <div className={`wa-chatlist-panel ${mobileView === 'chat' ? 'is-mobile-hidden' : ''}`}>
-              {/* WhatsApp Top Header */}
-              <div className="wa-chatlist-header">
-                <h3 className="wa-header-brand">JobGen Voice Studio</h3>
-                <div className="wa-header-actions">
-                  <button type="button" className="wa-icon-action" aria-label="More options">
-                    <MoreVertical size={18} />
-                  </button>
-                  <button type="button" className="wa-new-chat-btn" aria-label="New chat">
-                    <Plus size={18} strokeWidth={2.5} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Search Bar */}
-              <div className="wa-search-container">
-                <div className="wa-search-input-wrap">
-                  <Search size={15} className="wa-search-icon" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search or start a new chat"
-                    className="wa-search-input"
-                  />
-                </div>
-              </div>
-
-              {/* Filter Pills Bar */}
-              <div className="wa-filter-chips-row">
-                {['All', 'Unread', 'Favorites', 'Groups'].map((filter) => (
-                  <button
-                    key={filter}
-                    type="button"
-                    onClick={() => setActiveFilter(filter)}
-                    className={`wa-filter-chip ${activeFilter === filter ? 'is-active' : ''}`}
-                  >
-                    {filter === 'Unread' ? 'Unread 164' : filter === 'Groups' ? 'Groups 134' : filter}
-                  </button>
-                ))}
-                <button type="button" className="wa-filter-chip wa-filter-add" aria-label="Add filter">
-                  <Plus size={13} />
-                </button>
-              </div>
-
-              {/* Chat Items List: "the people options will be shown as the name for topic , and last mesage as category" */}
-              <div className="wa-chats-scroll-list" role="list">
-                {filteredCalls.map((call) => {
-                  const isActive = call.id === activeCallId;
-                  const avatar = CALL_AVATARS[call.id] || {
-                    initials: call.category.slice(0, 2).toUpperCase(),
-                    color: '#00A884',
-                    bg: '#005c4b',
-                  };
-
-                  return (
-                    <div
-                      key={call.id}
-                      role="listitem"
-                      onClick={() => handleSelectCall(call.id)}
-                      className={`wa-chat-item ${isActive ? 'is-active' : ''}`}
-                    >
-                      {/* Avatar */}
-                      <div
-                        className="wa-chat-avatar"
-                        style={{ backgroundColor: avatar.bg, color: '#fff' }}
-                      >
-                        <span className="wa-avatar-text">{avatar.initials}</span>
-                        {isActive && isPlaying && (
-                          <span className="wa-avatar-audio-pulse" />
-                        )}
-                      </div>
-
-                      {/* Chat Details */}
-                      <div className="wa-chat-details">
-                        {/* Name as Topic (call.title) + Duration / Time */}
-                        <div className="wa-chat-top-row">
-                          <strong className="wa-chat-topic-name" title={call.title}>
-                            {call.title}
-                          </strong>
-                          <span className="wa-chat-timestamp">{call.duration}</span>
-                        </div>
-
-                        {/* Last message as Category (call.category) */}
-                        <div className="wa-chat-bottom-row">
-                          <div className="wa-chat-category-preview">
-                            <CheckCheck size={16} className="wa-read-receipt-blue" />
-                            <span className="wa-category-text">{call.category}</span>
-                          </div>
-                          {isActive && (
-                            <span className="wa-playing-indicator">
-                              {isPlaying ? (
-                                <span className="wa-sound-bars">
-                                  <span />
-                                  <span />
-                                  <span />
-                                </span>
-                              ) : (
-                                <span className="wa-ready-dot" />
-                              )}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-            </div>
-
-            {/* 3. Right Main Chat Pane (Transcribe as Chats) */}
-            <div className={`wa-conversation-pane ${mobileView === 'list' ? 'is-mobile-hidden' : ''}`}>
-              {/* Conversation Top Header */}
-              <div className="wa-convo-header">
-                <div className="wa-convo-header-left">
-                  {/* Mobile Back Button to View All Calls List */}
-                  <button
-                    type="button"
-                    onClick={() => setMobileView('list')}
-                    className="wa-mobile-back-btn"
-                    aria-label="Back to all calls"
-                  >
-                    <ChevronLeft size={20} />
-                    <span>Calls</span>
-                  </button>
-
-                  <div
-                    className="wa-convo-avatar"
-                    style={{ backgroundColor: activeAvatar.bg, color: '#fff' }}
-                  >
-                    <span>{activeAvatar.initials}</span>
-                  </div>
-                  <div className="wa-convo-info">
-                    <h4 className="wa-convo-title">{activeCall.title}</h4>
-                    <span className="wa-convo-subtitle">
-                      {activeCall.speaker} · <span className="wa-convo-status-text">Production Call Telemetry</span>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Header Actions: Standard WhatsApp Icons */}
-                <div className="wa-convo-header-right">
-                  {/* Standard WhatsApp Header Icons */}
-                  <div className="wa-header-icon-group">
-                    <button type="button" className="wa-icon-tool" title="Video call" aria-label="Video call">
-                      <Video size={18} />
-                    </button>
-                    <button type="button" className="wa-icon-tool" title="Voice call" aria-label="Voice call">
-                      <Phone size={17} />
-                    </button>
-                    <button type="button" className="wa-icon-tool" title="Search messages" aria-label="Search">
-                      <Search size={18} />
-                    </button>
-                    <button type="button" className="wa-icon-tool" title="Menu" aria-label="Menu">
-                      <MoreVertical size={18} />
-                    </button>
+                      return (
+                        <div
+                          key={idx}
+                          className={`ref-wave-bar ${isAgentBar ? 'is-agent' : 'is-caller'} ${
+                            isPlayed ? 'is-played' : ''
+                          }`}
+                          style={{
+                            height: `${barHeight}%`
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               </div>
 
-              {/* Chat Messages Area (Transcribe as Chats with WhatsApp Doodle Background) */}
-              <div ref={chatScrollRef} className="wa-chat-messages-area">
-                <div className="wa-doodle-backdrop" aria-hidden="true" />
-
-                <div className="wa-messages-content-wrap">
-                  {/* Date Divider Pill */}
-                  <div className="wa-date-divider-wrap">
-                    <span className="wa-date-divider-pill">TODAY</span>
+              {/* Speaker Legend on Left & Time Display on Right */}
+              <div className="ref-player-subrow">
+                <div className="ref-speaker-legend">
+                  <div className="ref-legend-item">
+                    <span className="ref-legend-dot ref-legend-dot-amber" />
+                    <span className="ref-legend-name">Agent</span>
                   </div>
-
-                  {/* Encryption / Telemetry Notice */}
-                  <div className="wa-encryption-badge">
-                    <Lock size={12} />
-                    <span>
-                      Verbatim call telemetry is synchronized line-by-line. Click any speech bubble to seek audio.
-                    </span>
+                  <div className="ref-legend-item">
+                    <span className="ref-legend-dot ref-legend-dot-caller" />
+                    <span className="ref-legend-name">Caller</span>
                   </div>
+                </div>
 
-                  {/* Transcribe rendered as real WhatsApp Chat bubbles */}
-                  <div className="wa-bubbles-stream">
+                <div className="ref-time-display">
+                  <span>{formatTime(currentTime)}</span>
+                  <span className="ref-time-sep">/</span>
+                  <span>{activeCall.duration}</span>
+                </div>
+              </div>
+
+              {/* Outcome Captured Section */}
+              <div className="ref-outcome-row">
+                <span className="ref-outcome-label">OUTCOME CAPTURED</span>
+                <span className="ref-outcome-value">{activeCall.outcome}</span>
+              </div>
+
+              {/* Bottom Expander: "▶ Read the transcript · 1:36 · personal details omitted" */}
+              <div className="ref-transcript-toggle-wrap">
+                <button
+                  type="button"
+                  onClick={() => setIsTranscriptOpen(!isTranscriptOpen)}
+                  className="ref-transcript-toggle-btn"
+                  aria-expanded={isTranscriptOpen}
+                >
+                  <span className="ref-transcript-toggle-icon">
+                    {isTranscriptOpen ? '▼' : '▶'}
+                  </span>
+                  <span className="ref-transcript-toggle-text">
+                    {isTranscriptOpen ? 'Hide the transcript' : 'Read the transcript'} · {activeCall.duration} · personal details omitted
+                  </span>
+                </button>
+
+                {/* Collapsible Verbatim Transcript Stream that moves with the live recording */}
+                {isTranscriptOpen && (
+                  <div className="ref-expanded-transcript-stream" role="log" aria-label="Verbatim call transcript">
                     {activeCall.transcript.map((line, idx) => {
                       const isAI =
                         line.speaker.includes('Jenny') ||
@@ -552,142 +345,41 @@ export default function RealCallLibrary() {
                         (idx === activeCall.transcript.length - 1 ||
                           currentTime < activeCall.transcript[idx + 1].time);
 
-                      const bubbleTimeStr = `${Math.floor(line.time / 60)}:${String(
+                      const lineTimeStr = `${Math.floor(line.time / 60)}:${String(
                         Math.floor(line.time % 60)
                       ).padStart(2, '0')}`;
+
+                      const sanitizedSpeechText = line.text.replace(/\b(Olivia|Jenny)\b/gi, 'JobGen');
 
                       return (
                         <div
                           key={idx}
+                          ref={isCurrent ? activeLineRef : null}
                           onClick={() => handleJumpToTime(line.time)}
-                          className={`wa-bubble-row ${isAI ? 'is-outgoing' : 'is-incoming'} ${
-                            isCurrent && isPlaying ? 'is-live-speaking' : ''
+                          className={`ref-transcript-line-card ${isAI ? 'is-ai' : 'is-user'} ${
+                            isCurrent && isPlaying ? 'is-active-speaking' : ''
                           }`}
-                          title="Click to jump audio to this message"
+                          title="Click to jump audio to this line"
                         >
-                          <div className={`wa-bubble ${isAI ? 'wa-bubble-green' : 'wa-bubble-dark'}`}>
-                            {/* Sender Name in group colors for incoming callers */}
-                            {!isAI && (
-                              <div className="wa-bubble-sender-name">
-                                {line.speaker}
-                              </div>
-                            )}
-
-                            {/* Message Text */}
-                            <p className="wa-bubble-text">{line.text}</p>
-
-                            {/* Bubble Meta: Timestamp + WhatsApp Double Checkmark */}
-                            <div className="wa-bubble-meta">
-                              <span className="wa-bubble-time">{bubbleTimeStr}</span>
-                              {isAI && (
-                                <CheckCheck size={15} className="wa-bubble-checks wa-read-receipt-blue" />
+                          <div className="ref-line-top">
+                            <div className="ref-line-speaker-wrap">
+                              <span className="ref-line-speaker-name">
+                                {isAI ? 'JobGen AI' : 'Caller'}
+                              </span>
+                              {isCurrent && isPlaying && (
+                                <span className="ref-speaking-live-badge">
+                                  <span className="ref-speaking-pulse-dot" /> Speaking
+                                </span>
                               )}
                             </div>
-
-                            {/* Active Audio Wave indicator inside bubble */}
-                            {isCurrent && isPlaying && (
-                              <span className="wa-bubble-live-glow" aria-hidden="true" />
-                            )}
+                            <span className="ref-line-time">{lineTimeStr}</span>
                           </div>
+                          <p className="ref-line-speech-text">{sanitizedSpeechText}</p>
                         </div>
                       );
                     })}
                   </div>
-                </div>
-              </div>
-
-              {/* 90% View Floating Animated Prompt Card (Black Card with Close Button & 2s Pulse) */}
-              {showPlayPrompt && (
-                <div className="wa-play-prompt-card">
-                  <div className="wa-prompt-icon-ring">
-                    <Volume2 size={16} />
-                  </div>
-                  <div className="wa-prompt-text-group">
-                    <span className="wa-prompt-headline">Hear the Real Conversation</span>
-                    <span className="wa-prompt-subtext">Click play below to listen to verified live AI call audio</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowPlayPrompt(false)}
-                    className="wa-prompt-close-btn"
-                    title="Dismiss prompt"
-                    aria-label="Dismiss prompt"
-                  >
-                    <X size={14} />
-                  </button>
-                  <span className="wa-prompt-notch" />
-                </div>
-              )}
-
-              {/* WhatsApp Big Audio Playing & Pause Dock (Replaced "Click any message bubble above...") */}
-              <div className="wa-big-audio-dock">
-                {/* Big Play / Pause Button */}
-                <button
-                  type="button"
-                  onClick={togglePlay}
-                  className="wa-big-play-btn"
-                  title={isPlaying ? 'Pause call audio' : 'Play call audio'}
-                  aria-label={isPlaying ? 'Pause call audio' : 'Play call audio'}
-                >
-                  {isPlaying ? (
-                    <Pause size={22} fill="#FFFFFF" color="#FFFFFF" />
-                  ) : (
-                    <Play size={22} fill="#FFFFFF" color="#FFFFFF" style={{ marginLeft: '3px' }} />
-                  )}
-                </button>
-
-                {/* Big Audio Waveform (Playing and Pause Waves with Scrubber) */}
-                <div
-                  className="wa-big-waveform-container"
-                  onClick={handleAudioScrub}
-                  title="Click anywhere along the waveform to scrub audio"
-                  role="slider"
-                  aria-label="Audio scrubber"
-                  aria-valuenow={currentTime}
-                  aria-valuemin={0}
-                  aria-valuemax={duration || 100}
-                >
-                  {/* Waveform Bars Track */}
-                  <div className={`wa-big-waves-track ${isPlaying ? 'is-playing' : 'is-paused'}`}>
-                    {WAVE_BARS.map((heightPct, idx) => {
-                      const barFraction = idx / WAVE_BARS.length;
-                      const isPlayed = barFraction <= (duration ? currentTime / duration : 0);
-                      return (
-                        <div
-                          key={idx}
-                          className={`wa-big-wave-bar ${isPlayed ? 'is-played' : ''}`}
-                          style={{
-                            '--base-height': `${heightPct}%`,
-                            '--bar-delay': `${(idx % 10) * 0.07}s`,
-                          }}
-                        />
-                      );
-                    })}
-                  </div>
-
-                  {/* Scrub Playhead Line */}
-                  <div
-                    className="wa-waveform-playhead"
-                    style={{
-                      left: duration ? `${(currentTime / duration) * 100}%` : '0%',
-                    }}
-                  />
-                </div>
-
-                {/* Timestamps & Status Indicator */}
-                <div className="wa-big-audio-meta">
-                  <div className="wa-big-time-display">
-                    <span className="wa-time-current">{formatTime(currentTime)}</span>
-                    <span className="wa-time-sep">/</span>
-                    <span className="wa-time-total">{activeCall.duration}</span>
-                  </div>
-                  <div className="wa-audio-status-pill">
-                    <span className={`wa-audio-pulse-dot ${isPlaying ? 'is-active' : ''}`} />
-                    <span className="wa-audio-status-text">
-                      {isPlaying ? 'Playing' : 'Paused'}
-                    </span>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
