@@ -955,16 +955,16 @@ h6 {
   transition: color 0.3s ease;
 }
 
-/* Center: Actual Navigation Options (Replaces Hamburger) */
+/* Center: Actual Navigation Options (Replaces Hamburger) - Pills removed */
 .navbar-links-center {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  background: rgba(241, 245, 249, 0.42);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 9999px;
-  padding: 0.3rem 0.4rem;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  gap: 0.55rem;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.2rem 0.3rem;
+  box-shadow: none !important;
 }
 
 .nav-clay-link {
@@ -973,25 +973,25 @@ h6 {
   font-weight: 650;
   color: #334155;
   text-decoration: none;
-  padding: 0.42rem 0.95rem;
+  padding: 0.42rem 0.75rem;
   border-radius: 9999px;
+  background: transparent !important;
+  box-shadow: none !important;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 .nav-clay-link:hover {
   color: #0052FF;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 8px rgba(0, 82, 255, 0.12);
+  background: transparent !important;
+  box-shadow: none !important;
   transform: translateY(-1px);
 }
 
 .nav-clay-link.is-active {
   color: #0052FF;
-  background: #FFFFFF;
-  box-shadow: 
-    0 4px 12px rgba(0, 82, 255, 0.15),
-    inset 0 1px 2px rgba(255, 255, 255, 1);
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Right Actions Cluster */
@@ -1057,28 +1057,29 @@ h6 {
 }
 
 .navbar-header-full.is-scrolled.is-over-dark .navbar-links-center {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .navbar-header-full.is-scrolled.is-over-dark .nav-clay-link {
   color: #FFFFFF !important;
+  background: transparent !important;
+  box-shadow: none !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
 }
 
 .navbar-header-full.is-scrolled.is-over-dark .nav-clay-link:hover {
   color: #FFFFFF !important;
-  background: rgba(255, 255, 255, 0.16) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0.85;
 }
 
 .navbar-header-full.is-scrolled.is-over-dark .nav-clay-link.is-active {
   color: #FFFFFF !important;
-  background: rgba(255, 255, 255, 0.22) !important;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.35),
-    inset 0 1px 2px rgba(255, 255, 255, 0.35) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .navbar-header-full.is-scrolled.is-over-dark .nav-chevron-icon,
@@ -2820,6 +2821,7 @@ h6 {
   max-width: clamp(480px, 46vw, 680px);
   text-align: left;
   z-index: 4;
+  transform: translateY(-100px);
 }
 
 .hero-handwritten-lead {
@@ -2856,6 +2858,39 @@ h6 {
 .hero-cream-headline-line {
   display: block;
   white-space: nowrap;
+}
+
+.hero-automated-line {
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.hero-handwritten-with-wrap {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: -0.28em;
+  padding-top: 20px;
+  margin-bottom: 0.35rem;
+  pointer-events: none;
+}
+
+.hero-handwritten-with {
+  display: inline-block;
+  font-family: 'Caveat', 'Covered By Your Grace', cursive;
+  font-size: clamp(3.4rem, 5.8vw, 5.2rem);
+  font-weight: 700;
+  font-style: italic;
+  color: #FFFFFF;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.7);
+  transform: rotate(-5deg) translate(-114px, 4px);
+  transform-origin: top right;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: none;
+  user-select: none;
 }
 
 .hero-cream-headline-white {
@@ -3309,6 +3344,26 @@ h6 {
     margin-bottom: -0.15rem;
     display: block;
     text-align: center;
+  }
+
+  .hero-automated-line {
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .hero-handwritten-with-wrap {
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 340px;
+    margin: -0.2em auto 0.6rem;
+    padding-top: 20px;
+  }
+
+  .hero-handwritten-with {
+    font-size: clamp(1.8rem, 7.5vw, 2.5rem);
+    transform: rotate(-5deg) translate(-88px, 2px);
   }
 
   .hero-cream-cta-row {
@@ -13343,3 +13398,112 @@ h6 {
   animation: curtainBarRise 0.42s cubic-bezier(0.76, 0, 0.24, 1) 0.12s forwards;
 }
 
+
+
+/* ==========================================================================
+   LOADING SCREEN (Uiverse.io by AbanoubMagdy1)
+   ========================================================================== */
+.loader {
+  --dim: 3rem;
+  width: var(--dim);
+  height: var(--dim);
+  position: relative;
+  animation: spin988 2s linear infinite;
+}
+
+.loader .circle {
+  --color: #0052FF;
+  --dim: 1.2rem;
+  width: var(--dim);
+  height: var(--dim);
+  background-color: var(--color);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.loader .circle:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.loader .circle:nth-child(2) {
+  top: 0;
+  right: 0;
+}
+
+.loader .circle:nth-child(3) {
+  bottom: 0;
+  left: 0;
+}
+
+.loader .circle:nth-child(4) {
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes spin988 {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  20%, 25% {
+    transform: scale(1.3) rotate(90deg);
+  }
+
+  45%, 50% {
+    transform: scale(1) rotate(180deg);
+  }
+
+  70%, 75% {
+    transform: scale(1.3) rotate(270deg);
+  }
+
+  95%, 100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+
+/* ==========================================================================
+   PAGE REDIRECT LOADER OVERLAY
+   ========================================================================== */
+.page-transition-loader-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 99999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  user-select: none;
+  pointer-events: all !important;
+  opacity: 1;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.page-transition-loader-root.phase-in {
+  opacity: 1;
+  animation: pageLoaderFadeIn 0.22s ease-out forwards;
+}
+
+.page-transition-loader-root.phase-out {
+  opacity: 0;
+  pointer-events: none !important;
+  animation: pageLoaderFadeOut 0.28s ease-out forwards;
+}
+
+@keyframes pageLoaderFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pageLoaderFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

@@ -217,22 +217,26 @@ export default function Navbar({
         {/* Center: Desktop Navigation Options */}
         <div className="navbar-links-center">
           {/* 1. Home */}
-          <a
-            href="/"
-            onClick={handleHomeClick}
-            className={`nav-clay-link ${currentPage === 'home' ? 'is-active' : ''}`}
-          >
-            Home
-          </a>
+          {currentPage !== 'home' && (
+            <a
+              href="/"
+              onClick={handleHomeClick}
+              className={`nav-clay-link ${currentPage === 'home' ? 'is-active' : ''}`}
+            >
+              Home
+            </a>
+          )}
 
           {/* 2. About us */}
-          <a
-            href="/about"
-            onClick={handleAboutClick}
-            className={`nav-clay-link ${currentPage === 'about' ? 'is-active' : ''}`}
-          >
-            About us
-          </a>
+          {currentPage !== 'about' && (
+            <a
+              href="/about"
+              onClick={handleAboutClick}
+              className={`nav-clay-link ${currentPage === 'about' ? 'is-active' : ''}`}
+            >
+              About us
+            </a>
+          )}
 
           {/* 3. Industries with Mega Dropdown */}
           <div
@@ -310,13 +314,15 @@ export default function Navbar({
           </a>
 
           {/* 5. Pricing */}
-          <a
-            href="/pricing"
-            onClick={handlePricingClick}
-            className={`nav-clay-link ${currentPage === 'pricing' ? 'is-active' : ''}`}
-          >
-            Pricing
-          </a>
+          {currentPage !== 'pricing' && (
+            <a
+              href="/pricing"
+              onClick={handlePricingClick}
+              className={`nav-clay-link ${currentPage === 'pricing' ? 'is-active' : ''}`}
+            >
+              Pricing
+            </a>
+          )}
 
           {/* 6. Partners */}
           <a
@@ -379,24 +385,28 @@ export default function Navbar({
 
           <div className="mobile-nav-links-list">
             {/* 1. Home */}
-            <button
-              type="button"
-              onClick={handleHomeClick}
-              className={`mobile-nav-item ${currentPage === 'home' ? 'is-active' : ''}`}
-            >
-              <span>Home</span>
-              <span className="mobile-nav-item-indicator" />
-            </button>
+            {currentPage !== 'home' && (
+              <button
+                type="button"
+                onClick={handleHomeClick}
+                className={`mobile-nav-item ${currentPage === 'home' ? 'is-active' : ''}`}
+              >
+                <span>Home</span>
+                <span className="mobile-nav-item-indicator" />
+              </button>
+            )}
 
             {/* 2. About us */}
-            <button
-              type="button"
-              onClick={handleAboutClick}
-              className={`mobile-nav-item ${currentPage === 'about' ? 'is-active' : ''}`}
-            >
-              <span>About us</span>
-              <span className="mobile-nav-item-indicator" />
-            </button>
+            {currentPage !== 'about' && (
+              <button
+                type="button"
+                onClick={handleAboutClick}
+                className={`mobile-nav-item ${currentPage === 'about' ? 'is-active' : ''}`}
+              >
+                <span>About us</span>
+                <span className="mobile-nav-item-indicator" />
+              </button>
+            )}
 
             {/* 3. Industries Accordion */}
             <div className="mobile-accordion-section">
@@ -453,14 +463,16 @@ export default function Navbar({
             </a>
 
             {/* 5. Pricing */}
-            <button
-              type="button"
-              onClick={handlePricingClick}
-              className={`mobile-nav-item ${currentPage === 'pricing' ? 'is-active' : ''}`}
-            >
-              <span>Pricing</span>
-              <span className="mobile-nav-item-indicator" />
-            </button>
+            {currentPage !== 'pricing' && (
+              <button
+                type="button"
+                onClick={handlePricingClick}
+                className={`mobile-nav-item ${currentPage === 'pricing' ? 'is-active' : ''}`}
+              >
+                <span>Pricing</span>
+                <span className="mobile-nav-item-indicator" />
+              </button>
+            )}
 
             {/* 6. Partners */}
             <a

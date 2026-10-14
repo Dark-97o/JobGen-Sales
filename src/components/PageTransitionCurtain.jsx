@@ -3,22 +3,20 @@ import React, { useState, useEffect, useRef } from 'react';
 /**
  * PageTransitionCurtain
  * 
- * Orchestrates a three-column luxury curtain transition on page redirect:
- * 1. Three blue bars slide down from the top to fully cover the screen (staggered).
- *    - Left & Right: Deep Midnight Royal Cobalt with subtle glass shimmer.
- *    - Center: Radiant Electric Cobalt with glowing backlight halo & elevated drop shadow.
- * 2. In the middle bar, the JobGen white logo (no text) spins once 360 degrees.
- * 3. Page changes behind the curtain, and scroll position resets.
- * 4. The three bars slide back up (staggered), cleanly revealing the new page.
+ * Replaces previous page curtain with the requested Uiverse loading screen:
+ * - Four-circle spinning loader (Uiverse by AbanoubMagdy1)
+ * - Smooth fade-in overlay during page change
+ * - onCovered called when opaque so route swaps and scroll resets
+ * - Smooth fade-out once new page is ready
+ * - Only used for page navigation redirects, leaves initial landing load untouched
  */
 export default function PageTransitionCurtain({
   isActive,
   onCovered,
   onComplete,
 }) {
-  const [phase, setPhase] = useState('idle'); // 'idle' | 'entering' | 'spinning' | 'exiting'
+  const [phase, setPhase] = useState('idle'); // 'idle' | 'in' | 'out'
 
-  // Preserve callback references across renders so parent state updates never cancel the transition timers
   const onCoveredRef = useRef(onCovered);
   const onCompleteRef = useRef(onComplete);
 
@@ -33,61 +31,45 @@ export default function PageTransitionCurtain({
       return;
     }
 
-    // Phase 1: Bars enter from top (staggered drop)
-    setPhase('entering');
+    // Step 1: Fade overlay in
+    setPhase('in');
 
-    // Phase 2: Once bars cover the screen (~480ms), logo spins 360deg
-    const spinTimer = setTimeout(() => {
-      setPhase('spinning');
-    }, 480);
-
-    // Phase 3: Spin completes (~980ms) -> change page underneath & bars exit upwards
-    const exitTimer = setTimeout(() => {
+    // Step 2: Once covered (~250ms), trigger page route swap & scroll reset
+    const coveredTimer = setTimeout(() => {
       if (onCoveredRef.current) onCoveredRef.current();
-      setPhase('exiting');
-    }, 980);
+    }, 250);
 
-    // Phase 4: Bars have exited above the screen (~1460ms) -> complete transition
+    // Step 3: Fade out after loader has animated cleanly (~650ms)
+    const fadeOutTimer = setTimeout(() => {
+      setPhase('out');
+    }, 650);
+
+    // Step 4: Complete transition & unmount (~920ms)
     const doneTimer = setTimeout(() => {
       setPhase('idle');
       if (onCompleteRef.current) onCompleteRef.current();
-    }, 1460);
+    }, 920);
 
     return () => {
-      clearTimeout(spinTimer);
-      clearTimeout(exitTimer);
+      clearTimeout(coveredTimer);
+      clearTimeout(fadeOutTimer);
       clearTimeout(doneTimer);
     };
   }, [isActive]);
 
-  // Immediately remove from DOM when idle or not active to never block user interaction
   if (!isActive || phase === 'idle') return null;
 
   return (
     <div
-      className={`page-transition-curtain-root phase-${phase}`}
+      className={`page-transition-curtain-root page-transition-loader-root phase-${phase}`}
       aria-hidden="true"
     >
-      {/* Left Bar: Deep Midnight Cobalt */}
-      <div className="curtain-bar curtain-bar-left">
-        <div className="curtain-bar-ambient-glow" />
-      </div>
-      
-      {/* Center Bar: Radiant Electric Cobalt + Elevated Shadow + Halo + White Logo */}
-      <div className="curtain-bar curtain-bar-center">
-        <div className="curtain-logo-container">
-          <div className={`curtain-logo-halo ${phase === 'spinning' ? 'is-active' : ''}`} />
-          <img
-            src="/assets/jobgen-white.webp"
-            alt="JobGen"
-            className={`curtain-logo-img ${phase === 'spinning' ? 'is-spinning' : ''} ${phase === 'exiting' ? 'is-exited' : ''}`}
-          />
-        </div>
-      </div>
-
-      {/* Right Bar: Deep Midnight Cobalt */}
-      <div className="curtain-bar curtain-bar-right">
-        <div className="curtain-bar-ambient-glow" />
+      {/* From Uiverse.io by AbanoubMagdy1 */}
+      <div className="loader">
+        <div className="circle" />
+        <div className="circle" />
+        <div className="circle" />
+        <div className="circle" />
       </div>
     </div>
   );

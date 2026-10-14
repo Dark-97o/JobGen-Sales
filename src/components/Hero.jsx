@@ -1,22 +1,22 @@
 import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 import * as THREE from 'three';
-import { 
-  ArrowRight, 
-  Check, 
-  X, 
-  PhoneCall, 
-  ShieldCheck, 
-  Calendar, 
-  Database, 
-  Users, 
-  MessageSquare, 
-  BookOpen, 
-  Target, 
-  Zap, 
-  Layers, 
-  TrendingUp, 
+import {
+  ArrowRight,
+  Check,
+  X,
+  PhoneCall,
+  ShieldCheck,
+  Calendar,
+  Database,
+  Users,
+  MessageSquare,
+  BookOpen,
+  Target,
+  Zap,
+  Layers,
+  TrendingUp,
   Cpu,
-  Calculator 
+  Calculator
 } from 'lucide-react';
 
 function FluidGradientBackground() {
@@ -508,17 +508,17 @@ function CompanyLogo({ name }) {
     case 'WhatsApp':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.37c1.45.79 3.08 1.19 4.74 1.19 5.46 0 9.92-4.45 9.92-9.91C21.96 6.45 17.5 2 12.04 2z"/>
-          <path fill="#FFFFFF" d="M17.51 14.38c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.34.23-.64.08-.3-.15-1.26-.47-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.29-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.62-.93-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.02 1-1.02 2.43 0 1.43 1.05 2.8 1.2 3 .15.2 2.07 3.16 5.01 4.43.7.3 1.25.48 1.67.62.7.22 1.34.19 1.85.11.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.41-.07-.13-.2-.18-.4-.28z"/>
+          <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.37c1.45.79 3.08 1.19 4.74 1.19 5.46 0 9.92-4.45 9.92-9.91C21.96 6.45 17.5 2 12.04 2z" />
+          <path fill="#FFFFFF" d="M17.51 14.38c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.34.23-.64.08-.3-.15-1.26-.47-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.29-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.62-.93-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.02 1-1.02 2.43 0 1.43 1.05 2.8 1.2 3 .15.2 2.07 3.16 5.01 4.43.7.3 1.25.48 1.67.62.7.22 1.34.19 1.85.11.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.41-.07-.13-.2-.18-.4-.28z" />
         </svg>
       );
     case 'Slack':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
-          <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
-          <path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/>
-          <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/>
+          <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A" />
+          <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0" />
+          <path d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D" />
+          <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E" />
         </svg>
       );
     case 'Microsoft Teams':
@@ -534,92 +534,92 @@ function CompanyLogo({ name }) {
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect width="24" height="24" rx="4" fill="#0A66C2" />
-          <path fill="#FFFFFF" d="M19 19h-3.1v-4.9c0-1.2 0-2.7-1.6-2.7-1.6 0-1.9 1.3-1.9 2.6V19H9.3V9h3v1.4h.1c.4-.8 1.4-1.6 3-1.6 3.2 0 3.8 2.1 3.8 4.9V19zM6.5 7.6c-1 0-1.8-.8-1.8-1.8s.8-1.8 1.8-1.8 1.8.8 1.8 1.8-.8 1.8-1.8 1.8zM8 19H5V9h3v10z"/>
+          <path fill="#FFFFFF" d="M19 19h-3.1v-4.9c0-1.2 0-2.7-1.6-2.7-1.6 0-1.9 1.3-1.9 2.6V19H9.3V9h3v1.4h.1c.4-.8 1.4-1.6 3-1.6 3.2 0 3.8 2.1 3.8 4.9V19zM6.5 7.6c-1 0-1.8-.8-1.8-1.8s.8-1.8 1.8-1.8 1.8.8 1.8 1.8-.8 1.8-1.8 1.8zM8 19H5V9h3v10z" />
         </svg>
       );
     case 'HubSpot':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#FF7A59" d="M17.5 10.8V8.6a2.1 2.1 0 1 0-1.6 0v2.2a6 6 0 0 0-3.3 1.9l-4.5-3.5a2.2 2.2 0 1 0-1.1 1.2l4.4 3.4a6 6 0 1 0 6.1-3zM16.7 18a3.7 3.7 0 1 1 0-7.4 3.7 3.7 0 0 1 0 7.4z"/>
+          <path fill="#FF7A59" d="M17.5 10.8V8.6a2.1 2.1 0 1 0-1.6 0v2.2a6 6 0 0 0-3.3 1.9l-4.5-3.5a2.2 2.2 0 1 0-1.1 1.2l4.4 3.4a6 6 0 1 0 6.1-3zM16.7 18a3.7 3.7 0 1 1 0-7.4 3.7 3.7 0 0 1 0 7.4z" />
         </svg>
       );
     case 'MYOB':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#6100A5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 14.8c-1.4 1.4-3.6 1.4-5 0l-2.6-2.6c-.6-.6-.6-1.5 0-2.1.6-.6 1.5-.6 2.1 0l2 2c.6.6 1.6.6 2.1 0 .6-.6.6-1.6 0-2.1l-2.7-2.7c-1.2-1.2-3.1-1.2-4.2 0-.6.6-1.5.6-2.1 0-.6-.6-.6-1.5 0-2.1 2.3-2.3 6.1-2.3 8.5 0l2.7 2.7c1.4 1.4 1.4 3.6 0 5l-.8.9z"/>
+          <path fill="#6100A5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 14.8c-1.4 1.4-3.6 1.4-5 0l-2.6-2.6c-.6-.6-.6-1.5 0-2.1.6-.6 1.5-.6 2.1 0l2 2c.6.6 1.6.6 2.1 0 .6-.6.6-1.6 0-2.1l-2.7-2.7c-1.2-1.2-3.1-1.2-4.2 0-.6.6-1.5.6-2.1 0-.6-.6-.6-1.5 0-2.1 2.3-2.3 6.1-2.3 8.5 0l2.7 2.7c1.4 1.4 1.4 3.6 0 5l-.8.9z" />
         </svg>
       );
     case 'Calendly':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#006BFF" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2.1 0 3.96.99 5.16 2.53l-2.2 1.54C14.22 8.6 13.17 8 12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.17 0 2.22-.6 2.96-1.57l2.2 1.54C15.96 17.51 14.1 18.5 12 18.5z"/>
+          <path fill="#006BFF" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2.1 0 3.96.99 5.16 2.53l-2.2 1.54C14.22 8.6 13.17 8 12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.17 0 2.22-.6 2.96-1.57l2.2 1.54C15.96 17.51 14.1 18.5 12 18.5z" />
         </svg>
       );
     case 'Google Drive':
       return (
         <svg viewBox="0 0 87.3 78" fill="none" aria-hidden="true">
-          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-          <path d="M43.65 25 57.4 1.2c-1.35-.8-2.9-1.2-4.5-1.2H34.4c-1.6 0-3.15.45-4.5 1.25z" fill="#00ac47"/>
-          <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.5l5.85 10.15z" fill="#ea4335"/>
-          <path d="M43.65 25 29.9 1.2C28.55 2 27.4 3.1 26.6 4.5L1.2 48.55C.4 49.95 0 51.5 0 53.05h27.5z" fill="#ffba00"/>
-          <path d="M73.55 76.8H27.5L41.25 53h46.05c0 1.55-.4 3.1-1.2 4.5z" fill="#2684fc"/>
-          <path d="M60.7 48.55 47.95 26.45 43.65 25l13.75-23.8c1.35.8 2.5 1.9 3.3 3.3l25.4 44.05z" fill="#00832d"/>
+          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da" />
+          <path d="M43.65 25 57.4 1.2c-1.35-.8-2.9-1.2-4.5-1.2H34.4c-1.6 0-3.15.45-4.5 1.25z" fill="#00ac47" />
+          <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.5l5.85 10.15z" fill="#ea4335" />
+          <path d="M43.65 25 29.9 1.2C28.55 2 27.4 3.1 26.6 4.5L1.2 48.55C.4 49.95 0 51.5 0 53.05h27.5z" fill="#ffba00" />
+          <path d="M73.55 76.8H27.5L41.25 53h46.05c0 1.55-.4 3.1-1.2 4.5z" fill="#2684fc" />
+          <path d="M60.7 48.55 47.95 26.45 43.65 25l13.75-23.8c1.35.8 2.5 1.9 3.3 3.3l25.4 44.05z" fill="#00832d" />
         </svg>
       );
     case 'Dropbox':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#0061FF" d="M6 3.5 0 7.4l4.9 3.9 6.1-4-5-3.8zm12 0-5 3.8 6.1 4 4.9-3.9-6-3.9zM0 15.2l6 3.9 5-3.8-6.1-4-4.9 3.9zm19.1-3.9-6.1 4 5 3.8 6-3.9-4.9-3.9zM12 16.2l-5 3.8 5 3.1 5-3.1-5-3.8z"/>
+          <path fill="#0061FF" d="M6 3.5 0 7.4l4.9 3.9 6.1-4-5-3.8zm12 0-5 3.8 6.1 4 4.9-3.9-6-3.9zM0 15.2l6 3.9 5-3.8-6.1-4-4.9 3.9zm19.1-3.9-6.1 4 5 3.8 6-3.9-4.9-3.9zM12 16.2l-5 3.8 5 3.1 5-3.1-5-3.8z" />
         </svg>
       );
     case 'Notion':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#000000" d="M4.46 3.59c-.58.05-.73.23-.7.86l.26 14.86c.03.47.34.73.9.7l14.47-.78c.7-.04.83-.34.8-.88L19.86 3.7c-.03-.5-.3-.72-.92-.68L4.46 3.59zm2.4 2.37h2.8c.4 0 .63.15.7.53l.03 8.35 4.35-8.48c.22-.4.48-.5.95-.5h2.12c.38 0 .58.2.58.55v10.5c0 .35-.15.55-.54.55h-2.1c-.38 0-.58-.2-.58-.55V8.5l-4.4 8.52c-.22.4-.48.5-.95.5H6.86c-.38 0-.58-.2-.58-.55V6.51c0-.35.2-.55.58-.55z"/>
+          <path fill="#000000" d="M4.46 3.59c-.58.05-.73.23-.7.86l.26 14.86c.03.47.34.73.9.7l14.47-.78c.7-.04.83-.34.8-.88L19.86 3.7c-.03-.5-.3-.72-.92-.68L4.46 3.59zm2.4 2.37h2.8c.4 0 .63.15.7.53l.03 8.35 4.35-8.48c.22-.4.48-.5.95-.5h2.12c.38 0 .58.2.58.55v10.5c0 .35-.15.55-.54.55h-2.1c-.38 0-.58-.2-.58-.55V8.5l-4.4 8.52c-.22.4-.48.5-.95.5H6.86c-.38 0-.58-.2-.58-.55V6.51c0-.35.2-.55.58-.55z" />
         </svg>
       );
     case 'Zapier':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#FF4A00" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.6 13h-4.2l3.4 3.4-1.4 1.4-3.4-3.4v4.2h-2v-4.2l-3.4 3.4-1.4-1.4 3.4-3.4H4.8v-2h4.2l-3.4-3.4 1.4-1.4 3.4 3.4V4.8h2v4.2l3.4-3.4 1.4 1.4-3.4 3.4h4.2v2z"/>
+          <path fill="#FF4A00" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.6 13h-4.2l3.4 3.4-1.4 1.4-3.4-3.4v4.2h-2v-4.2l-3.4 3.4-1.4-1.4 3.4-3.4H4.8v-2h4.2l-3.4-3.4 1.4-1.4 3.4 3.4V4.8h2v4.2l3.4-3.4 1.4 1.4-3.4 3.4h4.2v2z" />
         </svg>
       );
     case 'Airtable':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#FCB400" d="M11.5 2.5L2 6.8l9.5 4.3 9.5-4.3-9.5-4.3zm0 2.2l6.8 3.1-6.8 3.1L4.7 7.8l6.8-3.1z"/>
-          <path fill="#18BFFF" d="M2 9.5v8.3l8.5 4.2v-8.3L2 9.5zm7 10.4l-5.5-2.7v-4.9l5.5 2.7v4.9z"/>
-          <path fill="#EC0677" d="M22 9.5l-8.5 4.2v8.3l8.5-4.2V9.5zm-1.5 7.7l-5.5 2.7v-4.9l5.5-2.7v4.9z"/>
+          <path fill="#FCB400" d="M11.5 2.5L2 6.8l9.5 4.3 9.5-4.3-9.5-4.3zm0 2.2l6.8 3.1-6.8 3.1L4.7 7.8l6.8-3.1z" />
+          <path fill="#18BFFF" d="M2 9.5v8.3l8.5 4.2v-8.3L2 9.5zm7 10.4l-5.5-2.7v-4.9l5.5 2.7v4.9z" />
+          <path fill="#EC0677" d="M22 9.5l-8.5 4.2v8.3l8.5-4.2V9.5zm-1.5 7.7l-5.5 2.7v-4.9l5.5-2.7v4.9z" />
         </svg>
       );
     case 'Salesforce':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path fill="#00A1E0" d="M19.4 9.1c-.6-2.5-2.9-4.3-5.6-4.3-1.6 0-3 .6-4 1.7-1.1-.9-2.5-1.5-4.1-1.5C2.6 5 0 7.6 0 10.8c0 .8.2 1.6.5 2.3C.2 13.8 0 14.6 0 15.5 0 18 2 20 4.5 20c.9 0 1.8-.3 2.5-.8 1.1 1.1 2.7 1.8 4.4 1.8 1.8 0 3.3-.7 4.5-1.9 1 .7 2.2 1.1 3.5 1.1 3.3 0 6-2.7 6-6 0-2.3-1.3-4.3-3.1-5.1z"/>
+          <path fill="#00A1E0" d="M19.4 9.1c-.6-2.5-2.9-4.3-5.6-4.3-1.6 0-3 .6-4 1.7-1.1-.9-2.5-1.5-4.1-1.5C2.6 5 0 7.6 0 10.8c0 .8.2 1.6.5 2.3C.2 13.8 0 14.6 0 15.5 0 18 2 20 4.5 20c.9 0 1.8-.3 2.5-.8 1.1 1.1 2.7 1.8 4.4 1.8 1.8 0 3.3-.7 4.5-1.9 1 .7 2.2 1.1 3.5 1.1 3.3 0 6-2.7 6-6 0-2.3-1.3-4.3-3.1-5.1z" />
         </svg>
       );
     case 'Mailchimp':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" fill="#FFE01B"/>
-          <path fill="#000000" d="M16.5 9c-.4 0-.8.2-1 .5-.3-.3-.7-.5-1.1-.5-.8 0-1.5.7-1.5 1.5 0 .2 0 .4.1.6-1.1.2-2.1.8-2.8 1.7-.5-.4-1.2-.6-1.9-.6-1.5 0-2.7 1.2-2.7 2.7 0 .5.1.9.4 1.3-.3.6-.5 1.3-.5 2.1 0 2.2 2.2 4 5 4s4.8-1.5 5-3.4c.7-.2 1.3-.8 1.5-1.5.3-.9 0-1.8-.7-2.3.1-.4.2-.8.2-1.3-.1-1.7-1.4-2.8-2-2.8zM9 13.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+          <circle cx="12" cy="12" r="10" fill="#FFE01B" />
+          <path fill="#000000" d="M16.5 9c-.4 0-.8.2-1 .5-.3-.3-.7-.5-1.1-.5-.8 0-1.5.7-1.5 1.5 0 .2 0 .4.1.6-1.1.2-2.1.8-2.8 1.7-.5-.4-1.2-.6-1.9-.6-1.5 0-2.7 1.2-2.7 2.7 0 .5.1.9.4 1.3-.3.6-.5 1.3-.5 2.1 0 2.2 2.2 4 5 4s4.8-1.5 5-3.4c.7-.2 1.3-.8 1.5-1.5.3-.9 0-1.8-.7-2.3.1-.4.2-.8.2-1.3-.1-1.7-1.4-2.8-2-2.8zM9 13.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
         </svg>
       );
     case 'Google Calendar':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="17" rx="3.5" fill="#FFFFFF" stroke="#4285F4" strokeWidth="2"/>
-          <path fill="#4285F4" d="M3 6.5h18v3.5H3z"/>
-          <rect x="7" y="2" width="2" height="4" rx="1" fill="#EA4335"/>
-          <rect x="15" y="2" width="2" height="4" rx="1" fill="#EA4335"/>
+          <rect x="3" y="4" width="18" height="17" rx="3.5" fill="#FFFFFF" stroke="#4285F4" strokeWidth="2" />
+          <path fill="#4285F4" d="M3 6.5h18v3.5H3z" />
+          <rect x="7" y="2" width="2" height="4" rx="1" fill="#EA4335" />
+          <rect x="15" y="2" width="2" height="4" rx="1" fill="#EA4335" />
           <text x="12" y="18" fill="#1A73E8" fontSize="8.5" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">31</text>
         </svg>
       );
     case 'Stripe':
       return (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect width="24" height="24" rx="5" fill="#635BFF"/>
-          <path fill="#FFFFFF" d="M14.6 10.9c-.8-.4-1.7-.6-2.5-.6-1 0-1.5.4-1.5 1 0 .7.8.9 2.2 1.4 1.9.7 2.7 1.6 2.7 3 0 2-1.6 3.3-4.2 3.3-1.1 0-2.3-.3-3.1-.7v-2.3c.9.5 2 .8 3 .8 1.1 0 1.6-.4 1.6-1.1 0-.8-.7-1-2.1-1.5-1.9-.7-2.8-1.5-2.8-3 0-1.9 1.5-3.2 3.9-3.2 1 0 2 .2 2.8.6v2.3z"/>
+          <rect width="24" height="24" rx="5" fill="#635BFF" />
+          <path fill="#FFFFFF" d="M14.6 10.9c-.8-.4-1.7-.6-2.5-.6-1 0-1.5.4-1.5 1 0 .7.8.9 2.2 1.4 1.9.7 2.7 1.6 2.7 3 0 2-1.6 3.3-4.2 3.3-1.1 0-2.3-.3-3.1-.7v-2.3c.9.5 2 .8 3 .8 1.1 0 1.6-.4 1.6-1.1 0-.8-.7-1-2.1-1.5-1.9-.7-2.8-1.5-2.8-3 0-1.9 1.5-3.2 3.9-3.2 1 0 2 .2 2.8.6v2.3z" />
         </svg>
       );
     default:
@@ -1117,11 +1117,13 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
                     <span className="hero-word hero-word-2">Your</span>{' '}
                     <span className="hero-word hero-word-3">Business</span>
                   </span>
-                  <span ref={autonomousRef} className="hero-cream-headline-line">
+                  <span ref={autonomousRef} className="hero-cream-headline-line hero-automated-line">
                     <span className="hero-word hero-word-4">AUTOMATED</span>
-                  </span>
-                  <span className="hero-cream-headline-line hero-cream-headline-white">
-                    <span className="hero-word hero-word-5">WITH</span>
+                    <span className="hero-handwritten-with-wrap">
+                      <span className="hero-handwritten-with">
+                        <span className="hero-word hero-word-5">with</span>
+                      </span>
+                    </span>
                   </span>
                 </h1>
 
@@ -1240,11 +1242,10 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
           <div
             ref={jennyClusterRef}
             style={{ transform: 'translateX(-115vw) translateY(0px)', opacity: 0 }}
-            className={`agent-cluster agent-cluster-left ${
-              activeAgent === 'olivia' && closingAgent !== 'olivia'
+            className={`agent-cluster agent-cluster-left ${activeAgent === 'olivia' && closingAgent !== 'olivia'
                 ? 'agent-cluster-hidden-left'
                 : ''
-            }`}
+              }`}
           >
             <div className="agent-image-wrap">
               <picture className="agent-picture-cutout">
@@ -1264,9 +1265,8 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
               </div>
               <button
                 type="button"
-                className={`btn-agent-action ${
-                  activeAgent === 'jenny' && closingAgent !== 'jenny' ? 'is-active' : ''
-                }`}
+                className={`btn-agent-action ${activeAgent === 'jenny' && closingAgent !== 'jenny' ? 'is-active' : ''
+                  }`}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleToggleAgent('jenny');
@@ -1282,11 +1282,10 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
           <div
             ref={oliviaClusterRef}
             style={{ transform: 'translateX(115vw) translateY(0px)', opacity: 0 }}
-            className={`agent-cluster agent-cluster-right ${
-              activeAgent === 'jenny' && closingAgent !== 'jenny'
+            className={`agent-cluster agent-cluster-right ${activeAgent === 'jenny' && closingAgent !== 'jenny'
                 ? 'agent-cluster-hidden-right'
                 : ''
-            }`}
+              }`}
           >
             <div className="agent-info-block agent-info-olivia">
               <span className="agent-name-cursive">Olivia</span>
@@ -1296,9 +1295,8 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
               </div>
               <button
                 type="button"
-                className={`btn-agent-action ${
-                  activeAgent === 'olivia' && closingAgent !== 'olivia' ? 'is-active' : ''
-                }`}
+                className={`btn-agent-action ${activeAgent === 'olivia' && closingAgent !== 'olivia' ? 'is-active' : ''
+                  }`}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleToggleAgent('olivia');
@@ -1324,9 +1322,8 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
           {(activeAgent === 'jenny' || closingAgent === 'jenny') && (
             <div
               ref={pointsWrapRef}
-              className={`agent-text-points-wrap agent-points-right ${
-                closingAgent === 'jenny' ? 'is-closing' : ''
-              }`}
+              className={`agent-text-points-wrap agent-points-right ${closingAgent === 'jenny' ? 'is-closing' : ''
+                }`}
             >
               <div className="agent-points-mobile-bar">
                 <span className="agent-points-mobile-title">Jenny • Core Capabilities</span>
@@ -1364,9 +1361,8 @@ export default function Hero({ onOpenDemo, onOpenCalculator }) {
           {(activeAgent === 'olivia' || closingAgent === 'olivia') && (
             <div
               ref={pointsWrapRef}
-              className={`agent-text-points-wrap agent-points-left ${
-                closingAgent === 'olivia' ? 'is-closing' : ''
-              }`}
+              className={`agent-text-points-wrap agent-points-left ${closingAgent === 'olivia' ? 'is-closing' : ''
+                }`}
             >
               <div className="agent-points-mobile-bar">
                 <span className="agent-points-mobile-title">Olivia • Outbound Capabilities</span>
