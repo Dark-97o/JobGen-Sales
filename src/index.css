@@ -2818,16 +2818,16 @@ h6 {
 /* Left Content: Monumental All-Caps Headline & CTA */
 .hero-cream-left {
   flex: 0 0 auto;
-  max-width: clamp(480px, 46vw, 680px);
+  max-width: clamp(508px, 49vw, 720px);
   text-align: left;
   z-index: 4;
-  transform: translateY(-100px);
+  transform: translateY(-35px);
 }
 
 .hero-handwritten-lead {
   display: inline-block;
   font-family: 'Caveat', 'Covered By Your Grace', cursive;
-  font-size: clamp(3.4rem, 5.8vw, 5.2rem);
+  font-size: clamp(3.60rem, 6.14vw, 5.50rem);
   font-weight: 700;
   font-style: italic;
   color: #FFFFFF;
@@ -2843,7 +2843,7 @@ h6 {
 
 .hero-cream-headline {
   font-family: 'Barlow Condensed', 'Oswald', 'Bebas Neue', sans-serif;
-  font-size: clamp(5.8rem, 12vw, 12.2rem);
+  font-size: clamp(6.14rem, 12.7vw, 12.91rem);
   font-weight: 900;
   line-height: 0.83;
   letter-spacing: -0.025em;
@@ -2880,7 +2880,7 @@ h6 {
 .hero-handwritten-with {
   display: inline-block;
   font-family: 'Caveat', 'Covered By Your Grace', cursive;
-  font-size: clamp(3.4rem, 5.8vw, 5.2rem);
+  font-size: clamp(3.60rem, 6.14vw, 5.50rem);
   font-weight: 700;
   font-style: italic;
   color: #FFFFFF;
@@ -3015,7 +3015,7 @@ h6 {
   border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 255, 255, 0.95);
   font-family: var(--font-sans);
-  font-size: 0.96rem;
+  font-size: 1.01rem;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 
@@ -3142,7 +3142,7 @@ h6 {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   font-family: var(--font-sans);
-  font-size: 0.96rem;
+  font-size: 1.01rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -3255,7 +3255,7 @@ h6 {
   }
 
   .hero-cream-headline {
-    font-size: clamp(3.2rem, 10vw, 5.5rem);
+    font-size: clamp(3.39rem, 10.58vw, 5.82rem);
     margin-bottom: 1.75rem;
   }
 
@@ -3327,7 +3327,7 @@ h6 {
   }
 
   .hero-cream-headline {
-    font-size: clamp(3.69rem, 15.8vw, 4.95rem);
+    font-size: clamp(3.90rem, 16.72vw, 5.23rem);
     letter-spacing: -0.04em;
     margin-bottom: 0.95rem;
     line-height: 0.88;
@@ -3335,12 +3335,12 @@ h6 {
   }
 
   .hero-cream-headline-line {
-    font-size: clamp(3.69rem, 15.8vw, 4.95rem);
+    font-size: clamp(3.90rem, 16.72vw, 5.23rem);
     line-height: 0.88;
   }
 
   .hero-handwritten-lead {
-    font-size: clamp(1.7rem, 7.2vw, 2.3rem);
+    font-size: clamp(1.80rem, 7.62vw, 2.44rem);
     margin-bottom: -0.15rem;
     display: block;
     text-align: center;
@@ -3362,7 +3362,7 @@ h6 {
   }
 
   .hero-handwritten-with {
-    font-size: clamp(1.8rem, 7.5vw, 2.5rem);
+    font-size: clamp(1.90rem, 7.94vw, 2.65rem);
     transform: rotate(-5deg) translate(-88px, 2px);
   }
 
@@ -3379,7 +3379,7 @@ h6 {
     width: 100%;
     justify-content: center;
     height: 44px;
-    font-size: 0.88rem;
+    font-size: 0.93rem;
     border-radius: 9999px;
   }
 
@@ -3420,17 +3420,17 @@ h6 {
 
 @media (max-width: 400px) {
   .hero-cream-headline {
-    font-size: 3.51rem;
+    font-size: 3.72rem;
     line-height: 0.86;
   }
 
   .hero-cream-headline-line {
-    font-size: 3.51rem;
+    font-size: 3.72rem;
     line-height: 0.86;
   }
 
   .hero-handwritten-lead {
-    font-size: 1.6rem;
+    font-size: 1.69rem;
   }
 
   .hero-image-direct {
